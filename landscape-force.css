@@ -1,0 +1,51 @@
+@media (orientation:portrait){
+  #rotate{display:none!important}
+  #app{
+    visibility:visible!important;
+    position:fixed;
+    left:50%;
+    top:50%;
+    width:100vh;
+    height:100vw;
+    width:100svh;
+    height:100svw;
+    transform:translate(-50%,-50%) rotate(90deg);
+    transform-origin:center center;
+    overflow:hidden;
+  }
+  #app .screen{position:absolute;inset:0}
+  #intro:before,#settings:before{left:-8vh;bottom:-12vw;width:58vh;height:78vw}
+  .brand{font-size:clamp(23px,2.5vh,38px)}
+  .panel{right:4vh;top:7vw;bottom:6vw;width:min(55vh,830px);padding:clamp(28px,4vh,56px)}
+  .panel>small{font-size:clamp(11px,1.1vh,16px)}
+  .panel h1{font-size:clamp(30px,3.6vh,55px)}
+  .panel #body{font-size:clamp(14px,1.42vh,20px);margin-top:clamp(16px,2vw,25px);max-height:48vw}
+  .settings{top:4vw;bottom:4vw;width:min(58vh,880px);padding:clamp(23px,3vh,43px)}
+  .settings h1{font-size:clamp(28px,3.15vh,47px)}
+  .settings>p{font-size:clamp(13px,1.25vh,18px)}
+  .row b{font-size:clamp(13px,1.2vh,17px)}
+  .go{font-size:clamp(15px,1.4vh,19px)}
+  .controls button{width:clamp(56px,5.2vh,76px);height:clamp(56px,5.2vh,76px);font-size:clamp(20px,2vh,29px)}
+  .phase{top:7vw}
+  .phase h1{font-size:clamp(36px,5vh,75px)}
+  .phase p{font-size:clamp(15px,2vh,28px)}
+  .phase>b{font-size:clamp(12px,1.4vh,19px)}
+  .lotus{width:clamp(84px,11vh,155px);height:clamp(84px,11vh,155px)}
+  .progress{left:5vh;right:5vh;bottom:4vw}
+  #time{font-size:clamp(16px,2vh,26px)}
+  #install{position:absolute;width:min(88vh,620px)}
+}
+
+@media (orientation:portrait) and (max-width:520px){
+  .settings{top:2.5vw;bottom:2.5vw}
+  .settings>small{margin-bottom:5px}
+  .settings h1{font-size:27px}
+  .settings>p{margin:5px 0 9px}
+  .row{padding:6px 11px;margin-bottom:6px}
+  .step button{width:30px;height:30px}
+  .presets button{padding:6px}
+  .go{padding:10px}
+  .panel{top:4vw;bottom:4vw}
+  .panel #body{line-height:1.4;margin-top:12px}
+  .panel footer{margin-top:12px}
+}
