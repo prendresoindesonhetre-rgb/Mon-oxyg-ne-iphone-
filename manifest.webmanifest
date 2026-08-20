@@ -1,0 +1,1 @@
+{"name":"Mon Oxygène","short_name":"Mon Oxygène","description":"Un espace de respiration guidée pour revenir doucement à soi.","start_url":"./","scope":"./","display":"standalone","background_color":"#d8eef0","theme_color":"#59ccd7","orientation":"landscape","icons":[{"src":"icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any"}]}
