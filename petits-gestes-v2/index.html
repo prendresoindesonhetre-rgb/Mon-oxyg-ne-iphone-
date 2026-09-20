@@ -3,61 +3,174 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#eef5f8">
+<meta name="theme-color" content="#eaf4f6">
 <title>Les petits gestes de mon Hêtre</title>
 <style>
 :root{
-  --blue:#245f83;--blue2:#357f9a;--turq:#50b7c4;--violet:#806fc4;
-  --ink:#244b63;--muted:#68808f;--paper:#f8f4f3;--glass:rgba(255,255,255,.83);
-  --line:rgba(38,92,121,.12);--shadow:0 24px 64px rgba(28,50,79,.18)
+  --ink:#245673;--ink2:#52758a;--turq:#55b9c7;--sky:#76b8d6;--violet:#8a73c6;
+  --ivory:#fbf8f4;--glass:rgba(255,255,255,.82);--line:rgba(42,91,119,.12);
+  --shadow:0 26px 65px rgba(34,57,82,.19)
 }
 *{box-sizing:border-box}html,body{height:100%;margin:0}
-body{font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);background:radial-gradient(circle at 18% 5%,rgba(80,183,196,.20),transparent 28%),radial-gradient(circle at 82% 5%,rgba(128,111,196,.17),transparent 30%),linear-gradient(180deg,#edf4f8,#f7f2f9 60%,#edf6f6);overflow:hidden}
-button,input{font:inherit}.wrap{height:100dvh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:10px;gap:8px}
-.head{width:min(960px,100%);display:flex;align-items:center;justify-content:space-between;gap:12px;padding:0 4px}.head h1{margin:0;font:italic 500 clamp(18px,3vw,30px)/1 Georgia,serif;color:#265f80}.head small{color:#6e8190}.badge{font-size:10px;background:#ffffffc9;border:1px solid var(--line);border-radius:999px;padding:7px 10px;white-space:nowrap}
-.stage{width:min(960px,100%);flex:1;min-height:0;display:grid;place-items:center;position:relative;overflow:hidden;border-radius:26px;background:#ffffff72;border:1px solid var(--line);box-shadow:var(--shadow);backdrop-filter:blur(15px)}.stage:before{content:"";position:absolute;inset:-45px;background:url('assets/hero-hd.webp') center/cover no-repeat;filter:blur(32px) saturate(.9);opacity:.12;transform:scale(1.14)}
-.phone{height:min(80vh,780px);max-height:100%;aspect-ratio:.47;position:relative;z-index:2;border-radius:34px;overflow:hidden;background:#ecf4f6;box-shadow:0 24px 50px rgba(27,47,72,.22);border:1px solid rgba(255,255,255,.75)}
-.screen{position:absolute;inset:0;opacity:0;pointer-events:none;transform:translateY(8px) scale(.995);transition:.2s ease;overflow:hidden;background:#edf5f7}.screen.active{opacity:1;pointer-events:auto;transform:none}
-.nature{position:absolute;inset:0;background-image:linear-gradient(180deg,rgba(234,246,250,.04),rgba(246,242,247,.10)),url('assets/hero-hd.webp');background-size:cover;background-position:center}.nature.soft:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(248,250,252,.20),rgba(248,244,248,.80) 51%,rgba(244,248,249,.94))}
-.ui{position:absolute;inset:0;z-index:3;padding:8% 7% 7%;display:flex;flex-direction:column}.topline{display:flex;align-items:center;justify-content:space-between;gap:8px}.back,.heart,.gear{border:0;background:#ffffffbc;color:var(--blue);width:40px;height:40px;border-radius:14px;display:grid;place-items:center;box-shadow:0 7px 20px rgba(31,69,95,.08);cursor:pointer}.ghost{visibility:hidden}
-.title{font:italic 500 31px/1.02 Georgia,serif;color:#1f5e83;text-align:center}.subtitle{text-align:center;font-size:12px;color:#52728a;margin-top:6px;line-height:1.35}.glass{background:var(--glass);border:1px solid rgba(255,255,255,.70);backdrop-filter:blur(12px);box-shadow:0 9px 26px rgba(43,68,91,.08)}
-.cta{border:0;border-radius:22px;padding:15px 18px;background:linear-gradient(135deg,#327f9a,#50b7c4);color:white;font-weight:750;box-shadow:0 12px 26px rgba(39,126,152,.23);cursor:pointer}.cta:active{transform:translateY(1px)}
-.nav{width:min(960px,100%);display:flex;gap:6px;justify-content:center;overflow:auto;padding:6px;background:#ffffffcc;border:1px solid var(--line);border-radius:16px;backdrop-filter:blur(12px)}.nav button{border:0;background:transparent;color:#496c83;font-size:10px;font-weight:700;padding:8px 10px;border-radius:11px;white-space:nowrap;cursor:pointer}.nav button.active{color:#fff;background:linear-gradient(135deg,#367e99,#53b5c5)}
-.launch .nature{background-position:38% center}.launch .ui{justify-content:flex-end;align-items:center;text-align:center;background:linear-gradient(180deg,transparent 38%,rgba(241,247,249,.20) 52%,rgba(247,243,246,.90) 76%,rgba(247,243,246,.97))}.brand{font:italic 500 39px/1.02 Georgia,serif;color:#18597e;text-shadow:0 2px 11px rgba(255,255,255,.8);margin-bottom:7px}.launch .tag{font:15px/1.45 Georgia,serif;color:#365f78;margin-bottom:20px}.launch .cta{width:82%;margin-bottom:11px}.signature{font:italic 12px Georgia,serif;color:#5a7281;margin-bottom:2%}
-.explore .ui{background:linear-gradient(180deg,rgba(249,248,247,.88),rgba(247,244,248,.89))}.explore .title{margin-top:5%}.cards{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:7%}.cards.simple-two{grid-template-columns:1fr;gap:14px;margin-top:10%}.need{min-height:105px;border-radius:20px;padding:13px 9px;text-align:center;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:7px;cursor:pointer}.simple-two .need{min-height:150px;padding:18px 18px}.need .icon{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(145deg,#daf0f4,#e8e0f5);font-size:23px;color:#367d98}.simple-two .need .icon{width:54px;height:54px;font-size:28px}.need b{font:15px/1.08 Georgia,serif;color:#285f7f}.simple-two .need b{font-size:20px}.need small{font-size:10px;color:#73838d}.simple-two .need small{font-size:11px;line-height:1.35;max-width:230px}.secondary-action{border:0;border-radius:18px;padding:12px 14px;color:#376a85;font-weight:700;margin-top:14px;cursor:pointer}.returncalm{margin-top:auto;margin-bottom:3%;width:100%}.micro{font-size:10px;color:#7b8790;text-align:center;margin-top:7px}
-.list .ui{background:linear-gradient(180deg,rgba(248,247,246,.93),rgba(246,243,248,.96))}.list .title{margin-top:3%}.search{margin-top:5%;width:100%;border:1px solid var(--line);background:#ffffffd8;border-radius:16px;padding:11px 13px;color:var(--ink);outline:none}.chips{display:flex;gap:6px;overflow:auto;margin-top:8px;padding-bottom:3px;scrollbar-width:none}.chips::-webkit-scrollbar{display:none}.chip{border:1px solid var(--line);background:#ffffffcf;color:#52728a;border-radius:999px;padding:7px 9px;font-size:9px;font-weight:700;white-space:nowrap;cursor:pointer}.chip.active{background:#dff1f5;color:#2c718d}.countline{font-size:9px;color:#758692;margin:6px 2px 0}.exercise-list{display:grid;gap:8px;margin-top:7px;overflow:auto;padding-bottom:8px}.row{border:0;border-radius:18px;padding:10px 11px;display:grid;grid-template-columns:42px 1fr 18px;align-items:center;gap:9px;text-align:left;cursor:pointer}.row .pic{width:40px;height:40px;border-radius:13px;display:grid;place-items:center;background:linear-gradient(145deg,#dff2f4,#ebe4f5);font-size:20px;color:#397e99}.row b{font:13.5px/1.15 Georgia,serif;color:#285f7f}.row small{display:block;font-size:9.5px;color:#748692;margin-top:2px}.chev{color:#6a91a7;font-size:20px}
-.detail .nature{background-position:34% center}.detail .ui{background:linear-gradient(180deg,rgba(247,250,251,.55),rgba(249,246,248,.90) 48%,rgba(249,247,247,.96))}.detail .title{margin-top:4%;font-size:28px}.detail-card{margin-top:auto;margin-bottom:4%;border-radius:24px;padding:17px}.detail-card .lead{font:17px/1.4 Georgia,serif;color:#315f76;margin:0 0 11px}.steps{display:grid;gap:7px;max-height:180px;overflow:auto;padding-right:2px}.step{display:grid;grid-template-columns:24px 1fr;gap:8px;align-items:start;font-size:11.5px;line-height:1.35}.num{width:23px;height:23px;border-radius:50%;display:grid;place-items:center;background:#dceff4;color:#2b718d;font-weight:800;font-size:10px}.facts{display:flex;gap:6px;flex-wrap:wrap;margin:11px 0}.pill{font-size:9px;padding:6px 8px;border-radius:999px;background:#eef4f7;color:#4f7184}.detail .cta{width:100%}.timer-inline{display:none;text-align:center}.timer-inline.show{display:block}.timer-big{font:500 54px Georgia,serif;color:#1e5e83}.progress{height:7px;border-radius:99px;background:#d9e8ee;overflow:hidden;margin:12px 0}.progress>div{height:100%;width:0;background:linear-gradient(90deg,#50b7c4,#6d91c0);transition:width .1s linear}.finish-note{font:italic 13px Georgia,serif;color:#5f7787}
-.breath .nature{background-position:58% center}.breath .ui{align-items:center;background:linear-gradient(180deg,rgba(238,248,251,.35),rgba(239,244,250,.28))}.breath .title{font-size:36px;margin-top:1%}.phase{margin-top:6px;padding:8px 13px;border-radius:999px;font-size:12px;font-weight:750;color:#286c87;background:#ffffffd9;box-shadow:0 7px 18px rgba(35,79,100,.10)}.breath-zone{position:absolute;inset:22% 13% 16%;z-index:4}.breath-track{position:absolute;left:50%;top:4%;bottom:4%;width:2px;background:linear-gradient(180deg,rgba(255,255,255,.2),rgba(255,255,255,.95),rgba(255,255,255,.2));transform:translateX(-50%)}.moving-leaf{position:absolute;left:50%;bottom:7%;width:49px;height:72px;transform:translateX(-50%) rotate(0deg);filter:drop-shadow(0 8px 10px rgba(29,78,99,.24));will-change:left,bottom,transform}.moving-leaf svg{width:100%;height:100%}.phase-circle{position:absolute;left:50%;top:52%;transform:translate(-50%,-50%);width:168px;height:168px;border-radius:50%;border:3px solid rgba(102,188,205,.70);box-shadow:0 0 0 9px rgba(255,255,255,.21),inset 0 0 35px rgba(255,255,255,.22);display:grid;place-items:center;background:rgba(255,255,255,.08)}.phase-circle strong{font:500 45px Georgia,serif;color:#164f78;text-shadow:0 2px 8px white}.phase-circle small{display:block;text-align:center;font-size:11px;color:#315f76;margin-top:2px}.pause{position:absolute;bottom:7%;left:50%;transform:translateX(-50%);width:50px;height:50px;border-radius:50%;border:0;background:#ffffffdf;color:#1f6383;font-size:19px;box-shadow:0 9px 22px rgba(37,75,99,.16);cursor:pointer}
-.done .ui,.day .ui,.space .ui{background:linear-gradient(180deg,rgba(239,248,250,.24),rgba(246,242,247,.60) 58%,rgba(247,245,246,.93))}.done .title{font-size:40px;margin-top:20%}.donebox{margin-top:20px;border-radius:22px;padding:17px;text-align:center;font:17px/1.4 Georgia,serif}.actions{display:grid;gap:8px;margin-top:auto;margin-bottom:4%}.actions button{border:0;border-radius:16px;padding:13px;background:#ffffffdf;color:#315f76;font-weight:650;box-shadow:0 7px 19px rgba(35,64,84,.09);cursor:pointer}.actions .primary{color:#fff;background:linear-gradient(135deg,#327f9a,#52b6c4)}.day .title{font-size:36px;margin-top:6%}.quote{margin-top:auto;margin-bottom:20%;padding:16px;border-radius:22px;text-align:center;font:italic 16px/1.5 Georgia,serif}.day .cta{position:absolute;bottom:8%;left:10%;right:10%}.space .title{font-size:34px;margin-top:4%}.menu{display:grid;gap:9px;margin-top:8%}.menuitem{border-radius:18px;padding:12px 13px;display:flex;gap:10px;align-items:center}.menuicon{width:40px;height:40px;border-radius:13px;display:grid;place-items:center;background:linear-gradient(145deg,#dff1f4,#e9e1f4);font-size:20px}.menuitem b{font-size:13px}.menuitem small{display:block;font-size:9px;color:#758792;margin-top:2px}.motto{margin-top:auto;margin-bottom:10%;padding:14px;border-radius:20px;text-align:center;font:italic 14px/1.45 Georgia,serif}
-@media(max-width:650px){.wrap{padding:4px;gap:4px}.head h1{font-size:17px}.head small{display:none}.badge{font-size:9px;padding:5px 7px}.stage{border-radius:20px}.phone{height:min(calc(100dvh - 90px),780px)}.nav{justify-content:flex-start;padding:5px}.nav button{font-size:9px;padding:7px 9px}}
+body{font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);background:
+radial-gradient(circle at 20% 5%,rgba(85,185,199,.20),transparent 30%),
+radial-gradient(circle at 84% 8%,rgba(138,115,198,.16),transparent 28%),
+linear-gradient(180deg,#edf5f7,#f7f2f8 58%,#edf6f5);overflow:hidden}
+button,input{font:inherit}.app-shell{height:100dvh;display:grid;place-items:center;padding:12px}
+.phone{height:min(94dvh,830px);aspect-ratio:.472;position:relative;overflow:hidden;border-radius:38px;background:#eef5f7;
+box-shadow:0 30px 80px rgba(30,50,73,.24);border:1px solid rgba(255,255,255,.9)}
+.screen{position:absolute;inset:0;opacity:0;pointer-events:none;transition:opacity .2s ease,transform .2s ease;transform:translateY(7px);background:#eef5f7}
+.screen.active{opacity:1;pointer-events:auto;transform:none}
+.hero{position:absolute;inset:0;background:url('assets/hero-hd.webp') center/cover no-repeat}
+.hero:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(238,247,250,.02),rgba(244,240,247,.06) 48%,rgba(249,247,244,.80) 78%,rgba(249,247,244,.98))}
+.topbar{position:absolute;left:0;right:0;top:0;z-index:9;padding:calc(env(safe-area-inset-top,0px) + 18px) 18px 0;display:flex;align-items:center;justify-content:space-between}
+.icon-btn{width:42px;height:42px;border:0;border-radius:15px;background:rgba(255,255,255,.82);backdrop-filter:blur(12px);color:var(--ink);box-shadow:0 8px 25px rgba(38,71,95,.10);cursor:pointer}
+.bottom-nav{position:absolute;z-index:25;bottom:0;left:0;right:0;height:74px;padding:7px 12px calc(env(safe-area-inset-bottom,0px) + 7px);display:grid;grid-template-columns:repeat(3,1fr);gap:6px;background:rgba(250,248,246,.92);backdrop-filter:blur(16px);border-top:1px solid var(--line)}
+.bottom-nav button{border:0;background:transparent;border-radius:15px;color:#6a8190;font-size:10px;font-weight:750;display:grid;place-items:center;gap:2px;cursor:pointer}
+.bottom-nav button span{font-size:20px;line-height:1}.bottom-nav button.active{color:#2c718d;background:#e4f1f4}
+.sheet{position:absolute;z-index:6;left:0;right:0;bottom:0;background:linear-gradient(180deg,rgba(252,249,246,.93),rgba(252,249,246,.99));border-radius:30px 30px 0 0;box-shadow:0 -16px 36px rgba(42,61,82,.08)}
+.eyebrow{font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:#7090a1;font-weight:800}
+.h1{font:italic 500 34px/1.04 Georgia,serif;color:#245d7e}.h2{font:italic 500 27px/1.08 Georgia,serif;color:#245d7e}.muted{color:#6b8190;font-size:11px;line-height:1.45}
+.primary{border:0;border-radius:20px;padding:14px 17px;color:white;background:linear-gradient(135deg,#337f9b,#55b9c7);font-weight:800;box-shadow:0 12px 25px rgba(50,131,154,.22);cursor:pointer}
+.soft-btn{border:1px solid var(--line);background:rgba(255,255,255,.78);color:#376a84;border-radius:17px;padding:12px;font-weight:750;cursor:pointer}
+.glass{background:var(--glass);border:1px solid rgba(255,255,255,.7);backdrop-filter:blur(12px);box-shadow:0 10px 28px rgba(37,62,85,.08)}
+
+/* splash */
+.splash .hero{background-position:36% center}.splash .hero:after{background:linear-gradient(180deg,rgba(230,244,247,.02) 0%,rgba(247,242,247,.05) 45%,rgba(247,242,247,.89) 78%,rgba(247,242,247,.98))}
+.splash-copy{position:absolute;z-index:5;left:8%;right:8%;bottom:7%;text-align:center}.splash-title{font:italic 500 39px/1.03 Georgia,serif;color:#185a7d;text-shadow:0 2px 10px rgba(255,255,255,.86)}.splash-copy p{font:15px/1.45 Georgia,serif;color:#45677b;margin:9px 0 18px}.splash-copy .primary{width:86%}
+
+/* home */
+.home .hero{height:52%;background-position:37% center}.home .hero:after{background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(248,246,245,.08) 55%,rgba(250,248,245,.95))}
+.home-sheet{height:57%;padding:23px 20px 88px}.home-sheet .h1{font-size:30px;margin-top:4px}.category-stack{display:grid;gap:11px;margin-top:16px}
+.category-card{border:0;border-radius:23px;padding:15px 16px;text-align:left;display:grid;grid-template-columns:54px 1fr 22px;align-items:center;gap:12px;cursor:pointer}
+.cat-icon{width:54px;height:54px;border-radius:18px;display:grid;place-items:center;font-size:28px;background:linear-gradient(145deg,#dceff4,#ebe5f6);color:#337b97}
+.category-card b{font:18px Georgia,serif;color:#275f80}.category-card small{display:block;color:#718692;font-size:10px;margin-top:3px}.arrow{font-size:24px;color:#7292a4}
+.quick-row{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:12px}.quick-row button{min-height:48px}.home-note{margin-top:8px;text-align:center;font-size:9px;color:#80909a}
+
+/* library */
+.library .hero{height:28%;background-position:42% 34%}.library .hero:after{background:linear-gradient(180deg,rgba(243,249,250,.06),rgba(248,246,244,.94))}
+.library-sheet{height:78%;padding:21px 18px 84px;display:flex;flex-direction:column}.library-head{padding:0 2px}.library-head .h2{margin-top:3px}.search{width:100%;border:1px solid var(--line);background:rgba(255,255,255,.88);border-radius:16px;padding:11px 13px;color:var(--ink);outline:none;margin-top:12px}.count{font-size:9px;color:#7b8e99;margin:7px 2px}
+.exercise-list{flex:1;overflow:auto;display:grid;gap:8px;padding:0 1px 10px;scrollbar-width:none}.exercise-list::-webkit-scrollbar{display:none}
+.exercise-row{border:0;border-radius:18px;padding:10px 11px;display:grid;grid-template-columns:42px 1fr 18px;align-items:center;gap:10px;text-align:left;cursor:pointer}
+.row-icon{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(145deg,#def0f4,#ece4f6);color:#377e99;font-size:19px}.exercise-row b{font:13.5px/1.15 Georgia,serif;color:#285f7f}.exercise-row small{display:block;color:#788995;font-size:9px;margin-top:3px}
+
+/* detail */
+.detail .hero{height:37%;background-position:39% 40%}.detail .hero:after{background:linear-gradient(180deg,rgba(238,247,250,.03),rgba(249,247,244,.13) 55%,rgba(250,248,246,.96))}
+.detail-sheet{height:69%;padding:23px 19px 87px;overflow:auto;scrollbar-width:none}.detail-sheet::-webkit-scrollbar{display:none}.detail-sheet .h2{font-size:28px;margin-top:4px}.when{font-size:10px;color:#6e8390;margin-top:7px;line-height:1.4}.lead{font:17px/1.42 Georgia,serif;color:#315f76;margin:17px 0 13px}.steps{display:grid;gap:9px}.step{display:grid;grid-template-columns:25px 1fr;gap:9px;align-items:start;font-size:11.5px;line-height:1.4}.num{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;background:#dceff4;color:#2d728d;font-size:10px;font-weight:800}.tags{display:flex;gap:6px;flex-wrap:wrap;margin:14px 0}.tag{font-size:9px;padding:6px 8px;border-radius:999px;background:#edf4f7;color:#557486}.detail-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}.detail-actions .primary{grid-column:1/-1}
+.timer-card{display:none;text-align:center;padding-top:28px}.timer-card.show{display:block}.timer-big{font:500 62px Georgia,serif;color:#225f80}.timer-instruction{font:15px/1.45 Georgia,serif;color:#4f7082;margin:12px auto;max-width:270px}.bar{height:8px;border-radius:99px;background:#dbe9ee;overflow:hidden;margin:19px 0}.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#55b9c7,#7e82c4)}.timer-card .soft-btn{width:100%}
+
+/* leaf breath */
+.breath .hero{background-position:47% center}.breath .hero:after{background:linear-gradient(180deg,rgba(229,244,248,.12),rgba(229,240,246,.15) 58%,rgba(245,241,247,.57))}
+.breath-title{position:absolute;z-index:8;top:9%;left:13%;right:13%;text-align:center}.breath-title .h2{color:#1d5b7d;text-shadow:0 2px 12px white}.breath-title .muted{color:#3e6b82;text-shadow:0 1px 8px white}
+.leaf-space{position:absolute;z-index:7;left:7%;right:7%;top:18%;bottom:22%;overflow:hidden}.moving-leaf{position:absolute;width:54px;height:80px;left:50%;bottom:11%;will-change:left,bottom,transform;filter:drop-shadow(0 9px 11px rgba(25,72,96,.25))}.moving-leaf svg{width:100%;height:100%}
+.breath-panel{position:absolute;z-index:9;left:8%;right:8%;bottom:8%;border-radius:24px;padding:14px 15px;text-align:center}.phase{font:18px Georgia,serif;color:#255f7d}.phase-count{font:500 38px Georgia,serif;color:#1e5678;margin-top:3px}.phase-small{font-size:9px;color:#718691}.breath-controls{display:flex;justify-content:center;gap:8px;margin-top:10px}.round{width:44px;height:44px;border-radius:50%;border:0;background:#ffffffd9;color:#286a86;font-size:17px;box-shadow:0 8px 18px rgba(36,71,91,.12);cursor:pointer}
+
+/* done */
+.done .hero{background-position:36% center}.done .hero:after{background:linear-gradient(180deg,rgba(237,247,249,.03),rgba(247,242,247,.25) 50%,rgba(249,247,244,.96) 78%)}
+.done-card{position:absolute;z-index:8;left:8%;right:8%;bottom:11%;border-radius:26px;padding:22px 18px;text-align:center}.done-card .h2{font-size:33px}.done-card p{font:15px/1.45 Georgia,serif;color:#507083}.done-actions{display:grid;gap:8px;margin-top:14px}
+
+/* app nav only on main screens */
+.appnav-hidden .bottom-nav{display:none}
+@media(max-width:560px){.app-shell{padding:0}.phone{height:100dvh;width:100vw;aspect-ratio:auto;border-radius:0;border:0}.splash-copy{bottom:8%}}
 </style>
 </head>
 <body>
-<div class="wrap">
-<header class="head"><div><h1>Les petits gestes de mon Hêtre</h1><small>Maquette interactive · bibliothèque complète de micro-gestes</small></div><div class="badge">Clique directement sur le téléphone</div></header>
-<main class="stage"><div class="phone">
+<div class="app-shell">
+<div class="phone" id="phone">
 
-<section class="screen launch active" data-key="launch"><div class="nature"></div><div class="ui"><div class="brand">Les petits gestes<br>de mon Hêtre</div><div class="tag">De grands bienfaits<br>dans de petits instants.</div><button class="cta" data-go="explore">❧ &nbsp; Commencer</button><div class="signature">Prendre soin de son Hêtre</div></div></section>
+<section class="screen splash active appnav-hidden" data-screen="splash">
+  <div class="hero"></div>
+  <div class="splash-copy">
+    <div class="splash-title">Les petits gestes<br>de mon Hêtre</div>
+    <p>Des gestes simples, dans la vraie vie,<br>quand tu en as besoin.</p>
+    <button class="primary" data-go="home">Entrer</button>
+  </div>
+</section>
 
-<section class="screen explore" data-key="explore"><div class="nature soft"></div><div class="ui"><div class="topline"><span class="ghost back">‹</span><div></div><button class="gear" data-go="space">♡</button></div><div class="title">Explorer</div><div class="subtitle">Deux chemins seulement, selon ce dont tu as envie.</div><div class="cards simple-two">
-<button class="need glass" data-cat="breath"><span class="icon">≈</span><b>Respiration</b><small>Respirations guidées, très courtes ou un peu plus longues</small></button>
-<button class="need glass" data-cat="daily"><span class="icon">❧</span><b>Gestes du quotidien</b><small>Des micro-gestes simples, souvent invisibles, utilisables partout</small></button>
-</div><button class="secondary-action glass" id="surpriseBtn">✦ &nbsp; Surprends-moi</button><button class="cta returncalm" id="calmBtn">❧ &nbsp; Un retour au calme</button><div class="micro">Un geste très court, maintenant.</div></div></section>
+<section class="screen home" data-screen="home">
+  <div class="hero"></div>
+  <div class="sheet home-sheet">
+    <div class="eyebrow">Les petits gestes de mon Hêtre</div>
+    <div class="h1">Qu’as-tu envie d’essayer ?</div>
+    <div class="category-stack">
+      <button class="category-card glass" data-open-library="breath"><span class="cat-icon">≈</span><span><b>Respiration</b><small id="breathCountHome">Des respirations courtes et guidées</small></span><span class="arrow">›</span></button>
+      <button class="category-card glass" data-open-library="daily"><span class="cat-icon">❧</span><span><b>Gestes du quotidien</b><small id="dailyCountHome">Des micro-gestes à utiliser partout</small></span><span class="arrow">›</span></button>
+    </div>
+    <div class="quick-row">
+      <button class="soft-btn" id="randomBtn">✦ Au hasard</button>
+      <button class="primary" id="calmBtn">Un retour au calme</button>
+    </div>
+    <div class="home-note">Quelques secondes peuvent suffire pour essayer autre chose.</div>
+  </div>
+  <nav class="bottom-nav"><button class="active" data-go="home"><span>⌂</span>Accueil</button><button data-open-library="breath"><span>≈</span>Respiration</button><button data-open-library="daily"><span>❧</span>Gestes</button></nav>
+</section>
 
-<section class="screen list" data-key="list"><div class="nature soft"></div><div class="ui"><div class="topline"><button class="back" data-go="explore">‹</button><button class="heart">♡</button></div><div class="title" id="listTitle">Les petits gestes</div><div class="subtitle">Des techniques de quelques secondes à quelques minutes</div><input class="search" id="searchBox" placeholder="Chercher un geste…"><div class="chips" id="chips"></div><div class="countline" id="countLine"></div><div class="exercise-list" id="exerciseList"></div></div></section>
+<section class="screen library" data-screen="library">
+  <div class="hero"></div>
+  <div class="topbar"><button class="icon-btn" data-go="home">‹</button><button class="icon-btn" id="libraryRandom">✦</button></div>
+  <div class="sheet library-sheet">
+    <div class="library-head"><div class="eyebrow" id="libraryEyebrow">Bibliothèque</div><div class="h2" id="libraryTitle">Gestes du quotidien</div><div class="muted" id="libraryIntro"></div></div>
+    <input class="search" id="searchBox" placeholder="Rechercher un geste…">
+    <div class="count" id="countLine"></div>
+    <div class="exercise-list" id="exerciseList"></div>
+  </div>
+  <nav class="bottom-nav"><button data-go="home"><span>⌂</span>Accueil</button><button data-open-library="breath"><span>≈</span>Respiration</button><button data-open-library="daily"><span>❧</span>Gestes</button></nav>
+</section>
 
-<section class="screen detail" data-key="detail"><div class="nature"></div><div class="ui"><div class="topline"><button class="back" data-go="list">‹</button><button class="heart">♡</button></div><div class="title" id="detailTitle"></div><div class="subtitle" id="detailWhen"></div><div class="detail-card glass"><div id="instructionView"><p class="lead" id="detailLead"></p><div class="steps" id="detailSteps"></div><div class="facts" id="detailFacts"></div><button class="cta" id="startExerciseBtn">▶ &nbsp; Commencer</button></div><div class="timer-inline" id="timerInline"><div class="timer-big" id="timerBig">10</div><div class="progress"><div id="timerBar"></div></div><div class="finish-note" id="timerNote">Rien à réussir. Essaie simplement.</div><button class="cta" id="finishNowBtn">Terminer</button></div></div></div></section>
+<section class="screen detail" data-screen="detail">
+  <div class="hero"></div>
+  <div class="topbar"><button class="icon-btn" id="detailBack">‹</button><button class="icon-btn">♡</button></div>
+  <div class="sheet detail-sheet">
+    <div id="instructionBlock">
+      <div class="eyebrow" id="detailType"></div>
+      <div class="h2" id="detailTitle"></div>
+      <div class="when" id="detailWhen"></div>
+      <div class="lead" id="detailLead"></div>
+      <div class="steps" id="detailSteps"></div>
+      <div class="tags" id="detailTags"></div>
+      <div class="detail-actions"><button class="soft-btn" id="anotherBtn">Un autre</button><button class="soft-btn" id="favoriteBtn">♡ Favori</button><button class="primary" id="startBtn">Commencer</button></div>
+    </div>
+    <div class="timer-card" id="timerCard">
+      <div class="eyebrow">Prends juste ce temps</div>
+      <div class="timer-big" id="timerBig">10 s</div>
+      <div class="timer-instruction" id="timerInstruction"></div>
+      <div class="bar"><i id="timerBar"></i></div>
+      <button class="soft-btn" id="finishBtn">Terminer</button>
+    </div>
+  </div>
+</section>
 
-<section class="screen breath" data-key="breath"><div class="nature"></div><div class="ui"><div class="topline"><button class="back" data-go="detail">‹</button><button class="heart">♡</button></div><div class="title">La feuille et le souffle</div><div class="subtitle">La feuille garde son balancement de vent</div><div class="phase" id="phaseLabel">Inspire doucement · la feuille monte</div></div><div class="breath-zone"><div class="breath-track"></div><div class="moving-leaf"><svg viewBox="0 0 60 92" aria-hidden="true"><defs><linearGradient id="leafG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#55c2cb"/><stop offset=".56" stop-color="#67a8d0"/><stop offset="1" stop-color="#8f6ec1"/></linearGradient></defs><path d="M30 4C10 11 3 35 8 57C12 76 23 86 30 89C42 80 52 63 52 43C52 22 42 8 30 4Z" fill="url(#leafG)" stroke="#2c7387" stroke-width="1.4"/><path d="M30 10V84M30 29L15 38M30 39L45 47M30 51L16 60M30 61L43 69" stroke="#2f7d8d" stroke-width="1.1" fill="none"/></svg></div><div class="phase-circle"><div><strong id="phaseCount">4</strong><small id="phaseSmall">secondes · inspire</small></div></div></div><button class="pause" id="pauseBtn">Ⅱ</button></section>
+<section class="screen breath appnav-hidden" data-screen="breath">
+  <div class="hero"></div>
+  <div class="topbar"><button class="icon-btn" data-go="detail">‹</button><button class="icon-btn">♡</button></div>
+  <div class="breath-title"><div class="h2">La feuille et le souffle</div><div class="muted">Elle flotte toujours comme portée par le vent.</div></div>
+  <div class="leaf-space">
+    <div class="moving-leaf" id="movingLeaf">
+      <svg viewBox="0 0 60 92" aria-hidden="true">
+        <defs><linearGradient id="leafG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#55c2cb"/><stop offset=".55" stop-color="#67a9d0"/><stop offset="1" stop-color="#8f6dc2"/></linearGradient></defs>
+        <path d="M30 4C10 11 3 35 8 57C12 76 23 86 30 89C42 80 52 63 52 43C52 22 42 8 30 4Z" fill="url(#leafG)" stroke="#2c7185" stroke-width="1.4"/>
+        <path d="M30 10V84M30 29L15 38M30 39L45 47M30 51L16 60M30 61L43 69" stroke="#2e7b8c" stroke-width="1.1" fill="none"/>
+      </svg>
+    </div>
+  </div>
+  <div class="breath-panel glass">
+    <div class="phase" id="phaseLabel">Inspire · la feuille monte</div>
+    <div class="phase-count" id="phaseCount">4</div>
+    <div class="phase-small" id="phaseSmall">secondes</div>
+    <div class="breath-controls"><button class="round" id="pauseBtn">Ⅱ</button><button class="round" id="endBreathBtn">✓</button></div>
+  </div>
+</section>
 
-<section class="screen done" data-key="done"><div class="nature"></div><div class="ui"><div class="title">C’est fait 🌿</div><div class="donebox glass">Tu as pris quelques secondes pour essayer.<br>C’est déjà suffisant.</div><div class="actions"><button data-go="list">Choisir un autre geste</button><button id="anotherRandom">✦ Un autre au hasard</button><button class="primary" data-go="explore">Retour à l’accueil</button></div></div></section>
+<section class="screen done appnav-hidden" data-screen="done">
+  <div class="hero"></div>
+  <div class="done-card glass">
+    <div class="h2">C’est fait 🌿</div>
+    <p>Tu viens simplement d’essayer un geste.<br>Garde ce qui t’est utile, laisse le reste.</p>
+    <div class="done-actions"><button class="primary" id="doneAnother">Essayer un autre geste</button><button class="soft-btn" data-go="home">Retour à l’accueil</button></div>
+  </div>
+</section>
 
-<section class="screen day" data-key="day"><div class="nature"></div><div class="ui"><div class="title">Le geste du jour</div><div class="subtitle">Un tout petit geste pour aujourd’hui</div><div class="quote glass">« Quelques secondes peuvent parfois suffire à créer un peu d’espace. »</div><button class="cta" id="dayBtn">❧ &nbsp; Découvrir le geste du jour</button></div></section>
-
-<section class="screen space" data-key="space"><div class="nature"></div><div class="ui"><div class="topline"><button class="back" data-go="explore">‹</button><button class="gear">⚙</button></div><div class="title">Mes essentiels</div><div class="subtitle">Retrouver rapidement les gestes qui te parlent</div><div class="menu"><div class="menuitem glass"><span class="menuicon">♡</span><span><b>Mes favoris</b><small>Les gestes à garder sous la main</small></span></div><div class="menuitem glass"><span class="menuicon">◎</span><span><b>Gestes invisibles</b><small>Pour le travail, les transports, les rendez-vous…</small></span></div><div class="menuitem glass"><span class="menuicon">☾</span><span><b>Avant de dormir</b><small>Des gestes très courts quand l’esprit recommence</small></span></div></div><div class="motto glass">« De petits gestes, pour créer un peu d’espace. »</div></div></section>
-
-</div></main>
-<nav class="nav" id="nav"><button data-go="launch">Début</button><button data-go="explore">Explorer</button><button data-go="list">Gestes</button><button data-go="detail">Fiche</button><button data-go="breath">Respire</button><button data-go="day">Jour</button><button data-go="space">Essentiels</button></nav>
+</div>
 </div>
 
 <script>
@@ -172,39 +285,152 @@ const EXERCISES=[
 {id:"long-exhale-no-count",title:"Expire juste un peu plus longtemps",cat:"breath",icon:"→",duration:45,when:"Quand tu ne veux pas compter.",lead:"Inspire normalement. Fais seulement durer l’expiration un peu plus longtemps.",steps:["Sans vider complètement les poumons.","Recommence quelques fois."],tags:["Respiration","Discret"]}
 ];
 
-const LABELS={all:"Tous",breath:"Respiration",daily:"Gestes du quotidien"};
-let current='launch',currentCat='all',currentExercise=EXERCISES[0],timer=null,breathStart=Date.now(),paused=false,pauseAt=0;
-const screens=[...document.querySelectorAll('.screen')],nav=[...document.querySelectorAll('#nav button')],leaf=document.querySelector('.moving-leaf');
+const screens=[...document.querySelectorAll('.screen')];
+let currentScreen='splash',libraryType='daily',currentExercise=null,lastLibrary='daily',timerId=null;
+let breathStart=0,breathPaused=false,breathPauseAt=0,windPhase=0,lastFrame=performance.now();
 
-function go(k){current=k;screens.forEach(x=>x.classList.toggle('active',x.dataset.key===k));nav.forEach(x=>x.classList.toggle('active',x.dataset.go===k));if(k==='list')renderList();if(k==='detail')renderDetail();if(k==='breath'){breathStart=Date.now();paused=false;document.getElementById('pauseBtn').textContent='Ⅱ'}history.replaceState(null,'','#'+k)}
-document.querySelectorAll('[data-go]').forEach(x=>x.addEventListener('click',e=>{e.stopPropagation();go(x.dataset.go)}));
-
-document.querySelectorAll('[data-cat]').forEach(b=>b.addEventListener('click',()=>{currentCat=b.dataset.cat;go('list')}));
-document.getElementById('surpriseBtn').onclick=()=>openExercise(EXERCISES[Math.floor(Math.random()*EXERCISES.length)]);
-document.getElementById('calmBtn').onclick=()=>{const pool=EXERCISES.filter(e=>e.duration<=30);openExercise(pool[Math.floor(Math.random()*pool.length)])};
-document.getElementById('anotherRandom').onclick=()=>openExercise(EXERCISES[Math.floor(Math.random()*EXERCISES.length)]);
-document.getElementById('dayBtn').onclick=()=>{const d=new Date();openExercise(EXERCISES[(d.getFullYear()+d.getMonth()+d.getDate())%EXERCISES.length])};
-
-function renderChips(){const c=document.getElementById('chips');c.innerHTML=Object.entries(LABELS).map(([k,v])=>'<button class="chip '+(currentCat===k?'active':'')+'" data-filter="'+k+'">'+v+'</button>').join('');c.querySelectorAll('[data-filter]').forEach(b=>b.onclick=()=>{currentCat=b.dataset.filter;renderList()})}
-function normalizedCat(e){return e.cat==='breath'?'breath':'daily'}
-function renderList(){clearInterval(timer);renderChips();const q=(document.getElementById('searchBox').value||'').toLowerCase();const items=EXERCISES.filter(e=>(currentCat==='all'||normalizedCat(e)===currentCat)&&(!q||(e.title+' '+e.when+' '+e.tags.join(' ')).toLowerCase().includes(q)));document.getElementById('listTitle').textContent=currentCat==='all'?'Tous les gestes':LABELS[currentCat];document.getElementById('countLine').textContent=items.length+' gestes disponibles';document.getElementById('exerciseList').innerHTML=items.map(e=>'<button class="row glass" data-id="'+e.id+'"><span class="pic">'+e.icon+'</span><span><b>'+e.title+'</b><small>'+formatDuration(e.duration)+' · '+e.tags[0]+'</small></span><span class="chev">›</span></button>').join('');document.querySelectorAll('[data-id]').forEach(b=>b.onclick=()=>openExercise(EXERCISES.find(e=>e.id===b.dataset.id)))}
-document.getElementById('searchBox').addEventListener('input',renderList);
-
-function openExercise(e){currentExercise=e;go(e.leaf?'breath':'detail')}
-function renderDetail(){clearInterval(timer);document.getElementById('instructionView').style.display='block';document.getElementById('timerInline').classList.remove('show');document.getElementById('detailTitle').textContent=currentExercise.title;document.getElementById('detailWhen').textContent=currentExercise.when;document.getElementById('detailLead').textContent=currentExercise.lead;document.getElementById('detailSteps').innerHTML=currentExercise.steps.map((s,i)=>'<div class="step"><span class="num">'+(i+1)+'</span><span>'+s+'</span></div>').join('');document.getElementById('detailFacts').innerHTML='<span class="pill">'+formatDuration(currentExercise.duration)+'</span>'+currentExercise.tags.map(t=>'<span class="pill">'+t+'</span>').join('');document.getElementById('startExerciseBtn').textContent='▶  Commencer · '+formatDuration(currentExercise.duration)}
+function normalizedType(e){return e.cat==='breath'?'breath':'daily'}
 function formatDuration(s){if(s<60)return s+' s';if(s===60)return'1 min';return Math.round(s/60)+' min'}
+function go(name){
+  currentScreen=name;
+  screens.forEach(s=>s.classList.toggle('active',s.dataset.screen===name));
+  if(name==='library')renderLibrary();
+  if(name==='detail')renderDetail();
+  if(name==='breath')startBreath();
+}
+document.querySelectorAll('[data-go]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.go)));
+document.querySelectorAll('[data-open-library]').forEach(b=>b.addEventListener('click',()=>openLibrary(b.dataset.openLibrary)));
 
-document.getElementById('startExerciseBtn').onclick=()=>{if(currentExercise.leaf){go('breath');return}startGenericTimer()};
-document.getElementById('finishNowBtn').onclick=()=>{clearInterval(timer);go('done')};
-function startGenericTimer(){clearInterval(timer);document.getElementById('instructionView').style.display='none';document.getElementById('timerInline').classList.add('show');const total=currentExercise.duration,start=Date.now();document.getElementById('timerBig').textContent=formatDuration(total);document.getElementById('timerBar').style.width='0%';timer=setInterval(()=>{const elapsed=(Date.now()-start)/1000,left=Math.max(0,total-elapsed);document.getElementById('timerBig').textContent=left>=60?Math.ceil(left/60)+' min':Math.ceil(left)+' s';document.getElementById('timerBar').style.width=Math.min(100,elapsed/total*100)+'%';if(left<=0){clearInterval(timer);document.getElementById('timerBig').textContent='Terminé';document.getElementById('timerNote').textContent='Observe simplement ce qui a changé, même très légèrement.';setTimeout(()=>go('done'),800)}},100)}
+function openLibrary(type){libraryType=type;lastLibrary=type;document.getElementById('searchBox').value='';go('library')}
+function pool(type){return EXERCISES.filter(e=>normalizedType(e)===type)}
+const breathN=pool('breath').length,dailyN=pool('daily').length;
+document.getElementById('breathCountHome').textContent=breathN+' respirations · courtes ou guidées';
+document.getElementById('dailyCountHome').textContent=dailyN+' gestes · simples et concrets';
 
-const INHALE=4,EXHALE=6,CYCLE=10;
-const pauseBtn=document.getElementById('pauseBtn');pauseBtn.addEventListener('click',()=>{paused=!paused;pauseBtn.textContent=paused?'▶':'Ⅱ';if(paused)pauseAt=Date.now();else breathStart+=Date.now()-pauseAt});
-function easeInOut(p){return .5-Math.cos(Math.PI*p)/2}
-function updateLeaf(elapsed){const t=elapsed%CYCLE,inhale=t<INHALE,phaseDuration=inhale?INHALE:EXHALE,phaseElapsed=inhale?t:t-INHALE,p=Math.max(0,Math.min(1,phaseElapsed/phaseDuration)),e=easeInOut(p),bottom=inhale?7+e*63:70-e*63,minDuration=3,maxDuration=8,speedFactor=Math.max(0,Math.min(1,(phaseDuration-minDuration)/(maxDuration-minDuration))),swayHz=.55+speedFactor*.75,windTime=elapsed*2*Math.PI*swayHz,left=50+Math.sin(windTime)*10+Math.sin(windTime*.47+1.1)*3.2,rotation=Math.sin(windTime+.5)*13+Math.sin(windTime*.53)*4;leaf.style.bottom=bottom+'%';leaf.style.left=left+'%';leaf.style.transform='translateX(-50%) rotate('+rotation+'deg)';const rem=Math.max(1,Math.ceil(phaseDuration-phaseElapsed));document.getElementById('phaseLabel').textContent=inhale?'Inspire doucement · la feuille monte':'Expire doucement · la feuille redescend';document.getElementById('phaseCount').textContent=rem;document.getElementById('phaseSmall').textContent=inhale?'secondes · inspire':'secondes · expire'}
-function tick(){if(current==='breath'&&!paused)updateLeaf((Date.now()-breathStart)/1000);requestAnimationFrame(tick)}tick();
+function renderLibrary(){
+  const q=document.getElementById('searchBox').value.trim().toLowerCase();
+  const items=pool(libraryType).filter(e=>!q||(e.title+' '+e.when+' '+e.lead+' '+e.tags.join(' ')).toLowerCase().includes(q));
+  document.getElementById('libraryEyebrow').textContent=libraryType==='breath'?'Respiration':'Gestes du quotidien';
+  document.getElementById('libraryTitle').textContent=libraryType==='breath'?'Choisis une respiration':'Choisis un petit geste';
+  document.getElementById('libraryIntro').textContent=libraryType==='breath'?'Des propositions courtes, sans chercher la performance.':'Des gestes à faire dans la vraie vie, souvent sans que personne ne le remarque.';
+  document.getElementById('countLine').textContent=items.length+' '+(libraryType==='breath'?'respirations':'gestes');
+  const box=document.getElementById('exerciseList');
+  box.innerHTML=items.map(e=>'<button class="exercise-row glass" data-ex="'+e.id+'"><span class="row-icon">'+e.icon+'</span><span><b>'+e.title+'</b><small>'+formatDuration(e.duration)+' · '+e.tags.slice(0,2).join(' · ')+'</small></span><span class="arrow">›</span></button>').join('');
+  box.querySelectorAll('[data-ex]').forEach(b=>b.onclick=()=>openExercise(EXERCISES.find(e=>e.id===b.dataset.ex)));
+  document.querySelectorAll('.bottom-nav button').forEach(b=>{
+    const t=b.dataset.openLibrary;
+    b.classList.toggle('active',currentScreen==='library'&&t===libraryType);
+  });
+}
+document.getElementById('searchBox').addEventListener('input',renderLibrary);
+document.getElementById('libraryRandom').onclick=()=>randomExercise(libraryType);
 
-const hash=location.hash.slice(1);go(screens.some(x=>x.dataset.key===hash)?hash:'launch');
+function openExercise(e){
+  if(!e)return;
+  currentExercise=e;
+  lastLibrary=normalizedType(e);
+  go(e.leaf?'breath':'detail');
+}
+function randomExercise(type){
+  const p=type?pool(type):EXERCISES;
+  openExercise(p[Math.floor(Math.random()*p.length)]);
+}
+document.getElementById('randomBtn').onclick=()=>randomExercise();
+document.getElementById('calmBtn').onclick=()=>{
+  const p=EXERCISES.filter(e=>e.duration<=30);
+  openExercise(p[Math.floor(Math.random()*p.length)]);
+};
+
+function renderDetail(){
+  clearInterval(timerId);
+  if(!currentExercise){currentExercise=pool(lastLibrary)[0]}
+  document.getElementById('instructionBlock').style.display='block';
+  document.getElementById('timerCard').classList.remove('show');
+  document.getElementById('detailType').textContent=normalizedType(currentExercise)==='breath'?'Respiration':'Geste du quotidien';
+  document.getElementById('detailTitle').textContent=currentExercise.title;
+  document.getElementById('detailWhen').textContent=currentExercise.when;
+  document.getElementById('detailLead').textContent=currentExercise.lead;
+  document.getElementById('detailSteps').innerHTML=currentExercise.steps.map((x,i)=>'<div class="step"><span class="num">'+(i+1)+'</span><span>'+x+'</span></div>').join('');
+  document.getElementById('detailTags').innerHTML='<span class="tag">'+formatDuration(currentExercise.duration)+'</span>'+currentExercise.tags.map(t=>'<span class="tag">'+t+'</span>').join('');
+  document.getElementById('startBtn').textContent='Commencer · '+formatDuration(currentExercise.duration);
+}
+document.getElementById('detailBack').onclick=()=>openLibrary(lastLibrary);
+document.getElementById('anotherBtn').onclick=()=>randomExercise(lastLibrary);
+document.getElementById('startBtn').onclick=()=>{
+  if(currentExercise.leaf){go('breath');return}
+  startTimer();
+};
+document.getElementById('finishBtn').onclick=()=>{clearInterval(timerId);go('done')};
+
+function startTimer(){
+  clearInterval(timerId);
+  document.getElementById('instructionBlock').style.display='none';
+  document.getElementById('timerCard').classList.add('show');
+  document.getElementById('timerInstruction').textContent=currentExercise.lead;
+  const total=currentExercise.duration,start=Date.now();
+  const tick=()=>{
+    const elapsed=(Date.now()-start)/1000,left=Math.max(0,total-elapsed);
+    document.getElementById('timerBig').textContent=left>=60?Math.ceil(left/60)+' min':Math.ceil(left)+' s';
+    document.getElementById('timerBar').style.width=Math.min(100,elapsed/total*100)+'%';
+    if(left<=0){clearInterval(timerId);setTimeout(()=>go('done'),500)}
+  };
+  tick();timerId=setInterval(tick,100);
+}
+
+/* Feuille : toujours portée par le vent.
+   Inspiration = montée. Expiration = descente.
+   Plus la phase est longue, plus le balancement latéral s'accélère.
+   Plus la phase est courte, plus il ralentit. */
+const INHALE=4,EXHALE=6,CYCLE=INHALE+EXHALE;
+const leaf=document.getElementById('movingLeaf');
+function startBreath(){
+  breathStart=performance.now();breathPaused=false;breathPauseAt=0;windPhase=0;lastFrame=performance.now();
+  document.getElementById('pauseBtn').textContent='Ⅱ';
+}
+document.getElementById('pauseBtn').onclick=()=>{
+  breathPaused=!breathPaused;
+  document.getElementById('pauseBtn').textContent=breathPaused?'▶':'Ⅱ';
+  if(breathPaused)breathPauseAt=performance.now();
+  else{breathStart+=performance.now()-breathPauseAt;lastFrame=performance.now()}
+};
+document.getElementById('endBreathBtn').onclick=()=>go('done');
+
+function ease(p){return .5-Math.cos(Math.PI*p)/2}
+function animate(now){
+  const dt=Math.min(.04,(now-lastFrame)/1000);lastFrame=now;
+  if(currentScreen==='breath'&&!breathPaused){
+    const elapsed=(now-breathStart)/1000;
+    const t=elapsed%CYCLE;
+    const inhale=t<INHALE;
+    const phaseDuration=inhale?INHALE:EXHALE;
+    const phaseElapsed=inhale?t:t-INHALE;
+    const p=Math.max(0,Math.min(1,phaseElapsed/phaseDuration));
+    const vertical=ease(p);
+    const bottom=inhale?10+vertical*67:77-vertical*67;
+
+    // durée longue => vent latéral plus rapide ; durée courte => plus lent
+    const minD=3,maxD=8;
+    const f=Math.max(0,Math.min(1,(phaseDuration-minD)/(maxD-minD)));
+    const hz=.34+f*.72;
+    windPhase+=dt*2*Math.PI*hz;
+
+    // balancement irrégulier de feuille, jamais une ligne droite
+    const x=50+Math.sin(windPhase)*13+Math.sin(windPhase*.43+1.8)*4.5+Math.sin(windPhase*1.73)*1.8;
+    const rot=Math.sin(windPhase+.4)*14+Math.sin(windPhase*.61)*5;
+    leaf.style.left=x+'%';
+    leaf.style.bottom=bottom+'%';
+    leaf.style.transform='translateX(-50%) rotate('+rot+'deg)';
+
+    const remain=Math.max(1,Math.ceil(phaseDuration-phaseElapsed));
+    document.getElementById('phaseLabel').textContent=inhale?'Inspire · la feuille monte':'Expire · la feuille redescend';
+    document.getElementById('phaseCount').textContent=remain;
+  }
+  requestAnimationFrame(animate);
+}
+requestAnimationFrame(animate);
+
+document.getElementById('doneAnother').onclick=()=>randomExercise(lastLibrary);
+go('splash');
 </script>
 </body>
 </html>
