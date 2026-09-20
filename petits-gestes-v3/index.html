@@ -4,6 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#edf6f7">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Petits gestes">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
 <title>Les petits gestes de mon Hêtre</title>
 <style>
 :root{
@@ -242,6 +248,7 @@ button{color:inherit}
 </div></div>
 
 <script>
+
 const EXERCISES=[
 /* RESPIRATION */
 {id:"leaf-breath",title:"Suis la feuille",cat:"breath",icon:"❧",duration:60,leaf:true,evidence:"Adaptation courte",source:"Respiration lente · Laborde et al., 2022",when:"Quand tu veux te laisser guider sans compter.",lead:"Suis simplement la feuille : elle monte à l’inspiration, redescend à l’expiration et continue de flotter avec le vent.",steps:["Choisis un rythme confortable.","Ne cherche pas à remplir les poumons au maximum.","Laisse la feuille guider le tempo."],tags:["Guidé","1 min"]},
@@ -306,292 +313,755 @@ const EXERCISES=[
 ];
 
 const NEEDS={
-  pressure:{label:"Faire redescendre la pression",short:"Faire redescendre",icon:"⌄",desc:"Quand le stress ou l’agitation prennent trop de place."},
-  thoughts:{label:"Créer de l’espace dans mes pensées",short:"Créer de l’espace",icon:"◌",desc:"Quand une pensée tourne, colle ou se répète."},
-  presence:{label:"Retrouver de la présence",short:"Revenir ici",icon:"◉",desc:"Quand tu veux retrouver l’instant et tes perceptions."},
-  energy:{label:"Retrouver de l’élan",short:"Retrouver de l’élan",icon:"↗",desc:"Quand tu veux te remettre doucement en mouvement."},
-  body:{label:"Relâcher mon corps",short:"Relâcher le corps",icon:"↕",desc:"Quand la tension semble surtout physique."},
-  clarity:{label:"Retrouver de la clarté",short:"Retrouver de la clarté",icon:"✦",desc:"Quand ton attention est embrouillée ou dispersée."}
+  pressure:{label:"Faire redescendre la pression",short:"Faire redescendre",desc:"Quand l’intensité, le stress ou l’agitation montent."},
+  thoughts:{label:"Créer de l’espace dans mes pensées",short:"Créer de l’espace",desc:"Quand une pensée tourne, colle ou prend toute la place."},
+  presence:{label:"Retrouver de la présence",short:"Revenir ici",desc:"Revenir à l’instant, aux sens et à ce qui m’entoure."},
+  energy:{label:"Retrouver de l’élan",short:"Retrouver de l’élan",desc:"Réveiller doucement l’énergie, la curiosité ou la vigilance."},
+  body:{label:"Relâcher mon corps",short:"Relâcher le corps",desc:"Quand la tension semble surtout physique."},
+  clarity:{label:"Retrouver de la clarté",short:"Retrouver de la clarté",desc:"Réengager l’attention quand tout devient flou ou dispersé."}
 };
+
 const NEED_MAP={
- pressure:["leaf-breath","slow-55","exhale-46","cyclic-sigh","diaphragm","pursed","box","nasal-slow","three-slow","pmr-3","hands-release","shoulders-release","jaw-release","scapula-release","palms-press","feet-press","open-hands","self-touch","grounding-333","tongue","teeth-space","feet-contact","soft-grip","autogenic-heavy"],
- thoughts:["third-person","affect-label","word-repeat","thought-prefix","next-thought","subtract-3","spell-back","color-hunt","straight-lines","angles","name-action","three-facts","grounding-333","focus-open-sound"],
- presence:["grounding-333","feet-contact","thumb-index","peripheral","near-far-sound","back-contact","warm-cool","name-action","three-facts","two-sides-touch","focus-open-sound","novelty-scan","near-far-gaze","tongue"],
- energy:["upright","soft-smile","brisk-walk","humming","chew-alert","backward-steps","stairs-energy","novelty-scan"],
- body:["pmr-3","hands-release","shoulders-release","jaw-release","scapula-release","palms-press","feet-press","open-hands","wall-push","brisk-walk","self-touch","tongue","teeth-space","soft-grip"],
- clarity:["third-person","affect-label","word-repeat","thought-prefix","subtract-3","spell-back","color-hunt","straight-lines","angles","near-far-sound","focus-open-sound","novelty-scan","near-far-gaze","name-action","three-facts","backward-steps"]
+  pressure:["leaf-breath","slow-55","exhale-46","cyclic-sigh","diaphragm","pursed","box","nasal-slow","three-slow","pmr-3","hands-release","shoulders-release","jaw-release","scapula-release","palms-press","feet-press","open-hands","self-touch","grounding-333","tongue","teeth-space","feet-contact","soft-grip","autogenic-heavy"],
+  thoughts:["third-person","affect-label","word-repeat","thought-prefix","next-thought","subtract-3","spell-back","color-hunt","straight-lines","angles","name-action","three-facts","grounding-333","focus-open-sound"],
+  presence:["grounding-333","feet-contact","thumb-index","peripheral","near-far-sound","back-contact","warm-cool","name-action","three-facts","two-sides-touch","focus-open-sound","novelty-scan","near-far-gaze","tongue"],
+  energy:["upright","soft-smile","brisk-walk","humming","chew-alert","backward-steps","stairs-energy","novelty-scan"],
+  body:["pmr-3","hands-release","shoulders-release","jaw-release","scapula-release","palms-press","feet-press","open-hands","wall-push","brisk-walk","self-touch","tongue","teeth-space","soft-grip"],
+  clarity:["third-person","affect-label","word-repeat","thought-prefix","subtract-3","spell-back","color-hunt","straight-lines","angles","near-far-sound","focus-open-sound","novelty-scan","near-far-gaze","name-action","three-facts","backward-steps"]
 };
-const needsOf=e=>Object.keys(NEED_MAP).filter(k=>NEED_MAP[k].includes(e.id));
 
-const THEMES={all:{label:"Tous les gestes",title:"Tout le catalogue",intro:"Tous les gestes réunis.",ids:null},breath:{label:"Respiration",title:"Respiration",intro:"Rythme, souffle, expiration et vibration.",ids:EXERCISES.filter(e=>e.cat==='breath').map(e=>e.id)},movement:{label:"Corps & mouvement",title:"Corps & mouvement",intro:"Contracter, relâcher, marcher, bouger ou changer de posture.",ids:EXERCISES.filter(e=>e.cat==='movement').map(e=>e.id)},discreet:{label:"Gestes discrets",title:"Gestes discrets",intro:"Des micro-gestes qui peuvent entrer dans la vie réelle.",ids:["self-touch","tongue","teeth-space","feet-contact","big-toe","thumb-index","soft-grip","back-contact","two-sides-touch","name-action","near-far-sound","peripheral"]},mind:{label:"Attention & pensées",title:"Attention & pensées",intro:"Déplacer l’attention, mettre à distance ou réengager la concentration.",ids:["third-person","affect-label","word-repeat","thought-prefix","next-thought","subtract-3","spell-back","color-hunt","straight-lines","angles","name-action","three-facts","focus-open-sound","novelty-scan"]},sensory:{label:"Sensoriel & perception",title:"Sensoriel & perception",intro:"Regard, sons, toucher, température et orientation.",ids:["grounding-333","feet-contact","thumb-index","peripheral","near-far-sound","back-contact","warm-cool","two-sides-touch","focus-open-sound","novelty-scan","near-far-gaze"]},activation:{label:"Élan & activation",title:"Élan & activation",intro:"Retrouver énergie, présence ou vigilance.",ids:["upright","soft-smile","brisk-walk","humming","chew-alert","backward-steps","stairs-energy","novelty-scan","near-far-gaze"]}};
-const MOMENTS={wake:{label:"Au réveil",icon:"☼",desc:"Remettre doucement du mouvement, du regard et de la présence.",ids:["upright","near-far-gaze","novelty-scan","three-slow","chew-alert","brisk-walk"]},start:{label:"Avant de commencer ma journée",icon:"→",desc:"Un petit repère avant de partir dans le rythme.",ids:["slow-55","three-slow","upright","name-action","three-facts","self-touch"]},work:{label:"Au travail",icon:"□",desc:"Des gestes brefs et compatibles avec une journée occupée.",ids:["tongue","teeth-space","soft-grip","feet-contact","thumb-index","shoulders-release","near-far-gaze","name-action"]},transport:{label:"Dans les transports",icon:"↔",desc:"Des gestes discrets, assis ou debout, sans matériel.",ids:["feet-contact","near-far-sound","peripheral","thumb-index","self-touch","focus-open-sound","thought-prefix"]},important:{label:"Avant un moment important",icon:"◇",desc:"Retrouver de l’espace, de l’appui et un peu de clarté.",ids:["exhale-46","cyclic-sigh","three-slow","third-person","affect-label","shoulders-release","upright"]},pressure:{label:"Quand la pression monte",icon:"⌄",desc:"Des gestes courts pour agir avant que tout prenne trop de place.",ids:["exhale-46","cyclic-sigh","three-slow","grounding-333","hands-release","self-touch","tongue","affect-label"]},break:{label:"Quand je veux faire une coupure",icon:"—",desc:"Changer brièvement de canal avant de reprendre.",ids:["brisk-walk","near-far-gaze","novelty-scan","warm-cool","focus-open-sound","shoulders-release"]},home:{label:"En rentrant chez moi",icon:"⌂",desc:"Marquer une transition et laisser un peu de la journée derrière soi.",ids:["pmr-3","self-touch","slow-55","autogenic-heavy","brisk-walk","humming"]},sleep:{label:"Avant de dormir",icon:"◒",desc:"Des gestes calmes et sans recherche de performance.",ids:["slow-55","exhale-46","diaphragm","pmr-3","autogenic-heavy","humming","self-touch"]},quick:{label:"Quand je n’ai que 30 secondes",icon:"30",desc:"Les gestes les plus courts du catalogue.",ids:EXERCISES.filter(e=>e.duration<=30).map(e=>e.id)},others:{label:"Quand je suis avec d’autres personnes",icon:"◌",desc:"Des gestes suffisamment discrets pour ne pas interrompre le moment.",ids:["tongue","teeth-space","feet-contact","big-toe","thumb-index","peripheral","near-far-sound","soft-grip","third-person","affect-label","thought-prefix","name-action"]}};
+const THEMES={
+  all:{label:"Tous les gestes",title:"Tout le catalogue",intro:"Tous les gestes réunis.",ids:null},
+  breath:{label:"Respiration",title:"Respiration",intro:"Rythme, souffle, expiration et vibration.",ids:EXERCISES.filter(function(e){return e.cat==="breath"}).map(function(e){return e.id})},
+  movement:{label:"Corps & mouvement",title:"Corps & mouvement",intro:"Contracter, relâcher, marcher, bouger ou changer de posture.",ids:EXERCISES.filter(function(e){return e.cat==="movement"}).map(function(e){return e.id})},
+  discreet:{label:"Gestes discrets",title:"Gestes discrets",intro:"Des micro-gestes qui peuvent entrer dans la vie réelle.",ids:["self-touch","tongue","teeth-space","feet-contact","big-toe","thumb-index","soft-grip","back-contact","two-sides-touch","name-action","near-far-sound","peripheral"]},
+  mind:{label:"Attention & pensées",title:"Attention & pensées",intro:"Déplacer l’attention, mettre à distance une pensée ou réengager la concentration.",ids:["third-person","affect-label","word-repeat","thought-prefix","next-thought","subtract-3","spell-back","color-hunt","straight-lines","angles","name-action","three-facts","focus-open-sound","novelty-scan"]},
+  sensory:{label:"Sensoriel & perception",title:"Sensoriel & perception",intro:"Regard, sons, toucher, température et orientation.",ids:["grounding-333","feet-contact","thumb-index","peripheral","near-far-sound","back-contact","warm-cool","two-sides-touch","focus-open-sound","novelty-scan","near-far-gaze"]},
+  activation:{label:"Élan & activation",title:"Élan & activation",intro:"Retrouver de l’énergie, de la présence ou de la vigilance.",ids:["upright","soft-smile","brisk-walk","humming","chew-alert","backward-steps","stairs-energy","novelty-scan","near-far-gaze"]}
+};
 
+const MOMENTS={
+  wake:{label:"Au réveil",icon:"☼",desc:"Remettre doucement du mouvement, du regard et de la présence.",ids:["upright","near-far-gaze","novelty-scan","three-slow","chew-alert","brisk-walk"]},
+  start:{label:"Avant de commencer ma journée",icon:"→",desc:"Un petit repère avant de partir dans le rythme.",ids:["slow-55","three-slow","upright","name-action","three-facts","self-touch"]},
+  work:{label:"Au travail",icon:"□",desc:"Des gestes brefs et compatibles avec une journée occupée.",ids:["tongue","teeth-space","soft-grip","feet-contact","thumb-index","shoulders-release","near-far-gaze","name-action"]},
+  transport:{label:"Dans les transports",icon:"↔",desc:"Des gestes discrets, assis ou debout, sans matériel.",ids:["feet-contact","near-far-sound","peripheral","thumb-index","self-touch","focus-open-sound","thought-prefix"]},
+  important:{label:"Avant un moment important",icon:"◇",desc:"Retrouver de l’espace, de l’appui et un peu de clarté.",ids:["exhale-46","cyclic-sigh","three-slow","third-person","affect-label","shoulders-release","upright"]},
+  pressure:{label:"Quand la pression monte",icon:"⌄",desc:"Des gestes courts pour agir avant que tout prenne trop de place.",ids:["exhale-46","cyclic-sigh","three-slow","grounding-333","hands-release","self-touch","tongue","affect-label"]},
+  break:{label:"Quand je veux faire une coupure",icon:"—",desc:"Changer brièvement de canal avant de reprendre.",ids:["brisk-walk","near-far-gaze","novelty-scan","warm-cool","focus-open-sound","shoulders-release"]},
+  home:{label:"En rentrant chez moi",icon:"⌂",desc:"Marquer une transition et laisser un peu de la journée derrière soi.",ids:["pmr-3","self-touch","slow-55","autogenic-heavy","brisk-walk","humming"]},
+  sleep:{label:"Avant de dormir",icon:"◒",desc:"Des gestes calmes et sans recherche de performance.",ids:["slow-55","exhale-46","diaphragm","pmr-3","autogenic-heavy","humming","self-touch"]},
+  quick:{label:"Quand je n’ai que 30 secondes",icon:"30",desc:"Les gestes les plus courts du catalogue.",ids:EXERCISES.filter(function(e){return e.duration<=30}).map(function(e){return e.id})},
+  others:{label:"Quand je suis avec d’autres personnes",icon:"◌",desc:"Des gestes suffisamment discrets pour ne pas interrompre le moment.",ids:["tongue","teeth-space","feet-contact","big-toe","thumb-index","peripheral","near-far-sound","soft-grip","third-person","affect-label","thought-prefix","name-action"]}
+};
 
+const $=function(id){return document.getElementById(id)};
+const screens=[].slice.call(document.querySelectorAll(".screen"));
+const typeOf=function(e){return e&&e.cat?e.cat:"discreet"};
+const fmt=function(sec){
+  sec=Number(sec)||0;
+  if(sec<60)return sec+" s";
+  if(sec===60)return "1 min";
+  if(sec%60===0)return Math.round(sec/60)+" min";
+  return Math.floor(sec/60)+" min "+(sec%60)+" s";
+};
+const escapeHtml=function(v){return String(v==null?"":v).replace(/[&<>"']/g,function(ch){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]})};
 
-const screens=[...document.querySelectorAll('.screen')];
-let current='home',listType='theme:all',categoryFilter='all',currentExercise=null,lastType='theme:all',timerId=null;
-let listOrigin='catalog',detailOrigin='list',dailyTab='moments',collectionType=null,collectionId=null,nameCreateType=null,nameAddCurrent=false,activeRoutine=null;
-let inhale=4,exhale=6,breathStart=0,breathPaused=false,pauseAt=0,windPhase=0,lastFrame=performance.now();
+let current="home";
+let listType="theme:all";
+let listOrigin="catalog";
+let lastType="theme:all";
+let categoryFilter="all";
+let currentExercise=null;
+let detailOrigin="catalog";
+let dailyTab="moments";
+let collectionType=null;
+let collectionId=null;
+let nameCreateType=null;
+let nameAddCurrent=false;
+let activeRoutine=null;
+let timerId=null;
 
-let favData=[];try{favData=JSON.parse(localStorage.getItem('petits-gestes-favorites')||'[]')}catch(e){}
+let inhale=4,exhale=6,breathElapsed=0,windPhase=0,breathPaused=false,lastFrame=performance.now();
+
+let favData=[];
+try{favData=JSON.parse(localStorage.getItem("petits-gestes-favorites")||"[]")}catch(e){}
 const favorites=new Set(Array.isArray(favData)?favData:[]);
-let feedbackData={};try{feedbackData=JSON.parse(localStorage.getItem('petits-gestes-feedback')||'{}')||{}}catch(e){}
-let strategies=[];try{strategies=JSON.parse(localStorage.getItem('petits-gestes-strategies')||'[]')||[]}catch(e){}
-let routines=[];try{routines=JSON.parse(localStorage.getItem('petits-gestes-routines')||'[]')||[]}catch(e){}
-const typeOf=e=>e?.cat||'discreet';
-const fmt=s=>s<60?s+' s':s===60?'1 min':Math.round(s/60)+' min';
-const pool=t=>{if(!t)return EXERCISES;if(t.startsWith('need:')){const code=t.slice(5);return EXERCISES.filter(e=>(NEED_MAP[code]||[]).includes(e.id))}if(t.startsWith('theme:')){const code=t.slice(6),th=THEMES[code]||THEMES.all;return th.ids?EXERCISES.filter(e=>th.ids.includes(e.id)):EXERCISES}if(t.startsWith('moment:')){const mo=MOMENTS[t.slice(7)];return mo?EXERCISES.filter(e=>mo.ids.includes(e.id)):[]}return EXERCISES.filter(e=>typeOf(e)===t)};
+
+let feedbackData={};
+try{feedbackData=JSON.parse(localStorage.getItem("petits-gestes-feedback")||"{}")||{}}catch(e){}
+if(!feedbackData||Array.isArray(feedbackData)||typeof feedbackData!=="object")feedbackData={};
+
+let strategies=[];
+try{strategies=JSON.parse(localStorage.getItem("petits-gestes-strategies")||"[]")||[]}catch(e){}
+if(!Array.isArray(strategies))strategies=[];
+
+let routines=[];
+try{routines=JSON.parse(localStorage.getItem("petits-gestes-routines")||"[]")||[]}catch(e){}
+if(!Array.isArray(routines))routines=[];
+
+function normalizeCollections(arr){
+  return arr.filter(function(c){return c&&c.id&&c.name}).map(function(c){
+    return {id:String(c.id),name:String(c.name),exerciseIds:Array.isArray(c.exerciseIds)?c.exerciseIds.filter(function(id){return EXERCISES.some(function(e){return e.id===id})}):[]};
+  });
+}
+strategies=normalizeCollections(strategies);
+routines=normalizeCollections(routines);
+
+function saveFavs(){
+  localStorage.setItem("petits-gestes-favorites",JSON.stringify([].slice.call(favorites)));
+}
+function savePersonal(){
+  localStorage.setItem("petits-gestes-feedback",JSON.stringify(feedbackData));
+  localStorage.setItem("petits-gestes-strategies",JSON.stringify(strategies));
+  localStorage.setItem("petits-gestes-routines",JSON.stringify(routines));
+}
+function isFav(id){return favorites.has(id)}
+function favPool(){return EXERCISES.filter(function(e){return favorites.has(e.id)})}
+function toggleFav(id){
+  if(!id)return;
+  if(favorites.has(id))favorites.delete(id);else favorites.add(id);
+  saveFavs();
+  updateFavButtons();
+  if(current==="favorites")renderFavorites();
+  if(current==="list")renderList();
+}
+
+function needsOf(e){
+  return Object.keys(NEED_MAP).filter(function(k){return NEED_MAP[k].indexOf(e.id)>=0});
+}
+function pool(t){
+  if(!t)return EXERCISES.slice();
+  if(t.indexOf("need:")===0){
+    const ids=NEED_MAP[t.slice(5)]||[];
+    return EXERCISES.filter(function(e){return ids.indexOf(e.id)>=0});
+  }
+  if(t.indexOf("theme:")===0){
+    const theme=THEMES[t.slice(6)]||THEMES.all;
+    if(!theme.ids)return EXERCISES.slice();
+    return EXERCISES.filter(function(e){return theme.ids.indexOf(e.id)>=0});
+  }
+  if(t.indexOf("moment:")===0){
+    const moment=MOMENTS[t.slice(7)];
+    if(!moment)return [];
+    return EXERCISES.filter(function(e){return moment.ids.indexOf(e.id)>=0});
+  }
+  return EXERCISES.filter(function(e){return typeOf(e)===t});
+}
 
 async function loadBrandImage(){
   try{
-    const b64=(await (await fetch('assets/hero.b64?v=3')).text()).trim();
-    const hero='data:image/webp;base64,'+b64;
+    const response=await fetch("assets/hero.b64?v=4");
+    const b64=(await response.text()).trim();
+    const hero="data:image/webp;base64,"+b64;
     const sources={
-      hero,
-      explore:'../petits-gestes/assets/explore.webp?v=3',
-      list:'../petits-gestes/assets/list.webp?v=3',
-      detail:'../petits-gestes/assets/detail.webp?v=3'
+      hero:hero,
+      explore:"../petits-gestes/assets/explore.webp?v=4",
+      list:"../petits-gestes/assets/list.webp?v=4",
+      detail:"../petits-gestes/assets/detail.webp?v=4"
     };
-    document.querySelectorAll('.brand-img').forEach(img=>{
-      const key=img.dataset.visual||'hero';
-      img.onload=()=>img.closest('.visual')?.classList.add('loaded');
-      img.onerror=()=>{if(img.src!==hero)img.src=hero};
+    [].slice.call(document.querySelectorAll(".brand-img")).forEach(function(img){
+      const key=img.dataset.visual||"hero";
+      img.onload=function(){const wrap=img.closest(".visual");if(wrap)wrap.classList.add("loaded")};
+      img.onerror=function(){if(img.src!==hero)img.src=hero};
       img.src=sources[key]||hero;
     });
-  }catch(e){console.warn('Visuel indisponible',e)}
+  }catch(e){console.warn("Visuel indisponible",e)}
 }
-loadBrandImage();
 
-function saveFavs(){localStorage.setItem('petits-gestes-favorites',JSON.stringify([...favorites]));refreshFavSummary()}
-function isFav(id){return favorites.has(id)}
-function toggleFav(id){if(!id)return;isFav(id)?favorites.delete(id):favorites.add(id);saveFavs();updateFavButtons();if(current==='favorites')renderFavorites();if(current==='list')renderList()}
-function favPool(){return EXERCISES.filter(e=>favorites.has(e.id))}
-
-function savePersonal(){
-  localStorage.setItem('petits-gestes-feedback',JSON.stringify(feedbackData));
-  localStorage.setItem('petits-gestes-strategies',JSON.stringify(strategies));
-  localStorage.setItem('petits-gestes-routines',JSON.stringify(routines));
-}
 function updateMainNav(){
   let active=current;
-  if(current==='list')active=listOrigin;
-  document.querySelectorAll('.main-nav button').forEach(btn=>btn.classList.toggle('active',btn.dataset.go===active));
+  if(current==="list")active=listOrigin;
+  [].slice.call(document.querySelectorAll(".main-nav button")).forEach(function(btn){
+    btn.classList.toggle("active",btn.dataset.go===active);
+  });
 }
 function go(name){
-  current=name;screens.forEach(sc=>sc.classList.toggle('active',sc.dataset.screen===name));
-  if(name==='home')renderHome();
-  if(name==='needs')renderNeedsCounts();
-  if(name==='catalog')renderCatalog();
-  if(name==='daily')renderDaily();
-  if(name==='favorites')renderFavorites();
-  if(name==='list')renderList();
-  if(name==='detail')renderDetail();
-  if(name==='collection')renderCollection();
-  if(name==='breath')startBreath();
-  if(name==='done')updateDoneFav();
+  current=name;
+  screens.forEach(function(sc){sc.classList.toggle("active",sc.dataset.screen===name)});
+  if(name==="home")renderHome();
+  if(name==="needs")renderNeedsCounts();
+  if(name==="catalog")renderCatalog();
+  if(name==="daily")renderDaily();
+  if(name==="favorites")renderFavorites();
+  if(name==="list")renderList();
+  if(name==="detail")renderDetail();
+  if(name==="collection")renderCollection();
+  if(name==="breath")startBreath();
+  if(name==="done")updateDoneFav();
   updateMainNav();
 }
-document.querySelectorAll('[data-go]').forEach(btn=>btn.onclick=()=>go(btn.dataset.go));
-document.querySelectorAll('[data-need]').forEach(btn=>btn.onclick=()=>openList('need:'+btn.dataset.need,'needs'));
-document.querySelectorAll('[data-theme]').forEach(btn=>btn.onclick=()=>openList('theme:'+btn.dataset.theme,'catalog'));
-document.querySelectorAll('[data-dailytab]').forEach(btn=>btn.onclick=()=>{dailyTab=btn.dataset.dailytab;renderDaily()});
+[].slice.call(document.querySelectorAll("[data-go]")).forEach(function(btn){
+  btn.onclick=function(){go(btn.dataset.go)};
+});
+[].slice.call(document.querySelectorAll("[data-need]")).forEach(function(btn){
+  btn.onclick=function(){openList("need:"+btn.dataset.need,"needs")};
+});
+[].slice.call(document.querySelectorAll("[data-theme]")).forEach(function(btn){
+  btn.onclick=function(){openList("theme:"+btn.dataset.theme,"catalog")};
+});
+[].slice.call(document.querySelectorAll("[data-dailytab]")).forEach(function(btn){
+  btn.onclick=function(){dailyTab=btn.dataset.dailytab;renderDaily()};
+});
 
 function openList(t,origin){
-  listOrigin=origin||current||'catalog';listType=t;lastType=t;categoryFilter='all';
-  const search=document.getElementById('searchBox');if(search)search.value='';
-  document.querySelectorAll('.filter-chip').forEach(btn=>btn.classList.toggle('active',btn.dataset.filter==='all'));
-  go('list');
+  listOrigin=origin||current||"catalog";
+  listType=t;
+  lastType=t;
+  categoryFilter="all";
+  if($("searchBox"))$("searchBox").value="";
+  [].slice.call(document.querySelectorAll(".filter-chip")).forEach(function(btn){btn.classList.toggle("active",btn.dataset.filter==="all")});
+  go("list");
 }
-document.getElementById('listBack').onclick=()=>go(listOrigin||'catalog');
+$("listBack").onclick=function(){go(listOrigin||"catalog")};
 
 function renderNeedsCounts(){
-  document.querySelectorAll('[data-count-need]').forEach(el=>{el.textContent=pool('need:'+el.dataset.countNeed).length+' gestes'});
+  [].slice.call(document.querySelectorAll("[data-count-need]")).forEach(function(el){
+    el.textContent=pool("need:"+el.dataset.countNeed).length+" gestes";
+  });
 }
 function renderCatalog(){
-  document.getElementById('catalogCount').textContent=EXERCISES.length+' gestes à découvrir, tester et adapter à toi.';
-  document.querySelectorAll('[data-count-theme]').forEach(el=>{el.textContent=pool('theme:'+el.dataset.countTheme).length});
+  $("catalogCount").textContent=EXERCISES.length+" gestes à découvrir, tester et adapter à toi.";
+  [].slice.call(document.querySelectorAll("[data-count-theme]")).forEach(function(el){
+    el.textContent=pool("theme:"+el.dataset.countTheme).length;
+  });
 }
-function refreshFavSummary(){if(current==='favorites')renderFavorites()}
 
 const dayIndex=Math.floor(new Date().setHours(0,0,0,0)/86400000);
-const discoveryPool=EXERCISES.filter(e=>e.duration<=180);
+const discoveryPool=EXERCISES.filter(function(e){return e.duration<=180});
 const homeGesture=discoveryPool[(dayIndex%discoveryPool.length+discoveryPool.length)%discoveryPool.length];
+
 function renderHome(){
-  document.getElementById('homeGestureTitle').textContent=homeGesture.title;
-  document.getElementById('homeGestureMeta').textContent=fmt(homeGesture.duration)+' · '+homeGesture.tags.slice(0,2).join(' · ');
-  const resume=document.getElementById('homeResume'),empty=document.getElementById('homeResumeEmpty');
-  const routine=routines[routines.length-1],strategy=strategies[strategies.length-1],last=routine||strategy;
+  $("homeGestureTitle").textContent=homeGesture.title;
+  $("homeGestureMeta").textContent=fmt(homeGesture.duration)+" · "+homeGesture.tags.slice(0,2).join(" · ");
+  const resume=$("homeResume");
+  const empty=$("homeResumeEmpty");
+  const lastRoutine=routines.length?routines[routines.length-1]:null;
+  const lastStrategy=strategies.length?strategies[strategies.length-1]:null;
+  const last=lastRoutine||lastStrategy;
   if(last){
-    resume.classList.add('show');empty.style.display='none';
-    document.getElementById('homeResumeTitle').textContent=last.name;
-    const isRoutine=!!routine;
-    document.getElementById('homeResumeMeta').textContent=(isRoutine?'Ma routine · ':'Ma stratégie · ')+last.exerciseIds.length+' geste'+(last.exerciseIds.length>1?'s':'');
-    resume.onclick=()=>openCollection(isRoutine?'routine':'strategy',last.id);
-  }else{resume.classList.remove('show');empty.style.display='block'}
+    resume.classList.add("show");
+    empty.style.display="none";
+    $("homeResumeTitle").textContent=last.name;
+    const isRoutine=!!lastRoutine;
+    $("homeResumeMeta").textContent=(isRoutine?"Ma routine · ":"Ma stratégie · ")+last.exerciseIds.length+" geste"+(last.exerciseIds.length>1?"s":"");
+    resume.onclick=function(){openCollection(isRoutine?"routine":"strategy",last.id)};
+  }else{
+    resume.classList.remove("show");
+    empty.style.display="block";
+  }
 }
-document.getElementById('homeGestureBtn').onclick=()=>openExercise(homeGesture);
+$("homeGestureBtn").onclick=function(){openExercise(homeGesture)};
 
 function renderRows(items,target){
-  const box=document.getElementById(target);
-  if(!items.length){box.innerHTML='<div class="empty glass">Rien ici pour le moment.</div>';return}
-  box.innerHTML=items.map(e=>'<div class="row glass" data-id="'+e.id+'"><div class="row-icon">'+e.icon+'</div><div><b>'+e.title+'</b><small>'+fmt(e.duration)+' · '+e.tags.slice(0,2).join(' · ')+'</small></div><button class="heart '+(isFav(e.id)?'on':'')+'" data-heart="'+e.id+'">'+(isFav(e.id)?'♥':'♡')+'</button></div>').join('');
-  box.querySelectorAll('[data-id]').forEach(r=>r.onclick=ev=>{if(ev.target.closest('[data-heart]'))return;openExercise(EXERCISES.find(e=>e.id===r.dataset.id))});
-  box.querySelectorAll('[data-heart]').forEach(b=>b.onclick=ev=>{ev.stopPropagation();toggleFav(b.dataset.heart)});
-}
-function renderList(){
-  const q=document.getElementById('searchBox').value.toLowerCase().trim();
-  const base=pool(listType);
-  const categoryOK=e=>categoryFilter==='all'||typeOf(e)===categoryFilter;
-  const items=base.filter(e=>categoryOK(e)&&(!q||(e.title+' '+e.when+' '+e.lead+' '+e.tags.join(' ')).toLowerCase().includes(q)));
-  let m={eyebrow:'Les gestes',title:'Tout le catalogue',intro:'Explore librement.',count:'gestes'};
-  if(listType.startsWith('need:')){
-    const code=listType.slice(5),n=NEEDS[code]||NEEDS.presence;m={eyebrow:'Par besoin',title:n.label,intro:n.desc,count:'gestes'};
-  }else if(listType.startsWith('theme:')){
-    const code=listType.slice(6),t=THEMES[code]||THEMES.all;m={eyebrow:'Les gestes',title:t.title,intro:t.intro,count:'gestes'};
-  }else if(listType.startsWith('moment:')){
-    const mo=MOMENTS[listType.slice(7)];if(mo)m={eyebrow:'Au quotidien',title:mo.label,intro:mo.desc,count:'gestes'};
+  const box=$(target);
+  if(!box)return;
+  if(!items.length){
+    box.innerHTML='<div class="empty-soft">Rien ici pour le moment.</div>';
+    return;
   }
-  document.getElementById('listEyebrow').textContent=m.eyebrow;
-  document.getElementById('listTitle').textContent=m.title;
-  document.getElementById('listIntro').textContent=m.intro;
-  document.getElementById('listCount').textContent=items.length+' '+m.count;
-  document.getElementById('filterChips').style.display=listType.startsWith('theme:')?'none':'flex';
-  renderRows(items,'listRows');
+  box.innerHTML=items.map(function(e){
+    return '<div class="row glass" data-id="'+e.id+'"><div class="row-icon">'+e.icon+'</div><div><b>'+escapeHtml(e.title)+'</b><small>'+fmt(e.duration)+' · '+escapeHtml(e.tags.slice(0,2).join(" · "))+'</small></div><button class="heart '+(isFav(e.id)?"on":"")+'" data-heart="'+e.id+'">'+(isFav(e.id)?"♥":"♡")+'</button></div>';
+  }).join("");
+  [].slice.call(box.querySelectorAll("[data-id]")).forEach(function(row){
+    row.onclick=function(ev){
+      if(ev.target.closest("[data-heart]"))return;
+      openExercise(EXERCISES.find(function(e){return e.id===row.dataset.id}));
+    };
+  });
+  [].slice.call(box.querySelectorAll("[data-heart]")).forEach(function(btn){
+    btn.onclick=function(ev){ev.stopPropagation();toggleFav(btn.dataset.heart)};
+  });
 }
-document.getElementById('searchBox').oninput=renderList;
-document.querySelectorAll('.filter-chip').forEach(b=>b.onclick=()=>{categoryFilter=b.dataset.filter;document.querySelectorAll('.filter-chip').forEach(x=>x.classList.toggle('active',x===b));renderList()});
-document.getElementById('listRandom').onclick=()=>{const p=pool(listType);openExercise(p[Math.floor(Math.random()*p.length)])};
 
-function renderFavorites(){const p=favPool();document.getElementById('favPageCount').textContent=p.length+' favori'+(p.length>1?'s':'');renderRows(p,'favRows')}
+function renderList(){
+  const q=$("searchBox").value.toLowerCase().trim();
+  const base=pool(listType);
+  const items=base.filter(function(e){
+    const catOK=categoryFilter==="all"||typeOf(e)===categoryFilter;
+    const text=(e.title+" "+e.when+" "+e.lead+" "+e.tags.join(" ")).toLowerCase();
+    return catOK&&(!q||text.indexOf(q)>=0);
+  });
+
+  let meta={eyebrow:"Les gestes",title:"Tout le catalogue",intro:"Explore librement.",count:"gestes"};
+  if(listType.indexOf("need:")===0){
+    const n=NEEDS[listType.slice(5)]||NEEDS.presence;
+    meta={eyebrow:"Par besoin",title:n.label,intro:n.desc,count:"gestes"};
+  }else if(listType.indexOf("theme:")===0){
+    const t=THEMES[listType.slice(6)]||THEMES.all;
+    meta={eyebrow:"Les gestes",title:t.title,intro:t.intro,count:"gestes"};
+  }else if(listType.indexOf("moment:")===0){
+    const m=MOMENTS[listType.slice(7)];
+    if(m)meta={eyebrow:"Au quotidien",title:m.label,intro:m.desc,count:"gestes"};
+  }
+  $("listEyebrow").textContent=meta.eyebrow;
+  $("listTitle").textContent=meta.title;
+  $("listIntro").textContent=meta.intro;
+  $("listCount").textContent=items.length+" "+meta.count;
+  $("filterChips").style.display=listType.indexOf("theme:")===0?"none":"flex";
+  renderRows(items,"listRows");
+}
+$("searchBox").oninput=renderList;
+[].slice.call(document.querySelectorAll(".filter-chip")).forEach(function(btn){
+  btn.onclick=function(){
+    categoryFilter=btn.dataset.filter;
+    [].slice.call(document.querySelectorAll(".filter-chip")).forEach(function(x){x.classList.toggle("active",x===btn)});
+    renderList();
+  };
+});
+$("listRandom").onclick=function(){
+  let p=pool(listType).filter(function(e){return categoryFilter==="all"||typeOf(e)===categoryFilter});
+  if(!p.length)p=EXERCISES;
+  openExercise(p[Math.floor(Math.random()*p.length)]);
+};
+
+function renderFavorites(){
+  const p=favPool();
+  $("favPageCount").textContent=p.length+" favori"+(p.length>1?"s":"");
+  renderRows(p,"favRows");
+}
 
 function renderDaily(){
-  document.querySelectorAll('[data-dailytab]').forEach(btn=>btn.classList.toggle('active',btn.dataset.dailytab===dailyTab));
-  const box=document.getElementById('dailyContent');
-  if(dailyTab==='moments'){
-    box.innerHTML='<div class="moment-grid">'+Object.entries(MOMENTS).map(([k,m])=>'<button class="moment-card" data-moment="'+k+'"><span>'+m.icon+'</span><b>'+m.label+'</b><small>'+m.desc+'</small></button>').join('')+'</div>';
-    box.querySelectorAll('[data-moment]').forEach(btn=>btn.onclick=()=>openList('moment:'+btn.dataset.moment,'daily'));
-    const helpful=EXERCISES.filter(e=>feedbackData[e.id]?.rating==='helpful').slice(0,4);
+  [].slice.call(document.querySelectorAll("[data-dailytab]")).forEach(function(btn){btn.classList.toggle("active",btn.dataset.dailytab===dailyTab)});
+  const box=$("dailyContent");
+  if(dailyTab==="moments"){
+    box.innerHTML='<div class="moment-grid">'+Object.keys(MOMENTS).map(function(k){
+      const m=MOMENTS[k];
+      return '<button class="moment-card" data-moment="'+k+'"><span>'+m.icon+'</span><b>'+escapeHtml(m.label)+'</b><small>'+escapeHtml(m.desc)+'</small></button>';
+    }).join("")+'</div>';
+    [].slice.call(box.querySelectorAll("[data-moment]")).forEach(function(btn){btn.onclick=function(){openList("moment:"+btn.dataset.moment,"daily")}});
+    const helpful=EXERCISES.filter(function(e){return feedbackData[e.id]&&feedbackData[e.id].rating==="helpful"}).slice(0,5);
     if(helpful.length){
-      const wrap=document.createElement('div');wrap.className='helpful-block';wrap.innerHTML='<h3>Ce qui fonctionne pour moi</h3><div class="rows" id="helpfulRows"></div>';box.appendChild(wrap);renderRows(helpful,'helpfulRows');
+      const wrap=document.createElement("div");
+      wrap.className="helpful-block";
+      wrap.innerHTML='<h3>Ce qui fonctionne pour moi</h3><div class="rows" id="helpfulRows"></div>';
+      box.appendChild(wrap);
+      renderRows(helpful,"helpfulRows");
     }
-  }else if(dailyTab==='strategies'){
+  }else if(dailyTab==="strategies"){
     box.innerHTML='<div class="personal-head"><h3>Mes stratégies</h3><button class="mini-add" id="newStrategy">+ Créer</button></div><div class="collection-cards" id="strategyCards"></div>';
-    document.getElementById('newStrategy').onclick=()=>openNameSheet('strategy',false);renderCollectionCards('strategy');
+    $("newStrategy").onclick=function(){openNameSheet("strategy",false)};
+    renderCollectionCards("strategy");
   }else{
     box.innerHTML='<div class="personal-head"><h3>Mes routines</h3><button class="mini-add" id="newRoutine">+ Créer</button></div><div class="collection-cards" id="routineCards"></div>';
-    document.getElementById('newRoutine').onclick=()=>openNameSheet('routine',false);renderCollectionCards('routine');
+    $("newRoutine").onclick=function(){openNameSheet("routine",false)};
+    renderCollectionCards("routine");
   }
 }
+
 function renderCollectionCards(type){
-  const arr=type==='routine'?routines:strategies,box=document.getElementById(type==='routine'?'routineCards':'strategyCards');if(!box)return;
-  if(!arr.length){box.innerHTML='<div class="empty-soft">'+(type==='routine'?'Une routine est un enchaînement de gestes que tu choisis et ordonnes toi-même.':'Une stratégie rassemble les gestes que tu veux retrouver dans une situation précise.')+'</div>';return}
-  box.innerHTML=arr.map(c=>{const total=c.exerciseIds.map(id=>EXERCISES.find(e=>e.id===id)?.duration||0).reduce((x,y)=>x+y,0);return '<div class="collection-card" data-collection="'+c.id+'"><div><b>'+escapeHtml(c.name)+'</b><small>'+c.exerciseIds.length+' geste'+(c.exerciseIds.length>1?'s':'')+(type==='routine'&&c.exerciseIds.length?' · '+fmt(total):'')+'</small></div>'+(type==='routine'&&c.exerciseIds.length?'<button class="launch" data-launch="'+c.id+'">Lancer</button>':'<span>›</span>')+'</div>'}).join('');
-  box.querySelectorAll('[data-collection]').forEach(card=>card.onclick=ev=>{if(ev.target.closest('[data-launch]'))return;openCollection(type,card.dataset.collection)});
-  box.querySelectorAll('[data-launch]').forEach(btn=>btn.onclick=ev=>{ev.stopPropagation();startRoutine(btn.dataset.launch)});
+  const arr=type==="routine"?routines:strategies;
+  const box=$(type==="routine"?"routineCards":"strategyCards");
+  if(!box)return;
+  if(!arr.length){
+    box.innerHTML='<div class="empty-soft">'+(type==="routine"?"Une routine est un enchaînement de gestes que tu choisis et ordonnes toi-même.":"Une stratégie rassemble les gestes que tu veux retrouver dans une situation précise.")+'</div>';
+    return;
+  }
+  box.innerHTML=arr.map(function(c){
+    const total=c.exerciseIds.reduce(function(sum,id){const e=EXERCISES.find(function(x){return x.id===id});return sum+(e?e.duration:0)},0);
+    return '<div class="collection-card" data-collection="'+c.id+'"><div><b>'+escapeHtml(c.name)+'</b><small>'+c.exerciseIds.length+' geste'+(c.exerciseIds.length>1?"s":"")+(type==="routine"&&c.exerciseIds.length?" · "+fmt(total):"")+'</small></div>'+(type==="routine"&&c.exerciseIds.length?'<button class="launch" data-launch="'+c.id+'">Lancer</button>':'<span>›</span>')+'</div>';
+  }).join("");
+  [].slice.call(box.querySelectorAll("[data-collection]")).forEach(function(card){
+    card.onclick=function(ev){if(ev.target.closest("[data-launch]"))return;openCollection(type,card.dataset.collection)};
+  });
+  [].slice.call(box.querySelectorAll("[data-launch]")).forEach(function(btn){
+    btn.onclick=function(ev){ev.stopPropagation();startRoutine(btn.dataset.launch)};
+  });
 }
 
-function openExercise(e){if(!e)return;detailOrigin=current;if(current==='list')lastType=listType;else if(!activeRoutine)lastType=typeOf(e);currentExercise=e;go(e.leaf?'breath':'detail')}
+function openExercise(e){
+  if(!e)return;
+  detailOrigin=current;
+  if(current==="list")lastType=listType;
+  else if(!activeRoutine)lastType=typeOf(e);
+  currentExercise=e;
+  go(e.leaf?"breath":"detail");
+}
+
 function renderDetail(){
-  clearInterval(timerId);if(!currentExercise)currentExercise=pool(lastType)[0];
-  document.getElementById('instruction').style.display='block';document.getElementById('timer').classList.remove('show');
-  const typeLabels={breath:'Respiration',movement:'Mouvement du corps',discreet:'Discret'};
-  document.getElementById('detailType').textContent=typeLabels[typeOf(currentExercise)]||'Petit geste';
-  document.getElementById('detailTitle').textContent=currentExercise.title;document.getElementById('detailWhen').textContent=currentExercise.when;document.getElementById('detailLead').textContent=currentExercise.lead;
-  document.getElementById('detailEvidence').textContent=(currentExercise.evidence||'À explorer')+(currentExercise.source?' · '+currentExercise.source:'');
-  document.getElementById('detailSafety').textContent=currentExercise.safety||'';
-  document.getElementById('detailSteps').innerHTML=currentExercise.steps.map((x,i)=>'<div class="step"><span class="num">'+(i+1)+'</span><span>'+x+'</span></div>').join('');
-  const needTags=needsOf(currentExercise).slice(0,2).map(k=>'<span class="tag">'+NEEDS[k].short+'</span>').join('');
-  document.getElementById('detailTags').innerHTML='<span class="tag">'+fmt(currentExercise.duration)+'</span>'+needTags+currentExercise.tags.map(t=>'<span class="tag">'+t+'</span>').join('');
-  document.getElementById('startBtn').textContent='Commencer · '+fmt(currentExercise.duration);updateFavButtons();renderPersonalSummary();
+  clearInterval(timerId);
+  $("instruction").style.display="block";
+  $("timer").classList.remove("show");
+  if(!currentExercise)currentExercise=EXERCISES[0];
+  const typeLabels={breath:"Respiration",movement:"Corps & mouvement",discreet:"Geste discret"};
+  $("detailType").textContent=typeLabels[typeOf(currentExercise)]||"Petit geste";
+  $("detailTitle").textContent=currentExercise.title;
+  $("detailWhen").textContent=currentExercise.when;
+  $("detailLead").textContent=currentExercise.lead;
+  $("detailEvidence").textContent=(currentExercise.evidence||"À explorer")+(currentExercise.source?" · "+currentExercise.source:"");
+  $("detailSafety").textContent=currentExercise.safety||"";
+  $("detailSteps").innerHTML=currentExercise.steps.map(function(x,i){return '<div class="step"><span class="num">'+(i+1)+'</span><span>'+escapeHtml(x)+'</span></div>'}).join("");
+  const needTags=needsOf(currentExercise).slice(0,2).map(function(k){return '<span class="tag">'+escapeHtml(NEEDS[k].short)+'</span>'}).join("");
+  $("detailTags").innerHTML='<span class="tag">'+fmt(currentExercise.duration)+'</span>'+needTags+currentExercise.tags.map(function(t){return '<span class="tag">'+escapeHtml(t)+'</span>'}).join("");
+  $("startBtn").textContent="Commencer · "+fmt(currentExercise.duration);
+  updateFavButtons();
+  renderPersonalSummary();
 }
+function backFromExercise(){
+  if(detailOrigin==="list")go("list");
+  else if(detailOrigin==="collection")go("collection");
+  else if(detailOrigin==="favorites")go("favorites");
+  else if(detailOrigin==="daily")go("daily");
+  else if(detailOrigin==="needs")go("needs");
+  else if(detailOrigin==="home")go("home");
+  else go("catalog");
+}
+$("detailBack").onclick=backFromExercise;
+$("breathBack").onclick=backFromExercise;
+
 function updateFavButtons(){
-  if(!currentExercise)return;const on=isFav(currentExercise.id);
-  document.getElementById('detailHeart').textContent=on?'♥':'♡';document.getElementById('detailFavBtn').textContent=on?'♥ Favori':'♡ Favori';
-  document.getElementById('breathHeart').textContent=on?'♥':'♡';document.getElementById('doneFav').textContent=on?'♥ Dans mes favoris':'♡ Ajouter aux favoris';
+  if(!currentExercise)return;
+  const on=isFav(currentExercise.id);
+  $("detailHeart").textContent=on?"♥":"♡";
+  $("detailFavBtn").textContent=on?"♥ Favori":"♡ Favori";
+  $("breathHeart").textContent=on?"♥":"♡";
+  $("doneFav").textContent=on?"♥ Dans mes favoris":"♡ Ajouter aux favoris";
 }
-document.getElementById('detailBack').onclick=()=>detailOrigin==='list'?go('list'):go(detailOrigin||'catalog');
-document.getElementById('detailHeart').onclick=()=>toggleFav(currentExercise?.id);
-document.getElementById('detailFavBtn').onclick=()=>toggleFav(currentExercise?.id);
-document.getElementById('breathHeart').onclick=()=>toggleFav(currentExercise?.id);
-document.getElementById('anotherBtn').onclick=()=>{const p=pool(lastType);openExercise(p[Math.floor(Math.random()*p.length)])};
-document.getElementById('startBtn').onclick=()=>startTimer();
-document.getElementById('finishBtn').onclick=()=>{clearInterval(timerId);go('done')};
-
-function escapeHtml(v){return String(v??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]))}
-function ratingLabel(r){return r==='helpful'?'Ça m’aide vraiment':r==='interesting'?'Je le trouve intéressant':r==='notfit'?'Peu adapté pour moi':''}
-function renderPersonalSummary(){
-  if(!currentExercise)return;const f=feedbackData[currentExercise.id],inS=strategies.filter(c=>c.exerciseIds.includes(currentExercise.id)).length,inR=routines.filter(c=>c.exerciseIds.includes(currentExercise.id)).length,bits=[];
-  if(f?.rating)bits.push(ratingLabel(f.rating));if(f?.moment)bits.push(f.moment);if(inS||inR)bits.push('Ajouté à '+(inS+inR)+' espace'+(inS+inR>1?'s':'')+' personnel'+(inS+inR>1?'s':''));
-  document.getElementById('personalSummary').textContent=bits.length?bits.join(' · '):'Tu peux noter ce que ce geste t’apporte et l’ajouter à tes stratégies ou routines.';
-}
-function showOverlay(id){document.getElementById(id)?.classList.add('show')}function hideOverlay(id){document.getElementById(id)?.classList.remove('show')}
-document.querySelectorAll('[data-close-overlay]').forEach(btn=>btn.onclick=()=>hideOverlay(btn.dataset.closeOverlay));document.querySelectorAll('.overlay').forEach(o=>o.onclick=e=>{if(e.target===o)hideOverlay(o.id)});
-let pendingRating='';
-function openFeedback(){if(!currentExercise)return;const f=feedbackData[currentExercise.id]||{};pendingRating=f.rating||'';document.querySelectorAll('[data-rating]').forEach(btn=>btn.classList.toggle('selected',btn.dataset.rating===pendingRating));document.getElementById('feedbackMoment').value=f.moment||'';document.getElementById('feedbackNote').value=f.note||'';showOverlay('feedbackOverlay')}
-document.querySelectorAll('[data-rating]').forEach(btn=>btn.onclick=()=>{pendingRating=btn.dataset.rating;document.querySelectorAll('[data-rating]').forEach(x=>x.classList.toggle('selected',x===btn))});
-document.getElementById('saveFeedback').onclick=()=>{if(!currentExercise)return;feedbackData[currentExercise.id]={rating:pendingRating,moment:document.getElementById('feedbackMoment').value.trim(),note:document.getElementById('feedbackNote').value.trim()};savePersonal();hideOverlay('feedbackOverlay');renderPersonalSummary()};
-document.getElementById('feedbackBtn').onclick=openFeedback;document.getElementById('doneFeedback').onclick=openFeedback;
-
-function getCollection(type,id){return (type==='routine'?routines:strategies).find(c=>c.id===id)}
-function renderAddGroups(){const box=document.getElementById('addGroups');const group=(title,type,arr)=>'<div class="add-group"><h4>'+title+'</h4>'+(arr.length?arr.map(c=>'<div class="add-row" data-addtype="'+type+'" data-addid="'+c.id+'"><div><b>'+escapeHtml(c.name)+'</b><small>'+c.exerciseIds.length+' geste'+(c.exerciseIds.length>1?'s':'')+'</small></div><span>'+(currentExercise&&c.exerciseIds.includes(currentExercise.id)?'✓':'+')+'</span></div>').join(''):'<div class="empty-soft">Rien encore.</div>')+'<button class="mini-add" data-newcollection="'+type+'">+ '+(type==='strategy'?'Nouvelle stratégie':'Nouvelle routine')+'</button></div>';box.innerHTML=group('Mes stratégies','strategy',strategies)+group('Mes routines','routine',routines);box.querySelectorAll('[data-addid]').forEach(row=>row.onclick=()=>toggleExerciseInCollection(row.dataset.addtype,row.dataset.addid,currentExercise.id));box.querySelectorAll('[data-newcollection]').forEach(btn=>btn.onclick=()=>{hideOverlay('addOverlay');openNameSheet(btn.dataset.newcollection,true)})}
-function openAdd(){if(!currentExercise)return;renderAddGroups();showOverlay('addOverlay')}document.getElementById('addToBtn').onclick=openAdd;
-function toggleExerciseInCollection(type,id,exerciseId){const c=getCollection(type,id);if(!c)return;const i=c.exerciseIds.indexOf(exerciseId);if(i>=0)c.exerciseIds.splice(i,1);else c.exerciseIds.push(exerciseId);savePersonal();renderAddGroups();renderPersonalSummary()}
-function openNameSheet(type,addCurrent){nameCreateType=type;nameAddCurrent=!!addCurrent;document.getElementById('nameKind').textContent=type==='routine'?'Ma routine':'Ma stratégie';document.getElementById('nameTitle').textContent=type==='routine'?'Créer une nouvelle routine':'Créer une nouvelle stratégie';document.getElementById('nameInput').value='';showOverlay('nameOverlay')}
-document.getElementById('nameSave').onclick=()=>{const name=document.getElementById('nameInput').value.trim();if(!name)return;const obj={id:'c'+Date.now().toString(36),name,exerciseIds:nameAddCurrent&&currentExercise?[currentExercise.id]:[]};(nameCreateType==='routine'?routines:strategies).push(obj);savePersonal();hideOverlay('nameOverlay');if(nameAddCurrent)renderPersonalSummary();else{dailyTab=nameCreateType==='routine'?'routines':'strategies';go('daily')}};
-
-function openCollection(type,id){collectionType=type;collectionId=id;go('collection')}
-function renderCollection(){const c=getCollection(collectionType,collectionId);if(!c){go('daily');return}document.getElementById('collectionKind').textContent=collectionType==='routine'?'Ma routine':'Ma stratégie';document.getElementById('collectionTitle').textContent=c.name;document.getElementById('collectionIntro').textContent=collectionType==='routine'?'Ordonne les gestes comme tu veux, puis lance-les les uns après les autres.':'Rassemble ici les gestes que tu veux retrouver pour cette situation.';document.getElementById('collectionLaunchBtn').style.display=collectionType==='routine'&&c.exerciseIds.length?'block':'none';const rows=document.getElementById('collectionRows');if(!c.exerciseIds.length){rows.innerHTML='<div class="empty-soft">Ajoute les gestes que tu souhaites garder ici.</div>';return}rows.innerHTML=c.exerciseIds.map((id,i)=>{const e=EXERCISES.find(x=>x.id===id);return e?'<div class="collection-row" data-cex="'+id+'"><span class="n">'+(i+1)+'</span><div><b>'+escapeHtml(e.title)+'</b><small>'+fmt(e.duration)+' · '+e.tags[0]+'</small></div><div class="row-tools"><button data-up="'+i+'">↑</button><button data-down="'+i+'">↓</button><button data-remove="'+i+'">×</button></div></div>':''}).join('');rows.querySelectorAll('[data-cex]').forEach(row=>row.onclick=ev=>{if(ev.target.closest('.row-tools'))return;openExercise(EXERCISES.find(e=>e.id===row.dataset.cex))});rows.querySelectorAll('[data-up]').forEach(btn=>btn.onclick=()=>moveCollectionItem(-1,+btn.dataset.up));rows.querySelectorAll('[data-down]').forEach(btn=>btn.onclick=()=>moveCollectionItem(1,+btn.dataset.down));rows.querySelectorAll('[data-remove]').forEach(btn=>btn.onclick=()=>removeCollectionItem(+btn.dataset.remove))}
-function moveCollectionItem(dir,index){const c=getCollection(collectionType,collectionId),j=index+dir;if(!c||j<0||j>=c.exerciseIds.length)return;[c.exerciseIds[index],c.exerciseIds[j]]=[c.exerciseIds[j],c.exerciseIds[index]];savePersonal();renderCollection()}function removeCollectionItem(index){const c=getCollection(collectionType,collectionId);if(!c)return;c.exerciseIds.splice(index,1);savePersonal();renderCollection()}
-document.getElementById('collectionBack').onclick=()=>{dailyTab=collectionType==='routine'?'routines':'strategies';go('daily')};document.getElementById('collectionDelete').onclick=()=>{const arr=collectionType==='routine'?routines:strategies,i=arr.findIndex(c=>c.id===collectionId);if(i>=0)arr.splice(i,1);savePersonal();dailyTab=collectionType==='routine'?'routines':'strategies';go('daily')};document.getElementById('collectionAddBtn').onclick=()=>{document.getElementById('pickSearch').value='';renderPicker('');showOverlay('pickOverlay')};document.getElementById('collectionLaunchBtn').onclick=()=>startRoutine(collectionId);
-function renderPicker(q){const c=getCollection(collectionType,collectionId),needle=(q||'').toLowerCase(),items=EXERCISES.filter(e=>!needle||(e.title+' '+e.tags.join(' ')).toLowerCase().includes(needle)),box=document.getElementById('pickRows');box.innerHTML=items.map(e=>'<div class="picker-row"><div class="pi">'+e.icon+'</div><div><b>'+escapeHtml(e.title)+'</b><small>'+fmt(e.duration)+' · '+e.tags.slice(0,2).join(' · ')+'</small></div><button class="'+(c?.exerciseIds.includes(e.id)?'on':'')+'" data-pick="'+e.id+'">'+(c?.exerciseIds.includes(e.id)?'✓':'+')+'</button></div>').join('');box.querySelectorAll('[data-pick]').forEach(btn=>btn.onclick=()=>{toggleExerciseInCollection(collectionType,collectionId,btn.dataset.pick);renderPicker(document.getElementById('pickSearch').value);renderCollection()})}document.getElementById('pickSearch').oninput=e=>renderPicker(e.target.value);
-function startRoutine(id){const r=routines.find(x=>x.id===id);if(!r||!r.exerciseIds.length)return;activeRoutine={id,index:0};openExercise(EXERCISES.find(e=>e.id===r.exerciseIds[0]))}
-function updateRoutineDone(){const next=document.getElementById('doneNext'),other=document.getElementById('doneAnother');if(!activeRoutine){next.style.display='none';other.style.display='block';return}const r=routines.find(x=>x.id===activeRoutine.id),hasNext=r&&activeRoutine.index<r.exerciseIds.length-1;next.style.display=hasNext?'block':'none';other.style.display='none';if(hasNext)next.textContent='Geste suivant · '+(activeRoutine.index+2)+' / '+r.exerciseIds.length}
-document.getElementById('doneNext').onclick=()=>{const r=routines.find(x=>x.id===activeRoutine?.id);if(!r)return;activeRoutine.index++;openExercise(EXERCISES.find(e=>e.id===r.exerciseIds[activeRoutine.index]))};
+$("detailHeart").onclick=function(){toggleFav(currentExercise&&currentExercise.id)};
+$("detailFavBtn").onclick=function(){toggleFav(currentExercise&&currentExercise.id)};
+$("breathHeart").onclick=function(){toggleFav(currentExercise&&currentExercise.id)};
+$("anotherBtn").onclick=function(){
+  if(activeRoutine)activeRoutine=null;
+  let p=pool(lastType);
+  if(!p.length)p=EXERCISES;
+  openExercise(p[Math.floor(Math.random()*p.length)]);
+};
 
 function startTimer(){
-  if(currentExercise?.leaf){go('breath');return}
-  document.getElementById('instruction').style.display='none';document.getElementById('timer').classList.add('show');
-  document.getElementById('timerText').textContent=currentExercise.lead;
-  const total=currentExercise.duration,start=Date.now();
-  const tick=()=>{
-    const elapsed=(Date.now()-start)/1000,left=Math.max(0,total-elapsed);
-    document.getElementById('timerBig').textContent=left>=60?Math.ceil(left/60)+' min':Math.ceil(left)+' s';
-    document.getElementById('progress').style.width=Math.min(100,elapsed/total*100)+'%';
-    if(left<=0){clearInterval(timerId);setTimeout(()=>go('done'),450)}
-  };tick();timerId=setInterval(tick,100)
-}
-
-const leaf=document.getElementById('leaf');
-function setRatio(a,b){inhale=a;exhale=b;document.querySelectorAll('.ratio').forEach(x=>x.classList.toggle('active',x.dataset.ratio===a+','+b));startBreath()}
-document.querySelectorAll('.ratio').forEach(b=>b.onclick=()=>{const [a,z]=b.dataset.ratio.split(',').map(Number);setRatio(a,z)});
-function startBreath(){breathStart=performance.now();breathPaused=false;pauseAt=0;windPhase=0;lastFrame=performance.now();document.getElementById('pauseBtn').textContent='Ⅱ';updateFavButtons()}
-document.getElementById('breathBack').onclick=()=>detailOrigin==='list'?go('list'):go(detailOrigin||'catalog');
-document.getElementById('pauseBtn').onclick=()=>{breathPaused=!breathPaused;document.getElementById('pauseBtn').textContent=breathPaused?'▶':'Ⅱ';if(breathPaused)pauseAt=performance.now();else{breathStart+=performance.now()-pauseAt;lastFrame=performance.now()}};
-document.getElementById('breathDone').onclick=()=>go('done');
-
-function ease(p){return .5-Math.cos(Math.PI*p)/2}
-function animate(now){
-  const dt=Math.min(.04,(now-lastFrame)/1000);lastFrame=now;
-  if(current==='breath'&&!breathPaused){
-    const cycle=inhale+exhale,elapsed=(now-breathStart)/1000,t=elapsed%cycle,up=t<inhale,d=up?inhale:exhale,pe=up?t:t-inhale,p=Math.max(0,Math.min(1,pe/d));
-    const bottom=up?9+ease(p)*67:76-ease(p)*67;
-    // plus la durée du temps respiratoire est longue, plus le balancement latéral accélère
-    const avg=(inhale+exhale)/2, hz=.26+(avg-4)*.16;
-    windPhase+=dt*2*Math.PI*Math.max(.24,hz);
-    const x=50+Math.sin(windPhase)*15+Math.sin(windPhase*.47+1.8)*5+Math.sin(windPhase*1.69)*2;
-    const rot=Math.sin(windPhase+.4)*14+Math.sin(windPhase*.63)*5;
-    leaf.style.left=x+'%';leaf.style.bottom=bottom+'%';leaf.style.transform='translateX(-50%) rotate('+rot+'deg)';
-    document.getElementById('phaseLabel').textContent=up?'Inspire · la feuille monte':'Expire · la feuille redescend';
-    document.getElementById('phaseCount').textContent=Math.max(1,Math.ceil(d-pe));
+  if(!currentExercise)return;
+  clearInterval(timerId);
+  $("instruction").style.display="none";
+  $("timer").classList.add("show");
+  const total=Math.max(1,currentExercise.duration||30);
+  const started=Date.now();
+  function tick(){
+    const elapsed=(Date.now()-started)/1000;
+    const left=Math.max(0,total-elapsed);
+    const whole=Math.ceil(left);
+    $("timerBig").textContent=whole>=60?Math.floor(whole/60)+":"+String(whole%60).padStart(2,"0"):String(whole);
+    $("timerText").textContent=left>0?"Reste simplement avec le geste.":"C’est bon.";
+    $("progress").style.width=(Math.min(1,elapsed/total)*100)+"%";
+    if(left<=0){
+      clearInterval(timerId);
+      setTimeout(function(){go("done")},350);
+    }
   }
-  requestAnimationFrame(animate)
+  tick();
+  timerId=setInterval(tick,100);
 }
-requestAnimationFrame(animate);
+$("startBtn").onclick=startTimer;
+$("finishBtn").onclick=function(){clearInterval(timerId);go("done")};
 
-function updateDoneFav(){updateFavButtons();updateRoutineDone()}
-document.getElementById('doneFav').onclick=()=>toggleFav(currentExercise?.id);
-document.getElementById('doneAnother').onclick=()=>{const p=pool(lastType);openExercise(p[Math.floor(Math.random()*p.length)])};
-renderNeedsCounts();renderCatalog();renderHome();updateMainNav();
+function ratingLabel(r){
+  if(r==="helpful")return "Ça m’aide vraiment";
+  if(r==="interesting")return "Je le trouve intéressant";
+  if(r==="notfit")return "Peu adapté pour moi";
+  return "";
+}
+function renderPersonalSummary(){
+  if(!currentExercise)return;
+  const f=feedbackData[currentExercise.id];
+  const inS=strategies.filter(function(c){return c.exerciseIds.indexOf(currentExercise.id)>=0}).length;
+  const inR=routines.filter(function(c){return c.exerciseIds.indexOf(currentExercise.id)>=0}).length;
+  const bits=[];
+  if(f&&f.rating)bits.push(ratingLabel(f.rating));
+  if(f&&f.moment)bits.push(f.moment);
+  if(f&&f.note)bits.push("Note enregistrée");
+  if(inS||inR)bits.push("Ajouté à "+(inS+inR)+" espace"+(inS+inR>1?"s":"")+" personnel"+(inS+inR>1?"s":""));
+  $("personalSummary").textContent=bits.length?bits.join(" · "):"Tu peux noter ce que ce geste t’apporte et l’ajouter à tes stratégies ou routines.";
+}
+
+function showOverlay(id){const el=$(id);if(el)el.classList.add("show")}
+function hideOverlay(id){const el=$(id);if(el)el.classList.remove("show")}
+[].slice.call(document.querySelectorAll("[data-close-overlay]")).forEach(function(btn){btn.onclick=function(){hideOverlay(btn.dataset.closeOverlay)}});
+[].slice.call(document.querySelectorAll(".overlay")).forEach(function(ov){ov.onclick=function(ev){if(ev.target===ov)hideOverlay(ov.id)}});
+
+let pendingRating="";
+function openFeedback(){
+  if(!currentExercise)return;
+  const f=feedbackData[currentExercise.id]||{};
+  pendingRating=f.rating||"";
+  [].slice.call(document.querySelectorAll("[data-rating]")).forEach(function(btn){btn.classList.toggle("selected",btn.dataset.rating===pendingRating)});
+  $("feedbackMoment").value=f.moment||"";
+  $("feedbackNote").value=f.note||"";
+  showOverlay("feedbackOverlay");
+}
+[].slice.call(document.querySelectorAll("[data-rating]")).forEach(function(btn){
+  btn.onclick=function(){
+    pendingRating=btn.dataset.rating;
+    [].slice.call(document.querySelectorAll("[data-rating]")).forEach(function(x){x.classList.toggle("selected",x===btn)});
+  };
+});
+$("saveFeedback").onclick=function(){
+  if(!currentExercise)return;
+  feedbackData[currentExercise.id]={
+    rating:pendingRating,
+    moment:$("feedbackMoment").value.trim(),
+    note:$("feedbackNote").value.trim()
+  };
+  savePersonal();
+  hideOverlay("feedbackOverlay");
+  renderPersonalSummary();
+};
+$("feedbackBtn").onclick=openFeedback;
+$("doneFeedback").onclick=openFeedback;
+
+function getCollection(type,id){
+  const arr=type==="routine"?routines:strategies;
+  return arr.find(function(c){return c.id===id});
+}
+function renderAddGroups(){
+  const box=$("addGroups");
+  function group(title,type,arr){
+    const rows=arr.length?arr.map(function(c){
+      const has=currentExercise&&c.exerciseIds.indexOf(currentExercise.id)>=0;
+      return '<div class="add-row" data-addtype="'+type+'" data-addid="'+c.id+'"><div><b>'+escapeHtml(c.name)+'</b><small>'+c.exerciseIds.length+' geste'+(c.exerciseIds.length>1?"s":"")+'</small></div><span>'+(has?"✓":"+")+'</span></div>';
+    }).join(""):'<div class="empty-soft">Rien encore.</div>';
+    return '<div class="add-group"><h4>'+title+'</h4>'+rows+'<button class="mini-add" data-newcollection="'+type+'">+ '+(type==="strategy"?"Nouvelle stratégie":"Nouvelle routine")+'</button></div>';
+  }
+  box.innerHTML=group("Mes stratégies","strategy",strategies)+group("Mes routines","routine",routines);
+  [].slice.call(box.querySelectorAll("[data-addid]")).forEach(function(row){
+    row.onclick=function(){toggleExerciseInCollection(row.dataset.addtype,row.dataset.addid,currentExercise.id)};
+  });
+  [].slice.call(box.querySelectorAll("[data-newcollection]")).forEach(function(btn){
+    btn.onclick=function(){hideOverlay("addOverlay");openNameSheet(btn.dataset.newcollection,true)};
+  });
+}
+function openAdd(){
+  if(!currentExercise)return;
+  renderAddGroups();
+  showOverlay("addOverlay");
+}
+$("addToBtn").onclick=openAdd;
+
+function toggleExerciseInCollection(type,id,exerciseId){
+  const c=getCollection(type,id);
+  if(!c)return;
+  const i=c.exerciseIds.indexOf(exerciseId);
+  if(i>=0)c.exerciseIds.splice(i,1);else c.exerciseIds.push(exerciseId);
+  savePersonal();
+  if($("addOverlay").classList.contains("show"))renderAddGroups();
+  renderPersonalSummary();
+}
+function openNameSheet(type,addCurrent){
+  nameCreateType=type;
+  nameAddCurrent=!!addCurrent;
+  $("nameKind").textContent=type==="routine"?"Ma routine":"Ma stratégie";
+  $("nameTitle").textContent=type==="routine"?"Créer une nouvelle routine":"Créer une nouvelle stratégie";
+  $("nameInput").value="";
+  showOverlay("nameOverlay");
+  setTimeout(function(){$("nameInput").focus()},80);
+}
+$("nameSave").onclick=function(){
+  const name=$("nameInput").value.trim();
+  if(!name)return;
+  const obj={id:"c"+Date.now().toString(36),name:name,exerciseIds:nameAddCurrent&&currentExercise?[currentExercise.id]:[]};
+  if(nameCreateType==="routine")routines.push(obj);else strategies.push(obj);
+  savePersonal();
+  hideOverlay("nameOverlay");
+  if(nameAddCurrent){
+    renderPersonalSummary();
+  }else{
+    openCollection(nameCreateType,obj.id);
+  }
+};
+
+function openCollection(type,id){
+  collectionType=type;
+  collectionId=id;
+  go("collection");
+}
+function renderCollection(){
+  const c=getCollection(collectionType,collectionId);
+  if(!c){dailyTab=collectionType==="routine"?"routines":"strategies";go("daily");return}
+  $("collectionKind").textContent=collectionType==="routine"?"Ma routine":"Ma stratégie";
+  $("collectionTitle").textContent=c.name;
+  $("collectionIntro").textContent=collectionType==="routine"?"Ordonne les gestes comme tu veux, puis lance-les les uns après les autres.":"Rassemble ici les gestes que tu veux retrouver pour cette situation.";
+  $("collectionLaunchBtn").style.display=collectionType==="routine"&&c.exerciseIds.length?"block":"none";
+  const rows=$("collectionRows");
+  if(!c.exerciseIds.length){
+    rows.innerHTML='<div class="empty-soft">Ajoute les gestes que tu souhaites garder ici.</div>';
+    return;
+  }
+  rows.innerHTML=c.exerciseIds.map(function(id,i){
+    const e=EXERCISES.find(function(x){return x.id===id});
+    if(!e)return "";
+    return '<div class="collection-row" data-cex="'+id+'"><span class="n">'+(i+1)+'</span><div><b>'+escapeHtml(e.title)+'</b><small>'+fmt(e.duration)+' · '+escapeHtml(e.tags[0]||"")+'</small></div><div class="row-tools"><button data-up="'+i+'">↑</button><button data-down="'+i+'">↓</button><button data-remove="'+i+'">×</button></div></div>';
+  }).join("");
+  [].slice.call(rows.querySelectorAll("[data-cex]")).forEach(function(row){
+    row.onclick=function(ev){
+      if(ev.target.closest(".row-tools"))return;
+      openExercise(EXERCISES.find(function(e){return e.id===row.dataset.cex}));
+    };
+  });
+  [].slice.call(rows.querySelectorAll("[data-up]")).forEach(function(btn){btn.onclick=function(){moveCollectionItem(-1,+btn.dataset.up)}});
+  [].slice.call(rows.querySelectorAll("[data-down]")).forEach(function(btn){btn.onclick=function(){moveCollectionItem(1,+btn.dataset.down)}});
+  [].slice.call(rows.querySelectorAll("[data-remove]")).forEach(function(btn){btn.onclick=function(){removeCollectionItem(+btn.dataset.remove)}});
+}
+function moveCollectionItem(dir,index){
+  const c=getCollection(collectionType,collectionId);
+  const j=index+dir;
+  if(!c||j<0||j>=c.exerciseIds.length)return;
+  const tmp=c.exerciseIds[index];c.exerciseIds[index]=c.exerciseIds[j];c.exerciseIds[j]=tmp;
+  savePersonal();renderCollection();
+}
+function removeCollectionItem(index){
+  const c=getCollection(collectionType,collectionId);
+  if(!c)return;
+  c.exerciseIds.splice(index,1);
+  savePersonal();renderCollection();
+}
+$("collectionBack").onclick=function(){dailyTab=collectionType==="routine"?"routines":"strategies";go("daily")};
+$("collectionDelete").onclick=function(){
+  const c=getCollection(collectionType,collectionId);
+  if(!c)return;
+  if(!window.confirm("Supprimer « "+c.name+" » ?"))return;
+  const arr=collectionType==="routine"?routines:strategies;
+  const i=arr.findIndex(function(x){return x.id===collectionId});
+  if(i>=0)arr.splice(i,1);
+  savePersonal();
+  dailyTab=collectionType==="routine"?"routines":"strategies";
+  go("daily");
+};
+$("collectionAddBtn").onclick=function(){
+  $("pickSearch").value="";
+  renderPicker("");
+  showOverlay("pickOverlay");
+};
+$("collectionLaunchBtn").onclick=function(){startRoutine(collectionId)};
+
+function renderPicker(q){
+  const c=getCollection(collectionType,collectionId);
+  if(!c)return;
+  const needle=(q||"").toLowerCase();
+  const items=EXERCISES.filter(function(e){
+    return !needle||(e.title+" "+e.tags.join(" ")).toLowerCase().indexOf(needle)>=0;
+  });
+  const box=$("pickRows");
+  box.innerHTML=items.map(function(e){
+    const on=c.exerciseIds.indexOf(e.id)>=0;
+    return '<div class="picker-row"><div class="pi">'+e.icon+'</div><div><b>'+escapeHtml(e.title)+'</b><small>'+fmt(e.duration)+' · '+escapeHtml(e.tags.slice(0,2).join(" · "))+'</small></div><button class="'+(on?"on":"")+'" data-pick="'+e.id+'">'+(on?"✓":"+")+'</button></div>';
+  }).join("");
+  [].slice.call(box.querySelectorAll("[data-pick]")).forEach(function(btn){
+    btn.onclick=function(){
+      toggleExerciseInCollection(collectionType,collectionId,btn.dataset.pick);
+      renderPicker($("pickSearch").value);
+      renderCollection();
+    };
+  });
+}
+$("pickSearch").oninput=function(ev){renderPicker(ev.target.value)};
+
+function startRoutine(id){
+  const r=routines.find(function(x){return x.id===id});
+  if(!r||!r.exerciseIds.length)return;
+  activeRoutine={id:id,index:0};
+  const e=EXERCISES.find(function(x){return x.id===r.exerciseIds[0]});
+  if(!e)return;
+  detailOrigin="daily";
+  currentExercise=e;
+  go(e.leaf?"breath":"detail");
+}
+function updateRoutineDone(){
+  const next=$("doneNext"),other=$("doneAnother");
+  if(!activeRoutine){
+    next.style.display="none";
+    other.style.display="block";
+    other.textContent="Essayer un autre geste";
+    return;
+  }
+  const r=routines.find(function(x){return x.id===activeRoutine.id});
+  if(!r){activeRoutine=null;updateRoutineDone();return}
+  const hasNext=activeRoutine.index<r.exerciseIds.length-1;
+  next.style.display=hasNext?"block":"none";
+  other.style.display=hasNext?"none":"block";
+  if(hasNext)next.textContent="Geste suivant · "+(activeRoutine.index+2)+" / "+r.exerciseIds.length;
+  else other.textContent="Terminer ma routine";
+}
+$("doneNext").onclick=function(){
+  const r=routines.find(function(x){return activeRoutine&&x.id===activeRoutine.id});
+  if(!r)return;
+  activeRoutine.index++;
+  const e=EXERCISES.find(function(x){return x.id===r.exerciseIds[activeRoutine.index]});
+  if(!e)return;
+  detailOrigin="daily";
+  currentExercise=e;
+  go(e.leaf?"breath":"detail");
+};
+
+function updateDoneFav(){
+  updateFavButtons();
+  updateRoutineDone();
+}
+$("doneFav").onclick=function(){toggleFav(currentExercise&&currentExercise.id)};
+$("doneAnother").onclick=function(){
+  if(activeRoutine){
+    activeRoutine=null;
+    dailyTab="routines";
+    go("daily");
+    return;
+  }
+  let p=pool(lastType);
+  if(!p.length)p=EXERCISES;
+  openExercise(p[Math.floor(Math.random()*p.length)]);
+};
+
+function startBreath(){
+  breathElapsed=0;
+  breathPaused=false;
+  $("pauseBtn").textContent="Ⅱ";
+  updateFavButtons();
+}
+[].slice.call(document.querySelectorAll(".ratio")).forEach(function(btn){
+  btn.onclick=function(){
+    [].slice.call(document.querySelectorAll(".ratio")).forEach(function(x){x.classList.toggle("active",x===btn)});
+    const parts=btn.dataset.ratio.split(",").map(Number);
+    inhale=parts[0];exhale=parts[1];breathElapsed=0;
+  };
+});
+$("pauseBtn").onclick=function(){breathPaused=!breathPaused;$("pauseBtn").textContent=breathPaused?"▶":"Ⅱ"};
+$("breathDone").onclick=function(){go("done")};
+
+function animateLeaf(now){
+  const dt=Math.min(.05,Math.max(0,(now-lastFrame)/1000));
+  lastFrame=now;
+  if(current==="breath"&&!breathPaused){
+    breathElapsed+=dt;
+    const cycle=inhale+exhale;
+    const pos=breathElapsed%cycle;
+    const inspire=pos<inhale;
+    const phaseDuration=inspire?inhale:exhale;
+    const phasePos=inspire?pos:pos-inhale;
+    const p=Math.max(0,Math.min(1,phasePos/phaseDuration));
+    const ease=.5-Math.cos(Math.PI*p)/2;
+    const bottom=inspire?10+ease*67:77-ease*67;
+    const minD=3,maxD=8;
+    const frac=Math.max(0,Math.min(1,(phaseDuration-minD)/(maxD-minD)));
+    const hz=.34+frac*.72;
+    windPhase+=dt*2*Math.PI*hz;
+    const x=50+Math.sin(windPhase)*13+Math.sin(windPhase*.43+1.8)*4.5+Math.sin(windPhase*1.73)*1.8;
+    const rot=Math.sin(windPhase+.4)*14+Math.sin(windPhase*.61)*5;
+    $("leaf").style.left=x+"%";
+    $("leaf").style.bottom=bottom+"%";
+    $("leaf").style.transform="translateX(-50%) rotate("+rot+"deg)";
+    $("phaseLabel").textContent=inspire?"Inspire · la feuille monte":"Expire · la feuille redescend";
+    $("phaseCount").textContent=Math.max(1,Math.ceil(phaseDuration-phasePos));
+  }
+  requestAnimationFrame(animateLeaf);
+}
+
+loadBrandImage();
+renderNeedsCounts();
+renderCatalog();
+renderHome();
+updateMainNav();
+requestAnimationFrame(animateLeaf);
+
+if("serviceWorker" in navigator){
+  window.addEventListener("load",function(){
+    navigator.serviceWorker.register("./sw.js").catch(function(err){console.warn("Service worker",err)});
+  });
+}
+
 </script>
 </body>
 </html>
