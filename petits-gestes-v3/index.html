@@ -367,43 +367,69 @@ function isFav(id){return favorites.has(id)}
 function toggleFav(id){if(!id)return;isFav(id)?favorites.delete(id):favorites.add(id);saveFavs();updateFavButtons();if(current==='favorites')renderFavorites();if(current==='list')renderList()}
 function favPool(){return EXERCISES.filter(e=>favorites.has(e.id))}
 
+function savePersonal(){
+  localStorage.setItem('petits-gestes-feedback',JSON.stringify(feedbackData));
+  localStorage.setItem('petits-gestes-strategies',JSON.stringify(strategies));
+  localStorage.setItem('petits-gestes-routines',JSON.stringify(routines));
+}
 function updateMainNav(){
-  document.querySelectorAll('.main-nav button').forEach(b=>{
-    let active=false;
-    if(b.dataset.go==='home') active=current==='home'||current==='favorites'||(current==='list'&&String(listType).startsWith('need:'));
-    else if(b.dataset.mode) active=current==='list'&&listType==='mode:'+b.dataset.mode;
-    b.classList.toggle('active',active);
-  });
+  let active=current;
+  if(current==='list')active=listOrigin;
+  document.querySelectorAll('.main-nav button').forEach(btn=>btn.classList.toggle('active',btn.dataset.go===active));
 }
 function go(name){
-  current=name;screens.forEach(s=>s.classList.toggle('active',s.dataset.screen===name));
-  if(name==='home')refreshFavSummary();updateMainNav();
+  current=name;screens.forEach(sc=>sc.classList.toggle('active',sc.dataset.screen===name));
+  if(name==='home')renderHome();
+  if(name==='needs')renderNeedsCounts();
+  if(name==='catalog')renderCatalog();
+  if(name==='daily')renderDaily();
   if(name==='favorites')renderFavorites();
   if(name==='list')renderList();
   if(name==='detail')renderDetail();
+  if(name==='collection')renderCollection();
   if(name==='breath')startBreath();
   if(name==='done')updateDoneFav();
   updateMainNav();
 }
-document.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>go(b.dataset.go));
-document.querySelectorAll('[data-open]').forEach(b=>b.onclick=()=>openList(b.dataset.open));
-document.querySelectorAll('[data-need]').forEach(b=>b.onclick=()=>openList('need:'+b.dataset.need));
-document.querySelectorAll('[data-mode]').forEach(b=>b.onclick=()=>openList('mode:'+b.dataset.mode));
+document.querySelectorAll('[data-go]').forEach(btn=>btn.onclick=()=>go(btn.dataset.go));
+document.querySelectorAll('[data-need]').forEach(btn=>btn.onclick=()=>openList('need:'+btn.dataset.need,'needs'));
+document.querySelectorAll('[data-theme]').forEach(btn=>btn.onclick=()=>openList('theme:'+btn.dataset.theme,'catalog'));
+document.querySelectorAll('[data-dailytab]').forEach(btn=>btn.onclick=()=>{dailyTab=btn.dataset.dailytab;renderDaily()});
 
-function openList(t){listType=t;lastType=t;categoryFilter='all';document.getElementById('searchBox').value='';document.querySelectorAll('.filter-chip').forEach(b=>b.classList.toggle('active',b.dataset.filter==='all'));go('list')}
-document.getElementById('breathCount').textContent=pool('breath').length+' pratiques guidées';
-document.getElementById('movementCount').textContent=pool('movement').length+' gestes pour mobiliser puis relâcher';
-document.getElementById('discreetCount').textContent=pool('discreet').length+' gestes presque invisibles';
+function openList(t,origin){
+  listOrigin=origin||current||'catalog';listType=t;lastType=t;categoryFilter='all';
+  const search=document.getElementById('searchBox');if(search)search.value='';
+  document.querySelectorAll('.filter-chip').forEach(btn=>btn.classList.toggle('active',btn.dataset.filter==='all'));
+  go('list');
+}
+document.getElementById('listBack').onclick=()=>go(listOrigin||'catalog');
 
-function refreshFavSummary(){ /* Les favoris ont désormais leur onglet dédié. */ }
+function renderNeedsCounts(){
+  document.querySelectorAll('[data-count-need]').forEach(el=>{el.textContent=pool('need:'+el.dataset.countNeed).length+' gestes'});
+}
+function renderCatalog(){
+  document.getElementById('catalogCount').textContent=EXERCISES.length+' gestes à découvrir, tester et adapter à toi.';
+  document.querySelectorAll('[data-count-theme]').forEach(el=>{el.textContent=pool('theme:'+el.dataset.countTheme).length});
+}
+function refreshFavSummary(){if(current==='favorites')renderFavorites()}
 
-const CALM=['exhale-46','cyclic-sigh','three-slow','hands-release','shoulders-release','self-touch','third-person','affect-label','word-repeat','grounding-333'];
-document.getElementById('calmBtn').onclick=()=>{
-  let p=CALM.map(id=>EXERCISES.find(e=>e.id===id)).filter(Boolean);
-  if(!p.length)p=EXERCISES.filter(e=>e.duration<=30);
-  openExercise(p[Math.floor(Math.random()*p.length)]);
-};
-const surpriseBtn=document.getElementById('surpriseBtn');if(surpriseBtn)surpriseBtn.onclick=()=>openExercise(EXERCISES[Math.floor(Math.random()*EXERCISES.length)]);
+const dayIndex=Math.floor(new Date().setHours(0,0,0,0)/86400000);
+const discoveryPool=EXERCISES.filter(e=>e.duration<=180);
+const homeGesture=discoveryPool[(dayIndex%discoveryPool.length+discoveryPool.length)%discoveryPool.length];
+function renderHome(){
+  document.getElementById('homeGestureTitle').textContent=homeGesture.title;
+  document.getElementById('homeGestureMeta').textContent=fmt(homeGesture.duration)+' · '+homeGesture.tags.slice(0,2).join(' · ');
+  const resume=document.getElementById('homeResume'),empty=document.getElementById('homeResumeEmpty');
+  const routine=routines[routines.length-1],strategy=strategies[strategies.length-1],last=routine||strategy;
+  if(last){
+    resume.classList.add('show');empty.style.display='none';
+    document.getElementById('homeResumeTitle').textContent=last.name;
+    const isRoutine=!!routine;
+    document.getElementById('homeResumeMeta').textContent=(isRoutine?'Ma routine · ':'Ma stratégie · ')+last.exerciseIds.length+' geste'+(last.exerciseIds.length>1?'s':'');
+    resume.onclick=()=>openCollection(isRoutine?'routine':'strategy',last.id);
+  }else{resume.classList.remove('show');empty.style.display='block'}
+}
+document.getElementById('homeGestureBtn').onclick=()=>openExercise(homeGesture);
 
 function renderRows(items,target){
   const box=document.getElementById(target);
@@ -417,24 +443,19 @@ function renderList(){
   const base=pool(listType);
   const categoryOK=e=>categoryFilter==='all'||typeOf(e)===categoryFilter;
   const items=base.filter(e=>categoryOK(e)&&(!q||(e.title+' '+e.when+' '+e.lead+' '+e.tags.join(' ')).toLowerCase().includes(q)));
-  const labels={
-    breath:{eyebrow:'Respiration',title:'Choisis une respiration',intro:'Des pratiques simples, guidées et sans recherche de performance.',count:'respirations'},
-    movement:{eyebrow:'Mouvement du corps',title:'Mobiliser, puis relâcher',intro:'Des gestes corporels courts pour créer un contraste entre tension, mouvement et relâchement.',count:'mouvements'},
-    discreet:{eyebrow:'Discret',title:'Un geste presque invisible',intro:'Des micro-gestes utilisables au travail, dans les transports ou au milieu d’une conversation.',count:'gestes discrets'}
-  };
+  let m={eyebrow:'Les gestes',title:'Tout le catalogue',intro:'Explore librement.',count:'gestes'};
   if(listType.startsWith('need:')){
-    const code=listType.slice(5),n=NEEDS[code]||NEEDS.presence;
-    labels[listType]={eyebrow:'Selon mon besoin',title:n.label,intro:n.desc,count:'propositions'};
+    const code=listType.slice(5),n=NEEDS[code]||NEEDS.presence;m={eyebrow:'Par besoin',title:n.label,intro:n.desc,count:'gestes'};
+  }else if(listType.startsWith('theme:')){
+    const code=listType.slice(6),t=THEMES[code]||THEMES.all;m={eyebrow:'Les gestes',title:t.title,intro:t.intro,count:'gestes'};
+  }else if(listType.startsWith('moment:')){
+    const mo=MOMENTS[listType.slice(7)];if(mo)m={eyebrow:'Au quotidien',title:mo.label,intro:mo.desc,count:'gestes'};
   }
-  if(listType.startsWith('mode:')){
-    const code=listType.slice(5),m=MODES[code]||MODES.recentrer;
-    labels[listType]={eyebrow:m.label,title:m.title,intro:m.intro,count:'gestes'};
-  }
-  const m=labels[listType]||labels.discreet;
   document.getElementById('listEyebrow').textContent=m.eyebrow;
   document.getElementById('listTitle').textContent=m.title;
   document.getElementById('listIntro').textContent=m.intro;
   document.getElementById('listCount').textContent=items.length+' '+m.count;
+  document.getElementById('filterChips').style.display=listType.startsWith('theme:')?'none':'flex';
   renderRows(items,'listRows');
 }
 document.getElementById('searchBox').oninput=renderList;
@@ -443,7 +464,33 @@ document.getElementById('listRandom').onclick=()=>{const p=pool(listType);openEx
 
 function renderFavorites(){const p=favPool();document.getElementById('favPageCount').textContent=p.length+' favori'+(p.length>1?'s':'');renderRows(p,'favRows')}
 
-function openExercise(e){if(!e)return;currentExercise=e;if(current==='list')lastType=listType;else lastType=typeOf(e);go(e.leaf?'breath':'detail')}
+function renderDaily(){
+  document.querySelectorAll('[data-dailytab]').forEach(btn=>btn.classList.toggle('active',btn.dataset.dailytab===dailyTab));
+  const box=document.getElementById('dailyContent');
+  if(dailyTab==='moments'){
+    box.innerHTML='<div class="moment-grid">'+Object.entries(MOMENTS).map(([k,m])=>'<button class="moment-card" data-moment="'+k+'"><span>'+m.icon+'</span><b>'+m.label+'</b><small>'+m.desc+'</small></button>').join('')+'</div>';
+    box.querySelectorAll('[data-moment]').forEach(btn=>btn.onclick=()=>openList('moment:'+btn.dataset.moment,'daily'));
+    const helpful=EXERCISES.filter(e=>feedbackData[e.id]?.rating==='helpful').slice(0,4);
+    if(helpful.length){
+      const wrap=document.createElement('div');wrap.className='helpful-block';wrap.innerHTML='<h3>Ce qui fonctionne pour moi</h3><div class="rows" id="helpfulRows"></div>';box.appendChild(wrap);renderRows(helpful,'helpfulRows');
+    }
+  }else if(dailyTab==='strategies'){
+    box.innerHTML='<div class="personal-head"><h3>Mes stratégies</h3><button class="mini-add" id="newStrategy">+ Créer</button></div><div class="collection-cards" id="strategyCards"></div>';
+    document.getElementById('newStrategy').onclick=()=>openNameSheet('strategy',false);renderCollectionCards('strategy');
+  }else{
+    box.innerHTML='<div class="personal-head"><h3>Mes routines</h3><button class="mini-add" id="newRoutine">+ Créer</button></div><div class="collection-cards" id="routineCards"></div>';
+    document.getElementById('newRoutine').onclick=()=>openNameSheet('routine',false);renderCollectionCards('routine');
+  }
+}
+function renderCollectionCards(type){
+  const arr=type==='routine'?routines:strategies,box=document.getElementById(type==='routine'?'routineCards':'strategyCards');if(!box)return;
+  if(!arr.length){box.innerHTML='<div class="empty-soft">'+(type==='routine'?'Une routine est un enchaînement de gestes que tu choisis et ordonnes toi-même.':'Une stratégie rassemble les gestes que tu veux retrouver dans une situation précise.')+'</div>';return}
+  box.innerHTML=arr.map(c=>{const total=c.exerciseIds.map(id=>EXERCISES.find(e=>e.id===id)?.duration||0).reduce((x,y)=>x+y,0);return '<div class="collection-card" data-collection="'+c.id+'"><div><b>'+escapeHtml(c.name)+'</b><small>'+c.exerciseIds.length+' geste'+(c.exerciseIds.length>1?'s':'')+(type==='routine'&&c.exerciseIds.length?' · '+fmt(total):'')+'</small></div>'+(type==='routine'&&c.exerciseIds.length?'<button class="launch" data-launch="'+c.id+'">Lancer</button>':'<span>›</span>')+'</div>'}).join('');
+  box.querySelectorAll('[data-collection]').forEach(card=>card.onclick=ev=>{if(ev.target.closest('[data-launch]'))return;openCollection(type,card.dataset.collection)});
+  box.querySelectorAll('[data-launch]').forEach(btn=>btn.onclick=ev=>{ev.stopPropagation();startRoutine(btn.dataset.launch)});
+}
+
+function openExercise(e){if(!e)return;detailOrigin=current;if(current==='list')lastType=listType;else if(!activeRoutine)lastType=typeOf(e);currentExercise=e;go(e.leaf?'breath':'detail')}
 function renderDetail(){
   clearInterval(timerId);if(!currentExercise)currentExercise=pool(lastType)[0];
   document.getElementById('instruction').style.display='block';document.getElementById('timer').classList.remove('show');
@@ -455,20 +502,51 @@ function renderDetail(){
   document.getElementById('detailSteps').innerHTML=currentExercise.steps.map((x,i)=>'<div class="step"><span class="num">'+(i+1)+'</span><span>'+x+'</span></div>').join('');
   const needTags=needsOf(currentExercise).slice(0,2).map(k=>'<span class="tag">'+NEEDS[k].short+'</span>').join('');
   document.getElementById('detailTags').innerHTML='<span class="tag">'+fmt(currentExercise.duration)+'</span>'+needTags+currentExercise.tags.map(t=>'<span class="tag">'+t+'</span>').join('');
-  document.getElementById('startBtn').textContent='Commencer · '+fmt(currentExercise.duration);updateFavButtons();
+  document.getElementById('startBtn').textContent='Commencer · '+fmt(currentExercise.duration);updateFavButtons();renderPersonalSummary();
 }
 function updateFavButtons(){
   if(!currentExercise)return;const on=isFav(currentExercise.id);
   document.getElementById('detailHeart').textContent=on?'♥':'♡';document.getElementById('detailFavBtn').textContent=on?'♥ Favori':'♡ Favori';
   document.getElementById('breathHeart').textContent=on?'♥':'♡';document.getElementById('doneFav').textContent=on?'♥ Dans mes favoris':'♡ Ajouter aux favoris';
 }
-document.getElementById('detailBack').onclick=()=>openList(lastType);
+document.getElementById('detailBack').onclick=()=>detailOrigin==='list'?go('list'):go(detailOrigin||'catalog');
 document.getElementById('detailHeart').onclick=()=>toggleFav(currentExercise?.id);
 document.getElementById('detailFavBtn').onclick=()=>toggleFav(currentExercise?.id);
 document.getElementById('breathHeart').onclick=()=>toggleFav(currentExercise?.id);
 document.getElementById('anotherBtn').onclick=()=>{const p=pool(lastType);openExercise(p[Math.floor(Math.random()*p.length)])};
 document.getElementById('startBtn').onclick=()=>startTimer();
 document.getElementById('finishBtn').onclick=()=>{clearInterval(timerId);go('done')};
+
+function escapeHtml(v){return String(v??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]))}
+function ratingLabel(r){return r==='helpful'?'Ça m’aide vraiment':r==='interesting'?'Je le trouve intéressant':r==='notfit'?'Peu adapté pour moi':''}
+function renderPersonalSummary(){
+  if(!currentExercise)return;const f=feedbackData[currentExercise.id],inS=strategies.filter(c=>c.exerciseIds.includes(currentExercise.id)).length,inR=routines.filter(c=>c.exerciseIds.includes(currentExercise.id)).length,bits=[];
+  if(f?.rating)bits.push(ratingLabel(f.rating));if(f?.moment)bits.push(f.moment);if(inS||inR)bits.push('Ajouté à '+(inS+inR)+' espace'+(inS+inR>1?'s':'')+' personnel'+(inS+inR>1?'s':''));
+  document.getElementById('personalSummary').textContent=bits.length?bits.join(' · '):'Tu peux noter ce que ce geste t’apporte et l’ajouter à tes stratégies ou routines.';
+}
+function showOverlay(id){document.getElementById(id)?.classList.add('show')}function hideOverlay(id){document.getElementById(id)?.classList.remove('show')}
+document.querySelectorAll('[data-close-overlay]').forEach(btn=>btn.onclick=()=>hideOverlay(btn.dataset.closeOverlay));document.querySelectorAll('.overlay').forEach(o=>o.onclick=e=>{if(e.target===o)hideOverlay(o.id)});
+let pendingRating='';
+function openFeedback(){if(!currentExercise)return;const f=feedbackData[currentExercise.id]||{};pendingRating=f.rating||'';document.querySelectorAll('[data-rating]').forEach(btn=>btn.classList.toggle('selected',btn.dataset.rating===pendingRating));document.getElementById('feedbackMoment').value=f.moment||'';document.getElementById('feedbackNote').value=f.note||'';showOverlay('feedbackOverlay')}
+document.querySelectorAll('[data-rating]').forEach(btn=>btn.onclick=()=>{pendingRating=btn.dataset.rating;document.querySelectorAll('[data-rating]').forEach(x=>x.classList.toggle('selected',x===btn))});
+document.getElementById('saveFeedback').onclick=()=>{if(!currentExercise)return;feedbackData[currentExercise.id]={rating:pendingRating,moment:document.getElementById('feedbackMoment').value.trim(),note:document.getElementById('feedbackNote').value.trim()};savePersonal();hideOverlay('feedbackOverlay');renderPersonalSummary()};
+document.getElementById('feedbackBtn').onclick=openFeedback;document.getElementById('doneFeedback').onclick=openFeedback;
+
+function getCollection(type,id){return (type==='routine'?routines:strategies).find(c=>c.id===id)}
+function renderAddGroups(){const box=document.getElementById('addGroups');const group=(title,type,arr)=>'<div class="add-group"><h4>'+title+'</h4>'+(arr.length?arr.map(c=>'<div class="add-row" data-addtype="'+type+'" data-addid="'+c.id+'"><div><b>'+escapeHtml(c.name)+'</b><small>'+c.exerciseIds.length+' geste'+(c.exerciseIds.length>1?'s':'')+'</small></div><span>'+(currentExercise&&c.exerciseIds.includes(currentExercise.id)?'✓':'+')+'</span></div>').join(''):'<div class="empty-soft">Rien encore.</div>')+'<button class="mini-add" data-newcollection="'+type+'">+ '+(type==='strategy'?'Nouvelle stratégie':'Nouvelle routine')+'</button></div>';box.innerHTML=group('Mes stratégies','strategy',strategies)+group('Mes routines','routine',routines);box.querySelectorAll('[data-addid]').forEach(row=>row.onclick=()=>toggleExerciseInCollection(row.dataset.addtype,row.dataset.addid,currentExercise.id));box.querySelectorAll('[data-newcollection]').forEach(btn=>btn.onclick=()=>{hideOverlay('addOverlay');openNameSheet(btn.dataset.newcollection,true)})}
+function openAdd(){if(!currentExercise)return;renderAddGroups();showOverlay('addOverlay')}document.getElementById('addToBtn').onclick=openAdd;
+function toggleExerciseInCollection(type,id,exerciseId){const c=getCollection(type,id);if(!c)return;const i=c.exerciseIds.indexOf(exerciseId);if(i>=0)c.exerciseIds.splice(i,1);else c.exerciseIds.push(exerciseId);savePersonal();renderAddGroups();renderPersonalSummary()}
+function openNameSheet(type,addCurrent){nameCreateType=type;nameAddCurrent=!!addCurrent;document.getElementById('nameKind').textContent=type==='routine'?'Ma routine':'Ma stratégie';document.getElementById('nameTitle').textContent=type==='routine'?'Créer une nouvelle routine':'Créer une nouvelle stratégie';document.getElementById('nameInput').value='';showOverlay('nameOverlay')}
+document.getElementById('nameSave').onclick=()=>{const name=document.getElementById('nameInput').value.trim();if(!name)return;const obj={id:'c'+Date.now().toString(36),name,exerciseIds:nameAddCurrent&&currentExercise?[currentExercise.id]:[]};(nameCreateType==='routine'?routines:strategies).push(obj);savePersonal();hideOverlay('nameOverlay');if(nameAddCurrent)renderPersonalSummary();else{dailyTab=nameCreateType==='routine'?'routines':'strategies';go('daily')}};
+
+function openCollection(type,id){collectionType=type;collectionId=id;go('collection')}
+function renderCollection(){const c=getCollection(collectionType,collectionId);if(!c){go('daily');return}document.getElementById('collectionKind').textContent=collectionType==='routine'?'Ma routine':'Ma stratégie';document.getElementById('collectionTitle').textContent=c.name;document.getElementById('collectionIntro').textContent=collectionType==='routine'?'Ordonne les gestes comme tu veux, puis lance-les les uns après les autres.':'Rassemble ici les gestes que tu veux retrouver pour cette situation.';document.getElementById('collectionLaunchBtn').style.display=collectionType==='routine'&&c.exerciseIds.length?'block':'none';const rows=document.getElementById('collectionRows');if(!c.exerciseIds.length){rows.innerHTML='<div class="empty-soft">Ajoute les gestes que tu souhaites garder ici.</div>';return}rows.innerHTML=c.exerciseIds.map((id,i)=>{const e=EXERCISES.find(x=>x.id===id);return e?'<div class="collection-row" data-cex="'+id+'"><span class="n">'+(i+1)+'</span><div><b>'+escapeHtml(e.title)+'</b><small>'+fmt(e.duration)+' · '+e.tags[0]+'</small></div><div class="row-tools"><button data-up="'+i+'">↑</button><button data-down="'+i+'">↓</button><button data-remove="'+i+'">×</button></div></div>':''}).join('');rows.querySelectorAll('[data-cex]').forEach(row=>row.onclick=ev=>{if(ev.target.closest('.row-tools'))return;openExercise(EXERCISES.find(e=>e.id===row.dataset.cex))});rows.querySelectorAll('[data-up]').forEach(btn=>btn.onclick=()=>moveCollectionItem(-1,+btn.dataset.up));rows.querySelectorAll('[data-down]').forEach(btn=>btn.onclick=()=>moveCollectionItem(1,+btn.dataset.down));rows.querySelectorAll('[data-remove]').forEach(btn=>btn.onclick=()=>removeCollectionItem(+btn.dataset.remove))}
+function moveCollectionItem(dir,index){const c=getCollection(collectionType,collectionId),j=index+dir;if(!c||j<0||j>=c.exerciseIds.length)return;[c.exerciseIds[index],c.exerciseIds[j]]=[c.exerciseIds[j],c.exerciseIds[index]];savePersonal();renderCollection()}function removeCollectionItem(index){const c=getCollection(collectionType,collectionId);if(!c)return;c.exerciseIds.splice(index,1);savePersonal();renderCollection()}
+document.getElementById('collectionBack').onclick=()=>{dailyTab=collectionType==='routine'?'routines':'strategies';go('daily')};document.getElementById('collectionDelete').onclick=()=>{const arr=collectionType==='routine'?routines:strategies,i=arr.findIndex(c=>c.id===collectionId);if(i>=0)arr.splice(i,1);savePersonal();dailyTab=collectionType==='routine'?'routines':'strategies';go('daily')};document.getElementById('collectionAddBtn').onclick=()=>{document.getElementById('pickSearch').value='';renderPicker('');showOverlay('pickOverlay')};document.getElementById('collectionLaunchBtn').onclick=()=>startRoutine(collectionId);
+function renderPicker(q){const c=getCollection(collectionType,collectionId),needle=(q||'').toLowerCase(),items=EXERCISES.filter(e=>!needle||(e.title+' '+e.tags.join(' ')).toLowerCase().includes(needle)),box=document.getElementById('pickRows');box.innerHTML=items.map(e=>'<div class="picker-row"><div class="pi">'+e.icon+'</div><div><b>'+escapeHtml(e.title)+'</b><small>'+fmt(e.duration)+' · '+e.tags.slice(0,2).join(' · ')+'</small></div><button class="'+(c?.exerciseIds.includes(e.id)?'on':'')+'" data-pick="'+e.id+'">'+(c?.exerciseIds.includes(e.id)?'✓':'+')+'</button></div>').join('');box.querySelectorAll('[data-pick]').forEach(btn=>btn.onclick=()=>{toggleExerciseInCollection(collectionType,collectionId,btn.dataset.pick);renderPicker(document.getElementById('pickSearch').value);renderCollection()})}document.getElementById('pickSearch').oninput=e=>renderPicker(e.target.value);
+function startRoutine(id){const r=routines.find(x=>x.id===id);if(!r||!r.exerciseIds.length)return;activeRoutine={id,index:0};openExercise(EXERCISES.find(e=>e.id===r.exerciseIds[0]))}
+function updateRoutineDone(){const next=document.getElementById('doneNext'),other=document.getElementById('doneAnother');if(!activeRoutine){next.style.display='none';other.style.display='block';return}const r=routines.find(x=>x.id===activeRoutine.id),hasNext=r&&activeRoutine.index<r.exerciseIds.length-1;next.style.display=hasNext?'block':'none';other.style.display='none';if(hasNext)next.textContent='Geste suivant · '+(activeRoutine.index+2)+' / '+r.exerciseIds.length}
+document.getElementById('doneNext').onclick=()=>{const r=routines.find(x=>x.id===activeRoutine?.id);if(!r)return;activeRoutine.index++;openExercise(EXERCISES.find(e=>e.id===r.exerciseIds[activeRoutine.index]))};
 
 function startTimer(){
   if(currentExercise?.leaf){go('breath');return}
@@ -487,7 +565,7 @@ const leaf=document.getElementById('leaf');
 function setRatio(a,b){inhale=a;exhale=b;document.querySelectorAll('.ratio').forEach(x=>x.classList.toggle('active',x.dataset.ratio===a+','+b));startBreath()}
 document.querySelectorAll('.ratio').forEach(b=>b.onclick=()=>{const [a,z]=b.dataset.ratio.split(',').map(Number);setRatio(a,z)});
 function startBreath(){breathStart=performance.now();breathPaused=false;pauseAt=0;windPhase=0;lastFrame=performance.now();document.getElementById('pauseBtn').textContent='Ⅱ';updateFavButtons()}
-document.getElementById('breathBack').onclick=()=>openList(lastType&&lastType.startsWith('need:')?lastType:'breath');
+document.getElementById('breathBack').onclick=()=>detailOrigin==='list'?go('list'):go(detailOrigin||'catalog');
 document.getElementById('pauseBtn').onclick=()=>{breathPaused=!breathPaused;document.getElementById('pauseBtn').textContent=breathPaused?'▶':'Ⅱ';if(breathPaused)pauseAt=performance.now();else{breathStart+=performance.now()-pauseAt;lastFrame=performance.now()}};
 document.getElementById('breathDone').onclick=()=>go('done');
 
@@ -510,9 +588,10 @@ function animate(now){
 }
 requestAnimationFrame(animate);
 
-function updateDoneFav(){updateFavButtons()}
+function updateDoneFav(){updateFavButtons();updateRoutineDone()}
 document.getElementById('doneFav').onclick=()=>toggleFav(currentExercise?.id);
 document.getElementById('doneAnother').onclick=()=>{const p=pool(lastType);openExercise(p[Math.floor(Math.random()*p.length)])};
+renderNeedsCounts();renderCatalog();renderHome();updateMainNav();
 </script>
 </body>
 </html>
