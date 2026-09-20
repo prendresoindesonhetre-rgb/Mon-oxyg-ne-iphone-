@@ -153,7 +153,13 @@ button{color:inherit}
 .benefit-text{font-size:10.8px;line-height:1.52;color:#315d72}
 .breath-benefit{margin-top:10px;padding:11px 12px;border-radius:15px;background:rgba(255,255,255,.76);font-size:9.2px;line-height:1.45;color:#426d80}
 .breath-benefit b{display:block;margin-bottom:4px;font-size:7.6px;letter-spacing:.07em;text-transform:uppercase;color:#527f92}
-.why-copy{font-size:10px;line-height:1.5;color:#45697a;margin:8px 0 10px}.evidence-meta{display:grid;gap:3px;padding-top:9px;border-top:1px solid rgba(73,111,130,.12);font-size:8.5px;line-height:1.4;color:#738a96}.evidence-meta b{font-size:7.6px;letter-spacing:.065em;text-transform:uppercase;color:#5d8191}.evidence-safety:empty{display:none}@media(max-width:560px){.shell{padding:0}.phone{height:100dvh;width:100vw;aspect-ratio:auto;border:0;border-radius:0}}
+.why-copy{font-size:10px;line-height:1.5;color:#45697a;margin:8px 0 10px}.evidence-meta{display:grid;gap:3px;padding-top:9px;border-top:1px solid rgba(73,111,130,.12);font-size:8.5px;line-height:1.4;color:#738a96}.evidence-meta b{font-size:7.6px;letter-spacing:.065em;text-transform:uppercase;color:#5d8191}.evidence-safety:empty{display:none}
+.modal-intro{margin:6px 0 0;font-size:9.5px;line-height:1.45;color:#718793}
+.field-help{display:block;margin-top:5px;font-size:8px;line-height:1.4;color:#86969e}
+.meaning-edit{margin:10px 0 2px;border:0;background:transparent;padding:0;color:#4e7d91;font-size:8.7px;font-weight:800;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.collection-purpose{display:block;margin-top:4px;font-size:8.5px!important;line-height:1.35;color:#5b7c8c!important}
+.personal-summary .my-meaning{display:block;margin-bottom:5px;color:#315f73;font-weight:700}
+@media(max-width:560px){.shell{padding:0}.phone{height:100dvh;width:100vw;aspect-ratio:auto;border:0;border-radius:0}}
 </style>
 </head>
 <body>
@@ -180,7 +186,7 @@ button{color:inherit}
 <button class="" data-go="daily"><svg class="nav-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 7v5l3.5 2M8 3.8 6.2 2M16 3.8 17.8 2"/></svg><span>Au quotidien</span></button>
 <button class="" data-go="favorites"><svg class="nav-svg" viewBox="0 0 24 24"><path d="M12 20s-7-4.3-7-9.2C5 8.1 6.8 6.5 9 6.5c1.4 0 2.5.7 3 1.7.5-1 1.6-1.7 3-1.7 2.2 0 4 1.6 4 4.3C19 15.7 12 20 12 20Z"/></svg><span>Favoris</span></button>
 </nav></section>
-<section class="screen hub daily" data-screen="daily"><div class="scroll"><div class="brand-photo visual"><img class="brand-img" data-visual="explore" alt=""><div class="brand-kicker">Au quotidien</div><div class="brand-title"><h1>Faire de ces gestes<br>les tiens</h1><p>Les tester, les adapter et les organiser comme tu veux.</p></div></div><div class="sheet"><div class="page-intro"><div class="h2">Mon guide personnel</div><div class="muted">Pars d’un moment réel, puis construis peu à peu tes propres stratégies et tes routines.</div></div><div class="daily-tabs"><button class="active" data-dailytab="moments">Selon le moment</button><button data-dailytab="strategies">Mes stratégies</button><button data-dailytab="routines">Mes routines</button></div><div id="dailyContent"></div></div></div><nav class="nav main-nav">
+<section class="screen hub daily" data-screen="daily"><div class="scroll"><div class="brand-photo visual"><img class="brand-img" data-visual="explore" alt=""><div class="brand-kicker">Au quotidien</div><div class="brand-title"><h1>Faire de ces gestes<br>les tiens</h1><p>Les tester, les adapter et les organiser comme tu veux.</p></div></div><div class="sheet"><div class="page-intro"><div class="h2">Mon guide personnel</div><div class="muted">Relie chaque geste à un moment et à une intention qui ont du sens pour toi, puis construis tes propres stratégies et routines.</div></div><div class="daily-tabs"><button class="active" data-dailytab="moments">Selon le moment</button><button data-dailytab="strategies">Mes stratégies</button><button data-dailytab="routines">Mes routines</button></div><div id="dailyContent"></div></div></div><nav class="nav main-nav">
 <button class="" data-go="home"><svg class="nav-svg" viewBox="0 0 24 24"><path d="M4 10.5 12 4l8 6.5v8.2a1.3 1.3 0 0 1-1.3 1.3h-4.2v-6h-5v6H5.3A1.3 1.3 0 0 1 4 18.7Z"/></svg><span>Accueil</span></button>
 <button class="" data-go="needs"><svg class="nav-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="7.5"/><circle cx="12" cy="12" r="2.5"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22"/></svg><span>Par besoin</span></button>
 <button class="nav-center " data-go="catalog"><svg class="nav-svg leaf-svg" viewBox="0 0 24 24"><path d="M19.5 4.5C12 4.8 6.2 8.8 5.4 14.2c-.5 3.2 1.8 5.3 4.7 4.7 5.1-1 8.7-6.8 9.4-14.4Z"/><path d="M6.4 18.4c2.3-3.5 5.1-6.2 9.1-8.5"/></svg><span>Gestes</span></button>
@@ -229,14 +235,14 @@ button{color:inherit}
           <div class="evidence-safety" id="detailSafety"></div>
         </details>
         <div class="steps" id="detailSteps"></div><div class="tags" id="detailTags"></div>
-        <div class="personal-card"><div class="personal-title">Pour moi</div><div class="personal-summary" id="personalSummary">Note comment ce geste fonctionne pour toi, puis ajoute-le à une stratégie ou une routine si tu veux le réutiliser.</div><div class="personal-actions"><button id="feedbackBtn">Mon ressenti</button><button id="addToBtn">Ajouter à…</button></div></div><div class="detail-actions"><button class="soft" id="anotherBtn">Un autre</button><button class="soft" id="detailFavBtn">♡ Favori</button><button class="primary" id="startBtn">Commencer</button></div>
+        <div class="personal-card"><div class="personal-title">Ce geste pour moi</div><div class="personal-summary" id="personalSummary">Un geste devient plus facile à reprendre quand tu sais pourquoi tu l’as choisi. Note à quoi tu veux qu’il te serve et dans quel moment tu veux l’utiliser.</div><div class="personal-actions"><button id="feedbackBtn">Donner du sens</button><button id="addToBtn">Ajouter à…</button></div></div><div class="detail-actions"><button class="soft" id="anotherBtn">Un autre</button><button class="soft" id="detailFavBtn">♡ Favori</button><button class="primary" id="startBtn">Commencer</button></div>
       </div>
       <div class="timer" id="timer"><div class="eyebrow">Exercice en cours</div><div class="timer-big" id="timerBig"></div><div class="timer-text" id="timerText"></div><div class="progress"><i id="progress"></i></div><button class="soft" id="finishBtn">Terminer</button></div>
     </div>
   </div>
 </section>
 
-<section class="screen collection no-nav" data-screen="collection"><div class="scroll"><div class="brand-photo visual"><img class="brand-img" data-visual="detail" alt=""></div><div class="topbar"><button class="icon-btn" id="collectionBack">‹</button><button class="icon-btn" id="collectionDelete">⌫</button></div><div class="sheet"><div class="eyebrow" id="collectionKind"></div><div class="h2" id="collectionTitle"></div><div class="muted" id="collectionIntro"></div><div class="collection-tools"><button class="soft" id="collectionAddBtn">+ Ajouter des gestes</button><button class="primary" id="collectionLaunchBtn">Lancer</button></div><div id="collectionRows"></div></div></div></section><section class="screen breath no-nav" data-screen="breath">
+<section class="screen collection no-nav" data-screen="collection"><div class="scroll"><div class="brand-photo visual"><img class="brand-img" data-visual="detail" alt=""></div><div class="topbar"><button class="icon-btn" id="collectionBack">‹</button><button class="icon-btn" id="collectionDelete">⌫</button></div><div class="sheet"><div class="eyebrow" id="collectionKind"></div><div class="h2" id="collectionTitle"></div><div class="muted" id="collectionIntro"></div><button class="meaning-edit" id="collectionMeaningBtn">Donner du sens à cet espace</button><div class="collection-tools"><button class="soft" id="collectionAddBtn">+ Ajouter des gestes</button><button class="primary" id="collectionLaunchBtn">Lancer</button></div><div id="collectionRows"></div></div></div></section><section class="screen breath no-nav" data-screen="breath">
   <div class="breath-bg visual"><img class="brand-img" data-visual="hero" alt=""></div>
   <div class="topbar"><button class="icon-btn" id="breathBack">‹</button><button class="icon-btn" id="breathHeart">♡</button></div>
   <div class="breath-title"><div class="h2">La feuille et le souffle</div><div class="muted">Suis le mouvement de la feuille pour guider naturellement ton rythme respiratoire.</div><div class="breath-benefit"><b>À quoi ce geste peut t’aider</b><span id="breathBenefit"></span></div></div>
@@ -250,9 +256,17 @@ button{color:inherit}
 
 <section class="screen done no-nav" data-screen="done">
   <div class="done-bg visual"><img class="brand-img" data-visual="detail" alt=""></div>
-  <div class="done-card glass"><div class="h2">C’est fait 🌿</div><p>L’exercice est terminé.<br>Tu peux maintenant noter ton ressenti ou garder ce geste dans tes favoris.</p><div class="done-actions"><button class="soft" id="doneFeedback">Noter mon ressenti</button><button class="soft" id="doneFav">♡ Ajouter aux favoris</button><button class="primary" id="doneNext" style="display:none">Geste suivant</button><button class="primary" id="doneAnother">Essayer un autre geste</button><button class="soft" data-go="home">Retour à l’accueil</button></div></div>
+  <div class="done-card glass"><div class="h2">C’est fait 🌿</div><p>L’exercice est terminé.<br>Tu peux maintenant noter ton ressenti ou garder ce geste dans tes favoris.</p><div class="done-actions"><button class="soft" id="doneFeedback">Ce geste pour moi</button><button class="soft" id="doneFav">♡ Ajouter aux favoris</button><button class="primary" id="doneNext" style="display:none">Geste suivant</button><button class="primary" id="doneAnother">Essayer un autre geste</button><button class="soft" data-go="home">Retour à l’accueil</button></div></div>
 </section>
-<div class="overlay" id="feedbackOverlay"><div class="modal-sheet"><div class="modal-head"><div><div class="eyebrow">Pour moi</div><h3>Comment ce geste a-t-il fonctionné pour toi ?</h3></div><button class="modal-close" data-close-overlay="feedbackOverlay">×</button></div><div class="choice-grid"><button class="choice-btn" data-rating="notfit"><b>Peu adapté pour moi</b><small>Ce geste ne me convient pas vraiment.</small></button><button class="choice-btn" data-rating="interesting"><b>Intéressant</b><small>Je veux peut-être le retester dans un autre contexte.</small></button><button class="choice-btn" data-rating="helpful"><b>Ça m’aide vraiment</b><small>Ce geste m’apporte quelque chose et je veux pouvoir le retrouver facilement.</small></button></div><div class="modal-field"><label>Quand est-ce qu’il m’aide ?</label><input id="feedbackMoment" placeholder="Ex. au travail, avant une réunion…"></div><div class="modal-field"><label>Ma note</label><textarea id="feedbackNote" placeholder="Ex. ce que j’ai ressenti, ce qui a changé, ce que je voudrais refaire…"></textarea></div><div class="modal-actions"><button class="soft" data-close-overlay="feedbackOverlay">Annuler</button><button class="primary" id="saveFeedback">Enregistrer</button></div></div></div><div class="overlay" id="addOverlay"><div class="modal-sheet"><div class="modal-head"><div><div class="eyebrow">Personnaliser</div><h3>Ajouter ce geste à…</h3></div><button class="modal-close" data-close-overlay="addOverlay">×</button></div><div class="add-groups" id="addGroups"></div></div></div><div class="overlay" id="nameOverlay"><div class="modal-sheet"><div class="modal-head"><div><div class="eyebrow" id="nameKind"></div><h3 id="nameTitle"></h3></div><button class="modal-close" data-close-overlay="nameOverlay">×</button></div><div class="modal-field"><label>Nom</label><input id="nameInput" maxlength="60" placeholder="Ex. Quand la pression monte"></div><div class="modal-actions"><button class="soft" data-close-overlay="nameOverlay">Annuler</button><button class="primary" id="nameSave">Créer</button></div></div></div><div class="overlay" id="pickOverlay"><div class="modal-sheet"><div class="modal-head"><div><div class="eyebrow">Choisir</div><h3>Ajouter des gestes</h3></div><button class="modal-close" data-close-overlay="pickOverlay">×</button></div><input class="picker-search" id="pickSearch" placeholder="Rechercher dans le catalogue…"><div class="picker-rows" id="pickRows"></div></div></div>
+<div class="overlay" id="feedbackOverlay"><div class="modal-sheet">
+  <div class="modal-head"><div><div class="eyebrow">Ce geste pour moi</div><h3>Pourquoi veux-tu le garder ?</h3><p class="modal-intro">Relie ce geste à quelque chose de concret dans ta vie. C’est ce qui lui donnera une vraie place dans ton quotidien.</p></div><button class="modal-close" data-close-overlay="feedbackOverlay">×</button></div>
+  <div class="modal-field"><label>À quoi je veux qu’il me serve ?</label><textarea id="feedbackMeaning" placeholder="Ex. Pour prendre quelques secondes avant de répondre quand je sens la pression monter."></textarea><small class="field-help">Écris avec tes mots ce que tu veux retrouver, éviter ou faciliter grâce à ce geste.</small></div>
+  <div class="modal-field"><label>Quand je veux l’utiliser ?</label><input id="feedbackMoment" placeholder="Ex. avant une réunion, dans les transports, le soir…"></div>
+  <div class="modal-field"><label>Après l’avoir essayé</label></div>
+  <div class="choice-grid"><button class="choice-btn" data-rating="notfit"><b>Peu adapté pour moi</b><small>Ce geste ne me convient pas vraiment.</small></button><button class="choice-btn" data-rating="interesting"><b>Intéressant</b><small>Je veux peut-être le retester dans un autre contexte.</small></button><button class="choice-btn" data-rating="helpful"><b>Ça m’aide vraiment</b><small>Ce geste m’apporte quelque chose et je veux pouvoir le retrouver facilement.</small></button></div>
+  <div class="modal-field"><label>Ce que j’ai remarqué</label><textarea id="feedbackNote" placeholder="Ex. mes épaules redescendent, j’arrive à moins répondre dans l’urgence…"></textarea></div>
+  <div class="modal-actions"><button class="soft" data-close-overlay="feedbackOverlay">Annuler</button><button class="primary" id="saveFeedback">Enregistrer</button></div>
+</div></div><div class="overlay" id="addOverlay"><div class="modal-sheet"><div class="modal-head"><div><div class="eyebrow">Personnaliser</div><h3>Ajouter ce geste à…</h3></div><button class="modal-close" data-close-overlay="addOverlay">×</button></div><div class="add-groups" id="addGroups"></div></div></div><div class="overlay" id="nameOverlay"><div class="modal-sheet"><div class="modal-head"><div><div class="eyebrow" id="nameKind"></div><h3 id="nameTitle"></h3><p class="modal-intro">Donne-lui un nom, mais surtout une raison d’exister pour toi.</p></div><button class="modal-close" data-close-overlay="nameOverlay">×</button></div><div class="modal-field"><label>Nom</label><input id="nameInput" maxlength="60" placeholder="Ex. Quand la pression monte"></div><div class="modal-field"><label>À quoi je veux que ça me serve ?</label><textarea id="nameMeaning" placeholder="Ex. Me donner un temps avant de réagir et retrouver assez de calme pour choisir quoi faire."></textarea><small class="field-help">Cette phrase restera visible dans ta stratégie ou ta routine.</small></div><div class="modal-actions"><button class="soft" data-close-overlay="nameOverlay">Annuler</button><button class="primary" id="nameSave">Créer</button></div></div></div><div class="overlay" id="pickOverlay"><div class="modal-sheet"><div class="modal-head"><div><div class="eyebrow">Choisir</div><h3>Ajouter des gestes</h3></div><button class="modal-close" data-close-overlay="pickOverlay">×</button></div><input class="picker-search" id="pickSearch" placeholder="Rechercher dans le catalogue…"><div class="picker-rows" id="pickRows"></div></div></div>
 </div></div>
 
 <script>
@@ -502,6 +516,7 @@ let collectionType=null;
 let collectionId=null;
 let nameCreateType=null;
 let nameAddCurrent=false;
+let nameEditingId=null;
 let activeRoutine=null;
 let timerId=null;
 
@@ -525,7 +540,7 @@ if(!Array.isArray(routines))routines=[];
 
 function normalizeCollections(arr){
   return arr.filter(function(c){return c&&c.id&&c.name}).map(function(c){
-    return {id:String(c.id),name:String(c.name),exerciseIds:Array.isArray(c.exerciseIds)?c.exerciseIds.filter(function(id){return EXERCISES.some(function(e){return e.id===id})}):[]};
+    return {id:String(c.id),name:String(c.name),meaning:typeof c.meaning==="string"?c.meaning:"",exerciseIds:Array.isArray(c.exerciseIds)?c.exerciseIds.filter(function(id){return EXERCISES.some(function(e){return e.id===id})}):[]};
   });
 }
 strategies=normalizeCollections(strategies);
@@ -782,7 +797,7 @@ function renderCollectionCards(type){
   }
   box.innerHTML=arr.map(function(c){
     const total=c.exerciseIds.reduce(function(sum,id){const e=EXERCISES.find(function(x){return x.id===id});return sum+(e?e.duration:0)},0);
-    return '<div class="collection-card" data-collection="'+c.id+'"><div><b>'+escapeHtml(c.name)+'</b><small>'+c.exerciseIds.length+' geste'+(c.exerciseIds.length>1?"s":"")+(type==="routine"&&c.exerciseIds.length?" · "+fmt(total):"")+'</small></div>'+(type==="routine"&&c.exerciseIds.length?'<button class="launch" data-launch="'+c.id+'">Lancer</button>':'<span>›</span>')+'</div>';
+    return '<div class="collection-card" data-collection="'+c.id+'"><div><b>'+escapeHtml(c.name)+'</b>'+(c.meaning?'<small class="collection-purpose">'+escapeHtml(c.meaning)+'</small>':'')+'<small>'+c.exerciseIds.length+' geste'+(c.exerciseIds.length>1?"s":"")+(type==="routine"&&c.exerciseIds.length?" · "+fmt(total):"")+'</small></div>'+(type==="routine"&&c.exerciseIds.length?'<button class="launch" data-launch="'+c.id+'">Lancer</button>':'<span>›</span>')+'</div>';
   }).join("");
   [].slice.call(box.querySelectorAll("[data-collection]")).forEach(function(card){
     card.onclick=function(ev){if(ev.target.closest("[data-launch]"))return;openCollection(type,card.dataset.collection)};
@@ -885,15 +900,18 @@ function ratingLabel(r){
 }
 function renderPersonalSummary(){
   if(!currentExercise)return;
-  const f=feedbackData[currentExercise.id];
+  const f=feedbackData[currentExercise.id]||{};
   const inS=strategies.filter(function(c){return c.exerciseIds.indexOf(currentExercise.id)>=0}).length;
   const inR=routines.filter(function(c){return c.exerciseIds.indexOf(currentExercise.id)>=0}).length;
   const bits=[];
-  if(f&&f.rating)bits.push(ratingLabel(f.rating));
-  if(f&&f.moment)bits.push(f.moment);
-  if(f&&f.note)bits.push("Note enregistrée");
-  if(inS||inR)bits.push("Ajouté à "+(inS+inR)+" espace"+(inS+inR>1?"s":"")+" personnel"+(inS+inR>1?"s":""));
-  $("personalSummary").textContent=bits.length?bits.join(" · "):"Note comment ce geste fonctionne pour toi, puis ajoute-le à une stratégie ou une routine si tu veux le réutiliser.";
+  if(f.rating)bits.push(ratingLabel(f.rating));
+  if(f.moment)bits.push("Quand : "+f.moment);
+  if(inS||inR)bits.push("Dans "+(inS+inR)+" stratégie/routine"+(inS+inR>1?"s":""));
+  if(f.meaning){
+    $("personalSummary").innerHTML='<span class="my-meaning">« '+escapeHtml(f.meaning)+' »</span>'+(bits.length?escapeHtml(bits.join(" · ")):"");
+  }else{
+    $("personalSummary").textContent=bits.length?bits.join(" · "):"Un geste devient plus facile à reprendre quand tu sais pourquoi tu l’as choisi. Note à quoi tu veux qu’il te serve et dans quel moment tu veux l’utiliser.";
+  }
 }
 
 function showOverlay(id){const el=$(id);if(el)el.classList.add("show")}
@@ -907,6 +925,7 @@ function openFeedback(){
   const f=feedbackData[currentExercise.id]||{};
   pendingRating=f.rating||"";
   [].slice.call(document.querySelectorAll("[data-rating]")).forEach(function(btn){btn.classList.toggle("selected",btn.dataset.rating===pendingRating)});
+  $("feedbackMeaning").value=f.meaning||"";
   $("feedbackMoment").value=f.moment||"";
   $("feedbackNote").value=f.note||"";
   showOverlay("feedbackOverlay");
@@ -920,6 +939,7 @@ function openFeedback(){
 $("saveFeedback").onclick=function(){
   if(!currentExercise)return;
   feedbackData[currentExercise.id]={
+    meaning:$("feedbackMeaning").value.trim(),
     rating:pendingRating,
     moment:$("feedbackMoment").value.trim(),
     note:$("feedbackNote").value.trim()
@@ -940,7 +960,7 @@ function renderAddGroups(){
   function group(title,type,arr){
     const rows=arr.length?arr.map(function(c){
       const has=currentExercise&&c.exerciseIds.indexOf(currentExercise.id)>=0;
-      return '<div class="add-row" data-addtype="'+type+'" data-addid="'+c.id+'"><div><b>'+escapeHtml(c.name)+'</b><small>'+c.exerciseIds.length+' geste'+(c.exerciseIds.length>1?"s":"")+'</small></div><span>'+(has?"✓":"+")+'</span></div>';
+      return '<div class="add-row" data-addtype="'+type+'" data-addid="'+c.id+'"><div><b>'+escapeHtml(c.name)+'</b><small>'+(c.meaning?escapeHtml(c.meaning)+' · ':'')+c.exerciseIds.length+' geste'+(c.exerciseIds.length>1?"s":"")+'</small></div><span>'+(has?"✓":"+")+'</span></div>';
     }).join(""):'<div class="empty-soft">Rien encore.</div>';
     return '<div class="add-group"><h4>'+title+'</h4>'+rows+'<button class="mini-add" data-newcollection="'+type+'">+ '+(type==="strategy"?"Nouvelle stratégie":"Nouvelle routine")+'</button></div>';
   }
@@ -968,19 +988,30 @@ function toggleExerciseInCollection(type,id,exerciseId){
   if($("addOverlay").classList.contains("show"))renderAddGroups();
   renderPersonalSummary();
 }
-function openNameSheet(type,addCurrent){
+function openNameSheet(type,addCurrent,editId){
   nameCreateType=type;
   nameAddCurrent=!!addCurrent;
+  nameEditingId=editId||null;
+  const existing=nameEditingId?getCollection(type,nameEditingId):null;
   $("nameKind").textContent=type==="routine"?"Ma routine":"Ma stratégie";
-  $("nameTitle").textContent=type==="routine"?"Créer une nouvelle routine":"Créer une nouvelle stratégie";
-  $("nameInput").value="";
+  $("nameTitle").textContent=existing?(type==="routine"?"Modifier ma routine":"Modifier ma stratégie"):(type==="routine"?"Créer une nouvelle routine":"Créer une nouvelle stratégie");
+  $("nameInput").value=existing?existing.name:"";
+  $("nameMeaning").value=existing?(existing.meaning||""):"";
+  $("nameSave").textContent=existing?"Enregistrer":"Créer";
+  $("nameMeaning").placeholder=type==="routine"?"Ex. Me préparer au sommeil et laisser la journée derrière moi.":"Ex. Me donner un temps avant de réagir quand la pression monte.";
   showOverlay("nameOverlay");
   setTimeout(function(){$("nameInput").focus()},80);
 }
 $("nameSave").onclick=function(){
   const name=$("nameInput").value.trim();
+  const meaning=$("nameMeaning").value.trim();
   if(!name)return;
-  const obj={id:"c"+Date.now().toString(36),name:name,exerciseIds:nameAddCurrent&&currentExercise?[currentExercise.id]:[]};
+  if(nameEditingId){
+    const existing=getCollection(nameCreateType,nameEditingId);
+    if(existing){existing.name=name;existing.meaning=meaning}
+    savePersonal();hideOverlay("nameOverlay");renderCollection();return;
+  }
+  const obj={id:"c"+Date.now().toString(36),name:name,meaning:meaning,exerciseIds:nameAddCurrent&&currentExercise?[currentExercise.id]:[]};
   if(nameCreateType==="routine")routines.push(obj);else strategies.push(obj);
   savePersonal();
   hideOverlay("nameOverlay");
@@ -1001,7 +1032,12 @@ function renderCollection(){
   if(!c){dailyTab=collectionType==="routine"?"routines":"strategies";go("daily");return}
   $("collectionKind").textContent=collectionType==="routine"?"Ma routine":"Ma stratégie";
   $("collectionTitle").textContent=c.name;
-  $("collectionIntro").textContent=collectionType==="routine"?"Ordonne les gestes comme tu veux, puis lance-les les uns après les autres.":"Rassemble ici les gestes que tu veux retrouver pour cette situation.";
+  $("collectionIntro").textContent=c.meaning||(
+    collectionType==="routine"
+      ?"À quoi veux-tu que cette routine te serve ? Ajoute une intention pour lui donner une place claire dans ton quotidien."
+      :"À quoi veux-tu que cette stratégie te serve ? Ajoute une intention pour savoir pourquoi tu veux la retrouver."
+  );
+  $("collectionMeaningBtn").textContent=c.meaning?"Modifier mon intention":"Ajouter mon intention";
   $("collectionLaunchBtn").style.display=collectionType==="routine"&&c.exerciseIds.length?"block":"none";
   const rows=$("collectionRows");
   if(!c.exerciseIds.length){
@@ -1036,6 +1072,7 @@ function removeCollectionItem(index){
   c.exerciseIds.splice(index,1);
   savePersonal();renderCollection();
 }
+$("collectionMeaningBtn").onclick=function(){openNameSheet(collectionType,false,collectionId)};
 $("collectionBack").onclick=function(){dailyTab=collectionType==="routine"?"routines":"strategies";go("daily")};
 $("collectionDelete").onclick=function(){
   const c=getCollection(collectionType,collectionId);
