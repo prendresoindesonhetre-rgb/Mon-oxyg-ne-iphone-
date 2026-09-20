@@ -1,0 +1,499 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#edf6f7">
+<title>Les petits gestes de mon Hêtre</title>
+<style>
+:root{
+  --ink:#255d7b;--muted:#6e8795;--turq:#55b9c7;--sky:#7ab8d7;--violet:#8c76c6;
+  --ivory:#fbf8f4;--mist:#eef6f7;--line:rgba(37,93,123,.10);
+  --glass:rgba(255,255,255,.86);--shadow:0 16px 38px rgba(38,67,85,.10)
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{
+  font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);overflow:hidden;
+  background:
+    radial-gradient(circle at 8% 0%,rgba(85,185,199,.18),transparent 26%),
+    radial-gradient(circle at 92% 4%,rgba(140,118,198,.13),transparent 28%),
+    linear-gradient(180deg,#edf6f7,#f8f3f8 58%,#eff6f4)
+}
+button,input{font:inherit}
+button{color:inherit}
+.shell{height:100dvh;display:grid;place-items:center;padding:12px}
+.phone{
+  position:relative;height:min(95dvh,860px);aspect-ratio:.478;overflow:hidden;border-radius:40px;background:#f7f8f6;
+  border:1px solid rgba(255,255,255,.95);box-shadow:0 32px 82px rgba(30,54,72,.22)
+}
+.screen{position:absolute;inset:0;opacity:0;pointer-events:none;transform:translateY(6px);transition:.2s ease;background:#f8f7f4}
+.screen.active{opacity:1;pointer-events:auto;transform:none}
+.scroll{position:absolute;inset:0;overflow-y:auto;scrollbar-width:none;padding-bottom:92px}
+.scroll::-webkit-scrollbar{display:none}
+.brand-photo{
+  position:relative;height:310px;overflow:hidden;background:
+    radial-gradient(circle at 28% 22%,rgba(85,185,199,.28),transparent 31%),
+    linear-gradient(145deg,#dceef2,#eee8f5)
+}
+.brand-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:44% 42%;opacity:0;transition:opacity .35s ease}
+.brand-photo.loaded img{opacity:1}
+.brand-photo:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(245,250,250,.02),rgba(247,247,246,.08) 52%,rgba(250,248,245,.96))}
+.brand-kicker{position:absolute;z-index:2;left:18px;top:calc(env(safe-area-inset-top,0px) + 17px);font-size:9px;letter-spacing:.13em;text-transform:uppercase;font-weight:850;color:#527d92;background:rgba(255,255,255,.72);backdrop-filter:blur(12px);padding:8px 11px;border-radius:999px}
+.brand-title{position:absolute;z-index:2;left:19px;right:19px;bottom:46px;text-shadow:0 2px 10px rgba(255,255,255,.92)}
+.brand-title h1{margin:0;font:italic 500 31px/1.03 Georgia,serif;color:#215d7f}
+.brand-title p{margin:7px 0 0;font-size:11px;color:#537487}
+.sheet{position:relative;margin-top:-30px;border-radius:30px 30px 0 0;background:linear-gradient(180deg,rgba(252,250,247,.97),#fbf8f4 20%);box-shadow:0 -10px 28px rgba(44,67,82,.07);padding:22px 18px 30px}
+.h2{margin:0;font:italic 500 27px/1.08 Georgia,serif;color:#255e7d}
+.eyebrow{font-size:9px;letter-spacing:.13em;text-transform:uppercase;color:#7893a2;font-weight:850}
+.muted{font-size:11px;line-height:1.45;color:var(--muted)}
+.glass{background:var(--glass);border:1px solid rgba(255,255,255,.8);backdrop-filter:blur(14px);box-shadow:var(--shadow)}
+.primary{border:0;border-radius:19px;padding:14px 16px;color:white;background:linear-gradient(135deg,#337f9b,#55b9c7 58%,#7f83c5);font-weight:800;box-shadow:0 12px 25px rgba(54,133,155,.21);cursor:pointer}
+.soft{border:1px solid var(--line);border-radius:17px;padding:12px 14px;background:rgba(255,255,255,.83);font-weight:760;color:#386d86;cursor:pointer}
+.icon-btn{width:43px;height:43px;border:0;border-radius:15px;background:rgba(255,255,255,.87);backdrop-filter:blur(14px);box-shadow:0 8px 20px rgba(38,70,90,.11);font-size:21px;cursor:pointer}
+.topbar{position:absolute;z-index:30;left:0;right:0;top:0;padding:calc(env(safe-area-inset-top,0px) + 14px) 15px 0;display:flex;justify-content:space-between}
+.nav{
+  position:absolute;z-index:50;left:0;right:0;bottom:0;height:77px;
+  padding:7px 11px calc(env(safe-area-inset-bottom,0px) + 7px);
+  display:grid;grid-template-columns:repeat(3,1fr);gap:6px;
+  background:rgba(251,249,246,.94);backdrop-filter:blur(18px);border-top:1px solid var(--line)
+}
+.nav button{border:0;background:transparent;border-radius:15px;font-size:9px;font-weight:800;color:#748995;display:grid;place-items:center;gap:2px;cursor:pointer}
+.nav button span{font-size:19px}.nav button.active{background:#e3f1f3;color:#2c718c}
+.no-nav .nav{display:none}
+
+/* HOME */
+.home .brand-photo{height:330px}
+.home .brand-title{bottom:54px}
+.home .sheet{padding-top:0}
+.calm-card{position:relative;margin-top:-58px;border-radius:25px;padding:17px;overflow:hidden}
+.calm-card:before{content:"";position:absolute;width:145px;height:145px;border-radius:50%;right:-55px;top:-65px;background:radial-gradient(circle,rgba(85,185,199,.23),rgba(140,118,198,.10) 56%,transparent 70%)}
+.calm-head{position:relative;z-index:1;display:grid;grid-template-columns:52px 1fr;gap:12px;align-items:center}
+.calm-icon{width:52px;height:52px;border-radius:17px;display:grid;place-items:center;background:linear-gradient(145deg,#deeff3,#eee7f6);font-size:24px}
+.calm-head b{display:block;font:20px/1.1 Georgia,serif}.calm-head small{display:block;margin-top:4px;font-size:10px;color:#708793}
+.calm-card .primary{position:relative;z-index:1;width:100%;margin-top:13px}
+.section-head{display:flex;justify-content:space-between;align-items:flex-end;margin:22px 2px 10px}
+.section-head h3{margin:0;font:18px Georgia,serif}.section-head button{border:0;background:none;color:#668698;font-size:10px;font-weight:800;cursor:pointer}
+.daily-card{position:relative;height:132px;border-radius:23px;overflow:hidden;cursor:pointer;background:linear-gradient(145deg,#dceef2,#ebe7f5)}
+.daily-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:67% 42%;opacity:0;transition:opacity .35s}
+.daily-card.loaded img{opacity:1}
+.daily-card:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(29,79,103,.82),rgba(39,86,110,.43) 60%,rgba(255,255,255,.04))}
+.daily-copy{position:absolute;z-index:2;left:15px;right:72px;top:15px;color:#fff}.daily-copy .eyebrow{color:#dceff4}.daily-copy b{display:block;margin-top:6px;font:18px/1.15 Georgia,serif}.daily-copy small{display:block;margin-top:5px;font-size:9px;line-height:1.35;opacity:.9}
+.fav-preview{display:grid;grid-template-columns:46px 1fr auto;gap:11px;align-items:center;padding:13px 14px;border-radius:20px;cursor:pointer}
+.fav-bubble{width:46px;height:46px;border-radius:15px;display:grid;place-items:center;background:linear-gradient(145deg,#eee7f6,#dff0f2);font-size:20px}
+.fav-preview b{font:15px Georgia,serif}.fav-preview small{display:block;margin-top:3px;font-size:9px;color:#788c98;line-height:1.3}.fav-count{font-size:10px;font-weight:850;color:#755e9a}
+
+/* EXPLORE */
+.explore .brand-photo{height:250px}
+.explore .sheet{min-height:calc(100% - 220px)}
+.explore-intro{margin-top:5px}
+.explore-grid{display:grid;gap:12px;margin-top:18px}
+.explore-card{border:0;border-radius:24px;padding:17px;text-align:left;display:grid;grid-template-columns:58px 1fr 24px;align-items:center;gap:13px;cursor:pointer}
+.explore-icon{width:58px;height:58px;border-radius:19px;display:grid;place-items:center;font-size:26px;background:linear-gradient(145deg,#dceff3,#ece6f5)}
+.explore-card b{display:block;font:19px Georgia,serif}.explore-card small{display:block;margin-top:5px;font-size:10px;color:#738995;line-height:1.35}.chev{font-size:24px;color:#7a98a7}
+.surprise{width:100%;margin-top:12px}
+
+/* LIST / FAVORITES */
+.list .brand-photo,.favorites .brand-photo{height:195px}
+.list .sheet,.favorites .sheet{min-height:calc(100% - 165px);padding-bottom:95px}
+.search-wrap{position:relative;margin-top:14px}.search{width:100%;padding:11px 40px 11px 13px;border:1px solid var(--line);border-radius:16px;background:#fff;outline:none;color:var(--ink)}.search-mark{position:absolute;right:13px;top:10px;color:#85a0ad}
+.count{font-size:9px;color:#7a909c;margin:7px 2px 8px}
+.rows{display:grid;gap:8px}.row{display:grid;grid-template-columns:44px 1fr 36px;gap:10px;align-items:center;padding:10px;border-radius:19px;cursor:pointer}
+.row-icon{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(145deg,#dff0f3,#eee7f6);font-size:19px}
+.row b{display:block;font:14px/1.15 Georgia,serif}.row small{display:block;margin-top:4px;font-size:9px;color:#788c97}.heart{width:34px;height:34px;border:0;border-radius:12px;background:#f1f5f5;color:#8397a1;font-size:17px;cursor:pointer}.heart.on{background:#f1e8f6;color:#765d9d}
+.empty{padding:22px;border-radius:20px;text-align:center;font:14px/1.5 Georgia,serif;color:#69818e}
+
+/* DETAIL */
+.detail .brand-photo{height:235px}
+.detail .sheet{margin-top:-34px}
+.detail .h2{font-size:29px;margin-top:4px}
+.when{margin-top:8px;font-size:10px;line-height:1.45;color:#708691}.lead{font:17px/1.45 Georgia,serif;color:#315f77;margin:18px 0 14px}
+.steps{display:grid;gap:9px}.step{display:grid;grid-template-columns:26px 1fr;gap:9px;align-items:start;font-size:11.5px;line-height:1.45;color:#416a7f}.num{width:25px;height:25px;border-radius:50%;display:grid;place-items:center;background:#dfeef2;color:#2f738d;font-size:10px;font-weight:850}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin:15px 0}.tag{font-size:9px;padding:6px 9px;border-radius:999px;background:#edf4f6;color:#5e7b8b}
+.detail-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}.detail-actions .primary{grid-column:1/-1}
+.timer{display:none;text-align:center;padding:24px 0 4px}.timer.show{display:block}.timer-big{font:500 62px Georgia,serif}.timer-text{font:15px/1.45 Georgia,serif;color:#507184;margin:12px auto;max-width:280px}.progress{height:8px;border-radius:999px;background:#dce9ed;overflow:hidden;margin:20px 0}.progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,#55b9c7,#7e83c7)}.timer .soft{width:100%}
+
+/* BREATH */
+.breath{background:linear-gradient(150deg,#dceef2,#eee8f5)}
+.breath-bg{position:absolute;inset:0}.breath-bg img{width:100%;height:100%;object-fit:cover;object-position:43% center;opacity:0;transition:opacity .35s}.breath-bg.loaded img{opacity:1}
+.breath-bg:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(231,245,248,.14),rgba(237,241,247,.16) 55%,rgba(246,242,247,.70))}
+.breath-title{position:absolute;z-index:5;top:9.5%;left:12%;right:12%;text-align:center}.breath-title .h2{text-shadow:0 2px 12px #fff}.breath-title .muted{color:#456f84;text-shadow:0 1px 8px #fff}
+.leaf-space{position:absolute;z-index:5;left:8%;right:8%;top:19%;bottom:27%;overflow:hidden}
+.leaf{position:absolute;width:55px;height:82px;left:50%;bottom:10%;filter:drop-shadow(0 8px 11px rgba(35,78,98,.23));will-change:left,bottom,transform}.leaf svg{width:100%;height:100%}
+.breath-panel{position:absolute;z-index:7;left:8%;right:8%;bottom:6%;padding:13px 14px;border-radius:25px;text-align:center}
+.phase{font:18px Georgia,serif}.phase-count{font:500 38px Georgia,serif;margin-top:2px}.phase-small{font-size:9px;color:#718694}
+.ratios{display:flex;justify-content:center;gap:6px;margin:9px 0}.ratio{border:0;border-radius:999px;padding:6px 9px;background:#eef4f5;color:#668392;font-size:9px;font-weight:800;cursor:pointer}.ratio.active{background:#dceef2;color:#2f718b}
+.breath-controls{display:flex;justify-content:center;gap:8px}.round{width:44px;height:44px;border:0;border-radius:50%;background:#fff;color:#2c6e89;font-size:17px;box-shadow:0 8px 18px rgba(35,71,91,.12);cursor:pointer}
+
+/* DONE */
+.done{background:linear-gradient(150deg,#dceef2,#eee8f5)}
+.done-bg{position:absolute;inset:0}.done-bg img{width:100%;height:100%;object-fit:cover;object-position:42% center;opacity:0;transition:opacity .35s}.done-bg.loaded img{opacity:1}.done-bg:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(238,247,249,.05),rgba(246,242,247,.26) 48%,rgba(249,247,244,.96) 81%)}
+.done-card{position:absolute;z-index:6;left:8%;right:8%;bottom:8%;padding:22px 18px;border-radius:27px;text-align:center}.done-card .h2{font-size:32px}.done-card p{font:15px/1.45 Georgia,serif;color:#507083}.done-actions{display:grid;gap:8px;margin-top:14px}
+
+@media(max-width:560px){.shell{padding:0}.phone{height:100dvh;width:100vw;aspect-ratio:auto;border:0;border-radius:0}}
+</style>
+</head>
+<body>
+<div class="shell"><div class="phone">
+
+<section class="screen home active" data-screen="home">
+  <div class="scroll">
+    <div class="brand-photo visual"><img class="brand-img" alt=""><div class="brand-kicker">Prendre soin de son Hêtre</div><div class="brand-title"><h1>Les petits gestes<br>de mon Hêtre</h1><p>Quelques secondes pour revenir à toi.</p></div></div>
+    <div class="sheet">
+      <div class="calm-card glass">
+        <div class="calm-head"><div class="calm-icon">❧</div><div><b>Un retour au calme</b><small>Un geste court, tout de suite, sans chercher à bien faire.</small></div></div>
+        <button class="primary" id="calmBtn">Me proposer un geste</button>
+      </div>
+
+      <div class="section-head"><h3>Le geste du jour</h3><button id="dailyOpen">Ouvrir</button></div>
+      <div class="daily-card visual" id="dailyCard"><img class="brand-img" alt=""><div class="daily-copy"><div class="eyebrow">Aujourd’hui</div><b id="dailyTitle"></b><small id="dailyMeta"></small></div></div>
+
+      <div class="section-head"><h3>Mes favoris</h3><button data-go="favorites">Tout voir</button></div>
+      <div class="fav-preview glass" data-go="favorites"><div class="fav-bubble">♡</div><div><b>Retrouver mes gestes</b><small id="favPreview">Ajoute un cœur aux gestes que tu veux garder.</small></div><div class="fav-count" id="favCount">0</div></div>
+    </div>
+  </div>
+  <nav class="nav"><button class="active" data-go="home"><span>⌂</span>Accueil</button><button data-go="explore"><span>❧</span>Explorer</button><button data-go="favorites"><span>♡</span>Favoris</button></nav>
+</section>
+
+<section class="screen explore" data-screen="explore">
+  <div class="scroll">
+    <div class="brand-photo visual"><img class="brand-img" alt=""><div class="brand-kicker">Explorer</div><div class="brand-title"><h1>Choisis simplement<br>ton chemin</h1><p>Deux espaces. Rien de plus à chercher.</p></div></div>
+    <div class="sheet">
+      <div class="h2">Qu’as-tu envie d’essayer ?</div>
+      <div class="muted explore-intro">Tu peux parcourir la bibliothèque ou laisser l’application te proposer quelque chose.</div>
+      <div class="explore-grid">
+        <button class="explore-card glass" data-open="breath"><span class="explore-icon">≈</span><span><b>Respiration</b><small id="breathCount"></small></span><span class="chev">›</span></button>
+        <button class="explore-card glass" data-open="daily"><span class="explore-icon">❧</span><span><b>Gestes du quotidien</b><small id="dailyCount"></small></span><span class="chev">›</span></button>
+      </div>
+      <button class="soft surprise" id="surpriseBtn">✦ Surprends-moi</button>
+    </div>
+  </div>
+  <nav class="nav"><button data-go="home"><span>⌂</span>Accueil</button><button class="active" data-go="explore"><span>❧</span>Explorer</button><button data-go="favorites"><span>♡</span>Favoris</button></nav>
+</section>
+
+<section class="screen favorites" data-screen="favorites">
+  <div class="scroll">
+    <div class="brand-photo visual"><img class="brand-img" alt=""><div class="brand-kicker">Mes favoris</div><div class="brand-title"><h1>Ce que tu veux<br>garder près de toi</h1><p>Une bibliothèque qui devient vraiment la tienne.</p></div></div>
+    <div class="sheet">
+      <div class="h2">Mes favoris</div><div class="muted">Tous les gestes que tu as choisis de garder sont ici.</div>
+      <div class="count" id="favPageCount"></div>
+      <div class="rows" id="favRows"></div>
+    </div>
+  </div>
+  <nav class="nav"><button data-go="home"><span>⌂</span>Accueil</button><button data-go="explore"><span>❧</span>Explorer</button><button class="active" data-go="favorites"><span>♡</span>Favoris</button></nav>
+</section>
+
+<section class="screen list no-nav" data-screen="list">
+  <div class="scroll">
+    <div class="brand-photo visual"><img class="brand-img" alt=""></div>
+    <div class="topbar"><button class="icon-btn" data-go="explore">‹</button><button class="icon-btn" id="listRandom">✦</button></div>
+    <div class="sheet">
+      <div class="eyebrow" id="listEyebrow"></div><div class="h2" id="listTitle"></div><div class="muted" id="listIntro"></div>
+      <div class="search-wrap"><input class="search" id="searchBox" placeholder="Rechercher…"><span class="search-mark">⌕</span></div>
+      <div class="count" id="listCount"></div><div class="rows" id="listRows"></div>
+    </div>
+  </div>
+</section>
+
+<section class="screen detail no-nav" data-screen="detail">
+  <div class="scroll">
+    <div class="brand-photo visual"><img class="brand-img" alt=""></div>
+    <div class="topbar"><button class="icon-btn" id="detailBack">‹</button><button class="icon-btn" id="detailHeart">♡</button></div>
+    <div class="sheet">
+      <div id="instruction">
+        <div class="eyebrow" id="detailType"></div><div class="h2" id="detailTitle"></div><div class="when" id="detailWhen"></div><div class="lead" id="detailLead"></div>
+        <div class="steps" id="detailSteps"></div><div class="tags" id="detailTags"></div>
+        <div class="detail-actions"><button class="soft" id="anotherBtn">Un autre</button><button class="soft" id="detailFavBtn">♡ Favori</button><button class="primary" id="startBtn">Commencer</button></div>
+      </div>
+      <div class="timer" id="timer"><div class="eyebrow">Prends juste ce temps</div><div class="timer-big" id="timerBig"></div><div class="timer-text" id="timerText"></div><div class="progress"><i id="progress"></i></div><button class="soft" id="finishBtn">Terminer</button></div>
+    </div>
+  </div>
+</section>
+
+<section class="screen breath no-nav" data-screen="breath">
+  <div class="breath-bg visual"><img class="brand-img" alt=""></div>
+  <div class="topbar"><button class="icon-btn" id="breathBack">‹</button><button class="icon-btn" id="breathHeart">♡</button></div>
+  <div class="breath-title"><div class="h2">La feuille et le souffle</div><div class="muted">Elle flotte toujours avec le vent. Elle monte à l’inspiration et redescend à l’expiration.</div></div>
+  <div class="leaf-space"><div class="leaf" id="leaf"><svg viewBox="0 0 60 92"><defs><linearGradient id="leafG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#55c2cb"/><stop offset=".55" stop-color="#67a9d0"/><stop offset="1" stop-color="#8f6dc2"/></linearGradient></defs><path d="M30 4C10 11 3 35 8 57C12 76 23 86 30 89C42 80 52 63 52 43C52 22 42 8 30 4Z" fill="url(#leafG)" stroke="#2c7185" stroke-width="1.4"/><path d="M30 10V84M30 29L15 38M30 39L45 47M30 51L16 60M30 61L43 69" stroke="#2e7b8c" stroke-width="1.1" fill="none"/></svg></div></div>
+  <div class="breath-panel glass">
+    <div class="phase" id="phaseLabel">Inspire · la feuille monte</div><div class="phase-count" id="phaseCount">4</div><div class="phase-small">secondes</div>
+    <div class="ratios"><button class="ratio" data-ratio="3,5">3 / 5</button><button class="ratio active" data-ratio="4,6">4 / 6</button><button class="ratio" data-ratio="5,7">5 / 7</button></div>
+    <div class="breath-controls"><button class="round" id="pauseBtn">Ⅱ</button><button class="round" id="breathDone">✓</button></div>
+  </div>
+</section>
+
+<section class="screen done no-nav" data-screen="done">
+  <div class="done-bg visual"><img class="brand-img" alt=""></div>
+  <div class="done-card glass"><div class="h2">C’est fait 🌿</div><p>Tu viens simplement d’essayer un geste.<br>Garde ce qui t’est utile, laisse le reste.</p><div class="done-actions"><button class="soft" id="doneFav">♡ Ajouter aux favoris</button><button class="primary" id="doneAnother">Essayer un autre geste</button><button class="soft" data-go="home">Retour à l’accueil</button></div></div>
+</section>
+
+</div></div>
+
+<script>
+const EXERCISES=[
+{id:"tongue",title:"Laisse ta langue flotter",cat:"discreet",icon:"❧",duration:10,when:"Quand les pensées tournent ou que la mâchoire reste serrée.",lead:"Laisse ta langue flotter au milieu de la bouche, sans la plaquer contre le palais ni la crisper.",steps:["Laisse un petit espace entre tes dents.","Relâche la langue sans chercher une position parfaite.","Observe simplement ce que cela change pendant quelques secondes."],tags:["Invisible","Partout"]},
+{id:"next-thought",title:"Quelle sera ma prochaine pensée ?",cat:"head",icon:"◌",duration:20,when:"Quand ton esprit tourne en boucle.",lead:"Pose-toi seulement cette question : « Quelle sera ma prochaine pensée ? »",steps:["Ne cherche pas la réponse.","Attends et observe ce qui arrive.","Puis reviens à ce que tu faisais."],tags:["Invisible","Pensées"]},
+{id:"teeth",title:"Décolle tes dents",cat:"discreet",icon:"⌁",duration:10,when:"Quand tu remarques que tu serres la mâchoire.",lead:"Crée un tout petit espace entre tes dents.",steps:["Les lèvres peuvent rester comme elles sont.","Laisse la mâchoire devenir légèrement plus lourde."],tags:["Invisible","Partout"]},
+{id:"relax5",title:"Relâche seulement 5 %",cat:"body",icon:"↓",duration:15,when:"Quand « se détendre » paraît trop difficile.",lead:"Ne cherche pas à tout relâcher. Seulement 5 %.",steps:["Choisis la mâchoire, les épaules ou les mains.","Relâche juste un peu. C’est suffisant."],tags:["Corps","Discret"]},
+{id:"bigtoe",title:"Appuie le gros orteil",cat:"discreet",icon:"◦",duration:15,when:"Au travail, dans les transports ou en réunion.",lead:"Dans ta chaussure, pousse doucement ton gros orteil vers la semelle.",steps:["Garde la pression quelques secondes.","Relâche complètement.","Recommence une fois."],tags:["Invisible","Ancrage"]},
+{id:"three-feet",title:"Trois points dans ton pied",cat:"discreet",icon:"⋯",duration:20,when:"Quand tu veux revenir au corps sans que cela se voie.",lead:"Retrouve trois points de contact dans un seul pied.",steps:["Le gros orteil.","Le petit orteil.","Le talon."],tags:["Invisible","Ancrage"]},
+{id:"pressure-min",title:"La pression minimale",cat:"discreet",icon:"⌁",duration:15,when:"Quand tu tiens un téléphone, un stylo ou une souris.",lead:"Diminue la pression jusqu’au minimum nécessaire.",steps:["Observe d’abord combien tu serres.","Relâche progressivement sans lâcher l’objet."],tags:["Invisible","Corps"]},
+{id:"thumb",title:"Pouce contre index",cat:"discreet",icon:"•",duration:20,when:"Quand tu as besoin d’un point d’attention minuscule.",lead:"Pose doucement ton pouce contre ton index.",steps:["Ne presse presque pas.","Sens la chaleur, la texture et la pression entre les deux doigts."],tags:["Invisible","Sensoriel"]},
+{id:"texture",title:"Une seule texture",cat:"discreet",icon:"≈",duration:20,when:"Quand ton esprit part dans tous les sens.",lead:"Choisis une texture que tu peux sentir sans regarder.",steps:["Ton vêtement, ton téléphone, un accoudoir…","Décris-la mentalement avec trois mots."],tags:["Invisible","Sensoriel"]},
+{id:"cold",title:"Trouve le point le plus frais",cat:"body",icon:"❄",duration:20,when:"Quand tu veux déplacer ton attention vers une sensation réelle.",lead:"Cherche l’endroit où ton corps perçoit le plus de fraîcheur.",steps:["Ne change rien.","Essaie seulement de préciser l’endroit."],tags:["Corps","Sensoriel"]},
+{id:"warm",title:"Trouve le point le plus chaud",cat:"body",icon:"☼",duration:20,when:"Quand tu veux revenir au présent.",lead:"Cherche l’endroit où ton corps perçoit le plus de chaleur.",steps:["Ne force rien.","Reste quelques secondes avec cette sensation."],tags:["Corps","Sensoriel"]},
+{id:"far-sound",title:"Le son le plus loin",cat:"head",icon:"◖",duration:20,when:"Quand les pensées deviennent trop bruyantes.",lead:"Cherche uniquement le son qui semble venir de plus loin.",steps:["Tu n’as pas besoin de l’identifier.","Écoute seulement sa distance."],tags:["Pensées","Invisible"]},
+{id:"near-sound",title:"Le son le plus proche",cat:"head",icon:"◗",duration:20,when:"Quand tu veux ramener ton attention ici.",lead:"Trouve le son le plus proche de toi.",steps:["Un vêtement, un souffle, un clavier…","Reste avec ce son quelques secondes."],tags:["Pensées","Invisible"]},
+{id:"peripheral",title:"Élargis ton regard",cat:"head",icon:"◎",duration:20,when:"Quand ton regard se fige sur un écran ou un problème.",lead:"Regarde devant toi et remarque aussi ce qui existe sur les côtés.",steps:["Sans tourner la tête.","Laisse simplement ton champ visuel devenir plus large."],tags:["Pensées","Discret"]},
+{id:"three-lines",title:"Trouve trois lignes",cat:"head",icon:"≡",duration:15,when:"Quand tu veux occuper ton attention quelques secondes.",lead:"Repère trois lignes droites autour de toi.",steps:["Une fenêtre, une table, un mur…","Pas besoin de bouger la tête."],tags:["Pensées","Invisible"]},
+{id:"same-color",title:"Trois choses de la même couleur",cat:"head",icon:"◍",duration:20,when:"Quand tu rumines ou attends quelque part.",lead:"Choisis une couleur puis trouve trois choses qui la portent.",steps:["Fais-le seulement avec le regard.","Puis reviens à ce que tu faisais."],tags:["Pensées","Discret"]},
+{id:"angles",title:"Compte les angles",cat:"head",icon:"⌑",duration:20,when:"Quand tu as besoin d’une tâche mentale très simple.",lead:"Choisis un objet devant toi et compte ses angles ou ses bords.",steps:["Va jusqu’au bout.","Puis arrête."],tags:["Pensées","Invisible"]},
+{id:"spell-name",title:"Ton prénom à l’envers",cat:"head",icon:"↶",duration:20,when:"Quand ton esprit a besoin d’une autre tâche.",lead:"Épelle mentalement ton prénom à l’envers.",steps:["Lentement.","Si tu te trompes, recommence simplement."],tags:["Pensées","Invisible"]},
+{id:"minus3",title:"37, 34, 31…",cat:"head",icon:"−3",duration:30,when:"Quand les pensées tournent trop vite.",lead:"Pars de 37 et enlève 3 à chaque fois.",steps:["37, 34, 31…","Continue tranquillement jusqu’à la fin du temps."],tags:["Pensées","Invisible"]},
+{id:"word-back",title:"Un mot à l’envers",cat:"head",icon:"↺",duration:20,when:"Quand tu veux déplacer ton attention très rapidement.",lead:"Choisis un mot simple autour de toi et épelle-le à l’envers.",steps:["Un objet, un prénom, une couleur.","Pas besoin d’aller vite."],tags:["Pensées","Invisible"]},
+{id:"next-action",title:"Une seule prochaine action",cat:"daily",icon:"→",duration:15,when:"Quand tout semble devoir être fait en même temps.",lead:"Demande-toi : « Quelle est la toute prochaine chose à faire ? »",steps:["Pas les dix suivantes.","Seulement la prochaine."],tags:["Quotidien","Invisible"]},
+{id:"not-now",title:"Pas maintenant",cat:"head",icon:"‖",duration:10,when:"Quand une pensée réclame une réponse immédiate.",lead:"Dis-toi : « Je peux y revenir. Mais pas pendant ces dix secondes. »",steps:["Ne lutte pas contre la pensée.","Accorde-toi seulement dix secondes."],tags:["Pensées","Invisible"]},
+{id:"notice-thought",title:"Je remarque que…",cat:"head",icon:"☁",duration:20,when:"Quand une pensée ressemble à une certitude.",lead:"Ajoute simplement : « Je remarque que j’ai la pensée que… »",steps:["Garde la même pensée derrière.","Observe si cela crée un peu de distance."],tags:["Pensées","Invisible"]},
+{id:"title-thought",title:"Donne-lui un titre",cat:"head",icon:"▱",duration:15,when:"Quand la même pensée revient encore.",lead:"Donne un petit titre à cette pensée.",steps:["Par exemple : « la pensée du pire » ou « la pensée du contrôle ».","Puis retourne à ce que tu faisais."],tags:["Pensées","Invisible"]},
+{id:"still",title:"Trouve ce qui ne bouge pas",cat:"head",icon:"▪",duration:15,when:"Quand tout paraît agité.",lead:"Repère trois choses complètement immobiles autour de toi.",steps:["Regarde-les une seconde chacune."],tags:["Pensées","Discret"]},
+{id:"moving",title:"Trouve ce qui bouge",cat:"head",icon:"∿",duration:15,when:"Quand ton attention reste coincée à l’intérieur.",lead:"Repère trois petits mouvements autour de toi.",steps:["Une lumière, un vêtement, une branche, une personne…"],tags:["Pensées","Discret"]},
+{id:"back-contact",title:"Le contact du dos",cat:"body",icon:"⌒",duration:20,when:"Assis, quand tu veux revenir à un appui concret.",lead:"Sens précisément où ton dos touche la chaise.",steps:["Ne change pas de position.","Observe les zones qui touchent et celles qui ne touchent pas."],tags:["Corps","Invisible"]},
+{id:"leg-weight",title:"Le poids d’une jambe",cat:"body",icon:"◒",duration:20,when:"Debout ou assis, quand tu veux revenir au corps.",lead:"Quelle jambe porte un peu plus de poids maintenant ?",steps:["Ne corrige rien tout de suite.","Observe seulement."],tags:["Corps","Invisible"]},
+{id:"silent-exhale",title:"Expire sans que ça se voie",cat:"breath",icon:"≈",duration:30,when:"Avant de répondre, pendant une réunion ou dans les transports.",lead:"Inspire normalement. Laisse seulement l’expiration devenir un peu plus longue.",steps:["Aucune grande inspiration.","Fais-le deux ou trois fois sans forcer."],tags:["Respiration","Invisible"]},
+{id:"double-sigh",title:"Le double soupir",cat:"breath",icon:"≋",duration:20,when:"Quand tu veux relâcher rapidement une tension.",lead:"Deux petites inspirations par le nez, puis une longue expiration douce.",steps:["Inspire par le nez.","Ajoute une toute petite seconde inspiration.","Laisse l’air repartir lentement.","Recommence une ou deux fois seulement."],tags:["Respiration","Court"]},
+{id:"shoulders-stop",title:"Arrête de tenir tes épaules",cat:"body",icon:"⌄",duration:15,when:"Quand tes épaules sont légèrement remontées.",lead:"Ne les fais pas tomber d’un coup. Arrête simplement de les tenir.",steps:["Laisse leur poids revenir naturellement."],tags:["Corps","Invisible"]},
+{id:"belly",title:"Le ventre n’a rien à tenir",cat:"body",icon:"◡",duration:15,when:"Quand tu te rends compte que tu rentres le ventre.",lead:"Laisse ton ventre revenir à une position naturelle.",steps:["Sans pousser.","Juste arrêter de le retenir."],tags:["Corps","Discret"]},
+{id:"one-muscle",title:"Un seul muscle",cat:"body",icon:"•",duration:20,when:"Quand tout le corps paraît tendu.",lead:"Choisis une seule petite zone à relâcher.",steps:["Sourcils, langue, mâchoire ou doigts.","Ne t’occupe pas du reste."],tags:["Corps","Discret"]},
+{id:"silence",title:"L’espace entre les sons",cat:"head",icon:"⋮",duration:20,when:"Quand il y a beaucoup de bruit autour ou dans ta tête.",lead:"Au lieu d’écouter les sons, cherche les minuscules espaces entre eux.",steps:["Même s’ils ne durent presque rien."],tags:["Pensées","Invisible"]},
+{id:"before-answer",title:"Avant de répondre",cat:"daily",icon:"…",duration:10,when:"Avant une réponse importante ou quand tu sens que ça monte.",lead:"Langue relâchée. Dents décollées. Une expiration.",steps:["Puis seulement, réponds."],tags:["Quotidien","Invisible"]},
+{id:"shoe-boundary",title:"Où commence ton pied ?",cat:"discreet",icon:"⌞",duration:20,when:"Quand tu veux te recentrer sans bouger.",lead:"Essaie de sentir la limite exacte entre ton pied et ta chaussure.",steps:["Repère trois zones différentes."],tags:["Invisible","Sensoriel"]},
+{id:"small-detail",title:"Le plus petit détail",cat:"head",icon:"·",duration:20,when:"Quand tu as besoin de sortir d’une boucle.",lead:"Sans tourner la tête, trouve le plus petit détail que tu peux voir.",steps:["Observe sa forme ou sa texture quelques secondes."],tags:["Pensées","Discret"]},
+{id:"slow-movement",title:"Ralentis de moitié",cat:"body",icon:"½",duration:20,when:"Quand ta jambe bouge ou que tes doigts tapotent.",lead:"Ne cherche pas à arrêter. Ralentis simplement le mouvement de moitié.",steps:["Puis encore un peu, si tu veux."],tags:["Corps","Discret"]},
+{id:"clench-release",title:"Serre… puis lâche",cat:"body",icon:"✦",duration:25,when:"Quand tu sens beaucoup de tension physique.",lead:"Serre les deux poings pendant quelques secondes, puis lâche tout.",steps:["Observe surtout le contraste après le relâchement.","Refais une fois si c’est confortable."],tags:["Corps","Relâchement"]},
+{id:"shoulder-drop",title:"Épaules hautes… et tombe",cat:"body",icon:"⇣",duration:25,when:"Quand la nuque et les épaules sont chargées.",lead:"Monte volontairement les épaules vers les oreilles.",steps:["Garde quelques secondes.","Puis laisse-les retomber sans les contrôler.","Observe le relâchement."],tags:["Corps","Relâchement"]},
+{id:"feet-press",title:"Appuie tes pieds",cat:"body",icon:"⌄",duration:30,when:"Quand tu te sens dispersé.",lead:"Appuie doucement les deux pieds dans le sol.",steps:["Garde quelques secondes.","Relâche.","Recommence deux fois."],tags:["Corps","Ancrage"]},
+{id:"open-hands",title:"Ouvre les mains",cat:"body",icon:"✋",duration:20,when:"Quand tes doigts sont crispés.",lead:"Écarte les doigts, puis relâche-les complètement.",steps:["Fais-le lentement deux fois."],tags:["Corps","Relâchement"]},
+{id:"hand-on-self",title:"Une main sur toi",cat:"body",icon:"♡",duration:30,when:"Quand tu as besoin d’un appui simple.",lead:"Pose une main sur la poitrine, le ventre ou ton bras.",steps:["Ne cherche pas un effet particulier.","Reste simplement avec la chaleur et le contact."],tags:["Corps","Apaisement"]},
+{id:"321",title:"3 · 2 · 1",cat:"head",icon:"321",duration:45,when:"Quand tu veux revenir rapidement à ce qui t’entoure.",lead:"Repère 3 choses que tu vois, 2 sons, puis 1 sensation corporelle.",steps:["Pas besoin de les nommer à voix haute.","Prends juste le temps de les remarquer."],tags:["Pensées","Ancrage"]},
+{id:"far-look",title:"Regarde au loin",cat:"daily",icon:"↗",duration:30,when:"Après beaucoup d’écran ou quand ton regard reste fixé.",lead:"Laisse ton regard aller vers le point le plus éloigné que tu peux voir.",steps:["Puis reviens à un objet proche.","Alterne deux ou trois fois."],tags:["Quotidien","Regard"]},
+{id:"shake-stop",title:"Secoue puis arrête",cat:"energy",icon:"≈",duration:20,when:"Quand tu as besoin de remettre un peu de mouvement.",lead:"Secoue doucement les mains pendant quelques secondes.",steps:["Puis arrête net.","Observe les sensations qui restent."],tags:["Énergie","Mouvement"]},
+{id:"ten-steps",title:"Dix pas",cat:"energy",icon:"↟",duration:30,when:"Quand rester immobile entretient la boucle.",lead:"Fais seulement dix pas.",steps:["Compte-les.","Sens chaque contact du pied avec le sol."],tags:["Énergie","Mouvement"]},
+{id:"really-look",title:"Regarde vraiment",cat:"head",icon:"◉",duration:30,when:"Quand ton attention est absorbée par une pensée.",lead:"Choisis un objet banal et trouve cinq détails que tu n’avais pas remarqués.",steps:["Forme, texture, reflet, ombre, petite imperfection…"],tags:["Pensées","Regard"]},
+{id:"leaf-breath",title:"La feuille et le souffle",cat:"breath",icon:"🍃",duration:60,when:"Quand tu veux une respiration guidée sans compter.",lead:"Suis la feuille de Hêtre : elle monte à l’inspiration et redescend à l’expiration, tout en flottant de gauche à droite.",steps:["À l’inspiration, suis sa montée.","À l’expiration, suis sa descente.","Le balancement continue comme une feuille portée par le vent."],tags:["Respiration","Guidé"],leaf:true},
+{id:"mini-pmr",title:"Relâchement express",cat:"body",icon:"✧",duration:120,when:"Quand tu peux t’accorder deux minutes.",lead:"Contracte puis relâche quelques zones, une par une.",steps:["Poings : serre puis relâche.","Épaules : monte-les puis laisse-les tomber.","Mâchoire : serre très légèrement puis relâche.","Pieds : appuie puis relâche."],tags:["Corps","2 min"]},
+{id:"before-interaction",title:"Avant d’entrer",cat:"daily",icon:"↦",duration:45,when:"Avant une réunion, un rendez-vous ou une conversation difficile.",lead:"Reviens à une seule chose que tu peux choisir maintenant.",steps:["Desserre la langue et la mâchoire.","Sens les deux pieds.","Demande-toi : « Comment ai-je envie d’entrer dans ce moment ? »"],tags:["Quotidien","Discret"]},
+{id:"sleep-loop",title:"Quand le cerveau recommence",cat:"sleep",icon:"☾",duration:60,when:"Au lit, lorsque les pensées reviennent en boucle.",lead:"Ne cherche pas à faire le vide. Donne à ton attention une tâche très simple.",steps:["Demande-toi : « Quelle sera ma prochaine pensée ? »","Écoute ensuite le son le plus lointain.","Enfin, sens le poids de ta tête sur l’oreiller."],tags:["Sommeil","Pensées"]},
+{id:"eyebrows",title:"Desserre les sourcils",cat:"discreet",icon:"⌢",duration:10,when:"Quand ton visage reste contracté sans que tu t’en rendes compte.",lead:"Laisse juste l’espace entre les sourcils devenir plus large.",steps:["Ne force pas.","Observe si le front suit."],tags:["Invisible","Visage"]},
+{id:"palms",title:"Sens la paume de tes mains",cat:"discreet",icon:"✋",duration:20,when:"Quand tu veux revenir à une sensation très simple.",lead:"Porte ton attention uniquement au centre de tes paumes.",steps:["Chaleur, picotement, contact…","Aucune sensation particulière n’est nécessaire."],tags:["Invisible","Sensoriel"]},
+{id:"heels",title:"Pousse les talons",cat:"discreet",icon:"⌄",duration:15,when:"Assis, quand tu veux un appui invisible.",lead:"Pousse doucement tes talons dans le sol.",steps:["Garde quelques secondes.","Relâche lentement."],tags:["Invisible","Ancrage"]},
+{id:"jaw-weight",title:"Laisse peser ta mâchoire",cat:"body",icon:"◡",duration:15,when:"Quand tu sens ton visage tendu.",lead:"Laisse la mâchoire peser légèrement vers le bas.",steps:["Sans ouvrir grand la bouche.","Sans chercher à l’étirer."],tags:["Corps","Discret"]},
+{id:"finger-count",title:"Compte tes doigts au toucher",cat:"discreet",icon:"✋",duration:20,when:"Quand tu veux occuper discrètement ton attention.",lead:"Avec le pouce, touche successivement chaque doigt.",steps:["Index, majeur, annulaire, auriculaire.","Puis reviens dans l’autre sens."],tags:["Invisible","Sensoriel"]},
+{id:"name-five",title:"Nomme cinq objets",cat:"head",icon:"5",duration:30,when:"Quand tu veux revenir à l’environnement.",lead:"Dans ta tête, nomme cinq objets que tu vois autour de toi.",steps:["Pas besoin de les décrire.","Un mot par objet suffit."],tags:["Pensées","Discret"]},
+{id:"one-sound",title:"Un son, seulement",cat:"head",icon:"♪",duration:20,when:"Quand tout se mélange.",lead:"Choisis un seul son et décide de ne suivre que lui quelques secondes.",steps:["Laisse les autres sons rester en arrière-plan."],tags:["Pensées","Invisible"]},
+{id:"touch-chair",title:"Le bord de la chaise",cat:"discreet",icon:"⌑",duration:20,when:"Assis, quand tu veux revenir au présent.",lead:"Sens précisément l’endroit où tes cuisses touchent la chaise.",steps:["Observe la pression.","Puis la température."],tags:["Invisible","Sensoriel"]},
+{id:"slow-blink",title:"Trois clignements lents",cat:"daily",icon:"◉",duration:10,when:"Quand ton regard reste accroché à l’écran.",lead:"Cligne des yeux trois fois, lentement.",steps:["À chaque fois, laisse les paupières se fermer sans les serrer."],tags:["Quotidien","Discret"]},
+{id:"sip",title:"Une gorgée en conscience",cat:"daily",icon:"◡",duration:20,when:"Quand tu as de l’eau à portée de main.",lead:"Prends une seule gorgée en suivant toutes les sensations.",steps:["Température.","Contact dans la bouche.","Déglutition."],tags:["Quotidien","Sensoriel"]},
+{id:"stand-tall",title:"Grandis-toi de 2 cm",cat:"energy",icon:"↑",duration:15,when:"Quand ton corps s’affaisse.",lead:"Imagine simplement que le sommet de ta tête monte de deux centimètres.",steps:["Sans raidir les épaules.","Puis relâche."],tags:["Énergie","Posture"]},
+{id:"soft-eyes",title:"Adoucis ton regard",cat:"daily",icon:"◉",duration:15,when:"Quand tes yeux restent fixés ou crispés.",lead:"Sans fermer les yeux, laisse ton regard devenir moins précis.",steps:["Ne cherche plus un point unique.","Laisse l’ensemble du champ visuel être présent."],tags:["Quotidien","Invisible"]},
+{id:"toe-release",title:"Desserre tes orteils",cat:"daily",icon:"⌄",duration:15,when:"Quand tu te rends compte que tes pieds sont crispés.",lead:"Laisse les orteils cesser d’agripper l’intérieur de la chaussure.",steps:["Ne bouge presque pas.","Observe juste le relâchement."],tags:["Quotidien","Invisible"]},
+{id:"feet-wide",title:"Élargis tes pieds dans tes chaussures",cat:"daily",icon:"↔",duration:20,when:"Debout ou assis, quand tu veux retrouver un appui.",lead:"Imagine que tes pieds prennent un peu plus de place dans tes chaussures.",steps:["Élargis doucement les orteils.","Puis laisse-les se poser."],tags:["Quotidien","Invisible"]},
+{id:"thigh-press",title:"Pousse tes mains sur tes cuisses",cat:"daily",icon:"⇣",duration:15,when:"Assis, quand tu veux un geste discret et physique.",lead:"Pose les mains sur les cuisses et pousse doucement pendant quelques secondes.",steps:["Relâche complètement.","Observe le contraste."],tags:["Quotidien","Discret"]},
+{id:"wall-push",title:"Pousse le mur",cat:"daily",icon:"▯",duration:20,when:"Quand tu peux t’isoler quelques secondes.",lead:"Pose les deux mains contre un mur et pousse doucement.",steps:["Garde 5 secondes.","Relâche et sens les bras."],tags:["Quotidien","Corps"]},
+{id:"rub-stop",title:"Frotte tes mains… puis arrête",cat:"daily",icon:"✋",duration:20,when:"Quand tu veux créer une sensation nette dans les mains.",lead:"Frotte doucement tes paumes l’une contre l’autre.",steps:["Arrête net.","Observe la chaleur et les picotements."],tags:["Quotidien","Sensoriel"]},
+{id:"clothes-contact",title:"Le contact de ton vêtement",cat:"daily",icon:"⌁",duration:20,when:"Quand tu veux revenir au présent sans rien changer.",lead:"Choisis une zone où ton vêtement touche ta peau.",steps:["Épaule, manche, ceinture…","Observe pression, chaleur et texture."],tags:["Quotidien","Invisible"]},
+{id:"air-skin",title:"L’air sur ta peau",cat:"daily",icon:"≈",duration:20,when:"Quand tu peux sentir un courant d’air, même léger.",lead:"Cherche l’endroit où l’air touche le plus clairement ta peau.",steps:["Visage, mains, cou…","Reste avec cette sensation."],tags:["Quotidien","Sensoriel"]},
+{id:"three-circles",title:"Trouve trois cercles",cat:"daily",icon:"○",duration:20,when:"Quand tu veux occuper rapidement ton regard.",lead:"Repère trois formes rondes autour de toi.",steps:["Petites ou grandes.","Puis reviens à ce que tu faisais."],tags:["Quotidien","Discret"]},
+{id:"trace-object",title:"Suis le contour d’un objet",cat:"daily",icon:"□",duration:20,when:"Quand ton attention a besoin d’un chemin simple.",lead:"Avec les yeux seulement, suis lentement le contour d’un objet.",steps:["Va jusqu’au point de départ.","Pas besoin de bouger la tête."],tags:["Quotidien","Invisible"]},
+{id:"three-materials",title:"Trois matières",cat:"daily",icon:"⋮",duration:25,when:"Quand tu veux revenir à ce qui t’entoure.",lead:"Trouve trois matières différentes autour de toi.",steps:["Bois, tissu, métal, verre…","Regarde seulement leurs différences."],tags:["Quotidien","Sensoriel"]},
+{id:"three-shadows",title:"Trois ombres",cat:"daily",icon:"◐",duration:20,when:"Quand tu as besoin d’un petit détour visuel.",lead:"Trouve trois ombres différentes autour de toi.",steps:["Observe leur forme.","Puis leur intensité."],tags:["Quotidien","Discret"]},
+{id:"sound-start-end",title:"Écoute un son jusqu’au bout",cat:"daily",icon:"♪",duration:25,when:"Quand tu veux sortir d’un flot de pensées.",lead:"Choisis un son et suis-le depuis le moment où tu le remarques jusqu’à ce qu’il disparaisse.",steps:["Ne cherche pas à le nommer.","Suis juste sa durée."],tags:["Quotidien","Invisible"]},
+{id:"smell-one",title:"Une seule odeur",cat:"daily",icon:"≈",duration:20,when:"Quand une odeur est présente autour de toi.",lead:"Choisis une seule odeur et décris-la mentalement.",steps:["Douce, sèche, fraîche, connue…","Un ou deux mots suffisent."],tags:["Quotidien","Sensoriel"]},
+{id:"left-right-tap",title:"Gauche · droite",cat:"daily",icon:"↔",duration:30,when:"Assis, quand tu peux bouger très légèrement les mains.",lead:"Tapote doucement une cuisse puis l’autre, en alternant.",steps:["Gauche, droite, gauche, droite.","Garde un rythme confortable."],tags:["Quotidien","Discret"]},
+{id:"neck-turn",title:"Regarde à gauche, puis à droite",cat:"daily",icon:"↔",duration:25,when:"Quand tu peux bouger le cou sans gêne.",lead:"Tourne doucement la tête vers la gauche, puis vers la droite.",steps:["Sans forcer l’amplitude.","Observe trois choses nouvelles de chaque côté."],tags:["Quotidien","Orientation"]},
+{id:"roll-shoulders",title:"Deux cercles d’épaules",cat:"daily",icon:"↻",duration:20,when:"Quand les épaules sont chargées.",lead:"Fais deux cercles d’épaules lents vers l’arrière.",steps:["Puis laisse-les revenir naturellement."],tags:["Quotidien","Corps"]},
+{id:"open-close-hand",title:"Ouvre · ferme · relâche",cat:"daily",icon:"✋",duration:20,when:"Quand tes mains restent tendues.",lead:"Ouvre complètement les doigts, ferme doucement la main, puis relâche.",steps:["Fais-le deux fois lentement."],tags:["Quotidien","Corps"]},
+{id:"count20",title:"20 vers 1",cat:"daily",icon:"20",duration:30,when:"Quand tu veux donner une tâche simple à ton attention.",lead:"Compte mentalement de 20 jusqu’à 1.",steps:["Un nombre à la fois.","Recommence si tu perds le fil, sans importance."],tags:["Quotidien","Pensées"]},
+{id:"months-back",title:"Les mois à l’envers",cat:"daily",icon:"↶",duration:35,when:"Quand tu veux déplacer ton attention vers une tâche mentale.",lead:"Récite mentalement les mois de l’année à l’envers.",steps:["Décembre, novembre, octobre…","Va tranquillement."],tags:["Quotidien","Pensées"]},
+{id:"letters-skip",title:"Une lettre sur deux",cat:"daily",icon:"A C",duration:30,when:"Quand tu veux mobiliser brièvement ta concentration.",lead:"Récite l’alphabet en sautant une lettre à chaque fois.",steps:["A, C, E, G…","Pas besoin d’aller jusqu’au bout."],tags:["Quotidien","Pensées"]},
+{id:"name-action",title:"Nomme ce que tu fais",cat:"daily",icon:"•",duration:15,when:"Quand tu te sens emporté par tes pensées.",lead:"Dis mentalement une phrase très simple sur ce que tu fais maintenant.",steps:["« Je marche. »","« Je tiens mon téléphone. »","« Je suis assis. »"],tags:["Quotidien","Invisible"]},
+{id:"three-control",title:"Trois choses que tu peux choisir maintenant",cat:"daily",icon:"3",duration:30,when:"Quand trop de choses semblent hors de contrôle.",lead:"Trouve trois choses minuscules que tu peux choisir maintenant.",steps:["Ta position.","Ta prochaine action.","Où poser ton regard."],tags:["Quotidien","Pensées"]},
+{id:"one-minute-object",title:"Un objet pendant 30 secondes",cat:"daily",icon:"◉",duration:30,when:"Quand tu veux donner une seule cible à ton attention.",lead:"Choisis un objet banal et reste avec lui pendant 30 secondes.",steps:["Regarde ses détails.","Chaque fois que l’esprit part, reviens à l’objet."],tags:["Quotidien","Attention"]},
+{id:"slow-sip",title:"Une gorgée très lente",cat:"daily",icon:"◡",duration:30,when:"Quand tu as une boisson à portée de main.",lead:"Prends une gorgée plus lentement que d’habitude.",steps:["Observe la température.","Puis le passage dans la bouche et la gorge."],tags:["Quotidien","Sensoriel"]},
+{id:"feet-alternate",title:"Un pied puis l’autre",cat:"daily",icon:"⇆",duration:20,when:"Debout ou assis.",lead:"Mets un peu plus de poids sur un pied, puis sur l’autre.",steps:["Très légèrement.","Observe la différence entre les deux côtés."],tags:["Quotidien","Corps"]},
+{id:"tiny-stretch",title:"Étire seulement les doigts",cat:"daily",icon:"✋",duration:20,when:"Quand tu ne peux pas faire un grand étirement.",lead:"Étire doucement les doigts vers l’avant.",steps:["Garde 3 secondes.","Puis relâche complètement."],tags:["Quotidien","Corps"]},
+{id:"soft-face",title:"Relâche trois points du visage",cat:"daily",icon:"◡",duration:20,when:"Quand le visage reste tendu.",lead:"Relâche successivement les sourcils, la langue puis la mâchoire.",steps:["Un point après l’autre.","Pas besoin de détendre tout le visage."],tags:["Quotidien","Discret"]},
+{id:"listen-left-right",title:"Un son à gauche, un son à droite",cat:"daily",icon:"↔",duration:25,when:"Quand tu veux élargir ton attention.",lead:"Trouve un son plutôt à gauche, puis un autre plutôt à droite.",steps:["Alterne deux ou trois fois."],tags:["Quotidien","Invisible"]},
+{id:"breath-4-6",title:"4 secondes · 6 secondes",cat:"breath",icon:"≈",duration:60,when:"Quand tu veux une respiration très simple.",lead:"Inspire doucement pendant 4 secondes, puis expire pendant 6 secondes.",steps:["Ne remplis pas les poumons au maximum.","Reste dans une amplitude confortable."],tags:["Respiration","1 min"]},
+{id:"breath-3-5",title:"3 secondes · 5 secondes",cat:"breath",icon:"≈",duration:60,when:"Quand 4/6 semble trop long.",lead:"Inspire 3 secondes, puis expire 5 secondes.",steps:["Garde le souffle doux.","Arrête si ce rythme ne te convient pas."],tags:["Respiration","1 min"]},
+{id:"equal-breath",title:"Même durée",cat:"breath",icon:"=",duration:60,when:"Quand tu veux simplement ralentir le rythme.",lead:"Inspire et expire sur la même durée confortable.",steps:["Par exemple 4 secondes puis 4 secondes.","Ajuste si nécessaire."],tags:["Respiration","1 min"]},
+{id:"count-breaths",title:"Compte dix respirations",cat:"breath",icon:"10",duration:90,when:"Quand tu veux rester avec un repère très simple.",lead:"Compte chaque expiration de 1 à 10.",steps:["Puis recommence à 1 si tu veux.","Si tu perds le compte, reprends simplement."],tags:["Respiration","1–2 min"]},
+{id:"hand-breath",title:"Une main qui suit le souffle",cat:"breath",icon:"✋",duration:60,when:"Quand tu peux poser une main sur le ventre ou les côtes.",lead:"Laisse ta main suivre le mouvement naturel de ta respiration.",steps:["Ne pousse pas le ventre.","Observe seulement le mouvement sous la main."],tags:["Respiration","Corps"]},
+{id:"finger-breath",title:"Respire le long de tes doigts",cat:"breath",icon:"✋",duration:60,when:"Quand tu veux un guide visuel et tactile.",lead:"Avec un doigt, suis le contour de l’autre main.",steps:["Monte le long d’un doigt en inspirant.","Redescends en expirant.","Continue à ton rythme."],tags:["Respiration","Guidé"]},
+{id:"humming-exhale",title:"Expire en fredonnant",cat:"breath",icon:"♪",duration:45,when:"Quand tu peux faire un petit son.",lead:"Inspire normalement puis expire avec un léger « mmm ».",steps:["Le son reste doux.","Recommence quelques fois sans forcer."],tags:["Respiration","Son"]},
+{id:"pursed-exhale",title:"Expire lèvres légèrement pincées",cat:"breath",icon:"≈",duration:45,when:"Quand tu veux ralentir l’expiration.",lead:"Inspire normalement, puis expire doucement comme à travers une petite ouverture.",steps:["Sans souffler fort.","Laisse l’expiration s’allonger naturellement."],tags:["Respiration","Discret"]},
+{id:"three-slow-breaths",title:"Trois respirations lentes",cat:"breath",icon:"3",duration:30,when:"Quand tu ne veux pas compter longtemps.",lead:"Prends seulement trois respirations un peu plus lentes que d’habitude.",steps:["Ne cherche pas une grande inspiration.","Ralentis juste un peu."],tags:["Respiration","Court"]},
+{id:"breath-pause-choice",title:"Une respiration avant de répondre",cat:"breath",icon:"…",duration:12,when:"Juste avant une réponse ou une action.",lead:"Avant de répondre, laisse passer une respiration complète.",steps:["Inspire normalement.","Expire sans te presser.","Puis réponds."],tags:["Respiration","Invisible"]},
+{id:"shoulder-breath",title:"Épaules et souffle",cat:"breath",icon:"⌄",duration:45,when:"Quand les épaules sont chargées.",lead:"À l’inspiration, laisse les épaules monter très légèrement. À l’expiration, laisse-les redescendre.",steps:["Mouvement petit et confortable.","Ne force pas l’inspiration."],tags:["Respiration","Corps"]},
+{id:"breath-nose",title:"Une minute par le nez",cat:"breath",icon:"≈",duration:60,when:"Quand la respiration nasale est confortable pour toi.",lead:"Respire simplement par le nez pendant une minute.",steps:["Sans compter.","Laisse le rythme se poser tout seul."],tags:["Respiration","1 min"]},
+{id:"breath-sides",title:"Sens les côtes s’ouvrir",cat:"breath",icon:"↔",duration:60,when:"Quand tu veux sentir le mouvement du souffle.",lead:"Pose les mains sur les côtés des côtes et observe leur mouvement.",steps:["Inspire sans forcer.","Sens les mains s’écarter un peu.","Expire et laisse-les revenir."],tags:["Respiration","Corps"]},
+{id:"alternate-nostril-simple",title:"Une narine puis l’autre",cat:"breath",icon:"↔",duration:60,when:"Quand tu peux utiliser une main et que ton nez est dégagé.",lead:"Ferme doucement une narine pour inspirer par l’autre, puis change de côté pour expirer.",steps:["Reste très doux.","Ne retiens pas l’air.","Arrête si ce n’est pas confortable."],tags:["Respiration","Guidé"]},
+{id:"box-simple",title:"Respiration carrée douce",cat:"breath",icon:"□",duration:60,when:"Quand les petites pauses sont confortables.",lead:"Inspire 4 secondes, pause 4, expire 4, pause 4.",steps:["Les pauses restent sans effort.","Si tu préfères, supprime les pauses et respire librement."],tags:["Respiration","Guidé"]},
+{id:"long-exhale-no-count",title:"Expire juste un peu plus longtemps",cat:"breath",icon:"→",duration:45,when:"Quand tu ne veux pas compter.",lead:"Inspire normalement. Fais seulement durer l’expiration un peu plus longtemps.",steps:["Sans vider complètement les poumons.","Recommence quelques fois."],tags:["Respiration","Discret"]}
+];
+
+const screens=[...document.querySelectorAll('.screen')];
+let current='home',listType='daily',currentExercise=null,lastType='daily',timerId=null;
+let inhale=4,exhale=6,breathStart=0,breathPaused=false,pauseAt=0,windPhase=0,lastFrame=performance.now();
+
+let favData=[];try{favData=JSON.parse(localStorage.getItem('petits-gestes-favorites')||'[]')}catch(e){}
+const favorites=new Set(Array.isArray(favData)?favData:[]);
+const typeOf=e=>e&&e.cat==='breath'?'breath':'daily';
+const fmt=s=>s<60?s+' s':s===60?'1 min':Math.round(s/60)+' min';
+const pool=t=>EXERCISES.filter(e=>typeOf(e)===t);
+
+async function loadBrandImage(){
+  try{
+    const b64=(await (await fetch('assets/hero.b64?v=3')).text()).trim();
+    const url='data:image/webp;base64,'+b64;
+    document.querySelectorAll('.brand-img').forEach(img=>{
+      img.onload=()=>img.closest('.visual')?.classList.add('loaded');
+      img.src=url;
+    });
+  }catch(e){console.warn('Visuel indisponible',e)}
+}
+loadBrandImage();
+
+function saveFavs(){localStorage.setItem('petits-gestes-favorites',JSON.stringify([...favorites]));refreshFavSummary()}
+function isFav(id){return favorites.has(id)}
+function toggleFav(id){if(!id)return;isFav(id)?favorites.delete(id):favorites.add(id);saveFavs();updateFavButtons();if(current==='favorites')renderFavorites();if(current==='list')renderList()}
+function favPool(){return EXERCISES.filter(e=>favorites.has(e.id))}
+
+function go(name){
+  current=name;screens.forEach(s=>s.classList.toggle('active',s.dataset.screen===name));
+  if(name==='home')refreshFavSummary();
+  if(name==='favorites')renderFavorites();
+  if(name==='list')renderList();
+  if(name==='detail')renderDetail();
+  if(name==='breath')startBreath();
+  if(name==='done')updateDoneFav();
+}
+document.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>go(b.dataset.go));
+document.querySelectorAll('[data-open]').forEach(b=>b.onclick=()=>openList(b.dataset.open));
+
+function openList(t){listType=t;lastType=t;document.getElementById('searchBox').value='';go('list')}
+document.getElementById('breathCount').textContent=pool('breath').length+' propositions, courtes ou guidées';
+document.getElementById('dailyCount').textContent=pool('daily').length+' micro-gestes simples à utiliser partout';
+
+const dailyPool=EXERCISES.filter(e=>e.duration<=60&&!e.leaf);
+const day=Math.floor(new Date().setHours(0,0,0,0)/86400000);
+const daily=dailyPool[(day%dailyPool.length+dailyPool.length)%dailyPool.length];
+document.getElementById('dailyTitle').textContent=daily.title;
+document.getElementById('dailyMeta').textContent=fmt(daily.duration)+' · '+daily.tags.slice(0,2).join(' · ');
+document.getElementById('dailyCard').onclick=()=>openExercise(daily);
+document.getElementById('dailyOpen').onclick=()=>openExercise(daily);
+
+function refreshFavSummary(){
+  const p=favPool();document.getElementById('favCount').textContent=p.length;
+  document.getElementById('favPreview').textContent=p.length?p.slice(-2).map(e=>e.title).join(' · '):'Ajoute un cœur aux gestes que tu veux garder.';
+}
+refreshFavSummary();
+
+const CALM=['tongue','next-thought','big-toe','foot-3','soft-grip','far-sound','near-sound','peripheral','back-contact','silent-exhale','shoulders-stop','belly','one-muscle','before-answer','eyebrows','palms','heels','slow-blink','soft-eyes','toe-release'];
+document.getElementById('calmBtn').onclick=()=>{
+  let p=CALM.map(id=>EXERCISES.find(e=>e.id===id)).filter(Boolean);
+  if(!p.length)p=EXERCISES.filter(e=>e.duration<=30);
+  openExercise(p[Math.floor(Math.random()*p.length)]);
+};
+document.getElementById('surpriseBtn').onclick=()=>openExercise(EXERCISES[Math.floor(Math.random()*EXERCISES.length)]);
+
+function renderRows(items,target){
+  const box=document.getElementById(target);
+  if(!items.length){box.innerHTML='<div class="empty glass">Rien ici pour le moment.</div>';return}
+  box.innerHTML=items.map(e=>'<div class="row glass" data-id="'+e.id+'"><div class="row-icon">'+e.icon+'</div><div><b>'+e.title+'</b><small>'+fmt(e.duration)+' · '+e.tags.slice(0,2).join(' · ')+'</small></div><button class="heart '+(isFav(e.id)?'on':'')+'" data-heart="'+e.id+'">'+(isFav(e.id)?'♥':'♡')+'</button></div>').join('');
+  box.querySelectorAll('[data-id]').forEach(r=>r.onclick=ev=>{if(ev.target.closest('[data-heart]'))return;openExercise(EXERCISES.find(e=>e.id===r.dataset.id))});
+  box.querySelectorAll('[data-heart]').forEach(b=>b.onclick=ev=>{ev.stopPropagation();toggleFav(b.dataset.heart)});
+}
+function renderList(){
+  const q=document.getElementById('searchBox').value.toLowerCase().trim();
+  const base=pool(listType);
+  const items=base.filter(e=>!q||(e.title+' '+e.when+' '+e.lead+' '+e.tags.join(' ')).toLowerCase().includes(q));
+  document.getElementById('listEyebrow').textContent=listType==='breath'?'Respiration':'Gestes du quotidien';
+  document.getElementById('listTitle').textContent=listType==='breath'?'Choisis une respiration':'Choisis un petit geste';
+  document.getElementById('listIntro').textContent=listType==='breath'?'Des propositions simples, sans chercher la performance.':'Des gestes courts, concrets et souvent invisibles pour les autres.';
+  document.getElementById('listCount').textContent=items.length+' '+(listType==='breath'?'respirations':'gestes');
+  renderRows(items,'listRows');
+}
+document.getElementById('searchBox').oninput=renderList;
+document.getElementById('listRandom').onclick=()=>{const p=pool(listType);openExercise(p[Math.floor(Math.random()*p.length)])};
+
+function renderFavorites(){const p=favPool();document.getElementById('favPageCount').textContent=p.length+' favori'+(p.length>1?'s':'');renderRows(p,'favRows')}
+
+function openExercise(e){if(!e)return;currentExercise=e;lastType=typeOf(e);go(e.leaf?'breath':'detail')}
+function renderDetail(){
+  clearInterval(timerId);if(!currentExercise)currentExercise=pool(lastType)[0];
+  document.getElementById('instruction').style.display='block';document.getElementById('timer').classList.remove('show');
+  document.getElementById('detailType').textContent=typeOf(currentExercise)==='breath'?'Respiration':'Geste du quotidien';
+  document.getElementById('detailTitle').textContent=currentExercise.title;document.getElementById('detailWhen').textContent=currentExercise.when;document.getElementById('detailLead').textContent=currentExercise.lead;
+  document.getElementById('detailSteps').innerHTML=currentExercise.steps.map((x,i)=>'<div class="step"><span class="num">'+(i+1)+'</span><span>'+x+'</span></div>').join('');
+  document.getElementById('detailTags').innerHTML='<span class="tag">'+fmt(currentExercise.duration)+'</span>'+currentExercise.tags.map(t=>'<span class="tag">'+t+'</span>').join('');
+  document.getElementById('startBtn').textContent='Commencer · '+fmt(currentExercise.duration);updateFavButtons();
+}
+function updateFavButtons(){
+  if(!currentExercise)return;const on=isFav(currentExercise.id);
+  document.getElementById('detailHeart').textContent=on?'♥':'♡';document.getElementById('detailFavBtn').textContent=on?'♥ Favori':'♡ Favori';
+  document.getElementById('breathHeart').textContent=on?'♥':'♡';document.getElementById('doneFav').textContent=on?'♥ Dans mes favoris':'♡ Ajouter aux favoris';
+}
+document.getElementById('detailBack').onclick=()=>openList(lastType);
+document.getElementById('detailHeart').onclick=()=>toggleFav(currentExercise?.id);
+document.getElementById('detailFavBtn').onclick=()=>toggleFav(currentExercise?.id);
+document.getElementById('breathHeart').onclick=()=>toggleFav(currentExercise?.id);
+document.getElementById('anotherBtn').onclick=()=>{const p=pool(lastType);openExercise(p[Math.floor(Math.random()*p.length)])};
+document.getElementById('startBtn').onclick=()=>startTimer();
+document.getElementById('finishBtn').onclick=()=>{clearInterval(timerId);go('done')};
+
+function startTimer(){
+  if(currentExercise?.leaf){go('breath');return}
+  document.getElementById('instruction').style.display='none';document.getElementById('timer').classList.add('show');
+  document.getElementById('timerText').textContent=currentExercise.lead;
+  const total=currentExercise.duration,start=Date.now();
+  const tick=()=>{
+    const elapsed=(Date.now()-start)/1000,left=Math.max(0,total-elapsed);
+    document.getElementById('timerBig').textContent=left>=60?Math.ceil(left/60)+' min':Math.ceil(left)+' s';
+    document.getElementById('progress').style.width=Math.min(100,elapsed/total*100)+'%';
+    if(left<=0){clearInterval(timerId);setTimeout(()=>go('done'),450)}
+  };tick();timerId=setInterval(tick,100)
+}
+
+const leaf=document.getElementById('leaf');
+function setRatio(a,b){inhale=a;exhale=b;document.querySelectorAll('.ratio').forEach(x=>x.classList.toggle('active',x.dataset.ratio===a+','+b));startBreath()}
+document.querySelectorAll('.ratio').forEach(b=>b.onclick=()=>{const [a,z]=b.dataset.ratio.split(',').map(Number);setRatio(a,z)});
+function startBreath(){breathStart=performance.now();breathPaused=false;pauseAt=0;windPhase=0;lastFrame=performance.now();document.getElementById('pauseBtn').textContent='Ⅱ';updateFavButtons()}
+document.getElementById('breathBack').onclick=()=>openList('breath');
+document.getElementById('pauseBtn').onclick=()=>{breathPaused=!breathPaused;document.getElementById('pauseBtn').textContent=breathPaused?'▶':'Ⅱ';if(breathPaused)pauseAt=performance.now();else{breathStart+=performance.now()-pauseAt;lastFrame=performance.now()}};
+document.getElementById('breathDone').onclick=()=>go('done');
+
+function ease(p){return .5-Math.cos(Math.PI*p)/2}
+function animate(now){
+  const dt=Math.min(.04,(now-lastFrame)/1000);lastFrame=now;
+  if(current==='breath'&&!breathPaused){
+    const cycle=inhale+exhale,elapsed=(now-breathStart)/1000,t=elapsed%cycle,up=t<inhale,d=up?inhale:exhale,pe=up?t:t-inhale,p=Math.max(0,Math.min(1,pe/d));
+    const bottom=up?9+ease(p)*67:76-ease(p)*67;
+    // plus la durée du temps respiratoire est longue, plus le balancement latéral accélère
+    const avg=(inhale+exhale)/2, hz=.26+(avg-4)*.16;
+    windPhase+=dt*2*Math.PI*Math.max(.24,hz);
+    const x=50+Math.sin(windPhase)*15+Math.sin(windPhase*.47+1.8)*5+Math.sin(windPhase*1.69)*2;
+    const rot=Math.sin(windPhase+.4)*14+Math.sin(windPhase*.63)*5;
+    leaf.style.left=x+'%';leaf.style.bottom=bottom+'%';leaf.style.transform='translateX(-50%) rotate('+rot+'deg)';
+    document.getElementById('phaseLabel').textContent=up?'Inspire · la feuille monte':'Expire · la feuille redescend';
+    document.getElementById('phaseCount').textContent=Math.max(1,Math.ceil(d-pe));
+  }
+  requestAnimationFrame(animate)
+}
+requestAnimationFrame(animate);
+
+function updateDoneFav(){updateFavButtons()}
+document.getElementById('doneFav').onclick=()=>toggleFav(currentExercise?.id);
+document.getElementById('doneAnother').onclick=()=>{const p=pool(lastType);openExercise(p[Math.floor(Math.random()*p.length)])};
+</script>
+</body>
+</html>
