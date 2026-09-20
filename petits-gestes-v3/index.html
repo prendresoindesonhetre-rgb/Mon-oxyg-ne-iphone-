@@ -58,9 +58,9 @@ button{color:inherit}
   display:grid;grid-template-columns:repeat(5,1fr);gap:2px;
   background:rgba(251,249,246,.96);backdrop-filter:blur(20px);border-top:1px solid var(--line)
 }
-.nav button{border:0;background:transparent;border-radius:14px;font-size:7.5px;font-weight:820;color:#7a8e99;display:grid;place-items:center;align-content:center;gap:2px;cursor:pointer;min-width:0;padding:4px 1px;letter-spacing:-.01em}
-.nav button span{font-size:18px;line-height:1}.nav button.active:not(.nav-center){background:#e7f2f3;color:#2c718c}
-.nav .nav-center{position:relative;transform:translateY(-21px);height:70px;width:70px;justify-self:center;border-radius:50%;color:white;background:linear-gradient(145deg,#4aaeba,#72a9d3 58%,#8b79c4);box-shadow:0 12px 28px rgba(53,116,145,.28);border:4px solid rgba(251,249,246,.98);font-size:7.2px;padding-top:7px}
+.nav button{border:0;background:transparent;border-radius:14px;font-size:7.4px;font-weight:780;color:#7a8e99;display:grid;place-items:center;align-content:center;gap:3px;cursor:pointer;min-width:0;padding:4px 1px;letter-spacing:-.01em}
+.nav button span{font-size:7.4px!important;line-height:1.05}.nav button.active:not(.nav-center){background:#e7f2f3;color:#2c718c}
+.nav .nav-center{position:relative;transform:translateY(-21px);height:70px;width:70px;justify-self:center;border-radius:50%;color:white;background:linear-gradient(145deg,#3e95aa,#69a8c9 56%,#8878bd);box-shadow:0 12px 28px rgba(53,116,145,.27);border:4px solid rgba(251,249,246,.98);padding-top:7px}
 .nav .nav-center span{font-size:25px}.nav .nav-center.active{box-shadow:0 13px 30px rgba(53,116,145,.34),0 0 0 3px rgba(85,185,199,.12)}
 .no-nav .nav{display:none}
 
@@ -138,119 +138,68 @@ button{color:inherit}
 .done-bg{position:absolute;inset:0}.done-bg img{width:100%;height:100%;object-fit:cover;object-position:42% center;opacity:0;transition:opacity .35s}.done-bg.loaded img{opacity:1}.done-bg:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(238,247,249,.05),rgba(246,242,247,.26) 48%,rgba(249,247,244,.96) 81%)}
 .done-card{position:absolute;z-index:6;left:8%;right:8%;bottom:8%;padding:22px 18px;border-radius:27px;text-align:center}.done-card .h2{font-size:32px}.done-card p{font:15px/1.45 Georgia,serif;color:#507083}.done-actions{display:grid;gap:8px;margin-top:14px}
 
+
+.nav-svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.65;stroke-linecap:round;stroke-linejoin:round}.nav .nav-center .nav-svg{width:28px;height:28px;stroke-width:1.45}.nav .nav-center .leaf-svg{fill:rgba(255,255,255,.10)}.nav .nav-center span{color:white!important}.nav button.active:not(.nav-center){background:rgba(222,239,242,.78);color:#2c718c}.nav .nav-center.active{box-shadow:0 13px 31px rgba(53,116,145,.35),0 0 0 3px rgba(85,185,199,.12)}
+.hub .brand-photo{height:220px}.hub .sheet{min-height:calc(100% - 190px);padding-bottom:100px}.page-intro{margin-top:4px}.page-intro .h2{font-size:26px}.page-intro .muted{margin-top:7px}.clean-list{display:grid;gap:9px;margin-top:16px}.clean-card{border:0;border-radius:21px;padding:14px 14px 13px;background:rgba(255,255,255,.82);box-shadow:0 10px 26px rgba(42,71,89,.07);display:grid;grid-template-columns:47px 1fr auto;gap:12px;align-items:center;text-align:left;cursor:pointer;color:inherit}.clean-icon{width:47px;height:47px;border-radius:15px;display:grid;place-items:center;background:linear-gradient(145deg,#e0f0f2,#eee8f5);font-size:18px}.clean-card b{display:block;font:15px/1.18 Georgia,serif;color:#315f78}.clean-card small{display:block;margin-top:4px;font-size:9px;line-height:1.35;color:#788d98}.clean-card .count-pill{font-size:8px;color:#6e8795;background:#edf4f5;padding:5px 7px;border-radius:999px;white-space:nowrap}.hero-action{margin-top:-46px;position:relative;z-index:5;border-radius:24px;padding:16px}.hero-action .eyebrow{margin-bottom:6px}.hero-action b{display:block;font:20px/1.15 Georgia,serif;color:#315f78}.hero-action p{margin:6px 0 12px;font-size:10px;line-height:1.42;color:#718793}.hero-action .primary{width:100%}.home-section{margin-top:22px}.home-section h3{margin:0 0 9px;font:17px Georgia,serif;color:#315f78}.resume-card{display:none;border-radius:20px;padding:13px 14px;grid-template-columns:42px 1fr auto;gap:10px;align-items:center;cursor:pointer}.resume-card.show{display:grid}.resume-icon{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;background:#e5f1f2}.resume-card b{font:14px Georgia,serif}.resume-card small{display:block;margin-top:3px;font-size:8.5px;color:#7a8e99}.daily-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;padding:5px;border-radius:17px;background:rgba(229,239,241,.72);margin:16px 0 14px}.daily-tabs button{border:0;border-radius:13px;padding:9px 4px;background:transparent;color:#718693;font-size:8.5px;font-weight:800;cursor:pointer}.daily-tabs button.active{background:#fff;color:#356f88;box-shadow:0 5px 14px rgba(46,77,94,.08)}.moment-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}.moment-card{border:1px solid rgba(255,255,255,.9);border-radius:19px;padding:13px 12px;min-height:101px;background:rgba(255,255,255,.78);box-shadow:0 8px 20px rgba(42,71,89,.06);text-align:left;cursor:pointer;color:inherit}.moment-card span{display:block;font-size:18px;margin-bottom:8px}.moment-card b{display:block;font:13px/1.18 Georgia,serif;color:#356a82}.moment-card small{display:block;margin-top:4px;font-size:8.4px;line-height:1.3;color:#7a8d98}.personal-head{display:flex;justify-content:space-between;align-items:center;margin:3px 1px 11px}.personal-head h3{margin:0;font:17px Georgia,serif}.mini-add{border:1px solid var(--line);background:#fff;border-radius:999px;padding:7px 10px;font-size:8.5px;font-weight:800;color:#47788d;cursor:pointer}.collection-cards{display:grid;gap:9px}.collection-card{border-radius:20px;padding:13px 14px;background:rgba(255,255,255,.82);box-shadow:0 8px 20px rgba(42,71,89,.06);display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;cursor:pointer}.collection-card b{display:block;font:14px Georgia,serif}.collection-card small{display:block;margin-top:4px;font-size:8.5px;color:#7c909a}.collection-card .launch{border:0;border-radius:999px;background:#e3f0f2;color:#35728b;padding:7px 9px;font-size:8px;font-weight:850;cursor:pointer}.empty-soft{border:1px dashed rgba(75,119,141,.18);border-radius:19px;padding:17px 14px;text-align:center;color:#78909b;font-size:9.5px;line-height:1.45;background:rgba(255,255,255,.45)}.helpful-block{margin-top:20px}.helpful-block h3{margin:0 0 9px;font:16px Georgia,serif}.personal-card{margin:14px 0;border-radius:19px;padding:13px 14px;background:linear-gradient(145deg,rgba(231,243,244,.82),rgba(243,238,248,.74));border:1px solid rgba(255,255,255,.9)}.personal-title{font:14px Georgia,serif}.personal-summary{margin-top:5px;font-size:9px;line-height:1.4;color:#708793}.personal-actions{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:10px}.personal-actions button{border:1px solid var(--line);background:rgba(255,255,255,.82);border-radius:13px;padding:8px 7px;font-size:8.5px;font-weight:800;color:#44768b;cursor:pointer}.collection .brand-photo{height:170px}.collection .sheet{min-height:calc(100% - 140px);padding-bottom:35px}.collection-tools{display:flex;gap:7px;margin:14px 0}.collection-tools button{flex:1}.collection-row{display:grid;grid-template-columns:32px 1fr auto;gap:9px;align-items:center;padding:10px 11px;border-radius:17px;background:#fff;border:1px solid var(--line);margin-bottom:7px}.collection-row .n{width:28px;height:28px;border-radius:10px;background:#e6f1f2;display:grid;place-items:center;font-size:9px;font-weight:850}.collection-row b{font:12px Georgia,serif}.collection-row small{display:block;margin-top:3px;font-size:8px;color:#7e9099}.row-tools{display:flex;gap:3px}.row-tools button{width:27px;height:27px;border:0;border-radius:9px;background:#f0f4f4;color:#577c8e;font-size:10px;cursor:pointer}.overlay{position:absolute;z-index:90;inset:0;background:rgba(34,54,67,.28);backdrop-filter:blur(5px);display:none;align-items:flex-end}.overlay.show{display:flex}.modal-sheet{width:100%;max-height:83%;overflow-y:auto;background:#fbf9f6;border-radius:28px 28px 0 0;padding:19px 17px calc(env(safe-area-inset-bottom,0px) + 20px);box-shadow:0 -18px 45px rgba(34,56,70,.15)}.modal-head{display:flex;justify-content:space-between;align-items:start;gap:12px}.modal-head h3{margin:2px 0 0;font:21px Georgia,serif}.modal-close{width:34px;height:34px;border:0;border-radius:12px;background:#eef3f3;color:#647e8c;font-size:18px;cursor:pointer}.choice-grid{display:grid;gap:8px;margin-top:15px}.choice-btn{border:1px solid var(--line);border-radius:16px;background:#fff;padding:11px 12px;text-align:left;color:#436e83;cursor:pointer}.choice-btn b{font:13px Georgia,serif}.choice-btn small{display:block;margin-top:3px;font-size:8.5px;color:#7d9099}.choice-btn.selected{background:#e4f0f2}.modal-field{margin-top:13px}.modal-field label{display:block;font-size:8.5px;font-weight:850;text-transform:uppercase;color:#7b909a;margin:0 0 6px}.modal-field input,.modal-field textarea{width:100%;border:1px solid var(--line);border-radius:14px;background:#fff;padding:10px 11px;color:var(--ink);outline:none;font:11px/1.4 inherit}.modal-field textarea{min-height:80px}.modal-actions{display:flex;gap:8px;margin-top:14px}.modal-actions button{flex:1}.add-groups{display:grid;gap:15px;margin-top:15px}.add-group h4{margin:0 0 7px;font:14px Georgia,serif}.add-row{display:flex;justify-content:space-between;align-items:center;gap:8px;border:1px solid var(--line);border-radius:15px;background:#fff;padding:10px 11px;margin-bottom:6px;cursor:pointer}.add-row b{font:12px Georgia,serif}.add-row small{font-size:8px;color:#84949d}.picker-search{width:100%;margin:13px 0 9px;border:1px solid var(--line);border-radius:14px;padding:10px 11px;background:#fff}.picker-rows{display:grid;gap:6px;max-height:48vh;overflow-y:auto}.picker-row{display:grid;grid-template-columns:38px 1fr 32px;gap:9px;align-items:center;border:1px solid var(--line);border-radius:15px;padding:8px;background:#fff}.picker-row .pi{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;background:#e7f1f2}.picker-row b{font:11.5px Georgia,serif}.picker-row small{display:block;font-size:7.8px;color:#80929c;margin-top:2px}.picker-row button{width:30px;height:30px;border:0;border-radius:10px;background:#edf3f3;color:#3d758c}.picker-row button.on{background:#dceef1}
 @media(max-width:560px){.shell{padding:0}.phone{height:100dvh;width:100vw;aspect-ratio:auto;border:0;border-radius:0}}
 </style>
 </head>
 <body>
 <div class="shell"><div class="phone">
 
-<section class="screen home active" data-screen="home">
-  <div class="topbar home-tools"><span></span><button class="icon-btn" data-go="favorites" aria-label="Mes favoris">♡</button></div>
-  <div class="scroll">
-    <div class="brand-photo visual"><img class="brand-img" data-visual="hero" alt=""><div class="brand-kicker">Prendre soin de son Hêtre</div><div class="brand-title"><h1>Les petits gestes<br>de mon Hêtre</h1><p>Un geste simple, au bon moment.</p></div></div>
-    <div class="sheet">
-      <div class="now-title">De quoi as-tu besoin maintenant ?</div>
-      <div class="now-sub">Choisis ce qui ressemble le plus à ton état du moment. Tu pourras ensuite affiner par respiration, corps ou geste discret.</div>
-
-      <div class="needs-grid">
-        <button class="need-card" data-need="pressure"><span class="need-icon">⌄</span><b>Faire redescendre</b><small>Stress, agitation, pression qui monte.</small></button>
-        <button class="need-card" data-need="thoughts"><span class="need-icon">◌</span><b>Créer de l’espace</b><small>Pensées qui tournent ou prennent trop de place.</small></button>
-        <button class="need-card" data-need="presence"><span class="need-icon">◉</span><b>Revenir ici</b><small>Retrouver l’instant et les sensations.</small></button>
-        <button class="need-card" data-need="energy"><span class="need-icon">↗</span><b>Retrouver de l’élan</b><small>Réveiller doucement l’énergie.</small></button>
-        <button class="need-card" data-need="body"><span class="need-icon">↕</span><b>Relâcher le corps</b><small>Quand la tension est surtout physique.</small></button>
-        <button class="need-card" data-need="clarity"><span class="need-icon">✦</span><b>Retrouver de la clarté</b><small>Réengager doucement l’attention.</small></button>
-      </div>
-
-      <div class="calm-card glass">
-        <div class="calm-head"><div class="calm-icon">❧</div><div><b>Je ne sais pas quoi choisir</b><small>Je te propose un geste court, simplement.</small></div></div>
-        <button class="primary" id="calmBtn">Me proposer un geste</button>
-      </div>
-    </div>
-  </div>
-  <nav class="nav main-nav">
-    <button data-mode="apaiser"><span>⌄</span>Apaiser</button>
-    <button data-mode="decrocher"><span>◌</span>Décrocher</button>
-    <button class="nav-center" data-go="home"><span>❧</span>Mon besoin</button>
-    <button data-mode="recentrer"><span>◎</span>Recentrer</button>
-    <button data-mode="activer"><span>↗</span>Activer</button>
-  </nav>
-</section>
-
-<section class="screen explore" data-screen="explore">
-  <div class="scroll">
-    <div class="brand-photo visual"><img class="brand-img" data-visual="explore" alt=""><div class="brand-kicker">Explorer</div><div class="brand-title"><h1>Choisis simplement<br>ton chemin</h1><p>Trois chemins simples, selon ce dont tu as besoin.</p></div></div>
-    <div class="sheet">
-      <div class="h2">Commence par ce dont tu as besoin</div>
-      <div class="muted explore-intro">Pas besoin de connaître la bonne technique : choisis seulement ce qui ressemble le plus à ton moment.</div>
-      <div class="needs-grid">
-        <button class="need-card" data-need="pressure"><span class="need-icon">⌄</span><b>Faire redescendre la pression</b><small>Stress, agitation, montée d’angoisse.</small></button>
-        <button class="need-card" data-need="thoughts"><span class="need-icon">◌</span><b>Créer de l’espace dans mes pensées</b><small>Boucles mentales, ruminations, surcharge.</small></button>
-        <button class="need-card" data-need="presence"><span class="need-icon">◉</span><b>Retrouver de la présence</b><small>Revenir ici, aux sens et à l’instant.</small></button>
-        <button class="need-card" data-need="energy"><span class="need-icon">↗</span><b>Retrouver de l’élan</b><small>Réveiller doucement l’énergie et la vigilance.</small></button>
-        <button class="need-card" data-need="body"><span class="need-icon">↕</span><b>Relâcher mon corps</b><small>Créer du contraste puis laisser tomber la tension.</small></button>
-        <button class="need-card" data-need="clarity"><span class="need-icon">✦</span><b>Retrouver de la clarté</b><small>Réengager l’attention avec une tâche simple.</small></button>
-      </div>
-
-      <div class="section-head compact"><h3>Ou explorer par type</h3></div>
-      <div class="explore-grid">
-        <button class="explore-card glass" data-open="breath"><span class="explore-icon">≈</span><span><b>Respiration</b><small id="breathCount"></small></span><span class="chev">›</span></button>
-        <button class="explore-card glass" data-open="movement"><span class="explore-icon">↕</span><span><b>Mouvement du corps</b><small id="movementCount"></small></span><span class="chev">›</span></button>
-        <button class="explore-card glass" data-open="discreet"><span class="explore-icon">◌</span><span><b>Discret</b><small id="discreetCount"></small></span><span class="chev">›</span></button>
-      </div>
-      <button class="soft surprise" id="surpriseBtn">✦ Surprends-moi</button>
-    </div>
-  </div>
-  <nav class="nav main-nav">
-    <button data-mode="apaiser"><span>⌄</span>Apaiser</button>
-    <button data-mode="decrocher"><span>◌</span>Décrocher</button>
-    <button class="nav-center" data-go="home"><span>❧</span>Mon besoin</button>
-    <button data-mode="recentrer"><span>◎</span>Recentrer</button>
-    <button data-mode="activer"><span>↗</span>Activer</button>
-  </nav>
-</section>
-
-<section class="screen favorites" data-screen="favorites">
-  <div class="topbar"><button class="icon-btn" data-go="home">‹</button><span></span></div>
-  <div class="scroll">
-    <div class="brand-photo visual"><img class="brand-img" data-visual="list" alt=""><div class="brand-kicker">Mes favoris</div><div class="brand-title"><h1>Ce que tu veux<br>garder près de toi</h1><p>Une bibliothèque qui devient vraiment la tienne.</p></div></div>
-    <div class="sheet">
-      <div class="h2">Mes favoris</div><div class="muted">Tous les gestes que tu as choisis de garder sont ici.</div>
-      <div class="count" id="favPageCount"></div>
-      <div class="rows" id="favRows"></div>
-    </div>
-  </div>
-  <nav class="nav main-nav">
-    <button data-mode="apaiser"><span>⌄</span>Apaiser</button>
-    <button data-mode="decrocher"><span>◌</span>Décrocher</button>
-    <button class="nav-center" data-go="home"><span>❧</span>Mon besoin</button>
-    <button data-mode="recentrer"><span>◎</span>Recentrer</button>
-    <button data-mode="activer"><span>↗</span>Activer</button>
-  </nav>
-</section>
-
+<section class="screen home active" data-screen="home"><div class="scroll"><div class="brand-photo visual"><img class="brand-img" data-visual="hero" alt=""><div class="brand-kicker">Prendre soin de son Hêtre</div><div class="brand-title"><h1>Les petits gestes<br>de mon Hêtre</h1><p>Découvrir, tester, garder ce qui te ressemble.</p></div></div><div class="sheet"><div class="hero-action glass"><div class="eyebrow">À découvrir</div><b id="homeGestureTitle">Un petit geste</b><p id="homeGestureMeta"></p><button class="primary" id="homeGestureBtn">Découvrir ce geste</button></div><div class="home-section"><h3>Reprendre là où j’en suis</h3><div class="resume-card glass" id="homeResume"><div class="resume-icon">↗</div><div><b id="homeResumeTitle"></b><small id="homeResumeMeta"></small></div><span>›</span></div><div class="empty-soft" id="homeResumeEmpty">Tes stratégies et tes routines apparaîtront ici au fur et à mesure que tu construiras ta propre boîte à outils.</div></div><div class="home-section"><div class="clean-list"><button class="clean-card" data-go="needs"><span class="clean-icon">◎</span><span><b>Je cherche un bénéfice précis</b><small>Partir de ce dont j’ai besoin aujourd’hui.</small></span><span>›</span></button><button class="clean-card" data-go="daily"><span class="clean-icon">◷</span><span><b>L’intégrer à mon quotidien</b><small>Moments de vie, stratégies et routines.</small></span><span>›</span></button></div></div></div></div><nav class="nav main-nav">
+<button class="active" data-go="home"><svg class="nav-svg" viewBox="0 0 24 24"><path d="M4 10.5 12 4l8 6.5v8.2a1.3 1.3 0 0 1-1.3 1.3h-4.2v-6h-5v6H5.3A1.3 1.3 0 0 1 4 18.7Z"/></svg><span>Accueil</span></button>
+<button class="" data-go="needs"><svg class="nav-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="7.5"/><circle cx="12" cy="12" r="2.5"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22"/></svg><span>Par besoin</span></button>
+<button class="nav-center " data-go="catalog"><svg class="nav-svg leaf-svg" viewBox="0 0 24 24"><path d="M19.5 4.5C12 4.8 6.2 8.8 5.4 14.2c-.5 3.2 1.8 5.3 4.7 4.7 5.1-1 8.7-6.8 9.4-14.4Z"/><path d="M6.4 18.4c2.3-3.5 5.1-6.2 9.1-8.5"/></svg><span>Gestes</span></button>
+<button class="" data-go="daily"><svg class="nav-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 7v5l3.5 2M8 3.8 6.2 2M16 3.8 17.8 2"/></svg><span>Au quotidien</span></button>
+<button class="" data-go="favorites"><svg class="nav-svg" viewBox="0 0 24 24"><path d="M12 20s-7-4.3-7-9.2C5 8.1 6.8 6.5 9 6.5c1.4 0 2.5.7 3 1.7.5-1 1.6-1.7 3-1.7 2.2 0 4 1.6 4 4.3C19 15.7 12 20 12 20Z"/></svg><span>Favoris</span></button>
+</nav></section>
+<section class="screen hub needs" data-screen="needs"><div class="scroll"><div class="brand-photo visual"><img class="brand-img" data-visual="explore" alt=""><div class="brand-kicker">Par besoin</div><div class="brand-title"><h1>Partir de ce que<br>tu recherches</h1><p>Le bénéfice d’abord. La technique vient ensuite.</p></div></div><div class="sheet"><div class="page-intro"><div class="h2">Qu’aimerais-tu retrouver ?</div><div class="muted">Chaque besoin rassemble respiration, mouvement, attention, sensations et gestes discrets.</div></div><div class="clean-list"><button class="clean-card" data-need="pressure"><span class="clean-icon">⌄</span><span><b>Faire redescendre la pression</b><small>Quand l’intensité, le stress ou l’agitation montent.</small></span><span class="count-pill" data-count-need="pressure"></span></button><button class="clean-card" data-need="thoughts"><span class="clean-icon">◌</span><span><b>Créer de l’espace dans mes pensées</b><small>Quand une pensée tourne, colle ou prend toute la place.</small></span><span class="count-pill" data-count-need="thoughts"></span></button><button class="clean-card" data-need="presence"><span class="clean-icon">◎</span><span><b>Retrouver de la présence</b><small>Revenir à l’instant, aux sens et à ce qui m’entoure.</small></span><span class="count-pill" data-count-need="presence"></span></button><button class="clean-card" data-need="energy"><span class="clean-icon">↗</span><span><b>Retrouver de l’élan</b><small>Réveiller doucement l’énergie, la curiosité ou la vigilance.</small></span><span class="count-pill" data-count-need="energy"></span></button><button class="clean-card" data-need="body"><span class="clean-icon">↕</span><span><b>Relâcher mon corps</b><small>Quand la tension semble surtout physique.</small></span><span class="count-pill" data-count-need="body"></span></button><button class="clean-card" data-need="clarity"><span class="clean-icon">✦</span><span><b>Retrouver de la clarté</b><small>Réengager l’attention quand tout devient flou ou dispersé.</small></span><span class="count-pill" data-count-need="clarity"></span></button></div></div></div><nav class="nav main-nav">
+<button class="" data-go="home"><svg class="nav-svg" viewBox="0 0 24 24"><path d="M4 10.5 12 4l8 6.5v8.2a1.3 1.3 0 0 1-1.3 1.3h-4.2v-6h-5v6H5.3A1.3 1.3 0 0 1 4 18.7Z"/></svg><span>Accueil</span></button>
+<button class="active" data-go="needs"><svg class="nav-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="7.5"/><circle cx="12" cy="12" r="2.5"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22"/></svg><span>Par besoin</span></button>
+<button class="nav-center " data-go="catalog"><svg class="nav-svg leaf-svg" viewBox="0 0 24 24"><path d="M19.5 4.5C12 4.8 6.2 8.8 5.4 14.2c-.5 3.2 1.8 5.3 4.7 4.7 5.1-1 8.7-6.8 9.4-14.4Z"/><path d="M6.4 18.4c2.3-3.5 5.1-6.2 9.1-8.5"/></svg><span>Gestes</span></button>
+<button class="" data-go="daily"><svg class="nav-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 7v5l3.5 2M8 3.8 6.2 2M16 3.8 17.8 2"/></svg><span>Au quotidien</span></button>
+<button class="" data-go="favorites"><svg class="nav-svg" viewBox="0 0 24 24"><path d="M12 20s-7-4.3-7-9.2C5 8.1 6.8 6.5 9 6.5c1.4 0 2.5.7 3 1.7.5-1 1.6-1.7 3-1.7 2.2 0 4 1.6 4 4.3C19 15.7 12 20 12 20Z"/></svg><span>Favoris</span></button>
+</nav></section>
+<section class="screen hub catalog" data-screen="catalog"><div class="scroll"><div class="brand-photo visual"><img class="brand-img" data-visual="hero" alt=""><div class="brand-kicker">Les gestes</div><div class="brand-title"><h1>Tout le catalogue</h1><p>Explore par famille, puis fais-en quelque chose qui te ressemble.</p></div></div><div class="sheet"><div class="page-intro"><div class="h2">Explorer les gestes</div><div class="muted" id="catalogCount"></div></div><div class="clean-list"><button class="clean-card" data-theme="all"><span class="clean-icon">✦</span><span><b>Tous les gestes</b><small>Parcourir toute la bibliothèque.</small></span><span class="count-pill" data-count-theme="all"></span></button><button class="clean-card" data-theme="breath"><span class="clean-icon">≈</span><span><b>Respiration</b><small>Rythme, expiration, souffle guidé, vibration.</small></span><span class="count-pill" data-count-theme="breath"></span></button><button class="clean-card" data-theme="movement"><span class="clean-icon">↕</span><span><b>Corps & mouvement</b><small>Contracter, relâcher, marcher, bouger, changer de posture.</small></span><span class="count-pill" data-count-theme="movement"></span></button><button class="clean-card" data-theme="discreet"><span class="clean-icon">◌</span><span><b>Gestes discrets</b><small>Des micro-gestes presque invisibles dans la vie réelle.</small></span><span class="count-pill" data-count-theme="discreet"></span></button><button class="clean-card" data-theme="mind"><span class="clean-icon">◎</span><span><b>Attention & pensées</b><small>Dé-fusion, distanciation, tâches cognitives et recentrage.</small></span><span class="count-pill" data-count-theme="mind"></span></button><button class="clean-card" data-theme="sensory"><span class="clean-icon">◇</span><span><b>Sensoriel & perception</b><small>Regard, sons, toucher, température, orientation.</small></span><span class="count-pill" data-count-theme="sensory"></span></button><button class="clean-card" data-theme="activation"><span class="clean-icon">↗</span><span><b>Élan & activation</b><small>Retrouver énergie, présence ou vigilance.</small></span><span class="count-pill" data-count-theme="activation"></span></button></div></div></div><nav class="nav main-nav">
+<button class="" data-go="home"><svg class="nav-svg" viewBox="0 0 24 24"><path d="M4 10.5 12 4l8 6.5v8.2a1.3 1.3 0 0 1-1.3 1.3h-4.2v-6h-5v6H5.3A1.3 1.3 0 0 1 4 18.7Z"/></svg><span>Accueil</span></button>
+<button class="" data-go="needs"><svg class="nav-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="7.5"/><circle cx="12" cy="12" r="2.5"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22"/></svg><span>Par besoin</span></button>
+<button class="nav-center active" data-go="catalog"><svg class="nav-svg leaf-svg" viewBox="0 0 24 24"><path d="M19.5 4.5C12 4.8 6.2 8.8 5.4 14.2c-.5 3.2 1.8 5.3 4.7 4.7 5.1-1 8.7-6.8 9.4-14.4Z"/><path d="M6.4 18.4c2.3-3.5 5.1-6.2 9.1-8.5"/></svg><span>Gestes</span></button>
+<button class="" data-go="daily"><svg class="nav-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 7v5l3.5 2M8 3.8 6.2 2M16 3.8 17.8 2"/></svg><span>Au quotidien</span></button>
+<button class="" data-go="favorites"><svg class="nav-svg" viewBox="0 0 24 24"><path d="M12 20s-7-4.3-7-9.2C5 8.1 6.8 6.5 9 6.5c1.4 0 2.5.7 3 1.7.5-1 1.6-1.7 3-1.7 2.2 0 4 1.6 4 4.3C19 15.7 12 20 12 20Z"/></svg><span>Favoris</span></button>
+</nav></section>
+<section class="screen hub daily" data-screen="daily"><div class="scroll"><div class="brand-photo visual"><img class="brand-img" data-visual="explore" alt=""><div class="brand-kicker">Au quotidien</div><div class="brand-title"><h1>Faire de ces gestes<br>les tiens</h1><p>Les tester, les adapter et les organiser comme tu veux.</p></div></div><div class="sheet"><div class="page-intro"><div class="h2">Mon guide personnel</div><div class="muted">Pars d’un moment réel, puis construis peu à peu tes propres stratégies et tes routines.</div></div><div class="daily-tabs"><button class="active" data-dailytab="moments">Selon le moment</button><button data-dailytab="strategies">Mes stratégies</button><button data-dailytab="routines">Mes routines</button></div><div id="dailyContent"></div></div></div><nav class="nav main-nav">
+<button class="" data-go="home"><svg class="nav-svg" viewBox="0 0 24 24"><path d="M4 10.5 12 4l8 6.5v8.2a1.3 1.3 0 0 1-1.3 1.3h-4.2v-6h-5v6H5.3A1.3 1.3 0 0 1 4 18.7Z"/></svg><span>Accueil</span></button>
+<button class="" data-go="needs"><svg class="nav-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="7.5"/><circle cx="12" cy="12" r="2.5"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22"/></svg><span>Par besoin</span></button>
+<button class="nav-center " data-go="catalog"><svg class="nav-svg leaf-svg" viewBox="0 0 24 24"><path d="M19.5 4.5C12 4.8 6.2 8.8 5.4 14.2c-.5 3.2 1.8 5.3 4.7 4.7 5.1-1 8.7-6.8 9.4-14.4Z"/><path d="M6.4 18.4c2.3-3.5 5.1-6.2 9.1-8.5"/></svg><span>Gestes</span></button>
+<button class="active" data-go="daily"><svg class="nav-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 7v5l3.5 2M8 3.8 6.2 2M16 3.8 17.8 2"/></svg><span>Au quotidien</span></button>
+<button class="" data-go="favorites"><svg class="nav-svg" viewBox="0 0 24 24"><path d="M12 20s-7-4.3-7-9.2C5 8.1 6.8 6.5 9 6.5c1.4 0 2.5.7 3 1.7.5-1 1.6-1.7 3-1.7 2.2 0 4 1.6 4 4.3C19 15.7 12 20 12 20Z"/></svg><span>Favoris</span></button>
+</nav></section>
+<section class="screen hub favorites" data-screen="favorites"><div class="scroll"><div class="brand-photo visual"><img class="brand-img" data-visual="list" alt=""><div class="brand-kicker">Favoris</div><div class="brand-title"><h1>Les gestes que<br>tu veux garder</h1><p>Retrouve-les sans avoir à les chercher.</p></div></div><div class="sheet"><div class="page-intro"><div class="h2">Mes favoris</div><div class="muted">Ce sont simplement les gestes que tu as choisi de garder près de toi.</div></div><div class="count" id="favPageCount"></div><div class="rows" id="favRows"></div></div></div><nav class="nav main-nav">
+<button class="" data-go="home"><svg class="nav-svg" viewBox="0 0 24 24"><path d="M4 10.5 12 4l8 6.5v8.2a1.3 1.3 0 0 1-1.3 1.3h-4.2v-6h-5v6H5.3A1.3 1.3 0 0 1 4 18.7Z"/></svg><span>Accueil</span></button>
+<button class="" data-go="needs"><svg class="nav-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="7.5"/><circle cx="12" cy="12" r="2.5"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22"/></svg><span>Par besoin</span></button>
+<button class="nav-center " data-go="catalog"><svg class="nav-svg leaf-svg" viewBox="0 0 24 24"><path d="M19.5 4.5C12 4.8 6.2 8.8 5.4 14.2c-.5 3.2 1.8 5.3 4.7 4.7 5.1-1 8.7-6.8 9.4-14.4Z"/><path d="M6.4 18.4c2.3-3.5 5.1-6.2 9.1-8.5"/></svg><span>Gestes</span></button>
+<button class="" data-go="daily"><svg class="nav-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 7v5l3.5 2M8 3.8 6.2 2M16 3.8 17.8 2"/></svg><span>Au quotidien</span></button>
+<button class="active" data-go="favorites"><svg class="nav-svg" viewBox="0 0 24 24"><path d="M12 20s-7-4.3-7-9.2C5 8.1 6.8 6.5 9 6.5c1.4 0 2.5.7 3 1.7.5-1 1.6-1.7 3-1.7 2.2 0 4 1.6 4 4.3C19 15.7 12 20 12 20Z"/></svg><span>Favoris</span></button>
+</nav></section>
 <section class="screen list" data-screen="list">
   <div class="scroll">
     <div class="brand-photo visual"><img class="brand-img" data-visual="list" alt=""></div>
-    <div class="topbar"><button class="icon-btn" data-go="home">‹</button><div class="top-actions"><button class="icon-btn" id="listRandom" aria-label="Au hasard">✦</button><button class="icon-btn" data-go="favorites" aria-label="Mes favoris">♡</button></div></div>
+    <div class="topbar"><button class="icon-btn" id="listBack">‹</button><div class="top-actions"><button class="icon-btn" id="listRandom">✦</button></div></div></div>
     <div class="sheet">
       <div class="eyebrow" id="listEyebrow"></div><div class="h2" id="listTitle"></div><div class="muted" id="listIntro"></div>
-      <div class="filter-chips" id="filterChips">
-        <button class="filter-chip active" data-filter="all">Tous</button>
-        <button class="filter-chip" data-filter="breath">Respiration</button>
-        <button class="filter-chip" data-filter="movement">Corps</button>
-        <button class="filter-chip" data-filter="discreet">Discret</button>
-      </div>
+      <div class="filter-chips" id="filterChips"><button class="filter-chip active" data-filter="all">Tous</button><button class="filter-chip" data-filter="breath">Respiration</button><button class="filter-chip" data-filter="movement">Corps</button><button class="filter-chip" data-filter="discreet">Discret</button></div>
       <div class="search-wrap"><input class="search" id="searchBox" placeholder="Rechercher…"><span class="search-mark">⌕</span></div>
       <div class="count" id="listCount"></div><div class="rows" id="listRows"></div>
     </div>
   </div>
   <nav class="nav main-nav">
-    <button data-mode="apaiser"><span>⌄</span>Apaiser</button>
-    <button data-mode="decrocher"><span>◌</span>Décrocher</button>
-    <button class="nav-center" data-go="home"><span>❧</span>Mon besoin</button>
-    <button data-mode="recentrer"><span>◎</span>Recentrer</button>
-    <button data-mode="activer"><span>↗</span>Activer</button>
-  </nav>
+<button class="" data-go="home"><svg class="nav-svg" viewBox="0 0 24 24"><path d="M4 10.5 12 4l8 6.5v8.2a1.3 1.3 0 0 1-1.3 1.3h-4.2v-6h-5v6H5.3A1.3 1.3 0 0 1 4 18.7Z"/></svg><span>Accueil</span></button>
+<button class="" data-go="needs"><svg class="nav-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="7.5"/><circle cx="12" cy="12" r="2.5"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22"/></svg><span>Par besoin</span></button>
+<button class="nav-center " data-go="catalog"><svg class="nav-svg leaf-svg" viewBox="0 0 24 24"><path d="M19.5 4.5C12 4.8 6.2 8.8 5.4 14.2c-.5 3.2 1.8 5.3 4.7 4.7 5.1-1 8.7-6.8 9.4-14.4Z"/><path d="M6.4 18.4c2.3-3.5 5.1-6.2 9.1-8.5"/></svg><span>Gestes</span></button>
+<button class="" data-go="daily"><svg class="nav-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 7v5l3.5 2M8 3.8 6.2 2M16 3.8 17.8 2"/></svg><span>Au quotidien</span></button>
+<button class="" data-go="favorites"><svg class="nav-svg" viewBox="0 0 24 24"><path d="M12 20s-7-4.3-7-9.2C5 8.1 6.8 6.5 9 6.5c1.4 0 2.5.7 3 1.7.5-1 1.6-1.7 3-1.7 2.2 0 4 1.6 4 4.3C19 15.7 12 20 12 20Z"/></svg><span>Favoris</span></button>
+</nav>
 </section>
 
 <section class="screen detail no-nav" data-screen="detail">
@@ -266,14 +215,14 @@ button{color:inherit}
           <div class="evidence-safety" id="detailSafety"></div>
         </details>
         <div class="steps" id="detailSteps"></div><div class="tags" id="detailTags"></div>
-        <div class="detail-actions"><button class="soft" id="anotherBtn">Un autre</button><button class="soft" id="detailFavBtn">♡ Favori</button><button class="primary" id="startBtn">Commencer</button></div>
+        <div class="personal-card"><div class="personal-title">Pour moi</div><div class="personal-summary" id="personalSummary">Tu peux noter ce que ce geste t’apporte et l’ajouter à tes stratégies ou routines.</div><div class="personal-actions"><button id="feedbackBtn">Mon ressenti</button><button id="addToBtn">Ajouter à…</button></div></div><div class="detail-actions"><button class="soft" id="anotherBtn">Un autre</button><button class="soft" id="detailFavBtn">♡ Favori</button><button class="primary" id="startBtn">Commencer</button></div>
       </div>
       <div class="timer" id="timer"><div class="eyebrow">Prends juste ce temps</div><div class="timer-big" id="timerBig"></div><div class="timer-text" id="timerText"></div><div class="progress"><i id="progress"></i></div><button class="soft" id="finishBtn">Terminer</button></div>
     </div>
   </div>
 </section>
 
-<section class="screen breath no-nav" data-screen="breath">
+<section class="screen collection no-nav" data-screen="collection"><div class="scroll"><div class="brand-photo visual"><img class="brand-img" data-visual="detail" alt=""></div><div class="topbar"><button class="icon-btn" id="collectionBack">‹</button><button class="icon-btn" id="collectionDelete">⌫</button></div><div class="sheet"><div class="eyebrow" id="collectionKind"></div><div class="h2" id="collectionTitle"></div><div class="muted" id="collectionIntro"></div><div class="collection-tools"><button class="soft" id="collectionAddBtn">+ Ajouter des gestes</button><button class="primary" id="collectionLaunchBtn">Lancer</button></div><div id="collectionRows"></div></div></div></section><section class="screen breath no-nav" data-screen="breath">
   <div class="breath-bg visual"><img class="brand-img" data-visual="hero" alt=""></div>
   <div class="topbar"><button class="icon-btn" id="breathBack">‹</button><button class="icon-btn" id="breathHeart">♡</button></div>
   <div class="breath-title"><div class="h2">La feuille et le souffle</div><div class="muted">Elle flotte toujours avec le vent. Elle monte à l’inspiration et redescend à l’expiration.</div></div>
@@ -287,9 +236,9 @@ button{color:inherit}
 
 <section class="screen done no-nav" data-screen="done">
   <div class="done-bg visual"><img class="brand-img" data-visual="detail" alt=""></div>
-  <div class="done-card glass"><div class="h2">C’est fait 🌿</div><p>Tu viens simplement d’essayer un geste.<br>Garde ce qui t’est utile, laisse le reste.</p><div class="done-actions"><button class="soft" id="doneFav">♡ Ajouter aux favoris</button><button class="primary" id="doneAnother">Essayer un autre geste</button><button class="soft" data-go="home">Retour à l’accueil</button></div></div>
+  <div class="done-card glass"><div class="h2">C’est fait 🌿</div><p>Tu viens simplement d’essayer un geste.<br>Garde ce qui t’est utile, laisse le reste.</p><div class="done-actions"><button class="soft" id="doneFeedback">Noter mon ressenti</button><button class="soft" id="doneFav">♡ Ajouter aux favoris</button><button class="primary" id="doneNext" style="display:none">Geste suivant</button><button class="primary" id="doneAnother">Essayer un autre geste</button><button class="soft" data-go="home">Retour à l’accueil</button></div></div>
 </section>
-
+<div class="overlay" id="feedbackOverlay"><div class="modal-sheet"><div class="modal-head"><div><div class="eyebrow">Pour moi</div><h3>Comment ce geste a-t-il été ?</h3></div><button class="modal-close" data-close-overlay="feedbackOverlay">×</button></div><div class="choice-grid"><button class="choice-btn" data-rating="notfit"><b>Peu adapté pour moi</b><small>Ce geste ne me convient pas vraiment.</small></button><button class="choice-btn" data-rating="interesting"><b>Intéressant</b><small>Je veux peut-être le retester.</small></button><button class="choice-btn" data-rating="helpful"><b>Ça m’aide vraiment</b><small>Je veux me souvenir que ce geste fonctionne bien pour moi.</small></button></div><div class="modal-field"><label>Quand est-ce qu’il m’aide ?</label><input id="feedbackMoment" placeholder="Ex. au travail, avant une réunion…"></div><div class="modal-field"><label>Ma note</label><textarea id="feedbackNote" placeholder="Ce que j’ai remarqué, ce que je veux retenir…"></textarea></div><div class="modal-actions"><button class="soft" data-close-overlay="feedbackOverlay">Annuler</button><button class="primary" id="saveFeedback">Enregistrer</button></div></div></div><div class="overlay" id="addOverlay"><div class="modal-sheet"><div class="modal-head"><div><div class="eyebrow">Personnaliser</div><h3>Ajouter ce geste à…</h3></div><button class="modal-close" data-close-overlay="addOverlay">×</button></div><div class="add-groups" id="addGroups"></div></div></div><div class="overlay" id="nameOverlay"><div class="modal-sheet"><div class="modal-head"><div><div class="eyebrow" id="nameKind"></div><h3 id="nameTitle"></h3></div><button class="modal-close" data-close-overlay="nameOverlay">×</button></div><div class="modal-field"><label>Nom</label><input id="nameInput" maxlength="60" placeholder="Ex. Quand la pression monte"></div><div class="modal-actions"><button class="soft" data-close-overlay="nameOverlay">Annuler</button><button class="primary" id="nameSave">Créer</button></div></div></div><div class="overlay" id="pickOverlay"><div class="modal-sheet"><div class="modal-head"><div><div class="eyebrow">Choisir</div><h3>Ajouter des gestes</h3></div><button class="modal-close" data-close-overlay="pickOverlay">×</button></div><input class="picker-search" id="pickSearch" placeholder="Rechercher dans le catalogue…"><div class="picker-rows" id="pickRows"></div></div></div>
 </div></div>
 
 <script>
@@ -374,32 +323,24 @@ const NEED_MAP={
 };
 const needsOf=e=>Object.keys(NEED_MAP).filter(k=>NEED_MAP[k].includes(e.id));
 
-const MODES={
-  apaiser:{label:"Apaiser",title:"Faire redescendre ce qui déborde",intro:"Des gestes choisis pour ralentir, relâcher ou diminuer l’intensité du moment.",ids:[...new Set([...(NEED_MAP.pressure||[]),...(NEED_MAP.body||[])])]},
-  decrocher:{label:"Décrocher",title:"Créer un peu d’espace avec mes pensées",intro:"Des gestes pour déplacer l’attention, mettre à distance ou casser brièvement une boucle mentale.",ids:[...(NEED_MAP.thoughts||[])]},
-  recentrer:{label:"Recentrer",title:"Revenir pleinement à ce qui est là",intro:"Des gestes de présence, d’orientation et d’attention pour retrouver des repères ici et maintenant.",ids:[...new Set([...(NEED_MAP.presence||[]),...(NEED_MAP.clarity||[])])]},
-  activer:{label:"Activer",title:"Retrouver de l’élan et de la vigilance",intro:"Des gestes pour réveiller doucement l’énergie, la curiosité ou l’engagement.",ids:[...(NEED_MAP.energy||[])]}
-};
+const THEMES={all:{label:"Tous les gestes",title:"Tout le catalogue",intro:"Tous les gestes réunis.",ids:null},breath:{label:"Respiration",title:"Respiration",intro:"Rythme, souffle, expiration et vibration.",ids:EXERCISES.filter(e=>e.cat==='breath').map(e=>e.id)},movement:{label:"Corps & mouvement",title:"Corps & mouvement",intro:"Contracter, relâcher, marcher, bouger ou changer de posture.",ids:EXERCISES.filter(e=>e.cat==='movement').map(e=>e.id)},discreet:{label:"Gestes discrets",title:"Gestes discrets",intro:"Des micro-gestes qui peuvent entrer dans la vie réelle.",ids:["self-touch","tongue","teeth-space","feet-contact","big-toe","thumb-index","soft-grip","back-contact","two-sides-touch","name-action","near-far-sound","peripheral"]},mind:{label:"Attention & pensées",title:"Attention & pensées",intro:"Déplacer l’attention, mettre à distance ou réengager la concentration.",ids:["third-person","affect-label","word-repeat","thought-prefix","next-thought","subtract-3","spell-back","color-hunt","straight-lines","angles","name-action","three-facts","focus-open-sound","novelty-scan"]},sensory:{label:"Sensoriel & perception",title:"Sensoriel & perception",intro:"Regard, sons, toucher, température et orientation.",ids:["grounding-333","feet-contact","thumb-index","peripheral","near-far-sound","back-contact","warm-cool","two-sides-touch","focus-open-sound","novelty-scan","near-far-gaze"]},activation:{label:"Élan & activation",title:"Élan & activation",intro:"Retrouver énergie, présence ou vigilance.",ids:["upright","soft-smile","brisk-walk","humming","chew-alert","backward-steps","stairs-energy","novelty-scan","near-far-gaze"]}};
+const MOMENTS={wake:{label:"Au réveil",icon:"☼",desc:"Remettre doucement du mouvement, du regard et de la présence.",ids:["upright","near-far-gaze","novelty-scan","three-slow","chew-alert","brisk-walk"]},start:{label:"Avant de commencer ma journée",icon:"→",desc:"Un petit repère avant de partir dans le rythme.",ids:["slow-55","three-slow","upright","name-action","three-facts","self-touch"]},work:{label:"Au travail",icon:"□",desc:"Des gestes brefs et compatibles avec une journée occupée.",ids:["tongue","teeth-space","soft-grip","feet-contact","thumb-index","shoulders-release","near-far-gaze","name-action"]},transport:{label:"Dans les transports",icon:"↔",desc:"Des gestes discrets, assis ou debout, sans matériel.",ids:["feet-contact","near-far-sound","peripheral","thumb-index","self-touch","focus-open-sound","thought-prefix"]},important:{label:"Avant un moment important",icon:"◇",desc:"Retrouver de l’espace, de l’appui et un peu de clarté.",ids:["exhale-46","cyclic-sigh","three-slow","third-person","affect-label","shoulders-release","upright"]},pressure:{label:"Quand la pression monte",icon:"⌄",desc:"Des gestes courts pour agir avant que tout prenne trop de place.",ids:["exhale-46","cyclic-sigh","three-slow","grounding-333","hands-release","self-touch","tongue","affect-label"]},break:{label:"Quand je veux faire une coupure",icon:"—",desc:"Changer brièvement de canal avant de reprendre.",ids:["brisk-walk","near-far-gaze","novelty-scan","warm-cool","focus-open-sound","shoulders-release"]},home:{label:"En rentrant chez moi",icon:"⌂",desc:"Marquer une transition et laisser un peu de la journée derrière soi.",ids:["pmr-3","self-touch","slow-55","autogenic-heavy","brisk-walk","humming"]},sleep:{label:"Avant de dormir",icon:"◒",desc:"Des gestes calmes et sans recherche de performance.",ids:["slow-55","exhale-46","diaphragm","pmr-3","autogenic-heavy","humming","self-touch"]},quick:{label:"Quand je n’ai que 30 secondes",icon:"30",desc:"Les gestes les plus courts du catalogue.",ids:EXERCISES.filter(e=>e.duration<=30).map(e=>e.id)},others:{label:"Quand je suis avec d’autres personnes",icon:"◌",desc:"Des gestes suffisamment discrets pour ne pas interrompre le moment.",ids:["tongue","teeth-space","feet-contact","big-toe","thumb-index","peripheral","near-far-sound","soft-grip","third-person","affect-label","thought-prefix","name-action"]}};
+
+
 
 const screens=[...document.querySelectorAll('.screen')];
-let current='home',listType='mode:recentrer',categoryFilter='all',currentExercise=null,lastType='mode:recentrer',timerId=null;
+let current='home',listType='theme:all',categoryFilter='all',currentExercise=null,lastType='theme:all',timerId=null;
+let listOrigin='catalog',detailOrigin='list',dailyTab='moments',collectionType=null,collectionId=null,nameCreateType=null,nameAddCurrent=false,activeRoutine=null;
 let inhale=4,exhale=6,breathStart=0,breathPaused=false,pauseAt=0,windPhase=0,lastFrame=performance.now();
 
 let favData=[];try{favData=JSON.parse(localStorage.getItem('petits-gestes-favorites')||'[]')}catch(e){}
 const favorites=new Set(Array.isArray(favData)?favData:[]);
+let feedbackData={};try{feedbackData=JSON.parse(localStorage.getItem('petits-gestes-feedback')||'{}')||{}}catch(e){}
+let strategies=[];try{strategies=JSON.parse(localStorage.getItem('petits-gestes-strategies')||'[]')||[]}catch(e){}
+let routines=[];try{routines=JSON.parse(localStorage.getItem('petits-gestes-routines')||'[]')||[]}catch(e){}
 const typeOf=e=>e?.cat||'discreet';
 const fmt=s=>s<60?s+' s':s===60?'1 min':Math.round(s/60)+' min';
-const pool=t=>{
-  if(t&&t.startsWith('need:')){
-    const code=t.slice(5);
-    return EXERCISES.filter(e=>(NEED_MAP[code]||[]).includes(e.id));
-  }
-  if(t&&t.startsWith('mode:')){
-    const code=t.slice(5);
-    return EXERCISES.filter(e=>(MODES[code]?.ids||[]).includes(e.id));
-  }
-  return EXERCISES.filter(e=>typeOf(e)===t);
-};
+const pool=t=>{if(!t)return EXERCISES;if(t.startsWith('need:')){const code=t.slice(5);return EXERCISES.filter(e=>(NEED_MAP[code]||[]).includes(e.id))}if(t.startsWith('theme:')){const code=t.slice(6),th=THEMES[code]||THEMES.all;return th.ids?EXERCISES.filter(e=>th.ids.includes(e.id)):EXERCISES}if(t.startsWith('moment:')){const mo=MOMENTS[t.slice(7)];return mo?EXERCISES.filter(e=>mo.ids.includes(e.id)):[]}return EXERCISES.filter(e=>typeOf(e)===t)};
 
 async function loadBrandImage(){
   try{
