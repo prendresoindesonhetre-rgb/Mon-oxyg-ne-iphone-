@@ -53,19 +53,27 @@ button{color:inherit}
 .icon-btn{width:43px;height:43px;border:0;border-radius:15px;background:rgba(255,255,255,.87);backdrop-filter:blur(14px);box-shadow:0 8px 20px rgba(38,70,90,.11);font-size:21px;cursor:pointer}
 .topbar{position:absolute;z-index:30;left:0;right:0;top:0;padding:calc(env(safe-area-inset-top,0px) + 14px) 15px 0;display:flex;justify-content:space-between}
 .nav{
-  position:absolute;z-index:50;left:0;right:0;bottom:0;height:77px;
-  padding:7px 11px calc(env(safe-area-inset-bottom,0px) + 7px);
-  display:grid;grid-template-columns:repeat(3,1fr);gap:6px;
-  background:rgba(251,249,246,.94);backdrop-filter:blur(18px);border-top:1px solid var(--line)
+  position:absolute;z-index:50;left:0;right:0;bottom:0;height:82px;
+  padding:9px 8px calc(env(safe-area-inset-bottom,0px) + 7px);
+  display:grid;grid-template-columns:repeat(5,1fr);gap:2px;
+  background:rgba(251,249,246,.96);backdrop-filter:blur(20px);border-top:1px solid var(--line)
 }
-.nav button{border:0;background:transparent;border-radius:15px;font-size:9px;font-weight:800;color:#748995;display:grid;place-items:center;gap:2px;cursor:pointer}
-.nav button span{font-size:19px}.nav button.active{background:#e3f1f3;color:#2c718c}
+.nav button{border:0;background:transparent;border-radius:14px;font-size:7.8px;font-weight:820;color:#7a8e99;display:grid;place-items:center;align-content:center;gap:2px;cursor:pointer;min-width:0;padding:4px 2px}
+.nav button span{font-size:18px;line-height:1}.nav button.active:not(.nav-center){background:#e7f2f3;color:#2c718c}
+.nav .nav-center{position:relative;transform:translateY(-21px);height:68px;width:68px;justify-self:center;border-radius:50%;color:white;background:linear-gradient(145deg,#4aaeba,#72a9d3 58%,#8b79c4);box-shadow:0 12px 28px rgba(53,116,145,.28);border:4px solid rgba(251,249,246,.98);font-size:7.5px;padding-top:7px}
+.nav .nav-center span{font-size:25px}.nav .nav-center.active{box-shadow:0 13px 30px rgba(53,116,145,.34),0 0 0 3px rgba(85,185,199,.12)}
 .no-nav .nav{display:none}
 
 /* HOME */
-.home .brand-photo{height:330px}
-.home .brand-title{bottom:54px}
-.home .sheet{padding-top:0}
+.home .brand-photo{height:255px}
+.home .brand-title{bottom:45px}
+.home .sheet{padding-top:19px}
+.home .sheet:before{content:"";position:absolute;left:18px;right:18px;top:-1px;height:1px;background:linear-gradient(90deg,transparent,rgba(70,118,142,.14),transparent)}
+.now-title{margin:0;font:italic 500 27px/1.08 Georgia,serif;color:#255e7d}
+.now-sub{margin:7px 0 15px;font-size:10.5px;line-height:1.45;color:#6f8794}
+.home .needs-grid{margin-top:0}
+.home .need-card{min-height:96px;padding:13px 12px}
+.home .calm-card{margin-top:15px}
 .calm-card{position:relative;margin-top:-58px;border-radius:25px;padding:17px;overflow:hidden}
 .calm-card:before{content:"";position:absolute;width:145px;height:145px;border-radius:50%;right:-55px;top:-65px;background:radial-gradient(circle,rgba(85,185,199,.23),rgba(140,118,198,.10) 56%,transparent 70%)}
 .calm-head{position:relative;z-index:1;display:grid;grid-template-columns:52px 1fr;gap:12px;align-items:center}
@@ -138,31 +146,33 @@ button{color:inherit}
 
 <section class="screen home active" data-screen="home">
   <div class="scroll">
-    <div class="brand-photo visual"><img class="brand-img" data-visual="hero" alt=""><div class="brand-kicker">Prendre soin de son Hêtre</div><div class="brand-title"><h1>Les petits gestes<br>de mon Hêtre</h1><p>Quelques secondes pour revenir à toi.</p></div></div>
+    <div class="brand-photo visual"><img class="brand-img" data-visual="hero" alt=""><div class="brand-kicker">Prendre soin de son Hêtre</div><div class="brand-title"><h1>Les petits gestes<br>de mon Hêtre</h1><p>Un geste simple, au bon moment.</p></div></div>
     <div class="sheet">
+      <div class="now-title">De quoi as-tu besoin maintenant ?</div>
+      <div class="now-sub">Choisis seulement ce qui ressemble le plus à ton moment. L’application te proposera ensuite les gestes adaptés.</div>
+
+      <div class="needs-grid">
+        <button class="need-card" data-need="pressure"><span class="need-icon">⌄</span><b>Faire redescendre</b><small>Stress, agitation, pression qui monte.</small></button>
+        <button class="need-card" data-need="thoughts"><span class="need-icon">◌</span><b>Créer de l’espace</b><small>Pensées qui tournent ou prennent trop de place.</small></button>
+        <button class="need-card" data-need="presence"><span class="need-icon">◉</span><b>Revenir ici</b><small>Retrouver l’instant et les sensations.</small></button>
+        <button class="need-card" data-need="energy"><span class="need-icon">↗</span><b>Retrouver de l’élan</b><small>Réveiller doucement l’énergie.</small></button>
+        <button class="need-card" data-need="body"><span class="need-icon">↕</span><b>Relâcher le corps</b><small>Quand la tension est surtout physique.</small></button>
+        <button class="need-card" data-need="clarity"><span class="need-icon">✦</span><b>Retrouver de la clarté</b><small>Réengager doucement l’attention.</small></button>
+      </div>
+
       <div class="calm-card glass">
-        <div class="calm-head"><div class="calm-icon">❧</div><div><b>Un retour au calme</b><small>Un geste court, tout de suite, sans chercher à bien faire.</small></div></div>
+        <div class="calm-head"><div class="calm-icon">❧</div><div><b>Je ne sais pas quoi choisir</b><small>Je te propose un geste court, simplement.</small></div></div>
         <button class="primary" id="calmBtn">Me proposer un geste</button>
       </div>
-
-      <div class="section-head"><h3>De quoi as-tu besoin ?</h3><button data-go="explore">Tout voir</button></div>
-      <div class="need-strip">
-        <button class="need-pill" data-need="pressure"><span>⌄</span><b>Faire redescendre</b><small>Quand la pression monte.</small></button>
-        <button class="need-pill" data-need="thoughts"><span>◌</span><b>Créer de l’espace</b><small>Quand les pensées prennent toute la place.</small></button>
-        <button class="need-pill" data-need="presence"><span>◉</span><b>Revenir ici</b><small>Retrouver de la présence.</small></button>
-        <button class="need-pill" data-need="energy"><span>↗</span><b>Retrouver de l’élan</b><small>Quand tout semble ralenti.</small></button>
-        <button class="need-pill" data-need="body"><span>↕</span><b>Relâcher le corps</b><small>Quand la tension s’installe.</small></button>
-        <button class="need-pill" data-need="clarity"><span>✦</span><b>Retrouver de la clarté</b><small>Réengager doucement l’attention.</small></button>
-      </div>
-
-      <div class="section-head"><h3>Le geste du jour</h3><button id="dailyOpen">Ouvrir</button></div>
-      <div class="daily-card visual" id="dailyCard"><img class="brand-img" data-visual="detail" alt=""><div class="daily-copy"><div class="eyebrow">Aujourd’hui</div><b id="dailyTitle"></b><small id="dailyMeta"></small></div></div>
-
-      <div class="section-head"><h3>Mes favoris</h3><button data-go="favorites">Tout voir</button></div>
-      <div class="fav-preview glass" data-go="favorites"><div class="fav-bubble">♡</div><div><b>Retrouver mes gestes</b><small id="favPreview">Ajoute un cœur aux gestes que tu veux garder.</small></div><div class="fav-count" id="favCount">0</div></div>
     </div>
   </div>
-  <nav class="nav"><button class="active" data-go="home"><span>⌂</span>Accueil</button><button data-go="explore"><span>❧</span>Explorer</button><button data-go="favorites"><span>♡</span>Favoris</button></nav>
+  <nav class="nav main-nav">
+    <button data-tab="breath"><span>≈</span>Respirer</button>
+    <button data-tab="movement"><span>↕</span>Corps</button>
+    <button class="nav-center active" data-go="home"><span>❧</span>Maintenant</button>
+    <button data-tab="discreet"><span>◌</span>Discret</button>
+    <button data-go="favorites"><span>♡</span>Favoris</button>
+  </nav>
 </section>
 
 <section class="screen explore" data-screen="explore">
@@ -189,7 +199,13 @@ button{color:inherit}
       <button class="soft surprise" id="surpriseBtn">✦ Surprends-moi</button>
     </div>
   </div>
-  <nav class="nav"><button data-go="home"><span>⌂</span>Accueil</button><button class="active" data-go="explore"><span>❧</span>Explorer</button><button data-go="favorites"><span>♡</span>Favoris</button></nav>
+  <nav class="nav main-nav">
+    <button data-tab="breath"><span>≈</span>Respirer</button>
+    <button data-tab="movement"><span>↕</span>Corps</button>
+    <button class="nav-center" data-go="home"><span>❧</span>Maintenant</button>
+    <button data-tab="discreet"><span>◌</span>Discret</button>
+    <button data-go="favorites"><span>♡</span>Favoris</button>
+  </nav>
 </section>
 
 <section class="screen favorites" data-screen="favorites">
@@ -201,13 +217,19 @@ button{color:inherit}
       <div class="rows" id="favRows"></div>
     </div>
   </div>
-  <nav class="nav"><button data-go="home"><span>⌂</span>Accueil</button><button data-go="explore"><span>❧</span>Explorer</button><button class="active" data-go="favorites"><span>♡</span>Favoris</button></nav>
+  <nav class="nav main-nav">
+    <button data-tab="breath"><span>≈</span>Respirer</button>
+    <button data-tab="movement"><span>↕</span>Corps</button>
+    <button class="nav-center" data-go="home"><span>❧</span>Maintenant</button>
+    <button data-tab="discreet"><span>◌</span>Discret</button>
+    <button class="active" data-go="favorites"><span>♡</span>Favoris</button>
+  </nav>
 </section>
 
-<section class="screen list no-nav" data-screen="list">
+<section class="screen list" data-screen="list">
   <div class="scroll">
     <div class="brand-photo visual"><img class="brand-img" data-visual="list" alt=""></div>
-    <div class="topbar"><button class="icon-btn" data-go="explore">‹</button><button class="icon-btn" id="listRandom">✦</button></div>
+    <div class="topbar"><button class="icon-btn" data-go="home">‹</button><button class="icon-btn" id="listRandom">✦</button></div>
     <div class="sheet">
       <div class="eyebrow" id="listEyebrow"></div><div class="h2" id="listTitle"></div><div class="muted" id="listIntro"></div>
       <div class="filter-chips" id="filterChips">
@@ -220,6 +242,13 @@ button{color:inherit}
       <div class="count" id="listCount"></div><div class="rows" id="listRows"></div>
     </div>
   </div>
+  <nav class="nav main-nav">
+    <button data-tab="breath"><span>≈</span>Respirer</button>
+    <button data-tab="movement"><span>↕</span>Corps</button>
+    <button class="nav-center" data-go="home"><span>❧</span>Maintenant</button>
+    <button data-tab="discreet"><span>◌</span>Discret</button>
+    <button data-go="favorites"><span>♡</span>Favoris</button>
+  </nav>
 </section>
 
 <section class="screen detail no-nav" data-screen="detail">
@@ -384,37 +413,36 @@ function isFav(id){return favorites.has(id)}
 function toggleFav(id){if(!id)return;isFav(id)?favorites.delete(id):favorites.add(id);saveFavs();updateFavButtons();if(current==='favorites')renderFavorites();if(current==='list')renderList()}
 function favPool(){return EXERCISES.filter(e=>favorites.has(e.id))}
 
+function updateMainNav(){
+  document.querySelectorAll('.main-nav button').forEach(b=>{
+    let active=false;
+    if(b.dataset.go==='home') active=current==='home'||(current==='list'&&String(listType).startsWith('need:'));
+    else if(b.dataset.go==='favorites') active=current==='favorites';
+    else if(b.dataset.tab) active=current==='list'&&listType===b.dataset.tab;
+    b.classList.toggle('active',active);
+  });
+}
 function go(name){
   current=name;screens.forEach(s=>s.classList.toggle('active',s.dataset.screen===name));
-  if(name==='home')refreshFavSummary();
+  if(name==='home')refreshFavSummary();updateMainNav();
   if(name==='favorites')renderFavorites();
   if(name==='list')renderList();
   if(name==='detail')renderDetail();
   if(name==='breath')startBreath();
   if(name==='done')updateDoneFav();
+  updateMainNav();
 }
 document.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>go(b.dataset.go));
 document.querySelectorAll('[data-open]').forEach(b=>b.onclick=()=>openList(b.dataset.open));
 document.querySelectorAll('[data-need]').forEach(b=>b.onclick=()=>openList('need:'+b.dataset.need));
+document.querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>openList(b.dataset.tab));
 
 function openList(t){listType=t;lastType=t;durationFilter='all';document.getElementById('searchBox').value='';document.querySelectorAll('.filter-chip').forEach(b=>b.classList.toggle('active',b.dataset.filter==='all'));go('list')}
 document.getElementById('breathCount').textContent=pool('breath').length+' pratiques guidées';
 document.getElementById('movementCount').textContent=pool('movement').length+' gestes pour mobiliser puis relâcher';
 document.getElementById('discreetCount').textContent=pool('discreet').length+' gestes presque invisibles';
 
-const dailyPool=EXERCISES.filter(e=>e.duration<=60&&!e.leaf);
-const day=Math.floor(new Date().setHours(0,0,0,0)/86400000);
-const daily=dailyPool[(day%dailyPool.length+dailyPool.length)%dailyPool.length];
-document.getElementById('dailyTitle').textContent=daily.title;
-document.getElementById('dailyMeta').textContent=fmt(daily.duration)+' · '+daily.tags.slice(0,2).join(' · ');
-document.getElementById('dailyCard').onclick=()=>openExercise(daily);
-document.getElementById('dailyOpen').onclick=()=>openExercise(daily);
-
-function refreshFavSummary(){
-  const p=favPool();document.getElementById('favCount').textContent=p.length;
-  document.getElementById('favPreview').textContent=p.length?p.slice(-2).map(e=>e.title).join(' · '):'Ajoute un cœur aux gestes que tu veux garder.';
-}
-refreshFavSummary();
+function refreshFavSummary(){ /* Les favoris ont désormais leur onglet dédié. */ }
 
 const CALM=['exhale-46','cyclic-sigh','three-slow','hands-release','shoulders-release','self-touch','third-person','affect-label','word-repeat','grounding-333'];
 document.getElementById('calmBtn').onclick=()=>{
@@ -422,7 +450,7 @@ document.getElementById('calmBtn').onclick=()=>{
   if(!p.length)p=EXERCISES.filter(e=>e.duration<=30);
   openExercise(p[Math.floor(Math.random()*p.length)]);
 };
-document.getElementById('surpriseBtn').onclick=()=>openExercise(EXERCISES[Math.floor(Math.random()*EXERCISES.length)]);
+const surpriseBtn=document.getElementById('surpriseBtn');if(surpriseBtn)surpriseBtn.onclick=()=>openExercise(EXERCISES[Math.floor(Math.random()*EXERCISES.length)]);
 
 function renderRows(items,target){
   const box=document.getElementById(target);
