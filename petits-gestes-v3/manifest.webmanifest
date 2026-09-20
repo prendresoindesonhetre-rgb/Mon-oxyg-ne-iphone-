@@ -1,0 +1,21 @@
+{
+  "id": "./",
+  "name": "Les petits gestes de mon Hêtre",
+  "short_name": "Petits gestes",
+  "description": "Un guide de petits gestes à découvrir, tester et adapter à son quotidien.",
+  "lang": "fr",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#fbf8f4",
+  "theme_color": "#edf6f7",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
