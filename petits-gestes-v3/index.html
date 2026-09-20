@@ -51,16 +51,16 @@ button{color:inherit}
 .primary{border:0;border-radius:19px;padding:14px 16px;color:white;background:linear-gradient(135deg,#337f9b,#55b9c7 58%,#7f83c5);font-weight:800;box-shadow:0 12px 25px rgba(54,133,155,.21);cursor:pointer}
 .soft{border:1px solid var(--line);border-radius:17px;padding:12px 14px;background:rgba(255,255,255,.83);font-weight:760;color:#386d86;cursor:pointer}
 .icon-btn{width:43px;height:43px;border:0;border-radius:15px;background:rgba(255,255,255,.87);backdrop-filter:blur(14px);box-shadow:0 8px 20px rgba(38,70,90,.11);font-size:21px;cursor:pointer}
-.topbar{position:absolute;z-index:30;left:0;right:0;top:0;padding:calc(env(safe-area-inset-top,0px) + 14px) 15px 0;display:flex;justify-content:space-between}
+.topbar{position:absolute;z-index:30;left:0;right:0;top:0;padding:calc(env(safe-area-inset-top,0px) + 14px) 15px 0;display:flex;justify-content:space-between;align-items:center}.top-actions{display:flex;gap:8px}.home-tools .icon-btn{background:rgba(255,255,255,.78)}
 .nav{
   position:absolute;z-index:50;left:0;right:0;bottom:0;height:82px;
   padding:9px 8px calc(env(safe-area-inset-bottom,0px) + 7px);
   display:grid;grid-template-columns:repeat(5,1fr);gap:2px;
   background:rgba(251,249,246,.96);backdrop-filter:blur(20px);border-top:1px solid var(--line)
 }
-.nav button{border:0;background:transparent;border-radius:14px;font-size:7.8px;font-weight:820;color:#7a8e99;display:grid;place-items:center;align-content:center;gap:2px;cursor:pointer;min-width:0;padding:4px 2px}
+.nav button{border:0;background:transparent;border-radius:14px;font-size:7.5px;font-weight:820;color:#7a8e99;display:grid;place-items:center;align-content:center;gap:2px;cursor:pointer;min-width:0;padding:4px 1px;letter-spacing:-.01em}
 .nav button span{font-size:18px;line-height:1}.nav button.active:not(.nav-center){background:#e7f2f3;color:#2c718c}
-.nav .nav-center{position:relative;transform:translateY(-21px);height:68px;width:68px;justify-self:center;border-radius:50%;color:white;background:linear-gradient(145deg,#4aaeba,#72a9d3 58%,#8b79c4);box-shadow:0 12px 28px rgba(53,116,145,.28);border:4px solid rgba(251,249,246,.98);font-size:7.5px;padding-top:7px}
+.nav .nav-center{position:relative;transform:translateY(-21px);height:70px;width:70px;justify-self:center;border-radius:50%;color:white;background:linear-gradient(145deg,#4aaeba,#72a9d3 58%,#8b79c4);box-shadow:0 12px 28px rgba(53,116,145,.28);border:4px solid rgba(251,249,246,.98);font-size:7.2px;padding-top:7px}
 .nav .nav-center span{font-size:25px}.nav .nav-center.active{box-shadow:0 13px 30px rgba(53,116,145,.34),0 0 0 3px rgba(85,185,199,.12)}
 .no-nav .nav{display:none}
 
@@ -145,11 +145,12 @@ button{color:inherit}
 <div class="shell"><div class="phone">
 
 <section class="screen home active" data-screen="home">
+  <div class="topbar home-tools"><span></span><button class="icon-btn" data-go="favorites" aria-label="Mes favoris">♡</button></div>
   <div class="scroll">
     <div class="brand-photo visual"><img class="brand-img" data-visual="hero" alt=""><div class="brand-kicker">Prendre soin de son Hêtre</div><div class="brand-title"><h1>Les petits gestes<br>de mon Hêtre</h1><p>Un geste simple, au bon moment.</p></div></div>
     <div class="sheet">
       <div class="now-title">De quoi as-tu besoin maintenant ?</div>
-      <div class="now-sub">Choisis seulement ce qui ressemble le plus à ton moment. L’application te proposera ensuite les gestes adaptés.</div>
+      <div class="now-sub">Choisis ce qui ressemble le plus à ton état du moment. Tu pourras ensuite affiner par respiration, corps ou geste discret.</div>
 
       <div class="needs-grid">
         <button class="need-card" data-need="pressure"><span class="need-icon">⌄</span><b>Faire redescendre</b><small>Stress, agitation, pression qui monte.</small></button>
@@ -167,11 +168,11 @@ button{color:inherit}
     </div>
   </div>
   <nav class="nav main-nav">
-    <button data-tab="breath"><span>≈</span>Respirer</button>
-    <button data-tab="movement"><span>↕</span>Corps</button>
-    <button class="nav-center active" data-go="home"><span>❧</span>Maintenant</button>
-    <button data-tab="discreet"><span>◌</span>Discret</button>
-    <button data-go="favorites"><span>♡</span>Favoris</button>
+    <button data-mode="apaiser"><span>⌄</span>Apaiser</button>
+    <button data-mode="decrocher"><span>◌</span>Décrocher</button>
+    <button class="nav-center" data-go="home"><span>❧</span>Mon besoin</button>
+    <button data-mode="recentrer"><span>◎</span>Recentrer</button>
+    <button data-mode="activer"><span>↗</span>Activer</button>
   </nav>
 </section>
 
@@ -200,15 +201,16 @@ button{color:inherit}
     </div>
   </div>
   <nav class="nav main-nav">
-    <button data-tab="breath"><span>≈</span>Respirer</button>
-    <button data-tab="movement"><span>↕</span>Corps</button>
-    <button class="nav-center" data-go="home"><span>❧</span>Maintenant</button>
-    <button data-tab="discreet"><span>◌</span>Discret</button>
-    <button data-go="favorites"><span>♡</span>Favoris</button>
+    <button data-mode="apaiser"><span>⌄</span>Apaiser</button>
+    <button data-mode="decrocher"><span>◌</span>Décrocher</button>
+    <button class="nav-center" data-go="home"><span>❧</span>Mon besoin</button>
+    <button data-mode="recentrer"><span>◎</span>Recentrer</button>
+    <button data-mode="activer"><span>↗</span>Activer</button>
   </nav>
 </section>
 
 <section class="screen favorites" data-screen="favorites">
+  <div class="topbar"><button class="icon-btn" data-go="home">‹</button><span></span></div>
   <div class="scroll">
     <div class="brand-photo visual"><img class="brand-img" data-visual="list" alt=""><div class="brand-kicker">Mes favoris</div><div class="brand-title"><h1>Ce que tu veux<br>garder près de toi</h1><p>Une bibliothèque qui devient vraiment la tienne.</p></div></div>
     <div class="sheet">
@@ -218,36 +220,36 @@ button{color:inherit}
     </div>
   </div>
   <nav class="nav main-nav">
-    <button data-tab="breath"><span>≈</span>Respirer</button>
-    <button data-tab="movement"><span>↕</span>Corps</button>
-    <button class="nav-center" data-go="home"><span>❧</span>Maintenant</button>
-    <button data-tab="discreet"><span>◌</span>Discret</button>
-    <button class="active" data-go="favorites"><span>♡</span>Favoris</button>
+    <button data-mode="apaiser"><span>⌄</span>Apaiser</button>
+    <button data-mode="decrocher"><span>◌</span>Décrocher</button>
+    <button class="nav-center" data-go="home"><span>❧</span>Mon besoin</button>
+    <button data-mode="recentrer"><span>◎</span>Recentrer</button>
+    <button data-mode="activer"><span>↗</span>Activer</button>
   </nav>
 </section>
 
 <section class="screen list" data-screen="list">
   <div class="scroll">
     <div class="brand-photo visual"><img class="brand-img" data-visual="list" alt=""></div>
-    <div class="topbar"><button class="icon-btn" data-go="home">‹</button><button class="icon-btn" id="listRandom">✦</button></div>
+    <div class="topbar"><button class="icon-btn" data-go="home">‹</button><div class="top-actions"><button class="icon-btn" id="listRandom" aria-label="Au hasard">✦</button><button class="icon-btn" data-go="favorites" aria-label="Mes favoris">♡</button></div></div>
     <div class="sheet">
       <div class="eyebrow" id="listEyebrow"></div><div class="h2" id="listTitle"></div><div class="muted" id="listIntro"></div>
       <div class="filter-chips" id="filterChips">
         <button class="filter-chip active" data-filter="all">Tous</button>
-        <button class="filter-chip" data-filter="quick">≤ 30 s</button>
-        <button class="filter-chip" data-filter="minute">≈ 1 min</button>
-        <button class="filter-chip" data-filter="long">2–5 min</button>
+        <button class="filter-chip" data-filter="breath">Respiration</button>
+        <button class="filter-chip" data-filter="movement">Corps</button>
+        <button class="filter-chip" data-filter="discreet">Discret</button>
       </div>
       <div class="search-wrap"><input class="search" id="searchBox" placeholder="Rechercher…"><span class="search-mark">⌕</span></div>
       <div class="count" id="listCount"></div><div class="rows" id="listRows"></div>
     </div>
   </div>
   <nav class="nav main-nav">
-    <button data-tab="breath"><span>≈</span>Respirer</button>
-    <button data-tab="movement"><span>↕</span>Corps</button>
-    <button class="nav-center" data-go="home"><span>❧</span>Maintenant</button>
-    <button data-tab="discreet"><span>◌</span>Discret</button>
-    <button data-go="favorites"><span>♡</span>Favoris</button>
+    <button data-mode="apaiser"><span>⌄</span>Apaiser</button>
+    <button data-mode="decrocher"><span>◌</span>Décrocher</button>
+    <button class="nav-center" data-go="home"><span>❧</span>Mon besoin</button>
+    <button data-mode="recentrer"><span>◎</span>Recentrer</button>
+    <button data-mode="activer"><span>↗</span>Activer</button>
   </nav>
 </section>
 
@@ -372,8 +374,15 @@ const NEED_MAP={
 };
 const needsOf=e=>Object.keys(NEED_MAP).filter(k=>NEED_MAP[k].includes(e.id));
 
+const MODES={
+  apaiser:{label:"Apaiser",title:"Faire redescendre ce qui déborde",intro:"Des gestes choisis pour ralentir, relâcher ou diminuer l’intensité du moment.",ids:[...new Set([...(NEED_MAP.pressure||[]),...(NEED_MAP.body||[])])]},
+  decrocher:{label:"Décrocher",title:"Créer un peu d’espace avec mes pensées",intro:"Des gestes pour déplacer l’attention, mettre à distance ou casser brièvement une boucle mentale.",ids:[...(NEED_MAP.thoughts||[])]},
+  recentrer:{label:"Recentrer",title:"Revenir pleinement à ce qui est là",intro:"Des gestes de présence, d’orientation et d’attention pour retrouver des repères ici et maintenant.",ids:[...new Set([...(NEED_MAP.presence||[]),...(NEED_MAP.clarity||[])])]},
+  activer:{label:"Activer",title:"Retrouver de l’élan et de la vigilance",intro:"Des gestes pour réveiller doucement l’énergie, la curiosité ou l’engagement.",ids:[...(NEED_MAP.energy||[])]}
+};
+
 const screens=[...document.querySelectorAll('.screen')];
-let current='home',listType='discreet',durationFilter='all',currentExercise=null,lastType='discreet',timerId=null;
+let current='home',listType='mode:recentrer',categoryFilter='all',currentExercise=null,lastType='mode:recentrer',timerId=null;
 let inhale=4,exhale=6,breathStart=0,breathPaused=false,pauseAt=0,windPhase=0,lastFrame=performance.now();
 
 let favData=[];try{favData=JSON.parse(localStorage.getItem('petits-gestes-favorites')||'[]')}catch(e){}
@@ -384,6 +393,10 @@ const pool=t=>{
   if(t&&t.startsWith('need:')){
     const code=t.slice(5);
     return EXERCISES.filter(e=>(NEED_MAP[code]||[]).includes(e.id));
+  }
+  if(t&&t.startsWith('mode:')){
+    const code=t.slice(5);
+    return EXERCISES.filter(e=>(MODES[code]?.ids||[]).includes(e.id));
   }
   return EXERCISES.filter(e=>typeOf(e)===t);
 };
@@ -416,9 +429,8 @@ function favPool(){return EXERCISES.filter(e=>favorites.has(e.id))}
 function updateMainNav(){
   document.querySelectorAll('.main-nav button').forEach(b=>{
     let active=false;
-    if(b.dataset.go==='home') active=current==='home'||(current==='list'&&String(listType).startsWith('need:'));
-    else if(b.dataset.go==='favorites') active=current==='favorites';
-    else if(b.dataset.tab) active=current==='list'&&listType===b.dataset.tab;
+    if(b.dataset.go==='home') active=current==='home'||current==='favorites'||(current==='list'&&String(listType).startsWith('need:'));
+    else if(b.dataset.mode) active=current==='list'&&listType==='mode:'+b.dataset.mode;
     b.classList.toggle('active',active);
   });
 }
@@ -435,9 +447,9 @@ function go(name){
 document.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>go(b.dataset.go));
 document.querySelectorAll('[data-open]').forEach(b=>b.onclick=()=>openList(b.dataset.open));
 document.querySelectorAll('[data-need]').forEach(b=>b.onclick=()=>openList('need:'+b.dataset.need));
-document.querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>openList(b.dataset.tab));
+document.querySelectorAll('[data-mode]').forEach(b=>b.onclick=()=>openList('mode:'+b.dataset.mode));
 
-function openList(t){listType=t;lastType=t;durationFilter='all';document.getElementById('searchBox').value='';document.querySelectorAll('.filter-chip').forEach(b=>b.classList.toggle('active',b.dataset.filter==='all'));go('list')}
+function openList(t){listType=t;lastType=t;categoryFilter='all';document.getElementById('searchBox').value='';document.querySelectorAll('.filter-chip').forEach(b=>b.classList.toggle('active',b.dataset.filter==='all'));go('list')}
 document.getElementById('breathCount').textContent=pool('breath').length+' pratiques guidées';
 document.getElementById('movementCount').textContent=pool('movement').length+' gestes pour mobiliser puis relâcher';
 document.getElementById('discreetCount').textContent=pool('discreet').length+' gestes presque invisibles';
@@ -462,8 +474,8 @@ function renderRows(items,target){
 function renderList(){
   const q=document.getElementById('searchBox').value.toLowerCase().trim();
   const base=pool(listType);
-  const durationOK=e=>durationFilter==='all'||(durationFilter==='quick'&&e.duration<=30)||(durationFilter==='minute'&&e.duration>30&&e.duration<=75)||(durationFilter==='long'&&e.duration>75);
-  const items=base.filter(e=>durationOK(e)&&(!q||(e.title+' '+e.when+' '+e.lead+' '+e.tags.join(' ')).toLowerCase().includes(q)));
+  const categoryOK=e=>categoryFilter==='all'||typeOf(e)===categoryFilter;
+  const items=base.filter(e=>categoryOK(e)&&(!q||(e.title+' '+e.when+' '+e.lead+' '+e.tags.join(' ')).toLowerCase().includes(q)));
   const labels={
     breath:{eyebrow:'Respiration',title:'Choisis une respiration',intro:'Des pratiques simples, guidées et sans recherche de performance.',count:'respirations'},
     movement:{eyebrow:'Mouvement du corps',title:'Mobiliser, puis relâcher',intro:'Des gestes corporels courts pour créer un contraste entre tension, mouvement et relâchement.',count:'mouvements'},
@@ -473,6 +485,10 @@ function renderList(){
     const code=listType.slice(5),n=NEEDS[code]||NEEDS.presence;
     labels[listType]={eyebrow:'Selon mon besoin',title:n.label,intro:n.desc,count:'propositions'};
   }
+  if(listType.startsWith('mode:')){
+    const code=listType.slice(5),m=MODES[code]||MODES.recentrer;
+    labels[listType]={eyebrow:m.label,title:m.title,intro:m.intro,count:'gestes'};
+  }
   const m=labels[listType]||labels.discreet;
   document.getElementById('listEyebrow').textContent=m.eyebrow;
   document.getElementById('listTitle').textContent=m.title;
@@ -481,7 +497,7 @@ function renderList(){
   renderRows(items,'listRows');
 }
 document.getElementById('searchBox').oninput=renderList;
-document.querySelectorAll('.filter-chip').forEach(b=>b.onclick=()=>{durationFilter=b.dataset.filter;document.querySelectorAll('.filter-chip').forEach(x=>x.classList.toggle('active',x===b));renderList()});
+document.querySelectorAll('.filter-chip').forEach(b=>b.onclick=()=>{categoryFilter=b.dataset.filter;document.querySelectorAll('.filter-chip').forEach(x=>x.classList.toggle('active',x===b));renderList()});
 document.getElementById('listRandom').onclick=()=>{const p=pool(listType);openExercise(p[Math.floor(Math.random()*p.length)])};
 
 function renderFavorites(){const p=favPool();document.getElementById('favPageCount').textContent=p.length+' favori'+(p.length>1?'s':'');renderRows(p,'favRows')}
