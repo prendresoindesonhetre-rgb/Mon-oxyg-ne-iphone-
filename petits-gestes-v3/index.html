@@ -72,7 +72,7 @@ button{color:inherit}
 .calm-icon{width:52px;height:52px;border-radius:17px;display:grid;place-items:center;background:linear-gradient(145deg,#deeff3,#eee7f6);font-size:24px}
 .calm-head b{display:block;font:20px/1.1 Georgia,serif}.calm-head small{display:block;margin-top:4px;font-size:10px;color:#708793}
 .calm-card .primary{position:relative;z-index:1;width:100%;margin-top:13px}
-.section-head{display:flex;justify-content:space-between;align-items:flex-end;margin:22px 2px 10px}
+.section-head{display:flex;justify-content:space-between;align-items:flex-end;margin:22px 2px 10px}.section-head.compact{margin-top:24px}.need-strip{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin:0 -2px;padding:2px 2px 5px}.need-strip::-webkit-scrollbar{display:none}.need-pill{min-width:138px;border:1px solid rgba(255,255,255,.9);border-radius:19px;padding:12px 12px 11px;background:rgba(255,255,255,.78);box-shadow:0 9px 22px rgba(42,71,89,.07);text-align:left;cursor:pointer}.need-pill span{display:block;font-size:18px;margin-bottom:5px}.need-pill b{display:block;font:13px/1.15 Georgia,serif;color:#356a82}.need-pill small{display:block;margin-top:4px;font-size:8.5px;line-height:1.3;color:#7a8e99}
 .section-head h3{margin:0;font:18px Georgia,serif}.section-head button{border:0;background:none;color:#668698;font-size:10px;font-weight:800;cursor:pointer}
 .daily-card{position:relative;height:132px;border-radius:23px;overflow:hidden;cursor:pointer;background:linear-gradient(145deg,#dceef2,#ebe7f5)}
 .daily-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:67% 42%;opacity:0;transition:opacity .35s}
@@ -87,7 +87,7 @@ button{color:inherit}
 .explore .brand-photo{height:250px}
 .explore .sheet{min-height:calc(100% - 220px)}
 .explore-intro{margin-top:5px}
-.explore-grid{display:grid;gap:12px;margin-top:18px}
+.needs-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:17px}.need-card{border:0;border-radius:20px;padding:14px 12px;background:rgba(255,255,255,.82);box-shadow:0 10px 25px rgba(40,70,88,.08);text-align:left;cursor:pointer;min-height:104px;position:relative;overflow:hidden}.need-card:after{content:"";position:absolute;width:80px;height:80px;border-radius:50%;right:-30px;bottom:-34px;background:radial-gradient(circle,rgba(85,185,199,.18),rgba(140,118,198,.08) 58%,transparent 72%)}.need-card .need-icon{display:block;font-size:21px;margin-bottom:8px}.need-card b{display:block;font:14px/1.15 Georgia,serif;color:#356a82}.need-card small{display:block;margin-top:5px;font-size:8.5px;line-height:1.3;color:#7a8f9a}.explore-grid{display:grid;gap:10px;margin-top:10px}
 .explore-card{border:0;border-radius:24px;padding:17px;text-align:left;display:grid;grid-template-columns:58px 1fr 24px;align-items:center;gap:13px;cursor:pointer;position:relative;overflow:hidden}.explore-card:after{content:"";position:absolute;width:95px;height:95px;border-radius:50%;right:-38px;top:-43px;background:radial-gradient(circle,rgba(117,184,211,.16),rgba(139,118,198,.08) 55%,transparent 70%);pointer-events:none}
 .explore-icon{width:58px;height:58px;border-radius:19px;display:grid;place-items:center;font-size:26px;background:linear-gradient(145deg,#dceff3,#ece6f5)}
 .explore-card b{display:block;font:19px Georgia,serif}.explore-card small{display:block;margin-top:5px;font-size:10px;color:#738995;line-height:1.35}.chev{font-size:24px;color:#7a98a7}
@@ -138,15 +138,25 @@ button{color:inherit}
 
 <section class="screen home active" data-screen="home">
   <div class="scroll">
-    <div class="brand-photo visual"><img class="brand-img" alt=""><div class="brand-kicker">Prendre soin de son Hêtre</div><div class="brand-title"><h1>Les petits gestes<br>de mon Hêtre</h1><p>Quelques secondes pour revenir à toi.</p></div></div>
+    <div class="brand-photo visual"><img class="brand-img" data-visual="hero" alt=""><div class="brand-kicker">Prendre soin de son Hêtre</div><div class="brand-title"><h1>Les petits gestes<br>de mon Hêtre</h1><p>Quelques secondes pour revenir à toi.</p></div></div>
     <div class="sheet">
       <div class="calm-card glass">
         <div class="calm-head"><div class="calm-icon">❧</div><div><b>Un retour au calme</b><small>Un geste court, tout de suite, sans chercher à bien faire.</small></div></div>
         <button class="primary" id="calmBtn">Me proposer un geste</button>
       </div>
 
+      <div class="section-head"><h3>De quoi as-tu besoin ?</h3><button data-go="explore">Tout voir</button></div>
+      <div class="need-strip">
+        <button class="need-pill" data-need="pressure"><span>⌄</span><b>Faire redescendre</b><small>Quand la pression monte.</small></button>
+        <button class="need-pill" data-need="thoughts"><span>◌</span><b>Créer de l’espace</b><small>Quand les pensées prennent toute la place.</small></button>
+        <button class="need-pill" data-need="presence"><span>◉</span><b>Revenir ici</b><small>Retrouver de la présence.</small></button>
+        <button class="need-pill" data-need="energy"><span>↗</span><b>Retrouver de l’élan</b><small>Quand tout semble ralenti.</small></button>
+        <button class="need-pill" data-need="body"><span>↕</span><b>Relâcher le corps</b><small>Quand la tension s’installe.</small></button>
+        <button class="need-pill" data-need="clarity"><span>✦</span><b>Retrouver de la clarté</b><small>Réengager doucement l’attention.</small></button>
+      </div>
+
       <div class="section-head"><h3>Le geste du jour</h3><button id="dailyOpen">Ouvrir</button></div>
-      <div class="daily-card visual" id="dailyCard"><img class="brand-img" alt=""><div class="daily-copy"><div class="eyebrow">Aujourd’hui</div><b id="dailyTitle"></b><small id="dailyMeta"></small></div></div>
+      <div class="daily-card visual" id="dailyCard"><img class="brand-img" data-visual="detail" alt=""><div class="daily-copy"><div class="eyebrow">Aujourd’hui</div><b id="dailyTitle"></b><small id="dailyMeta"></small></div></div>
 
       <div class="section-head"><h3>Mes favoris</h3><button data-go="favorites">Tout voir</button></div>
       <div class="fav-preview glass" data-go="favorites"><div class="fav-bubble">♡</div><div><b>Retrouver mes gestes</b><small id="favPreview">Ajoute un cœur aux gestes que tu veux garder.</small></div><div class="fav-count" id="favCount">0</div></div>
@@ -157,10 +167,20 @@ button{color:inherit}
 
 <section class="screen explore" data-screen="explore">
   <div class="scroll">
-    <div class="brand-photo visual"><img class="brand-img" alt=""><div class="brand-kicker">Explorer</div><div class="brand-title"><h1>Choisis simplement<br>ton chemin</h1><p>Trois chemins simples, selon ce dont tu as besoin.</p></div></div>
+    <div class="brand-photo visual"><img class="brand-img" data-visual="explore" alt=""><div class="brand-kicker">Explorer</div><div class="brand-title"><h1>Choisis simplement<br>ton chemin</h1><p>Trois chemins simples, selon ce dont tu as besoin.</p></div></div>
     <div class="sheet">
-      <div class="h2">Qu’as-tu envie d’essayer ?</div>
-      <div class="muted explore-intro">Tu peux parcourir la bibliothèque ou laisser l’application te proposer quelque chose.</div>
+      <div class="h2">Commence par ce dont tu as besoin</div>
+      <div class="muted explore-intro">Pas besoin de connaître la bonne technique : choisis seulement ce qui ressemble le plus à ton moment.</div>
+      <div class="needs-grid">
+        <button class="need-card" data-need="pressure"><span class="need-icon">⌄</span><b>Faire redescendre la pression</b><small>Stress, agitation, montée d’angoisse.</small></button>
+        <button class="need-card" data-need="thoughts"><span class="need-icon">◌</span><b>Créer de l’espace dans mes pensées</b><small>Boucles mentales, ruminations, surcharge.</small></button>
+        <button class="need-card" data-need="presence"><span class="need-icon">◉</span><b>Retrouver de la présence</b><small>Revenir ici, aux sens et à l’instant.</small></button>
+        <button class="need-card" data-need="energy"><span class="need-icon">↗</span><b>Retrouver de l’élan</b><small>Réveiller doucement l’énergie et la vigilance.</small></button>
+        <button class="need-card" data-need="body"><span class="need-icon">↕</span><b>Relâcher mon corps</b><small>Créer du contraste puis laisser tomber la tension.</small></button>
+        <button class="need-card" data-need="clarity"><span class="need-icon">✦</span><b>Retrouver de la clarté</b><small>Réengager l’attention avec une tâche simple.</small></button>
+      </div>
+
+      <div class="section-head compact"><h3>Ou explorer par type</h3></div>
       <div class="explore-grid">
         <button class="explore-card glass" data-open="breath"><span class="explore-icon">≈</span><span><b>Respiration</b><small id="breathCount"></small></span><span class="chev">›</span></button>
         <button class="explore-card glass" data-open="movement"><span class="explore-icon">↕</span><span><b>Mouvement du corps</b><small id="movementCount"></small></span><span class="chev">›</span></button>
@@ -174,7 +194,7 @@ button{color:inherit}
 
 <section class="screen favorites" data-screen="favorites">
   <div class="scroll">
-    <div class="brand-photo visual"><img class="brand-img" alt=""><div class="brand-kicker">Mes favoris</div><div class="brand-title"><h1>Ce que tu veux<br>garder près de toi</h1><p>Une bibliothèque qui devient vraiment la tienne.</p></div></div>
+    <div class="brand-photo visual"><img class="brand-img" data-visual="list" alt=""><div class="brand-kicker">Mes favoris</div><div class="brand-title"><h1>Ce que tu veux<br>garder près de toi</h1><p>Une bibliothèque qui devient vraiment la tienne.</p></div></div>
     <div class="sheet">
       <div class="h2">Mes favoris</div><div class="muted">Tous les gestes que tu as choisis de garder sont ici.</div>
       <div class="count" id="favPageCount"></div>
@@ -186,7 +206,7 @@ button{color:inherit}
 
 <section class="screen list no-nav" data-screen="list">
   <div class="scroll">
-    <div class="brand-photo visual"><img class="brand-img" alt=""></div>
+    <div class="brand-photo visual"><img class="brand-img" data-visual="list" alt=""></div>
     <div class="topbar"><button class="icon-btn" data-go="explore">‹</button><button class="icon-btn" id="listRandom">✦</button></div>
     <div class="sheet">
       <div class="eyebrow" id="listEyebrow"></div><div class="h2" id="listTitle"></div><div class="muted" id="listIntro"></div>
@@ -204,7 +224,7 @@ button{color:inherit}
 
 <section class="screen detail no-nav" data-screen="detail">
   <div class="scroll">
-    <div class="brand-photo visual"><img class="brand-img" alt=""></div>
+    <div class="brand-photo visual"><img class="brand-img" data-visual="detail" alt=""></div>
     <div class="topbar"><button class="icon-btn" id="detailBack">‹</button><button class="icon-btn" id="detailHeart">♡</button></div>
     <div class="sheet">
       <div id="instruction">
@@ -223,7 +243,7 @@ button{color:inherit}
 </section>
 
 <section class="screen breath no-nav" data-screen="breath">
-  <div class="breath-bg visual"><img class="brand-img" alt=""></div>
+  <div class="breath-bg visual"><img class="brand-img" data-visual="hero" alt=""></div>
   <div class="topbar"><button class="icon-btn" id="breathBack">‹</button><button class="icon-btn" id="breathHeart">♡</button></div>
   <div class="breath-title"><div class="h2">La feuille et le souffle</div><div class="muted">Elle flotte toujours avec le vent. Elle monte à l’inspiration et redescend à l’expiration.</div></div>
   <div class="leaf-space"><div class="leaf" id="leaf"><svg viewBox="0 0 60 92"><defs><linearGradient id="leafG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#55c2cb"/><stop offset=".55" stop-color="#67a9d0"/><stop offset="1" stop-color="#8f6dc2"/></linearGradient></defs><path d="M30 4C10 11 3 35 8 57C12 76 23 86 30 89C42 80 52 63 52 43C52 22 42 8 30 4Z" fill="url(#leafG)" stroke="#2c7185" stroke-width="1.4"/><path d="M30 10V84M30 29L15 38M30 39L45 47M30 51L16 60M30 61L43 69" stroke="#2e7b8c" stroke-width="1.1" fill="none"/></svg></div></div>
@@ -235,7 +255,7 @@ button{color:inherit}
 </section>
 
 <section class="screen done no-nav" data-screen="done">
-  <div class="done-bg visual"><img class="brand-img" alt=""></div>
+  <div class="done-bg visual"><img class="brand-img" data-visual="detail" alt=""></div>
   <div class="done-card glass"><div class="h2">C’est fait 🌿</div><p>Tu viens simplement d’essayer un geste.<br>Garde ce qui t’est utile, laisse le reste.</p><div class="done-actions"><button class="soft" id="doneFav">♡ Ajouter aux favoris</button><button class="primary" id="doneAnother">Essayer un autre geste</button><button class="soft" data-go="home">Retour à l’accueil</button></div></div>
 </section>
 
@@ -296,8 +316,32 @@ const EXERCISES=[
 {id:"warm-cool",title:"Trouve un point plus chaud et un point plus frais",cat:"discreet",icon:"↕",duration:25,evidence:"À explorer",source:"Orientation sensorielle",when:"Quand tu veux occuper l’attention avec une différence physique fine.",lead:"Cherche sur tes mains ou ton visage une zone un peu plus chaude, puis une un peu plus fraîche.",steps:["Pas besoin d’un contraste net.","Compare simplement deux zones.","Reste quelques secondes sur chacune."],tags:["Sensoriel","25 s"]},
 {id:"name-action",title:"Nomme exactement ce que tu fais",cat:"discreet",icon:"•",duration:15,evidence:"À explorer",source:"Attention au présent / description neutre",when:"Quand tu es très loin dans tes pensées.",lead:"Formule mentalement une phrase factuelle et banale sur ce que tu fais.",steps:["« Je suis assis sur une chaise. »","« Je tiens mon téléphone. »","« Je marche dans le couloir. »"],tags:["Présent","15 s"]},
 {id:"three-facts",title:"Décris un objet en trois faits neutres",cat:"discreet",icon:"3",duration:30,evidence:"À tester",source:"Déplacement attentionnel descriptif",when:"Quand tu veux revenir à quelque chose de concret.",lead:"Choisis un objet et donne-lui trois caractéristiques sans jugement.",steps:["« Rectangulaire. »","« Bleu foncé. »","« Surface lisse. »"],tags:["Attention","30 s"]},
-{id:"two-sides-touch",title:"Deux contacts à la fois",cat:"discreet",icon:"↔",duration:30,evidence:"À explorer",source:"Attention tactile bilatérale · preuve spécifique limitée",when:"Quand tu veux donner au cerveau deux sensations simples à suivre.",lead:"Sens en même temps le contact de tes deux pieds au sol, ou de tes deux mains sur tes cuisses.",steps:["Ne tapote pas.","Compare simplement gauche et droite.","Puis sens les deux en même temps."],tags:["Bilatéral","30 s"]}
+{id:"two-sides-touch",title:"Deux contacts à la fois",cat:"discreet",icon:"↔",duration:30,evidence:"À explorer",source:"Attention tactile bilatérale · preuve spécifique limitée",when:"Quand tu veux donner au cerveau deux sensations simples à suivre.",lead:"Sens en même temps le contact de tes deux pieds au sol, ou de tes deux mains sur tes cuisses.",steps:["Ne tapote pas.","Compare simplement gauche et droite.","Puis sens les deux en même temps."],tags:["Bilatéral","30 s"]},
+{id:"focus-open-sound",title:"Un son, puis tous les sons",cat:"discreet",icon:"◎",duration:30,evidence:"Adaptation solide",source:"Attention focalisée vs open monitoring · littérature méditative/cognitive",when:"Quand ton attention est soit trop serrée, soit complètement dispersée.",lead:"Passe volontairement d’une attention très étroite à une attention beaucoup plus ouverte.",steps:["Choisis un seul son et reste avec lui 10 secondes.","Puis cesse de choisir : laisse entrer tous les sons à la fois pendant 10 à 20 secondes.","Observe seulement la différence entre les deux façons d’écouter."],tags:["Attention","30 s"]},
+{id:"novelty-scan",title:"Trouve ce que tu n’avais pas remarqué",cat:"discreet",icon:"✦",duration:30,evidence:"À explorer",source:"Orientation à la nouveauté / oddball · neurosciences de l’attention",when:"Quand tout semble automatique ou que ton attention décroche.",lead:"Cherche autour de toi un détail que tu n’avais encore jamais vraiment regardé.",steps:["Ne change pas forcément de pièce.","Cherche une petite forme, une ombre, une texture, un reflet.","Reste dessus quelques secondes comme si tu le découvrais."],tags:["Nouveauté","30 s"]},
+{id:"near-far-gaze",title:"Regarde près, puis loin",cat:"discreet",icon:"↔",duration:30,evidence:"À explorer",source:"Changement de profondeur visuelle · usage attentionnel/ergonomique",when:"Après un écran ou quand le regard semble figé.",lead:"Fais passer doucement ton regard d’un objet proche à un point lointain.",steps:["Choisis un objet à portée de main pendant 5 secondes.","Puis regarde un point aussi loin que possible pendant 10 secondes.","Reviens une fois au proche, puis au loin."],tags:["Regard","30 s"]},
+{id:"chew-alert",title:"Mâche pour te réveiller",cat:"discreet",icon:"◡",duration:180,evidence:"Effet petit mais documenté",source:"Allen & Smith, 2019 · méta-analyse attention/vigilance",when:"Quand tu as quelque chose à mâcher et que tu sens la vigilance baisser.",lead:"Mâche tranquillement pendant quelques minutes en laissant le rythme rester naturel.",steps:["Pas besoin de mâcher vite.","Utilise seulement quelque chose que tu consommes habituellement.","Observe surtout si tu te sens un peu plus éveillé."],tags:["Vigilance","3 min"],safety:"À utiliser seulement si mâcher est adapté et sans risque pour toi."},
+{id:"backward-steps",title:"Six pas en arrière",cat:"movement",icon:"↶",duration:20,evidence:"Expérimental ciblé",source:"Aksentijevic et al., 2019 · cognition et mouvement vers l’arrière",when:"Quand tu peux le faire dans un espace parfaitement dégagé et sûr.",lead:"Fais quelques pas lents en arrière pour casser brièvement un automatisme moteur.",steps:["Regarde d’abord derrière toi.","Fais 4 à 6 petits pas lents.","Arrête-toi puis observe ce que cela change dans ton attention."],tags:["Nouveauté motrice","20 s"],safety:"Uniquement dans un espace dégagé, stable et sans obstacle. À éviter si équilibre fragile, vertiges ou risque de chute."},
+{id:"stairs-energy",title:"Trois minutes d’escaliers",cat:"movement",icon:"↗",duration:180,evidence:"Directement étudié",source:"Acute stair walking · études énergie/fatigue",when:"Quand tu veux surtout retrouver de l’élan plutôt que te calmer.",lead:"Si ta condition physique et l’environnement le permettent, monte des escaliers à un rythme confortable pendant quelques minutes.",steps:["Reste à une intensité où tu gardes le contrôle de ta respiration.","Ralentis ou arrête si nécessaire.","Observe surtout ton niveau d’énergie juste après."],tags:["Élan","3 min"],safety:"À éviter si l’effort ou les escaliers ne sont pas adaptés à ta condition physique."}
 ];
+
+const NEEDS={
+  pressure:{label:"Faire redescendre la pression",short:"Faire redescendre",icon:"⌄",desc:"Quand le stress ou l’agitation prennent trop de place."},
+  thoughts:{label:"Créer de l’espace dans mes pensées",short:"Créer de l’espace",icon:"◌",desc:"Quand une pensée tourne, colle ou se répète."},
+  presence:{label:"Retrouver de la présence",short:"Revenir ici",icon:"◉",desc:"Quand tu veux retrouver l’instant et tes perceptions."},
+  energy:{label:"Retrouver de l’élan",short:"Retrouver de l’élan",icon:"↗",desc:"Quand tu veux te remettre doucement en mouvement."},
+  body:{label:"Relâcher mon corps",short:"Relâcher le corps",icon:"↕",desc:"Quand la tension semble surtout physique."},
+  clarity:{label:"Retrouver de la clarté",short:"Retrouver de la clarté",icon:"✦",desc:"Quand ton attention est embrouillée ou dispersée."}
+};
+const NEED_MAP={
+ pressure:["leaf-breath","slow-55","exhale-46","cyclic-sigh","diaphragm","pursed","box","nasal-slow","three-slow","pmr-3","hands-release","shoulders-release","jaw-release","scapula-release","palms-press","feet-press","open-hands","self-touch","grounding-333","tongue","teeth-space","feet-contact","soft-grip","autogenic-heavy"],
+ thoughts:["third-person","affect-label","word-repeat","thought-prefix","next-thought","subtract-3","spell-back","color-hunt","straight-lines","angles","name-action","three-facts","grounding-333","focus-open-sound"],
+ presence:["grounding-333","feet-contact","thumb-index","peripheral","near-far-sound","back-contact","warm-cool","name-action","three-facts","two-sides-touch","focus-open-sound","novelty-scan","near-far-gaze","tongue"],
+ energy:["upright","soft-smile","brisk-walk","humming","chew-alert","backward-steps","stairs-energy","novelty-scan"],
+ body:["pmr-3","hands-release","shoulders-release","jaw-release","scapula-release","palms-press","feet-press","open-hands","wall-push","brisk-walk","self-touch","tongue","teeth-space","soft-grip"],
+ clarity:["third-person","affect-label","word-repeat","thought-prefix","subtract-3","spell-back","color-hunt","straight-lines","angles","near-far-sound","focus-open-sound","novelty-scan","near-far-gaze","name-action","three-facts","backward-steps"]
+};
+const needsOf=e=>Object.keys(NEED_MAP).filter(k=>NEED_MAP[k].includes(e.id));
 
 const screens=[...document.querySelectorAll('.screen')];
 let current='home',listType='discreet',durationFilter='all',currentExercise=null,lastType='discreet',timerId=null;
@@ -307,15 +351,29 @@ let favData=[];try{favData=JSON.parse(localStorage.getItem('petits-gestes-favori
 const favorites=new Set(Array.isArray(favData)?favData:[]);
 const typeOf=e=>e?.cat||'discreet';
 const fmt=s=>s<60?s+' s':s===60?'1 min':Math.round(s/60)+' min';
-const pool=t=>EXERCISES.filter(e=>typeOf(e)===t);
+const pool=t=>{
+  if(t&&t.startsWith('need:')){
+    const code=t.slice(5);
+    return EXERCISES.filter(e=>(NEED_MAP[code]||[]).includes(e.id));
+  }
+  return EXERCISES.filter(e=>typeOf(e)===t);
+};
 
 async function loadBrandImage(){
   try{
     const b64=(await (await fetch('assets/hero.b64?v=3')).text()).trim();
-    const url='data:image/webp;base64,'+b64;
+    const hero='data:image/webp;base64,'+b64;
+    const sources={
+      hero,
+      explore:'../petits-gestes/assets/explore.webp?v=3',
+      list:'../petits-gestes/assets/list.webp?v=3',
+      detail:'../petits-gestes/assets/detail.webp?v=3'
+    };
     document.querySelectorAll('.brand-img').forEach(img=>{
+      const key=img.dataset.visual||'hero';
       img.onload=()=>img.closest('.visual')?.classList.add('loaded');
-      img.src=url;
+      img.onerror=()=>{if(img.src!==hero)img.src=hero};
+      img.src=sources[key]||hero;
     });
   }catch(e){console.warn('Visuel indisponible',e)}
 }
@@ -337,6 +395,7 @@ function go(name){
 }
 document.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>go(b.dataset.go));
 document.querySelectorAll('[data-open]').forEach(b=>b.onclick=()=>openList(b.dataset.open));
+document.querySelectorAll('[data-need]').forEach(b=>b.onclick=()=>openList('need:'+b.dataset.need));
 
 function openList(t){listType=t;lastType=t;durationFilter='all';document.getElementById('searchBox').value='';document.querySelectorAll('.filter-chip').forEach(b=>b.classList.toggle('active',b.dataset.filter==='all'));go('list')}
 document.getElementById('breathCount').textContent=pool('breath').length+' pratiques guidées';
@@ -382,6 +441,10 @@ function renderList(){
     movement:{eyebrow:'Mouvement du corps',title:'Mobiliser, puis relâcher',intro:'Des gestes corporels courts pour créer un contraste entre tension, mouvement et relâchement.',count:'mouvements'},
     discreet:{eyebrow:'Discret',title:'Un geste presque invisible',intro:'Des micro-gestes utilisables au travail, dans les transports ou au milieu d’une conversation.',count:'gestes discrets'}
   };
+  if(listType.startsWith('need:')){
+    const code=listType.slice(5),n=NEEDS[code]||NEEDS.presence;
+    labels[listType]={eyebrow:'Selon mon besoin',title:n.label,intro:n.desc,count:'propositions'};
+  }
   const m=labels[listType]||labels.discreet;
   document.getElementById('listEyebrow').textContent=m.eyebrow;
   document.getElementById('listTitle').textContent=m.title;
@@ -395,7 +458,7 @@ document.getElementById('listRandom').onclick=()=>{const p=pool(listType);openEx
 
 function renderFavorites(){const p=favPool();document.getElementById('favPageCount').textContent=p.length+' favori'+(p.length>1?'s':'');renderRows(p,'favRows')}
 
-function openExercise(e){if(!e)return;currentExercise=e;lastType=typeOf(e);go(e.leaf?'breath':'detail')}
+function openExercise(e){if(!e)return;currentExercise=e;if(current==='list')lastType=listType;else lastType=typeOf(e);go(e.leaf?'breath':'detail')}
 function renderDetail(){
   clearInterval(timerId);if(!currentExercise)currentExercise=pool(lastType)[0];
   document.getElementById('instruction').style.display='block';document.getElementById('timer').classList.remove('show');
@@ -405,7 +468,8 @@ function renderDetail(){
   document.getElementById('detailEvidence').textContent=(currentExercise.evidence||'À explorer')+(currentExercise.source?' · '+currentExercise.source:'');
   document.getElementById('detailSafety').textContent=currentExercise.safety||'';
   document.getElementById('detailSteps').innerHTML=currentExercise.steps.map((x,i)=>'<div class="step"><span class="num">'+(i+1)+'</span><span>'+x+'</span></div>').join('');
-  document.getElementById('detailTags').innerHTML='<span class="tag">'+fmt(currentExercise.duration)+'</span><span class="tag">'+(currentExercise.evidence||'À explorer')+'</span>'+currentExercise.tags.map(t=>'<span class="tag">'+t+'</span>').join('');
+  const needTags=needsOf(currentExercise).slice(0,2).map(k=>'<span class="tag">'+NEEDS[k].short+'</span>').join('');
+  document.getElementById('detailTags').innerHTML='<span class="tag">'+fmt(currentExercise.duration)+'</span>'+needTags+currentExercise.tags.map(t=>'<span class="tag">'+t+'</span>').join('');
   document.getElementById('startBtn').textContent='Commencer · '+fmt(currentExercise.duration);updateFavButtons();
 }
 function updateFavButtons(){
@@ -438,7 +502,7 @@ const leaf=document.getElementById('leaf');
 function setRatio(a,b){inhale=a;exhale=b;document.querySelectorAll('.ratio').forEach(x=>x.classList.toggle('active',x.dataset.ratio===a+','+b));startBreath()}
 document.querySelectorAll('.ratio').forEach(b=>b.onclick=()=>{const [a,z]=b.dataset.ratio.split(',').map(Number);setRatio(a,z)});
 function startBreath(){breathStart=performance.now();breathPaused=false;pauseAt=0;windPhase=0;lastFrame=performance.now();document.getElementById('pauseBtn').textContent='Ⅱ';updateFavButtons()}
-document.getElementById('breathBack').onclick=()=>openList('breath');
+document.getElementById('breathBack').onclick=()=>openList(lastType&&lastType.startsWith('need:')?lastType:'breath');
 document.getElementById('pauseBtn').onclick=()=>{breathPaused=!breathPaused;document.getElementById('pauseBtn').textContent=breathPaused?'▶':'Ⅱ';if(breathPaused)pauseAt=performance.now();else{breathStart+=performance.now()-pauseAt;lastFrame=performance.now()}};
 document.getElementById('breathDone').onclick=()=>go('done');
 
