@@ -163,6 +163,12 @@ button{color:inherit}
 .plan-preview{display:none;margin:12px 0 2px;padding:11px 12px;border-radius:15px;background:linear-gradient(145deg,rgba(224,241,243,.88),rgba(239,235,248,.84));border:1px solid rgba(255,255,255,.92);font-size:9.4px;line-height:1.45;color:#385f73}
 .plan-preview.show{display:block}.plan-preview b{display:block;margin-bottom:4px;font-size:7.5px;text-transform:uppercase;letter-spacing:.07em;color:#5b8294}
 .collection-plan{display:none;margin:10px 0 3px;padding:11px 12px;border-radius:15px;background:rgba(230,241,243,.72);font-size:9px;line-height:1.4;color:#3e697c}.collection-plan.show{display:block}.collection-plan b{display:block;font-size:7.4px;text-transform:uppercase;letter-spacing:.07em;margin-bottom:4px;color:#5d8292}
+
+.research-level{display:inline-flex;margin-top:9px;padding:5px 8px;border-radius:999px;background:rgba(255,255,255,.72);font-size:7.7px;font-weight:800;line-height:1.2;color:#5b7d8e}
+.evidence-source{margin-top:8px;padding-top:0;border-top:0!important;padding-bottom:10px;border-bottom:1px solid rgba(73,111,130,.12)}
+.why-copy b{display:block;margin-bottom:5px;font-size:7.6px;letter-spacing:.065em;text-transform:uppercase;color:#5d8191}
+.why-copy span{display:block}
+.breath-benefit small{display:inline-flex;margin-top:7px;padding:4px 7px;border-radius:999px;background:rgba(255,255,255,.74);font-size:7px;font-weight:800;color:#567b8d}
 @media(max-width:560px){.shell{padding:0}.phone{height:100dvh;width:100vw;aspect-ratio:auto;border:0;border-radius:0}}
 </style>
 </head>
@@ -231,11 +237,12 @@ button{color:inherit}
     <div class="sheet">
       <div id="instruction">
         <div class="eyebrow" id="detailType"></div><div class="h2" id="detailTitle"></div><div class="when" id="detailWhen"></div><div class="lead" id="detailLead"></div>
-        <div class="benefit-card"><div class="benefit-label">À quoi ce geste peut t’aider</div><div class="benefit-text" id="detailBenefit"></div></div>
+        <div class="benefit-card"><div class="benefit-label">Pourquoi le faire ?</div><div class="benefit-text" id="detailBenefit"></div><div class="research-level" id="detailResearchLevel"></div></div>
         <details class="evidence-box">
-          <summary>Pourquoi ça peut aider ?</summary>
-          <div class="why-copy" id="detailWhy"></div>
-          <div class="evidence-meta"><b>Ce qu’on sait</b><span id="detailEvidence"></span></div>
+          <summary>Voir les études et le mécanisme</summary>
+          <div class="evidence-meta evidence-source"><b>Études / sources</b><span id="detailResearchSource"></span></div>
+          <div class="why-copy"><b>Ce qui peut l’expliquer</b><span id="detailWhy"></span></div>
+          <div class="evidence-meta"><b>Niveau de preuve dans l’application</b><span id="detailEvidence"></span></div>
           <div class="evidence-safety" id="detailSafety"></div>
         </details>
         <div class="steps" id="detailSteps"></div><div class="tags" id="detailTags"></div>
@@ -249,7 +256,7 @@ button{color:inherit}
 <section class="screen collection no-nav" data-screen="collection"><div class="scroll"><div class="brand-photo visual"><img class="brand-img" data-visual="detail" alt=""></div><div class="topbar"><button class="icon-btn" id="collectionBack">‹</button><button class="icon-btn" id="collectionDelete">⌫</button></div><div class="sheet"><div class="eyebrow" id="collectionKind"></div><div class="h2" id="collectionTitle"></div><div class="muted" id="collectionIntro"></div><div class="collection-plan" id="collectionPlan"></div><button class="meaning-edit" id="collectionMeaningBtn">Donner du sens à cet espace</button><div class="collection-tools"><button class="soft" id="collectionAddBtn">+ Ajouter des gestes</button><button class="primary" id="collectionLaunchBtn">Lancer</button></div><div id="collectionRows"></div></div></div></section><section class="screen breath no-nav" data-screen="breath">
   <div class="breath-bg visual"><img class="brand-img" data-visual="hero" alt=""></div>
   <div class="topbar"><button class="icon-btn" id="breathBack">‹</button><button class="icon-btn" id="breathHeart">♡</button></div>
-  <div class="breath-title"><div class="h2">La feuille et le souffle</div><div class="muted">Suis le mouvement de la feuille pour guider naturellement ton rythme respiratoire.</div><div class="breath-benefit"><b>À quoi ce geste peut t’aider</b><span id="breathBenefit"></span></div></div>
+  <div class="breath-title"><div class="h2">La feuille et le souffle</div><div class="muted">Suis le mouvement de la feuille pour guider naturellement ton rythme respiratoire.</div><div class="breath-benefit"><b>Pourquoi le faire ?</b><span id="breathBenefit"></span><small id="breathResearchLevel"></small></div></div>
   <div class="leaf-space"><div class="leaf" id="leaf"><svg viewBox="0 0 60 92"><defs><linearGradient id="leafG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#55c2cb"/><stop offset=".55" stop-color="#67a9d0"/><stop offset="1" stop-color="#8f6dc2"/></linearGradient></defs><path d="M30 4C10 11 3 35 8 57C12 76 23 86 30 89C42 80 52 63 52 43C52 22 42 8 30 4Z" fill="url(#leafG)" stroke="#2c7185" stroke-width="1.4"/><path d="M30 10V84M30 29L15 38M30 39L45 47M30 51L16 60M30 61L43 69" stroke="#2e7b8c" stroke-width="1.1" fill="none"/></svg></div></div>
   <div class="breath-panel glass">
     <div class="phase" id="phaseLabel">Inspire · la feuille monte</div><div class="phase-count" id="phaseCount">4</div><div class="phase-small">secondes</div>
@@ -339,61 +346,177 @@ const EXERCISES=[
 {id:"stairs-energy",title:"Trois minutes d’escaliers",cat:"movement",icon:"↗",duration:180,evidence:"Directement étudié",source:"Acute stair walking · études énergie/fatigue",when:"Quand tu veux surtout retrouver de l’élan plutôt que te calmer.",lead:"Si ta condition physique et l’environnement le permettent, monte des escaliers à un rythme confortable pendant quelques minutes.",steps:["Reste à une intensité où tu gardes le contrôle de ta respiration.","Ralentis ou arrête si nécessaire.","Observe surtout ton niveau d’énergie juste après."],tags:["Élan","3 min"],safety:"À éviter si l’effort ou les escaliers ne sont pas adaptés à ta condition physique."}
 ];
 const BENEFITS={
-  "leaf-breath": "Utile quand tu sens que tout va trop vite et que tu n’as pas envie de compter. Le mouvement de la feuille te donne un repère visuel simple pour ralentir le souffle et recentrer ton attention pendant une minute.",
-  "slow-55": "Utile pour installer un rythme plus calme quand tu te sens tendu, dispersé ou simplement trop rapide. Quelques minutes de respiration régulière peuvent aider à retrouver une sensation de stabilité.",
-  "exhale-46": "Utile lorsque tu sens la pression monter mais que tu ne veux pas retenir ton souffle. L’expiration plus longue donne un rythme simple pour ralentir progressivement et retrouver un peu de marge.",
-  "cyclic-sigh": "Utile quand la respiration devient haute, courte ou agitée. Cette succession très précise d’inspirations puis d’une longue expiration peut aider à retrouver rapidement un souffle plus ample et une sensation de relâchement.",
-  "diaphragm": "Utile quand tu respires surtout dans le haut du thorax ou que tu as du mal à sentir ton souffle. La main sert de repère pour retrouver une respiration plus basse et revenir aux sensations du corps.",
-  "pursed": "Utile lorsque le souffle s’accélère ou paraît difficile à contrôler. Expirer lentement entre les lèvres peut aider à prolonger l’expiration et à retrouver un rythme respiratoire plus confortable.",
-  "box": "Utile quand ton esprit part dans plusieurs directions et que compter t’aide. Le rythme en quatre temps donne une structure claire à suivre et occupe suffisamment l’attention pour créer une pause mentale.",
-  "nasal-slow": "Utile quand tu veux ralentir ta respiration sans que cela se voie. Le souffle nasal lent permet de retrouver un rythme plus posé tout en restant facile à utiliser au travail ou dans les transports.",
-  "humming": "Utile quand tu veux associer respiration et sensation physique. Le son prolonge naturellement l’expiration et la vibration du « mmm » donne un point d’attention concret qui peut aider à décrocher du flot mental.",
-  "alternate-nostril": "Utile quand tu as besoin d’un exercice qui mobilise davantage l’attention qu’une simple respiration lente. Le changement de narine impose un rythme précis et peut aider à faire une coupure avec les pensées répétitives.",
-  "three-slow": "Utile quand tu n’as presque pas de temps. Trois respirations légèrement plus lentes peuvent suffire à interrompre quelques secondes le rythme automatique et à te redonner un point de repère.",
-  "pmr-3": "Utile quand ton corps est globalement tendu et que tu ne sais pas quoi relâcher. Contracter puis relâcher trois grandes zones permet de mieux sentir la différence entre tension et détente.",
-  "hands-release": "Utile lorsque tu serres les mains sans t’en rendre compte ou que la tension passe beaucoup par les bras. Le contraste entre serrer et relâcher rend la détente plus facile à percevoir.",
-  "shoulders-release": "Utile quand les épaules restent hautes, dures ou proches des oreilles. Les monter volontairement puis les laisser redescendre aide à repérer la tension et à retrouver une position plus relâchée.",
-  "jaw-release": "Utile si tu serres les dents, crispes la mâchoire ou remarques une tension dans le visage. Le geste aide à interrompre le serrage et à redonner un peu de mobilité à cette zone.",
-  "scapula-release": "Utile quand le haut du dos paraît figé après un écran, une position assise ou une période de tension. Contracter puis relâcher les omoplates aide à remettre du mouvement dans cette zone.",
-  "palms-press": "Utile quand tu as besoin de faire quelque chose physiquement sans attirer l’attention. Presser puis relâcher les paumes permet de canaliser brièvement la tension et de sentir plus clairement le relâchement.",
-  "feet-press": "Utile quand tu es assis et que tu te sens très « dans ta tête ». Pousser les pieds dans le sol donne un appui corporel net et peut aider à revenir aux sensations des jambes.",
-  "open-hands": "Utile quand tes doigts restent crispés sur un clavier, un téléphone ou simplement sous l’effet de la tension. Ouvrir puis relâcher les mains aide à réduire cette crispation discrète.",
-  "wall-push": "Utile quand tu ressens beaucoup d’énergie ou de tension physique et que rester immobile ne t’aide pas. Un effort court contre un mur permet de mobiliser le corps puis de sentir le relâchement qui suit.",
-  "upright": "Utile quand tu te sens affaissé, éteint ou peu présent. Te redresser sans te raidir peut augmenter la sensation d’ouverture et t’aider à retrouver un peu de vigilance et d’engagement.",
-  "soft-smile": "Utile quand ton visage est devenu tendu sans que tu t’en aperçoives. Relâcher le front, les yeux et la mâchoire peut diminuer cette tension et rendre l’expression plus souple.",
-  "brisk-walk": "Utile quand tu manques d’élan, que tu somnoles ou que tu tournes en rond mentalement. Quelques minutes de marche soutenue changent le rythme du corps et peuvent aider à retrouver énergie et clarté.",
-  "self-touch": "Utile quand tu as besoin d’un repère corporel stable et que le contact avec toi-même est agréable. Poser une main sur le torse, le bras ou l’autre main peut donner une sensation de soutien et de présence.",
-  "third-person": "Utile quand une pensée ou une réaction te paraît trop proche et prend toute la place. Utiliser ton prénom peut t’aider à regarder la situation avec un peu plus de distance avant de réagir.",
-  "affect-label": "Utile quand tu sens que quelque chose est fort mais encore flou. Mettre un mot simple sur ce qui se passe peut rendre l’expérience plus identifiable et t’aider à choisir ensuite ce dont tu as besoin.",
-  "word-repeat": "Utile quand un mot ou une phrase négative revient en boucle et semble devenir une vérité. Répéter le mot rapidement peut diminuer temporairement son poids en attirant l’attention sur sa forme sonore.",
-  "thought-prefix": "Utile quand une pensée ressemble à un fait incontestable. Ajouter « J’ai la pensée que… » permet de remettre une petite distance entre ce que ton esprit produit et ce qui est réellement certain.",
-  "grounding-333": "Utile quand ton attention est happée par l’anticipation, les pensées ou une montée de stress. Chercher trois éléments visuels, trois sons et trois contacts te ramène vers des repères concrets ici et maintenant.",
-  "tongue": "Utile quand tu remarques une tension dans la bouche ou la mâchoire. Relâcher simplement la langue peut aider à diminuer une crispation très discrète que l’on maintient parfois sans s’en rendre compte.",
-  "teeth-space": "Utile quand tes dents se touchent ou se serrent alors qu’il n’y a aucune raison de mastiquer. Créer un petit espace peut interrompre le serrage et rendre la mâchoire plus libre.",
-  "feet-contact": "Utile quand tu veux te recentrer sans que personne ne le voie. Sentir précisément les points d’appui sous les pieds donne à l’attention quelque chose de concret et immédiatement disponible.",
-  "big-toe": "Utile en réunion, dans les transports ou partout où tu veux un geste totalement invisible. La pression du gros orteil crée un petit repère corporel auquel revenir quelques secondes.",
-  "thumb-index": "Utile quand tu as besoin d’un ancrage tactile très discret. Le contact précis entre le pouce et l’index donne à l’attention une sensation simple sur laquelle se poser sans interrompre ce que tu fais.",
-  "peripheral": "Utile quand ton regard et ton attention semblent coincés sur un seul point, notamment sous stress ou devant un écran. Remarquer ce qui existe aussi sur les côtés aide à élargir volontairement le champ visuel.",
-  "near-far-sound": "Utile quand tu rumines mais que tu ne peux pas bouger. Chercher successivement le son le plus proche puis le plus lointain oblige l’attention à sortir quelques instants du flot mental.",
-  "soft-grip": "Utile quand tu tiens trop fort un téléphone, un stylo, un volant ou un objet sans t’en rendre compte. Diminuer la force de la prise peut réduire immédiatement une petite tension inutile.",
-  "next-thought": "Utile quand les pensées s’enchaînent sans pause. Poser cette question change brièvement ta position : au lieu de suivre la pensée en cours, tu attends et observes ce qui arrive ensuite.",
-  "autogenic-heavy": "Utile quand tu peux t’arrêter une minute et que tu veux favoriser une sensation de repos. Porter l’attention sur la lourdeur d’un bras peut aider le corps à se relâcher sans mouvement visible.",
-  "subtract-3": "Utile quand une image mentale ou une anticipation revient en boucle. Faire une petite tâche de calcul utilise une partie de la mémoire de travail et peut réduire momentanément la place prise par cette image.",
-  "spell-back": "Utile quand tu veux couper une boucle mentale sans exercice visible. Épeler ton prénom à l’envers demande juste assez d’attention pour interrompre quelques instants le mode automatique.",
-  "color-hunt": "Utile quand tu veux sortir de tes pensées en utilisant ce qui est déjà autour de toi. Chercher cinq objets d’une même couleur redonne au regard une mission précise et concrète.",
-  "straight-lines": "Utile quand une pensée tourne et que tu as besoin d’une coupure très discrète. Rechercher trois lignes droites mobilise le regard sur une tâche neutre, simple et immédiatement disponible.",
-  "angles": "Utile quand ton attention est dispersée ou aspirée par une boucle mentale. Compter cinq angles donne au cerveau une petite tâche visuelle précise qui peut ramener au présent.",
-  "back-contact": "Utile quand tu es assis et que tu veux revenir rapidement au corps. Sentir les zones de contact entre le dos et le dossier donne des repères physiques stables sans avoir à changer de position.",
-  "warm-cool": "Utile quand tu veux détourner doucement l’attention d’une pensée insistante. Chercher une différence de température sur la peau demande une observation sensorielle fine et très concrète.",
-  "name-action": "Utile quand tu réalises que tu fais quelque chose tout en étant mentalement ailleurs. Nommer exactement l’action en cours aide à reconnecter l’attention avec ce que tu es réellement en train de faire.",
-  "three-facts": "Utile quand ton esprit interprète beaucoup ou anticipe. Décrire un objet avec trois faits neutres remet momentanément l’attention sur des informations observables plutôt que sur des scénarios.",
-  "two-sides-touch": "Utile quand tu veux retrouver rapidement la sensation de ton corps. Sentir simultanément les deux pieds ou les deux mains donne deux repères simples qui occupent l’attention dans l’instant.",
-  "focus-open-sound": "Utile quand ton attention est soit trop serrée, soit complètement dispersée. Passer d’un seul son à l’ensemble des sons entraîne volontairement le passage entre concentration précise et perception plus large.",
-  "novelty-scan": "Utile quand tout devient automatique, monotone ou que tu décroches. Chercher un détail encore jamais remarqué réveille la curiosité et oblige l’attention à examiner réellement l’environnement.",
-  "near-far-gaze": "Utile après un écran, une lecture prolongée ou quand ton regard reste bloqué de près. Alterner proche et lointain redonne de la mobilité au regard et change brièvement le mode d’attention visuelle.",
-  "chew-alert": "Utile quand tu sens une baisse de vigilance et que tu as quelque chose à mâcher. Quelques minutes de mastication peuvent soutenir légèrement l’éveil et l’attention pendant une tâche monotone.",
-  "backward-steps": "Utile quand tu veux casser un automatisme et remettre toute ton attention dans le mouvement. Quelques pas en arrière, uniquement dans un espace sûr, obligent à redevenir très attentif à chaque déplacement.",
-  "stairs-energy": "Utile quand tu manques surtout d’énergie plutôt que de calme. Quelques minutes d’escaliers peuvent réveiller rapidement le corps, augmenter la vigilance et donner un nouvel élan avant de reprendre une activité."
+  "leaf-breath": "Les études sur la respiration lente montrent une augmentation de la variabilité du rythme cardiaque liée au contrôle vagal, pendant la pratique et parfois juste après. Ici, la feuille sert de guide visuel pour faciliter ce ralentissement. La version d’1 minute est une adaptation : les protocoles les mieux étudiés durent généralement plus longtemps.",
+  "slow-55": "La respiration lente est l’un des gestes les mieux documentés de cette application : une méta-analyse de 223 études montre des effets sur la fréquence cardiaque et la variabilité cardiaque vagale, marqueurs de régulation autonome. Elle peut donc être intéressante quand l’objectif est de faire redescendre l’activation physiologique. Les effets sur le stress sont surtout étudiés avec des séances d’au moins 5 minutes.",
+  "exhale-46": "Allonger doucement l’expiration ralentit le cycle respiratoire et se rapproche des protocoles de respiration contrôlée associés à une baisse de l’activation physiologique. L’intérêt est donc de donner au corps un rythme plus lent à suivre. Le format exact 4/6 pendant 1 minute n’a pas été validé comme protocole clinique à lui seul.",
+  "cyclic-sigh": "Dans un essai randomisé de Stanford, 5 minutes quotidiennes de soupirs cycliques pendant un mois ont amélioré l’affect positif et diminué la fréquence respiratoire, davantage que la méditation pour certains critères. Un essai clinique pilote de 2025 a aussi observé une diminution de la douleur après 4 minutes. La version d’1 minute ici est plus courte que les protocoles étudiés.",
+  "diaphragm": "Une revue systématique sur la respiration diaphragmatique rapporte des réductions du stress dans les études incluses, avec des changements observés selon les travaux sur la fréquence respiratoire, le cortisol salivaire ou la pression artérielle. L’intérêt est donc de retrouver un souffle moins haut et moins rapide. Les séances étudiées étaient toutefois nettement plus longues que 3 minutes.",
+  "pursed": "La respiration à lèvres pincées est surtout étudiée chez des personnes ayant une maladie respiratoire : les revues montrent une diminution de la fréquence respiratoire et parfois de l’essoufflement. Son intérêt ici est donc respiratoire, pas un effet anti-stress démontré chez tout le monde. En cas d’essoufflement inhabituel, ce geste ne doit pas retarder un avis médical.",
+  "box": "Dans l’essai randomisé de Balban et al., la box breathing pratiquée 5 minutes par jour pendant un mois faisait partie des techniques de respiration associées à une amélioration de l’humeur et à une baisse de l’anxiété d’état. Le format de 2 minutes proposé ici est une adaptation plus courte et ne doit pas être présenté comme équivalent au protocole étudié.",
+  "nasal-slow": "Le bénéfice documenté vient surtout du fait de ralentir la respiration, pas du simple passage par le nez. Les études sur la respiration lente montrent des effets sur la régulation cardiaque autonome ; utiliser le nez peut surtout rendre le geste discret et confortable si les voies nasales sont libres.",
+  "humming": "Une étude physiologique chez des adultes sains a montré que fredonner augmente fortement l’oxyde nitrique nasal et les échanges d’air entre les sinus et le nez. Cela montre un effet biologique réel, mais ne prouve pas à lui seul un effet calmant. Dans cette application, l’intérêt principal reste l’expiration prolongée et la vibration comme repère sensoriel.",
+  "alternate-nostril": "Les données sont prometteuses mais moins solides que pour la respiration lente classique. Une revue systématique rapporte des effets favorables sur le stress, et une méta-analyse de 2024 trouve une baisse de la pression artérielle, avec une forte hétérogénéité entre études. Les essais utilisent surtout 10 à 30 minutes : la version de 3 minutes est une adaptation.",
+  "three-slow": "Trois respirations plus lentes peuvent servir de micro-pause, mais il n’existe pas de preuve clinique montrant que trois souffles suffisent à produire les mêmes effets que les protocoles de respiration lente. Une revue de 58 études a d’ailleurs trouvé que les interventions efficaces évitaient généralement les séances de moins de 5 minutes.",
+  "pmr-3": "La relaxation musculaire progressive est bien documentée : une revue systématique de 46 publications chez plus de 3 400 adultes rapporte des diminutions du stress et de l’anxiété, et une méta-analyse 2026 de 31 essais randomisés retrouve aussi une baisse de l’anxiété. Cette version en trois zones est une adaptation courte du protocole complet.",
+  "hands-release": "Ce geste reprend le principe central de la relaxation musculaire progressive : créer volontairement de la tension puis la relâcher pour rendre le contraste corporel plus perceptible. Les bénéfices cliniques sont démontrés pour des protocoles complets de relaxation musculaire, pas spécifiquement pour 30 secondes appliquées seulement aux mains.",
+  "shoulders-release": "Les protocoles complets de relaxation musculaire progressive réduisent le stress et l’anxiété dans plusieurs revues. Monter puis relâcher les épaules reprend ce mécanisme de contraste tension–détente, mais ce mini-geste de 30 secondes n’a pas été testé isolément dans un essai clinique.",
+  "jaw-release": "L’intérêt scientifique vient surtout du principe tension–relâchement utilisé en relaxation musculaire progressive. Il est logique pour interrompre un serrage volontaire ou automatique de la mâchoire, mais aucune étude clinique ne permet d’affirmer que cette version de 25 secondes réduit à elle seule le stress ou l’anxiété.",
+  "scapula-release": "Ce geste est une adaptation locale du principe de relaxation musculaire progressive, dont les effets sur stress et anxiété sont bien documentés. L’exercice ciblé sur les omoplates n’a pas été étudié isolément : le bénéfice attendu est surtout de rendre la tension du haut du dos plus facile à percevoir puis à relâcher.",
+  "palms-press": "La recherche soutient le principe général de contraction puis relâchement musculaire dans les protocoles de relaxation progressive. Presser les paumes reprend ce principe de façon discrète, mais il n’existe pas d’essai clinique spécifique montrant un effet anti-stress de ce mini-geste seul.",
+  "feet-press": "Pousser les pieds puis relâcher combine un effort isométrique bref et un repère proprioceptif fort. Le raisonnement est cohérent avec la relaxation musculaire et le recentrage corporel, mais ce geste exact n’a pas de preuve clinique directe.",
+  "open-hands": "Ouvrir puis relâcher les mains reprend le principe de contraste musculaire utilisé en relaxation progressive. Les bénéfices sur le stress sont établis pour des protocoles complets, pas pour cette micro-version ciblée ; son intérêt est surtout de repérer et corriger une crispation des mains.",
+  "wall-push": "Le bénéfice supposé vient du contraste entre un effort musculaire bref et le relâchement qui suit, principe proche de la relaxation musculaire progressive. Il n’existe pas de preuve clinique directe pour « pousser un mur » comme technique anti-stress : c’est une adaptation corporelle à tester, pas une méthode validée en elle-même.",
+  "upright": "Dans un essai randomisé de 74 participants exposés à une tâche de stress, la posture assise droite était associée à davantage d’éveil, une meilleure humeur, moins de peur et moins d’auto-focalisation que la posture affaissée. Cela donne un intérêt réel au redressement, mais l’étude portait sur une posture maintenue, pas sur une minute seulement.",
+  "soft-smile": "Les recherches sur le feedback facial montrent qu’une modification volontaire de l’expression peut influencer légèrement l’expérience émotionnelle. Une méta-analyse de 138 études conclut toutefois que les effets sont petits et variables. L’intérêt ici est donc surtout de relâcher le visage ; il ne faut pas attendre qu’un sourire forcé change fortement l’humeur.",
+  "brisk-walk": "L’activité physique et la marche ont des effets bien documentés sur l’humeur à l’échelle de programmes répétés, et les pauses actives brèves peuvent produire de petits bénéfices cognitifs. Pour quelques minutes de marche, l’intérêt le plus crédible est de changer l’état d’activation du corps et de rompre une période d’immobilité ; ce n’est pas une « dose clinique » en 5 minutes.",
+  "self-touch": "Un essai randomisé de 159 adultes soumis à un stress psychosocial a montré que l’auto-contact apaisant était associé à une réponse de cortisol plus faible après le stress, sans baisse nette du stress subjectif. Un essai 2026 a aussi observé une diminution du stress momentané après des séances répétées. C’est donc un geste avec données humaines directes, tout en restant très dépendant du confort personnel.",
+  "third-person": "Des expériences avec EEG et IRMf montrent que se parler avec son prénom plutôt qu’avec « je » réduit certains marqueurs de réactivité émotionnelle et de traitement auto-référentiel, sans augmenter les marqueurs de contrôle cognitif. L’intérêt est donc de créer une distance psychologique avec ce que l’on vit.",
+  "affect-label": "En IRMf, mettre des mots sur une émotion a diminué la réponse de l’amygdale à des images négatives et augmenté l’activité du cortex préfrontal ventrolatéral droit. Le bénéfice recherché est donc de transformer une réaction diffuse en information identifiable, avec un mécanisme neurocognitif documenté.",
+  "word-repeat": "Cette technique a été testée directement : répéter rapidement un mot négatif auto-référentiel réduit le malaise associé en quelques secondes et diminue sa crédibilité surtout après environ 20 à 30 secondes. C’est l’un des rares micro-exercices de l’application dont la durée courte a été étudiée expérimentalement.",
+  "thought-prefix": "Ajouter « J’ai la pensée que… » relève de la défusion cognitive : le but n’est pas de supprimer la pensée mais de la traiter comme un événement mental. La défusion est étudiée expérimentalement, notamment par répétition de mots, mais cette formulation exacte dispose de moins de données directes que la technique de répétition.",
+  "grounding-333": "Le principe de rediriger l’attention vers des informations sensorielles concrètes est cohérent avec les modèles de contrôle attentionnel et avec certaines interventions numériques contre l’anxiété. En revanche, le protocole exact « 3 choses, 3 sons, 3 contacts » n’a pas, à ce jour, une base clinique aussi solide que la respiration lente ou la relaxation musculaire.",
+  "tongue": "Il n’existe pas de preuve clinique ou neuroscientifique directe montrant que relâcher la langue pendant 15 secondes réduit le stress. L’intérêt est uniquement local : repérer une tension de la bouche et la relâcher. Ce geste doit donc être présenté comme expérientiel, pas comme une technique validée.",
+  "teeth-space": "Créer un petit espace entre les dents peut interrompre immédiatement un serrage de mâchoire, mais aucune étude ne montre que ce geste de 10 secondes réduit l’anxiété. Son bénéfice est mécanique et local : diminuer une contraction inutile des muscles masticateurs quand elle est présente.",
+  "feet-contact": "Porter l’attention sur les appuis des pieds fournit une cible tactile et proprioceptive précise. Les neurosciences de l’attention soutiennent l’idée qu’une cible sensorielle concurrence temporairement le contenu mental, mais ce protocole exact n’a pas été validé comme traitement du stress.",
+  "big-toe": "Aucune étude clinique n’a validé la pression du gros orteil comme technique de régulation émotionnelle. Son seul intérêt défendable est d’offrir un repère tactile volontaire et totalement discret pour déplacer quelques secondes l’attention vers le corps.",
+  "thumb-index": "Le contact pouce-index donne une cible tactile très précise, mais il n’existe pas d’essai montrant que ce micro-geste réduit le stress ou l’anxiété. Il est donc utile comme ancrage attentionnel discret, avec un niveau de preuve indirect.",
+  "peripheral": "Des études montrent que le stress peut s’accompagner d’un rétrécissement de l’attention visuelle périphérique. Cela donne un rationnel pour réélargir volontairement le regard, mais aucune étude ne démontre que « regarder en périphérie » produit à lui seul une activation vagale ou un apaisement immédiat.",
+  "near-far-sound": "Chercher un son proche puis lointain oblige à réorienter l’attention auditive. Ce mécanisme de déplacement attentionnel est cohérent avec les neurosciences de l’attention, mais l’exercice exact n’a pas été étudié cliniquement comme technique anti-stress.",
+  "soft-grip": "Diminuer la force avec laquelle on tient un objet réduit immédiatement la contraction musculaire de la main et de l’avant-bras. C’est un bénéfice mécanique évident, mais il n’existe pas de preuve clinique que ce geste isolé réduise le stress général.",
+  "next-thought": "Cette question crée une posture métacognitive : attendre la prochaine pensée au lieu de suivre automatiquement la pensée actuelle. Le mécanisme est cohérent avec les approches métacognitives et de défusion, mais cette formulation exacte n’a pas de validation clinique directe comme « interrupteur » des pensées.",
+  "autogenic-heavy": "L’entraînement autogène a fait l’objet de méta-analyses : des effets favorables ont été rapportés sur l’anxiété et certains paramètres psychophysiologiques, même si la qualité des études varie. La lourdeur d’un bras est un élément classique de cette méthode, mais la version d’1 minute est beaucoup plus courte que les protocoles étudiés.",
+  "subtract-3": "Dans des expériences de laboratoire, effectuer des soustractions tout en maintenant une image négative en mémoire a réduit sa vivacité et son intensité émotionnelle, ce qui s’explique par la compétition pour les ressources de mémoire de travail. Ce résultat ne signifie pas qu’un calcul de 30 secondes traite un souvenir traumatique : l’usage ici doit rester limité aux images mentales ordinaires ou anticipations modérées.",
+  "spell-back": "Épeler son prénom à l’envers sollicite brièvement la mémoire de travail et le contrôle attentionnel. Il n’existe toutefois pas d’étude clinique spécifique sur cet exercice : son intérêt est simplement de mobiliser une tâche cognitive concurrente pour interrompre quelques secondes un automatisme mental.",
+  "color-hunt": "La recherche visuelle demande au cerveau de sélectionner activement certaines informations dans l’environnement. Cela fournit un mécanisme plausible de réorientation attentionnelle, mais « trouver cinq objets d’une couleur » n’a pas été validé directement comme intervention contre l’anxiété.",
+  "straight-lines": "Trouver des lignes droites est une tâche de recherche visuelle simple qui déplace l’attention vers l’environnement. Il n’existe pas de bénéfice clinique démontré pour cet exercice exact ; sa valeur est celle d’une micro-tâche attentionnelle neutre.",
+  "angles": "Compter des angles combine recherche visuelle et suivi mental. Le geste peut occuper brièvement l’attention, mais aucune étude clinique ou neuroscientifique n’a validé précisément « compter cinq angles » comme technique de régulation émotionnelle.",
+  "back-contact": "Sentir le dossier donne une information tactile continue et peut augmenter la conscience corporelle. Le mécanisme est plausible sur le plan sensoriel, mais ce mini-exercice n’a pas de preuve clinique directe sur le stress ou l’anxiété.",
+  "warm-cool": "Comparer deux températures mobilise une discrimination sensorielle fine et réoriente l’attention vers le corps. C’est un rationnel attentionnel plausible, mais ce geste précis n’a pas été étudié comme intervention clinique.",
+  "name-action": "Nommer l’action en cours oblige l’attention et le langage à se reconnecter avec le comportement présent. Cela ressemble aux pratiques de pleine conscience descriptive, mais l’exercice exact de 15 secondes n’a pas été validé isolément dans un essai clinique.",
+  "three-facts": "Décrire trois caractéristiques factuelles d’un objet limite volontairement l’interprétation et réoriente l’attention vers des données observables. Le mécanisme est cohérent avec les pratiques attentionnelles, mais il n’existe pas de validation clinique directe de cette micro-version.",
+  "two-sides-touch": "Suivre deux contacts corporels simultanément mobilise l’attention somatosensorielle. Cela peut servir de recentrage corporel, mais il n’existe pas de preuve que ce geste ait les effets d’une stimulation bilatérale thérapeutique ; il ne doit pas être présenté comme de l’EMDR.",
+  "focus-open-sound": "Des études comparant attention focalisée et attention ouverte montrent que ces entraînements peuvent modifier les performances d’attention exécutive après des pratiques structurées. Passer d’un son à tous les sons en 30 secondes reprend ce principe, mais cette micro-version n’a pas été testée directement.",
+  "novelty-scan": "Les stimuli nouveaux recrutent fortement les réseaux cérébraux d’orientation et de saillance, ce qui est bien établi en neurosciences de l’attention. Chercher un détail inédit peut donc réveiller l’exploration, mais aucune étude ne montre que ce mini-exercice améliore cliniquement le stress ou l’humeur.",
+  "near-far-gaze": "Des travaux sur l’accommodation visuelle suggèrent que faire varier la profondeur de fixation peut modifier certains marqueurs de fatigue oculaire après un travail de près. Cela peut être utile après un écran, mais il n’existe pas de preuve que 30 secondes de proche-loin réduisent le stress ou l’anxiété.",
+  "chew-alert": "Une méta-analyse de 21 études chez des adultes sains trouve un petit mais significatif bénéfice de la mastication sur l’attention soutenue. L’effet est faible : ce geste peut être pertinent pour la vigilance lors d’une tâche monotone, pas comme traitement de la fatigue ou du stress.",
+  "backward-steps": "Des expériences ont montré que le mouvement vers l’arrière pouvait modifier certains résultats de mémoire épisodique. Elles n’ont pas démontré que six pas en arrière calment le stress ou améliorent la vigilance. Dans l’application, ce geste doit donc rester un exercice expérientiel de rupture d’automatisme, avec prudence pour le risque de chute.",
+  "stairs-energy": "Dans un essai randomisé croisé chez 32 jeunes adultes, trois intervalles d’une minute d’escaliers ont augmenté la sensation d’énergie, diminué la tension et la fatigue, avec certains effets cognitifs dépendant du sexe. C’est donc un des exercices d’activation de l’application disposant de données directes proches du format proposé."
+};
+
+const RESEARCH_LEVEL={
+  "leaf-breath": "Adaptation d’un protocole étudié",
+  "slow-55": "Données solides sur la famille",
+  "exhale-46": "Adaptation d’un protocole étudié",
+  "cyclic-sigh": "Données directes proches du format",
+  "diaphragm": "Données cliniques sur la famille",
+  "pursed": "Données cliniques dans les maladies respiratoires",
+  "box": "Données directes sur 5 min",
+  "nasal-slow": "Bénéfice surtout lié au ralentissement",
+  "humming": "Effet physiologique direct, bénéfice émotionnel incertain",
+  "alternate-nostril": "Données prometteuses, hétérogènes",
+  "three-slow": "Micro-format non validé",
+  "pmr-3": "Adaptation d’une méthode bien étudiée",
+  "hands-release": "Adaptation de relaxation musculaire",
+  "shoulders-release": "Adaptation de relaxation musculaire",
+  "jaw-release": "Rationnel indirect",
+  "scapula-release": "Adaptation de relaxation musculaire",
+  "palms-press": "Rationnel indirect",
+  "feet-press": "Rationnel indirect",
+  "open-hands": "Rationnel indirect",
+  "wall-push": "Rationnel indirect",
+  "upright": "Essai randomisé, durée adaptée",
+  "soft-smile": "Effet faible et variable",
+  "brisk-walk": "Famille bien étudiée, format court moins certain",
+  "self-touch": "Données humaines directes",
+  "third-person": "Données EEG + IRMf",
+  "affect-label": "Données IRMf directes",
+  "word-repeat": "Données expérimentales directes",
+  "thought-prefix": "Adaptation de défusion",
+  "grounding-333": "Preuve directe limitée",
+  "tongue": "Pas de preuve directe",
+  "teeth-space": "Bénéfice local, pas de preuve anxiété",
+  "feet-contact": "Rationnel sensoriel indirect",
+  "big-toe": "Pas de preuve directe",
+  "thumb-index": "Pas de preuve directe",
+  "peripheral": "Rationnel neuroscientifique indirect",
+  "near-far-sound": "Rationnel attentionnel indirect",
+  "soft-grip": "Bénéfice musculaire local",
+  "next-thought": "Rationnel métacognitif indirect",
+  "autogenic-heavy": "Adaptation d’une méthode étudiée",
+  "subtract-3": "Données expérimentales ciblées",
+  "spell-back": "Pas de preuve directe",
+  "color-hunt": "Rationnel attentionnel indirect",
+  "straight-lines": "Pas de preuve directe",
+  "angles": "Pas de preuve directe",
+  "back-contact": "Rationnel sensoriel indirect",
+  "warm-cool": "Rationnel sensoriel indirect",
+  "name-action": "Rationnel attentionnel indirect",
+  "three-facts": "Rationnel attentionnel indirect",
+  "two-sides-touch": "Rationnel sensoriel indirect",
+  "focus-open-sound": "Adaptation d’entraînements attentionnels",
+  "novelty-scan": "Rationnel neuroscientifique indirect",
+  "near-far-gaze": "Données ergonomiques, pas anti-stress",
+  "chew-alert": "Petit effet documenté",
+  "backward-steps": "Résultat cognitif indirect",
+  "stairs-energy": "Données directes proches du format"
+};
+
+const RESEARCH_SOURCE={
+  "leaf-breath": "Laborde et al., 2022 · méta-analyse · PMID 35623448",
+  "slow-55": "Laborde et al., 2022 · méta-analyse · PMID 35623448 ; Fincham et al., 2023 · revue 58 études · PMID 38137060",
+  "exhale-46": "Laborde et al., 2022 · PMID 35623448 ; Balban et al., 2023 · PMID 36630953",
+  "cyclic-sigh": "Balban et al., 2023 · essai randomisé · PMID 36630953 ; essai pilote 4 min, 2025 · PMID 39904867",
+  "diaphragm": "Hopper et al., 2019 · revue systématique · PMID 31436595",
+  "pursed": "Gulart et al., 2017 · revue/méta-analyse · PMID 28969859 ; Burge et al., 2024 · PMID 39477355",
+  "box": "Balban et al., 2023 · essai randomisé · PMID 36630953",
+  "nasal-slow": "Laborde et al., 2022 · méta-analyse respiration lente · PMID 35623448",
+  "humming": "Weitzberg & Lundberg, 2002 · physiologie nasale · PMID 12119224",
+  "alternate-nostril": "Rung et al., 2021 · revue systématique · PMID 33461386 ; Nam et al., 2024 · méta-analyse · PMID 39008954",
+  "three-slow": "Fincham et al., 2023 · revue 58 études · PMID 38137060",
+  "pmr-3": "Khir et al., 2024 · revue systématique · PMID 38322293 ; Donato et al., 2026 · méta-analyse · PMID 41633054",
+  "hands-release": "Khir et al., 2024 · relaxation musculaire progressive · PMID 38322293",
+  "shoulders-release": "Khir et al., 2024 · PMID 38322293",
+  "jaw-release": "Extrapolation du principe de relaxation musculaire progressive · PMID 38322293",
+  "scapula-release": "Khir et al., 2024 · PMID 38322293",
+  "palms-press": "Extrapolation du principe tension–relâchement · PMID 38322293",
+  "feet-press": "Extrapolation sensorielle + tension–relâchement · preuve directe absente",
+  "open-hands": "Extrapolation du principe de relaxation musculaire · PMID 38322293",
+  "wall-push": "Extrapolation isométrique ; pas d’essai direct sur ce geste",
+  "upright": "Nair et al., 2015 · essai randomisé · PMID 25222091",
+  "soft-smile": "Coles et al., 2019 · méta-analyse 138 études · PMID 30973236",
+  "brisk-walk": "Xu et al., 2024 · méta-analyse marche · PMID 39045858 ; revue pauses actives 2026 · PMID 42443952",
+  "self-touch": "Dreisoerner et al., 2021 · essai randomisé · PMID 35757667 ; Maier et al., 2026 · PMID 41631519",
+  "third-person": "Moser et al., 2017 · EEG + IRMf · PMID 28674404",
+  "affect-label": "Lieberman et al., 2007 · IRMf · PMID 17576282",
+  "word-repeat": "Masuda et al., 2009 · expérimental · PMID 19028961 ; De Young et al., 2010 · PMID 20519128",
+  "thought-prefix": "Défusion cognitive : données expérimentales sur la famille · PMID 19028961, 33453739",
+  "grounding-333": "Protocole exact non validé ; données générales sur réorientation attentionnelle",
+  "tongue": "Pas d’étude clinique directe de ce mini-geste",
+  "teeth-space": "Pas d’étude clinique directe sur anxiété/stress pour ce mini-geste",
+  "feet-contact": "Rationnel somatosensoriel ; protocole exact non validé",
+  "big-toe": "Pas d’étude clinique directe",
+  "thumb-index": "Pas d’étude clinique directe",
+  "peripheral": "Williams et al., 1990 · stress et rétrécissement périphérique · PMID 2271803",
+  "near-far-sound": "Neurosciences de l’orientation attentionnelle ; protocole exact non validé",
+  "soft-grip": "Bénéfice musculaire local ; pas d’étude clinique directe",
+  "next-thought": "Rationnel métacognitif ; pas de validation directe de la question",
+  "autogenic-heavy": "Stetter & Kupper, 2002 · méta-analyse · PMID 12001885 ; méta-analyse stress 2019 · PMID 31477667",
+  "subtract-3": "Engelhard et al., 2011 · mémoire de travail · PMID 21074004 ; méta-analyse dual-task · PMID 34619553",
+  "spell-back": "Pas d’étude clinique directe ; tâche de mémoire de travail légère",
+  "color-hunt": "Recherche visuelle/attention ; exercice exact non validé",
+  "straight-lines": "Recherche visuelle/attention ; exercice exact non validé",
+  "angles": "Recherche visuelle/attention ; exercice exact non validé",
+  "back-contact": "Rationnel tactile/proprioceptif ; exercice exact non validé",
+  "warm-cool": "Rationnel de discrimination sensorielle ; exercice exact non validé",
+  "name-action": "Rationnel de recentrage attentionnel ; exercice exact non validé",
+  "three-facts": "Rationnel descriptif/attentionnel ; exercice exact non validé",
+  "two-sides-touch": "Rationnel somatosensoriel ; ne pas assimiler à l’EMDR",
+  "focus-open-sound": "Ainsworth et al., 2013 · attention focalisée vs ouverte · PMID 24135553",
+  "novelty-scan": "Herrmann & Knight, 2001 · revue neurosciences attention/novelty · PMID 11595268",
+  "near-far-gaze": "Étude accommodation/fatigue visuelle · PMID 12420374",
+  "chew-alert": "Miquel et al., 2019 · méta-analyse 21 études · PMID 30611764",
+  "backward-steps": "Aksentijevic et al., 2019 · mémoire et mouvement vers l’arrière · PMID 30368065",
+  "stairs-energy": "Stenling et al., 2019 · essai randomisé croisé · PMID 31681096"
 };
 
 const WHY_EXERCISE={
@@ -832,6 +955,8 @@ function renderDetail(){
   $("detailWhen").textContent=currentExercise.when;
   $("detailLead").textContent=currentExercise.lead;
   $("detailBenefit").textContent=BENEFITS[currentExercise.id]||"";
+  $("detailResearchLevel").textContent=RESEARCH_LEVEL[currentExercise.id]||"";
+  $("detailResearchSource").textContent=RESEARCH_SOURCE[currentExercise.id]||"";
   $("detailWhy").textContent=WHY_EXERCISE[currentExercise.id]||"";
   $("detailEvidence").textContent=(currentExercise.evidence||"À explorer")+(currentExercise.source?" · "+currentExercise.source:"");
   $("detailSafety").textContent=currentExercise.safety||"";
@@ -1223,6 +1348,7 @@ $("doneAnother").onclick=function(){
 
 function startBreath(){
   $("breathBenefit").textContent=BENEFITS["leaf-breath"]||"";
+  $("breathResearchLevel").textContent=RESEARCH_LEVEL["leaf-breath"]||"";
   breathElapsed=0;
   breathPaused=false;
   $("pauseBtn").textContent="Ⅱ";
