@@ -61,12 +61,12 @@ button{color:inherit}
 .nav{
   position:absolute;z-index:50;left:0;right:0;bottom:0;height:82px;
   padding:9px 8px calc(env(safe-area-inset-bottom,0px) + 7px);
-  display:grid;grid-template-columns:repeat(5,1fr);gap:2px;
+  display:grid;grid-template-columns:repeat(6,1fr);gap:2px;
   background:rgba(251,249,246,.96);backdrop-filter:blur(20px);border-top:1px solid var(--line)
 }
 .nav button{border:0;background:transparent;border-radius:14px;font-size:7.4px;font-weight:780;color:#7a8e99;display:grid;place-items:center;align-content:center;gap:3px;cursor:pointer;min-width:0;padding:4px 1px;letter-spacing:-.01em}
 .nav button span{font-size:7.4px!important;line-height:1.05}.nav button.active:not(.nav-center){background:#e7f2f3;color:#2c718c}
-.nav .nav-center{position:relative;transform:translateY(-21px);height:70px;width:70px;justify-self:center;border-radius:50%;color:white;background:linear-gradient(145deg,#3e95aa,#69a8c9 56%,#8878bd);box-shadow:0 12px 28px rgba(53,116,145,.27);border:4px solid rgba(251,249,246,.98);padding-top:7px}
+.nav .nav-center{position:relative;transform:translateY(-16px);height:60px;width:60px;justify-self:center;border-radius:50%;color:white;background:linear-gradient(145deg,#3e95aa,#69a8c9 56%,#8878bd);box-shadow:0 12px 28px rgba(53,116,145,.27);border:4px solid rgba(251,249,246,.98);padding-top:7px}
 .nav .nav-center span{font-size:25px}.nav .nav-center.active{box-shadow:0 13px 30px rgba(53,116,145,.34),0 0 0 3px rgba(85,185,199,.12)}
 .no-nav .nav{display:none}
 
@@ -169,45 +169,100 @@ button{color:inherit}
 .why-copy b{display:block;margin-bottom:5px;font-size:7.6px;letter-spacing:.065em;text-transform:uppercase;color:#5d8191}
 .why-copy span{display:block}
 .breath-benefit small{display:inline-flex;margin-top:7px;padding:4px 7px;border-radius:999px;background:rgba(255,255,255,.74);font-size:7px;font-weight:800;color:#567b8d}
+
+/* FIVE-MINUTES-MODULE */
+.five .brand-photo{height:220px}
+.five .sheet{min-height:calc(100% - 190px);padding-bottom:104px}
+.five-now{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:14px 0 16px;padding:11px 12px;border-radius:16px;background:rgba(231,242,244,.72);font-size:9px;color:#5e7e8e}
+.five-now b{font:13px Georgia,serif;color:#315f78}
+.five-block{margin-top:17px}
+.five-block h3{margin:0 0 8px;font:16px Georgia,serif;color:#315f78}
+.five-block p{margin:0 0 9px;font-size:9px;line-height:1.4;color:#788c97}
+.five-options{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
+.five-options.place{grid-template-columns:1fr 1fr}
+.five-choice{border:1px solid var(--line);border-radius:17px;padding:11px 7px;background:rgba(255,255,255,.82);color:#55798b;font-size:9px;font-weight:800;cursor:pointer;min-height:48px}
+.five-choice b{display:block;font:15px Georgia,serif;color:#356a82;margin-bottom:2px}
+.five-choice.active{background:linear-gradient(145deg,#dff0f2,#eee8f5);border-color:rgba(74,145,164,.18);box-shadow:0 7px 18px rgba(42,71,89,.07)}
+.five-scale{margin-top:16px;padding:13px;border-radius:19px;background:rgba(255,255,255,.78);border:1px solid rgba(255,255,255,.9)}
+.five-scale-head{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:9px;color:#688493}
+.five-scale-head b{font:14px Georgia,serif;color:#315f78}
+.five-scale input[type=range]{width:100%;margin:11px 0 2px;accent-color:#55aebb}
+.five-scale-ends{display:flex;justify-content:space-between;font-size:7.5px;color:#8a9aa3}
+.five-hint{min-height:17px;margin:9px 2px 0;font-size:8.5px;color:#7a8995}
+.five-reco{display:none;margin-top:14px;padding:16px;border-radius:22px;background:linear-gradient(145deg,rgba(225,241,243,.94),rgba(239,235,248,.92));border:1px solid rgba(255,255,255,.95);box-shadow:0 12px 28px rgba(42,71,89,.08)}
+.five-reco.show{display:block}
+.five-reco .eyebrow{margin-bottom:5px}
+.five-reco h3{margin:0;font:20px/1.15 Georgia,serif;color:#315f78}
+.five-reco p{margin:7px 0 4px;font-size:9.5px;line-height:1.45;color:#66808f}
+.five-reco-meta{font-size:8px;font-weight:800;color:#6b8290;margin:7px 0 12px}
+.five-reco-actions{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.five-reco-actions .primary{grid-column:1/-1}
+.five-result{display:none;margin-top:13px;padding:11px 12px;border-radius:16px;background:rgba(232,243,241,.82);font-size:9px;line-height:1.4;color:#507586}
+.five-result.show{display:block}.five-result b{display:block;margin-bottom:3px;font:13px Georgia,serif;color:#315f78}
+.five-after{display:none;margin:13px 0 4px;padding:13px;border-radius:18px;background:rgba(242,247,246,.86);text-align:left}
+.five-after label{display:flex;justify-content:space-between;gap:8px;font-size:9px;color:#64808e}
+.five-after label b{font:14px Georgia,serif;color:#315f78}
+.five-after input[type=range]{width:100%;margin:10px 0 4px;accent-color:#55aebb}
+.five-after .primary{width:100%;margin-top:9px}
+.five-delta{min-height:16px;font-size:8.5px;line-height:1.35;color:#597888}
+
 @media(max-width:560px){.shell{padding:0}.phone{height:100dvh;width:100vw;aspect-ratio:auto;border:0;border-radius:0}}
 </style>
 </head>
 <body>
 <div class="shell"><div class="phone">
 
-<section class="screen home active" data-screen="home"><div class="scroll"><div class="brand-photo visual"><img class="brand-img" data-visual="hero" alt=""><div class="brand-kicker">Prendre soin de son Hêtre</div><div class="brand-title"><h1>Les petits gestes<br>de mon Hêtre</h1><p>Découvre, teste et garde les gestes qui t’aident.</p></div></div><div class="sheet"><div class="hero-action glass"><div class="eyebrow">À découvrir</div><b id="homeGestureTitle">Un petit geste</b><p id="homeGestureMeta"></p><button class="primary" id="homeGestureBtn">Découvrir ce geste</button></div><div class="home-section"><h3>Reprendre là où j’en suis</h3><div class="resume-card glass" id="homeResume"><div class="resume-icon">↗</div><div><b id="homeResumeTitle"></b><small id="homeResumeMeta"></small></div><span>›</span></div><div class="empty-soft" id="homeResumeEmpty">Tes stratégies et tes routines apparaîtront ici au fur et à mesure que tu construiras ta propre boîte à outils.</div></div><div class="home-section"><div class="clean-list"><button class="clean-card" data-go="needs"><span class="clean-icon">◎</span><span><b>Je cherche un bénéfice précis</b><small>Partir de ce dont j’ai besoin aujourd’hui.</small></span><span>›</span></button><button class="clean-card" data-go="daily"><span class="clean-icon">◷</span><span><b>L’intégrer à mon quotidien</b><small>Moments de vie, stratégies et routines.</small></span><span>›</span></button></div></div></div></div><nav class="nav main-nav">
+<section class="screen home active" data-screen="home"><div class="scroll"><div class="brand-photo visual"><img class="brand-img" data-visual="hero" alt=""><div class="brand-kicker">Prendre soin de son Hêtre</div><div class="brand-title"><h1>Les petits gestes<br>de mon Hêtre</h1><p>Découvre, teste et garde les gestes qui t’aident.</p></div></div><div class="sheet"><div class="hero-action glass"><div class="eyebrow">À découvrir</div><b id="homeGestureTitle">Un petit geste</b><p id="homeGestureMeta"></p><button class="primary" id="homeGestureBtn">Découvrir ce geste</button></div><div class="home-section"><h3>Reprendre là où j’en suis</h3><div class="resume-card glass" id="homeResume"><div class="resume-icon">↗</div><div><b id="homeResumeTitle"></b><small id="homeResumeMeta"></small></div><span>›</span></div><div class="empty-soft" id="homeResumeEmpty">Tes stratégies et tes routines apparaîtront ici au fur et à mesure que tu construiras ta propre boîte à outils.</div></div><div class="home-section"><div class="clean-list"><button class="clean-card" data-go="five"><span class="clean-icon">5′</span><span><b>Quelques minutes pour moi</b><small>30 secondes, 2 minutes ou 5 minutes, selon où tu es et le moment de la journée.</small></span><span>›</span></button><button class="clean-card" data-go="needs"><span class="clean-icon">◎</span><span><b>Je cherche un bénéfice précis</b><small>Partir de ce dont j’ai besoin aujourd’hui.</small></span><span>›</span></button><button class="" data-go="five"><svg class="nav-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 7v5l3 2"/></svg><span>5 min</span></button>\n<button class="clean-card" data-go="daily"><span class="clean-icon">◷</span><span><b>L’intégrer à mon quotidien</b><small>Moments de vie, stratégies et routines.</small></span><span>›</span></button></div></div></div></div><nav class="nav main-nav">
 <button class="active" data-go="home"><svg class="nav-svg" viewBox="0 0 24 24"><path d="M4 10.5 12 4l8 6.5v8.2a1.3 1.3 0 0 1-1.3 1.3h-4.2v-6h-5v6H5.3A1.3 1.3 0 0 1 4 18.7Z"/></svg><span>Accueil</span></button>
 <button class="" data-go="needs"><svg class="nav-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="7.5"/><circle cx="12" cy="12" r="2.5"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22"/></svg><span>Par besoin</span></button>
 <button class="nav-center " data-go="catalog"><svg class="nav-svg leaf-svg" viewBox="0 0 24 24"><path d="M19.5 4.5C12 4.8 6.2 8.8 5.4 14.2c-.5 3.2 1.8 5.3 4.7 4.7 5.1-1 8.7-6.8 9.4-14.4Z"/><path d="M6.4 18.4c2.3-3.5 5.1-6.2 9.1-8.5"/></svg><span>Gestes</span></button>
-<button class="" data-go="daily"><svg class="nav-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 7v5l3.5 2M8 3.8 6.2 2M16 3.8 17.8 2"/></svg><span>Au quotidien</span></button>
+<button class="" data-go="five"><svg class="nav-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 7v5l3 2"/></svg><span>5 min</span></button>\n<button class="" data-go="daily"><svg class="nav-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 7v5l3.5 2M8 3.8 6.2 2M16 3.8 17.8 2"/></svg><span>Au quotidien</span></button>
 <button class="" data-go="favorites"><svg class="nav-svg" viewBox="0 0 24 24"><path d="M12 20s-7-4.3-7-9.2C5 8.1 6.8 6.5 9 6.5c1.4 0 2.5.7 3 1.7.5-1 1.6-1.7 3-1.7 2.2 0 4 1.6 4 4.3C19 15.7 12 20 12 20Z"/></svg><span>Favoris</span></button>
 </nav></section>
 <section class="screen hub needs" data-screen="needs"><div class="scroll"><div class="brand-photo visual"><img class="brand-img" data-visual="explore" alt=""><div class="brand-kicker">Par besoin</div><div class="brand-title"><h1>Partir de ce que<br>tu recherches</h1><p>Choisis ce que tu souhaites retrouver maintenant.</p></div></div><div class="sheet"><div class="page-intro"><div class="h2">Qu’aimerais-tu retrouver ?</div><div class="muted">Chaque besoin rassemble respiration, mouvement, attention, sensations et gestes discrets.</div></div><div class="clean-list"><button class="clean-card" data-need="pressure"><span class="clean-icon">⌄</span><span><b>Faire redescendre la pression</b><small>Quand l’intensité, le stress ou l’agitation montent.</small></span><span class="count-pill" data-count-need="pressure"></span></button><button class="clean-card" data-need="thoughts"><span class="clean-icon">◌</span><span><b>Créer de l’espace dans mes pensées</b><small>Quand une pensée tourne, colle ou prend toute la place.</small></span><span class="count-pill" data-count-need="thoughts"></span></button><button class="clean-card" data-need="presence"><span class="clean-icon">◎</span><span><b>Retrouver de la présence</b><small>Revenir à l’instant, aux sens et à ce qui m’entoure.</small></span><span class="count-pill" data-count-need="presence"></span></button><button class="clean-card" data-need="energy"><span class="clean-icon">↗</span><span><b>Retrouver de l’élan</b><small>Réveiller doucement l’énergie, la curiosité ou la vigilance.</small></span><span class="count-pill" data-count-need="energy"></span></button><button class="clean-card" data-need="body"><span class="clean-icon">↕</span><span><b>Relâcher mon corps</b><small>Quand la tension semble surtout physique.</small></span><span class="count-pill" data-count-need="body"></span></button><button class="clean-card" data-need="clarity"><span class="clean-icon">✦</span><span><b>Retrouver de la clarté</b><small>Réengager l’attention quand tout devient flou ou dispersé.</small></span><span class="count-pill" data-count-need="clarity"></span></button></div></div></div><nav class="nav main-nav">
 <button class="" data-go="home"><svg class="nav-svg" viewBox="0 0 24 24"><path d="M4 10.5 12 4l8 6.5v8.2a1.3 1.3 0 0 1-1.3 1.3h-4.2v-6h-5v6H5.3A1.3 1.3 0 0 1 4 18.7Z"/></svg><span>Accueil</span></button>
 <button class="active" data-go="needs"><svg class="nav-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="7.5"/><circle cx="12" cy="12" r="2.5"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22"/></svg><span>Par besoin</span></button>
 <button class="nav-center " data-go="catalog"><svg class="nav-svg leaf-svg" viewBox="0 0 24 24"><path d="M19.5 4.5C12 4.8 6.2 8.8 5.4 14.2c-.5 3.2 1.8 5.3 4.7 4.7 5.1-1 8.7-6.8 9.4-14.4Z"/><path d="M6.4 18.4c2.3-3.5 5.1-6.2 9.1-8.5"/></svg><span>Gestes</span></button>
-<button class="" data-go="daily"><svg class="nav-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 7v5l3.5 2M8 3.8 6.2 2M16 3.8 17.8 2"/></svg><span>Au quotidien</span></button>
+<button class="" data-go="five"><svg class="nav-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 7v5l3 2"/></svg><span>5 min</span></button>\n<button class="" data-go="daily"><svg class="nav-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 7v5l3.5 2M8 3.8 6.2 2M16 3.8 17.8 2"/></svg><span>Au quotidien</span></button>
 <button class="" data-go="favorites"><svg class="nav-svg" viewBox="0 0 24 24"><path d="M12 20s-7-4.3-7-9.2C5 8.1 6.8 6.5 9 6.5c1.4 0 2.5.7 3 1.7.5-1 1.6-1.7 3-1.7 2.2 0 4 1.6 4 4.3C19 15.7 12 20 12 20Z"/></svg><span>Favoris</span></button>
 </nav></section>
 <section class="screen hub catalog" data-screen="catalog"><div class="scroll"><div class="brand-photo visual"><img class="brand-img" data-visual="hero" alt=""><div class="brand-kicker">Les gestes</div><div class="brand-title"><h1>Tout le catalogue</h1><p>Explore les exercices par thème et retrouve facilement ceux qui te conviennent.</p></div></div><div class="sheet"><div class="page-intro"><div class="h2">Explorer les gestes</div><div class="muted" id="catalogCount"></div></div><div class="clean-list"><button class="clean-card" data-theme="all"><span class="clean-icon">✦</span><span><b>Tous les gestes</b><small>Parcourir toute la bibliothèque.</small></span><span class="count-pill" data-count-theme="all"></span></button><button class="clean-card" data-theme="breath"><span class="clean-icon">≈</span><span><b>Respiration</b><small>Rythme, expiration, souffle guidé, vibration.</small></span><span class="count-pill" data-count-theme="breath"></span></button><button class="clean-card" data-theme="movement"><span class="clean-icon">↕</span><span><b>Corps & mouvement</b><small>Contracter, relâcher, marcher, bouger, changer de posture.</small></span><span class="count-pill" data-count-theme="movement"></span></button><button class="clean-card" data-theme="discreet"><span class="clean-icon">◌</span><span><b>Gestes discrets</b><small>Des micro-gestes presque invisibles dans la vie réelle.</small></span><span class="count-pill" data-count-theme="discreet"></span></button><button class="clean-card" data-theme="mind"><span class="clean-icon">◎</span><span><b>Attention & pensées</b><small>Dé-fusion, distanciation, tâches cognitives et recentrage.</small></span><span class="count-pill" data-count-theme="mind"></span></button><button class="clean-card" data-theme="sensory"><span class="clean-icon">◇</span><span><b>Sensoriel & perception</b><small>Regard, sons, toucher, température, orientation.</small></span><span class="count-pill" data-count-theme="sensory"></span></button><button class="clean-card" data-theme="activation"><span class="clean-icon">↗</span><span><b>Élan & activation</b><small>Retrouver énergie, présence ou vigilance.</small></span><span class="count-pill" data-count-theme="activation"></span></button></div></div></div><nav class="nav main-nav">
 <button class="" data-go="home"><svg class="nav-svg" viewBox="0 0 24 24"><path d="M4 10.5 12 4l8 6.5v8.2a1.3 1.3 0 0 1-1.3 1.3h-4.2v-6h-5v6H5.3A1.3 1.3 0 0 1 4 18.7Z"/></svg><span>Accueil</span></button>
 <button class="" data-go="needs"><svg class="nav-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="7.5"/><circle cx="12" cy="12" r="2.5"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22"/></svg><span>Par besoin</span></button>
 <button class="nav-center active" data-go="catalog"><svg class="nav-svg leaf-svg" viewBox="0 0 24 24"><path d="M19.5 4.5C12 4.8 6.2 8.8 5.4 14.2c-.5 3.2 1.8 5.3 4.7 4.7 5.1-1 8.7-6.8 9.4-14.4Z"/><path d="M6.4 18.4c2.3-3.5 5.1-6.2 9.1-8.5"/></svg><span>Gestes</span></button>
-<button class="" data-go="daily"><svg class="nav-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 7v5l3.5 2M8 3.8 6.2 2M16 3.8 17.8 2"/></svg><span>Au quotidien</span></button>
+<button class="" data-go="five"><svg class="nav-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 7v5l3 2"/></svg><span>5 min</span></button>\n<button class="" data-go="daily"><svg class="nav-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 7v5l3.5 2M8 3.8 6.2 2M16 3.8 17.8 2"/></svg><span>Au quotidien</span></button>
 <button class="" data-go="favorites"><svg class="nav-svg" viewBox="0 0 24 24"><path d="M12 20s-7-4.3-7-9.2C5 8.1 6.8 6.5 9 6.5c1.4 0 2.5.7 3 1.7.5-1 1.6-1.7 3-1.7 2.2 0 4 1.6 4 4.3C19 15.7 12 20 12 20Z"/></svg><span>Favoris</span></button>
 </nav></section>
 <section class="screen hub daily" data-screen="daily"><div class="scroll"><div class="brand-photo visual"><img class="brand-img" data-visual="explore" alt=""><div class="brand-kicker">Au quotidien</div><div class="brand-title"><h1>Faire de ces gestes<br>les tiens</h1><p>Les tester, les adapter et les organiser comme tu veux.</p></div></div><div class="sheet"><div class="page-intro"><div class="h2">Mon guide personnel</div><div class="muted">Relie chaque geste à un moment et à une intention qui ont du sens pour toi, puis construis tes propres stratégies et routines.</div></div><div class="daily-tabs"><button class="active" data-dailytab="moments">Selon le moment</button><button data-dailytab="strategies">Mes stratégies</button><button data-dailytab="routines">Mes routines</button></div><div id="dailyContent"></div></div></div><nav class="nav main-nav">
 <button class="" data-go="home"><svg class="nav-svg" viewBox="0 0 24 24"><path d="M4 10.5 12 4l8 6.5v8.2a1.3 1.3 0 0 1-1.3 1.3h-4.2v-6h-5v6H5.3A1.3 1.3 0 0 1 4 18.7Z"/></svg><span>Accueil</span></button>
 <button class="" data-go="needs"><svg class="nav-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="7.5"/><circle cx="12" cy="12" r="2.5"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22"/></svg><span>Par besoin</span></button>
 <button class="nav-center " data-go="catalog"><svg class="nav-svg leaf-svg" viewBox="0 0 24 24"><path d="M19.5 4.5C12 4.8 6.2 8.8 5.4 14.2c-.5 3.2 1.8 5.3 4.7 4.7 5.1-1 8.7-6.8 9.4-14.4Z"/><path d="M6.4 18.4c2.3-3.5 5.1-6.2 9.1-8.5"/></svg><span>Gestes</span></button>
-<button class="active" data-go="daily"><svg class="nav-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 7v5l3.5 2M8 3.8 6.2 2M16 3.8 17.8 2"/></svg><span>Au quotidien</span></button>
+<button class="" data-go="five"><svg class="nav-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 7v5l3 2"/></svg><span>5 min</span></button>\n<button class="active" data-go="daily"><svg class="nav-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 7v5l3.5 2M8 3.8 6.2 2M16 3.8 17.8 2"/></svg><span>Au quotidien</span></button>
 <button class="" data-go="favorites"><svg class="nav-svg" viewBox="0 0 24 24"><path d="M12 20s-7-4.3-7-9.2C5 8.1 6.8 6.5 9 6.5c1.4 0 2.5.7 3 1.7.5-1 1.6-1.7 3-1.7 2.2 0 4 1.6 4 4.3C19 15.7 12 20 12 20Z"/></svg><span>Favoris</span></button>
 </nav></section>
+
+<section class="screen hub five" data-screen="five"><div class="scroll"><div class="brand-photo visual"><img class="brand-img" data-visual="explore" alt=""><div class="brand-kicker">Mon moment</div><div class="brand-title"><h1>Quelques minutes<br>pour moi</h1><p>Un petit geste adapté au temps, au lieu et au moment.</p></div></div><div class="sheet">
+<div class="page-intro"><div class="h2">De quoi disposes-tu maintenant ?</div><div class="muted">Pas besoin de choisir entre confort et élan : l’application adapte la proposition à ta situation.</div></div>
+<div class="five-now"><span id="fiveMomentText">Maintenant</span><b id="fiveClock"></b></div>
+<div class="five-block"><h3>Combien de temps as-tu ?</h3><div class="five-options"><button class="five-choice" data-five-time="30"><b>30 s</b>Un geste éclair</button><button class="five-choice active" data-five-time="120"><b>2 min</b>Une vraie coupure</button><button class="five-choice" data-five-time="300"><b>5 min</b>Un peu plus d’espace</button></div></div>
+<div class="five-block"><h3>Où es-tu ?</h3><p>Choisis simplement le contexte : aucune position précise n’est enregistrée.</p><div class="five-options place"><button class="five-choice" data-five-place="home"><b>⌂ Chez moi</b></button><button class="five-choice" data-five-place="work"><b>▦ Travail / école</b></button><button class="five-choice" data-five-place="outside"><b>⌖ Dehors</b></button><button class="five-choice" data-five-place="transport"><b>⇢ Transports</b></button></div></div>
+<div class="five-scale"><div class="five-scale-head"><span><b>Comment tu te sens maintenant ?</b><br>Facultatif, pour voir si quelque chose bouge.</span><strong id="fiveBeforeValue">—</strong></div><input id="fiveBefore" type="range" min="0" max="10" value="5"><div class="five-scale-ends"><span>Très inconfortable</span><span>Très bien</span></div></div>
+<button class="primary" id="fiveSuggest" style="width:100%;margin-top:14px">Me proposer un geste</button><div class="five-hint" id="fiveHint"></div>
+<div class="five-reco" id="fiveRecommendation"><div class="eyebrow">Pour maintenant</div><h3 id="fiveRecoTitle"></h3><p id="fiveRecoLead"></p><div class="five-reco-meta" id="fiveRecoMeta"></div><div class="five-reco-actions"><button class="primary" id="fiveStart">Commencer ce geste</button><button class="soft" id="fiveAnother">Une autre idée</button><button class="soft" id="fiveChange">Changer mes choix</button></div></div>
+<div class="five-result" id="fiveResult"></div>
+</div></div><nav class="nav main-nav">
+<button class="" data-go="home"><svg class="nav-svg" viewBox="0 0 24 24"><path d="M4 10.5 12 4l8 6.5v8.2a1.3 1.3 0 0 1-1.3 1.3h-4.2v-6h-5v6H5.3A1.3 1.3 0 0 1 4 18.7Z"/></svg><span>Accueil</span></button>
+<button class="" data-go="needs"><svg class="nav-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="7.5"/><circle cx="12" cy="12" r="2.5"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22"/></svg><span>Par besoin</span></button>
+<button class="nav-center " data-go="catalog"><svg class="nav-svg leaf-svg" viewBox="0 0 24 24"><path d="M19.5 4.5C12 4.8 6.2 8.8 5.4 14.2c-.5 3.2 1.8 5.3 4.7 4.7 5.1-1 8.7-6.8 9.4-14.4Z"/><path d="M6.4 18.4c2.3-3.5 5.1-6.2 9.1-8.5"/></svg><span>Gestes</span></button>
+<button class="active" data-go="five"><svg class="nav-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 7v5l3 2"/></svg><span>5 min</span></button>\n<button class="" data-go="daily"><svg class="nav-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 7v5l3.5 2M8 3.8 6.2 2M16 3.8 17.8 2"/></svg><span>Au quotidien</span></button>
+<button class="" data-go="favorites"><svg class="nav-svg" viewBox="0 0 24 24"><path d="M12 20s-7-4.3-7-9.2C5 8.1 6.8 6.5 9 6.5c1.4 0 2.5.7 3 1.7.5-1 1.6-1.7 3-1.7 2.2 0 4 1.6 4 4.3C19 15.7 12 20 12 20Z"/></svg><span>Favoris</span></button>
+</nav></section>
+
 <section class="screen hub favorites" data-screen="favorites"><div class="scroll"><div class="brand-photo visual"><img class="brand-img" data-visual="list" alt=""><div class="brand-kicker">Favoris</div><div class="brand-title"><h1>Les gestes que<br>tu veux garder</h1><p>Retrouve-les sans avoir à les chercher.</p></div></div><div class="sheet"><div class="page-intro"><div class="h2">Mes favoris</div><div class="muted">Retrouve ici les gestes que tu as ajoutés à tes favoris.</div></div><div class="count" id="favPageCount"></div><div class="rows" id="favRows"></div></div></div><nav class="nav main-nav">
 <button class="" data-go="home"><svg class="nav-svg" viewBox="0 0 24 24"><path d="M4 10.5 12 4l8 6.5v8.2a1.3 1.3 0 0 1-1.3 1.3h-4.2v-6h-5v6H5.3A1.3 1.3 0 0 1 4 18.7Z"/></svg><span>Accueil</span></button>
 <button class="" data-go="needs"><svg class="nav-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="7.5"/><circle cx="12" cy="12" r="2.5"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22"/></svg><span>Par besoin</span></button>
 <button class="nav-center " data-go="catalog"><svg class="nav-svg leaf-svg" viewBox="0 0 24 24"><path d="M19.5 4.5C12 4.8 6.2 8.8 5.4 14.2c-.5 3.2 1.8 5.3 4.7 4.7 5.1-1 8.7-6.8 9.4-14.4Z"/><path d="M6.4 18.4c2.3-3.5 5.1-6.2 9.1-8.5"/></svg><span>Gestes</span></button>
-<button class="" data-go="daily"><svg class="nav-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 7v5l3.5 2M8 3.8 6.2 2M16 3.8 17.8 2"/></svg><span>Au quotidien</span></button>
+<button class="" data-go="five"><svg class="nav-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 7v5l3 2"/></svg><span>5 min</span></button>\n<button class="" data-go="daily"><svg class="nav-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 7v5l3.5 2M8 3.8 6.2 2M16 3.8 17.8 2"/></svg><span>Au quotidien</span></button>
 <button class="active" data-go="favorites"><svg class="nav-svg" viewBox="0 0 24 24"><path d="M12 20s-7-4.3-7-9.2C5 8.1 6.8 6.5 9 6.5c1.4 0 2.5.7 3 1.7.5-1 1.6-1.7 3-1.7 2.2 0 4 1.6 4 4.3C19 15.7 12 20 12 20Z"/></svg><span>Favoris</span></button>
 </nav></section>
 <section class="screen list" data-screen="list">
@@ -225,7 +280,7 @@ button{color:inherit}
 <button class="" data-go="home"><svg class="nav-svg" viewBox="0 0 24 24"><path d="M4 10.5 12 4l8 6.5v8.2a1.3 1.3 0 0 1-1.3 1.3h-4.2v-6h-5v6H5.3A1.3 1.3 0 0 1 4 18.7Z"/></svg><span>Accueil</span></button>
 <button class="" data-go="needs"><svg class="nav-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="7.5"/><circle cx="12" cy="12" r="2.5"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22"/></svg><span>Par besoin</span></button>
 <button class="nav-center " data-go="catalog"><svg class="nav-svg leaf-svg" viewBox="0 0 24 24"><path d="M19.5 4.5C12 4.8 6.2 8.8 5.4 14.2c-.5 3.2 1.8 5.3 4.7 4.7 5.1-1 8.7-6.8 9.4-14.4Z"/><path d="M6.4 18.4c2.3-3.5 5.1-6.2 9.1-8.5"/></svg><span>Gestes</span></button>
-<button class="" data-go="daily"><svg class="nav-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 7v5l3.5 2M8 3.8 6.2 2M16 3.8 17.8 2"/></svg><span>Au quotidien</span></button>
+<button class="" data-go="five"><svg class="nav-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 7v5l3 2"/></svg><span>5 min</span></button>\n<button class="" data-go="daily"><svg class="nav-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 7v5l3.5 2M8 3.8 6.2 2M16 3.8 17.8 2"/></svg><span>Au quotidien</span></button>
 <button class="" data-go="favorites"><svg class="nav-svg" viewBox="0 0 24 24"><path d="M12 20s-7-4.3-7-9.2C5 8.1 6.8 6.5 9 6.5c1.4 0 2.5.7 3 1.7.5-1 1.6-1.7 3-1.7 2.2 0 4 1.6 4 4.3C19 15.7 12 20 12 20Z"/></svg><span>Favoris</span></button>
 </nav>
 </section>
@@ -267,7 +322,7 @@ button{color:inherit}
 
 <section class="screen done no-nav" data-screen="done">
   <div class="done-bg visual"><img class="brand-img" data-visual="detail" alt=""></div>
-  <div class="done-card glass"><div class="h2">C’est fait 🌿</div><p>L’exercice est terminé.<br>Tu peux maintenant noter ton ressenti ou garder ce geste dans tes favoris.</p><div class="done-actions"><button class="soft" id="doneFeedback">Ce geste pour moi</button><button class="soft" id="doneFav">♡ Ajouter aux favoris</button><button class="primary" id="doneNext" style="display:none">Geste suivant</button><button class="primary" id="doneAnother">Essayer un autre geste</button><button class="soft" data-go="home">Retour à l’accueil</button></div></div>
+  <div class="done-card glass"><div class="h2">C’est fait 🌿</div><p>L’exercice est terminé.<br>Tu peux maintenant noter ton ressenti ou garder ce geste dans tes favoris.</p><div class="five-after" id="fiveAfterBox"><div class="eyebrow">Avant / après</div><label><span>Comment tu te sens maintenant ?</span><b id="fiveAfterValue">5 / 10</b></label><input id="fiveAfter" type="range" min="0" max="10" value="5"><div class="five-delta" id="fiveDelta"></div><button class="primary" id="fiveFinish">Terminer mon moment</button></div><div class="done-actions"><button class="soft" id="doneFeedback">Ce geste pour moi</button><button class="soft" id="doneFav">♡ Ajouter aux favoris</button><button class="primary" id="doneNext" style="display:none">Geste suivant</button><button class="primary" id="doneAnother">Essayer un autre geste</button><button class="soft" data-go="home">Retour à l’accueil</button></div></div>
 </section>
 <div class="overlay" id="feedbackOverlay"><div class="modal-sheet">
   <div class="modal-head"><div><div class="eyebrow">Ce geste pour moi</div><h3>Lui donner une vraie place</h3><p class="modal-intro">Choisis pourquoi ce geste compte pour toi et le moment précis où tu veux t’en servir.</p></div><button class="modal-close" data-close-overlay="feedbackOverlay">×</button></div>
@@ -647,6 +702,7 @@ let nameAddCurrent=false;
 let nameEditingId=null;
 let activeRoutine=null;
 let timerId=null;
+let fiveTime=120,fivePlace="",fiveRecommended=null,fiveBefore=null,fivePickOffset=0,fiveFlow=null,fiveLastResult=null;
 
 let inhale=4,exhale=6,breathElapsed=0,windPhase=0,breathPaused=false,lastFrame=performance.now();
 
@@ -750,6 +806,7 @@ function go(name){
   if(name==="catalog")renderCatalog();
   if(name==="daily")renderDaily();
   if(name==="favorites")renderFavorites();
+  if(name==="five")renderFive();
   if(name==="list")renderList();
   if(name==="detail")renderDetail();
   if(name==="collection")renderCollection();
@@ -769,6 +826,135 @@ function go(name){
 [].slice.call(document.querySelectorAll("[data-dailytab]")).forEach(function(btn){
   btn.onclick=function(){dailyTab=btn.dataset.dailytab;renderDaily()};
 });
+
+/* FIVE-MINUTES-MODULE */
+const FIVE_LABELS={home:"chez toi",work:"au travail / à l’école",outside:"dehors",transport:"dans les transports"};
+const FIVE_POOLS={
+  home:{
+    morning:["upright","shoulders-release","wall-push","humming","slow-55","pmr-3","three-slow","hands-release"],
+    day:["wall-push","grounding-333","slow-55","pmr-3","shoulders-release","humming","three-slow"],
+    evening:["jaw-release","self-touch","exhale-46","diaphragm","pmr-3","slow-55","three-slow","teeth-space"],
+    night:["teeth-space","jaw-release","self-touch","three-slow","exhale-46","slow-55","pmr-3"]
+  },
+  work:{
+    morning:["upright","shoulders-release","feet-press","near-far-gaze","color-hunt","three-slow","stairs-energy","slow-55"],
+    day:["grounding-333","near-far-gaze","shoulders-release","feet-contact","cyclic-sigh","slow-55","stairs-energy","subtract-3"],
+    evening:["jaw-release","soft-grip","feet-contact","three-slow","exhale-46","slow-55","self-touch"],
+    night:["teeth-space","soft-grip","back-contact","three-slow","exhale-46","slow-55","self-touch"]
+  },
+  outside:{
+    morning:["near-far-sound","novelty-scan","peripheral","near-far-gaze","grounding-333","brisk-walk","three-slow","upright"],
+    day:["color-hunt","near-far-gaze","near-far-sound","grounding-333","brisk-walk","novelty-scan","three-slow","upright"],
+    evening:["near-far-sound","peripheral","grounding-333","three-slow","slow-55","self-touch","near-far-gaze"],
+    night:["near-far-sound","peripheral","three-slow","self-touch","exhale-46","slow-55","feet-contact"]
+  },
+  transport:{
+    morning:["back-contact","near-far-sound","soft-grip","jaw-release","feet-contact","thumb-index","three-slow","exhale-46","slow-55"],
+    day:["back-contact","grounding-333","near-far-sound","soft-grip","feet-contact","thumb-index","three-slow","exhale-46","slow-55"],
+    evening:["teeth-space","jaw-release","back-contact","soft-grip","feet-contact","three-slow","exhale-46","slow-55"],
+    night:["teeth-space","tongue","back-contact","soft-grip","three-slow","exhale-46","slow-55"]
+  }
+};
+function fivePeriod(){
+  const h=new Date().getHours();
+  if(h>=5&&h<11)return {key:"morning",label:"le matin"};
+  if(h>=11&&h<18)return {key:"day",label:"dans la journée"};
+  if(h>=18&&h<22)return {key:"evening",label:"le soir"};
+  return {key:"night",label:"la nuit"};
+}
+function renderFive(){
+  const now=new Date(),period=fivePeriod();
+  $("fiveClock").textContent=now.toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"});
+  $("fiveMomentText").textContent=period.label.charAt(0).toUpperCase()+period.label.slice(1);
+  [].slice.call(document.querySelectorAll("[data-five-time]")).forEach(function(btn){btn.classList.toggle("active",Number(btn.dataset.fiveTime)===fiveTime)});
+  [].slice.call(document.querySelectorAll("[data-five-place]")).forEach(function(btn){btn.classList.toggle("active",btn.dataset.fivePlace===fivePlace)});
+  if(fiveLastResult){
+    const before=fiveLastResult.before,after=fiveLastResult.after;
+    let msg="Ton dernier petit moment : "+fiveLastResult.title+".";
+    if(before!=null&&after!=null){
+      const d=after-before;
+      msg+=" Avant "+before+"/10 → après "+after+"/10";
+      if(d>0)msg+=" · quelque chose a bougé dans le bon sens.";
+      else if(d===0)msg+=" · pas de changement mesuré cette fois.";
+      else msg+=" · ce geste n’était peut-être pas le plus juste à ce moment-là.";
+    }
+    $("fiveResult").innerHTML="<b>La dernière fois</b>"+escapeHtml(msg);
+    $("fiveResult").classList.add("show");
+  }
+}
+function chooseFive(){
+  if(!fivePlace){
+    $("fiveHint").textContent="Choisis d’abord où tu te trouves.";
+    return;
+  }
+  const period=fivePeriod();
+  const ids=(FIVE_POOLS[fivePlace]&&FIVE_POOLS[fivePlace][period.key])||[];
+  let pool=ids.map(function(id){return EXERCISES.find(function(e){return e.id===id})}).filter(Boolean).filter(function(e){return e.duration<=fiveTime});
+  const min=fiveTime===30?0:(fiveTime===120?40:120);
+  const preferred=pool.filter(function(e){return e.duration>=min});
+  if(preferred.length)pool=preferred;
+  if(!pool.length)pool=EXERCISES.filter(function(e){return e.duration<=fiveTime});
+  if(!pool.length)return;
+  fiveRecommended=pool[fivePickOffset%pool.length];
+  fivePickOffset++;
+  $("fiveRecoTitle").textContent=fiveRecommended.title;
+  $("fiveRecoLead").textContent=fiveRecommended.lead;
+  const durationLabel=fiveTime===30?"30 secondes":(fiveTime===120?"2 minutes":"5 minutes");
+  $("fiveRecoMeta").textContent=fmt(fiveRecommended.duration)+" · "+FIVE_LABELS[fivePlace]+" · "+period.label+" · tu as "+durationLabel;
+  $("fiveRecommendation").classList.add("show");
+  $("fiveHint").textContent="Cette proposition tient compte du temps disponible, du lieu et de l’heure.";
+}
+[].slice.call(document.querySelectorAll("[data-five-time]")).forEach(function(btn){
+  btn.onclick=function(){
+    fiveTime=Number(btn.dataset.fiveTime);fivePickOffset=0;
+    [].slice.call(document.querySelectorAll("[data-five-time]")).forEach(function(x){x.classList.toggle("active",x===btn)});
+    $("fiveRecommendation").classList.remove("show");
+  };
+});
+[].slice.call(document.querySelectorAll("[data-five-place]")).forEach(function(btn){
+  btn.onclick=function(){
+    fivePlace=btn.dataset.fivePlace;fivePickOffset=0;
+    [].slice.call(document.querySelectorAll("[data-five-place]")).forEach(function(x){x.classList.toggle("active",x===btn)});
+    $("fiveRecommendation").classList.remove("show");
+    $("fiveHint").textContent="";
+  };
+});
+$("fiveBefore").oninput=function(){
+  fiveBefore=Number(this.value);
+  $("fiveBeforeValue").textContent=fiveBefore+" / 10";
+};
+$("fiveSuggest").onclick=chooseFive;
+$("fiveAnother").onclick=chooseFive;
+$("fiveChange").onclick=function(){$("fiveRecommendation").classList.remove("show")};
+$("fiveStart").onclick=function(){
+  if(!fiveRecommended)return;
+  fiveFlow={before:fiveBefore,place:fivePlace,time:fiveTime,exerciseId:fiveRecommended.id,title:fiveRecommended.title,started:new Date().toISOString()};
+  openExercise(fiveRecommended);
+};
+$("fiveAfter").oninput=function(){
+  const v=Number(this.value);
+  $("fiveAfterValue").textContent=v+" / 10";
+  if(fiveFlow&&fiveFlow.before!=null){
+    const d=v-fiveFlow.before;
+    $("fiveDelta").textContent=d>0?"Tu notes "+d+" point"+(d>1?"s":"")+" de plus qu’avant.":d===0?"Tu notes le même niveau qu’avant.":"Tu notes "+Math.abs(d)+" point"+(Math.abs(d)>1?"s":"")+" de moins qu’avant.";
+  }else{
+    $("fiveDelta").textContent="Tu n’avais pas renseigné le niveau avant : garde simplement ce repère si tu le souhaites.";
+  }
+};
+$("fiveFinish").onclick=function(){
+  if(!fiveFlow){go("five");return}
+  const after=Number($("fiveAfter").value);
+  fiveLastResult={before:fiveFlow.before,after:after,title:fiveFlow.title,place:fiveFlow.place,time:fiveFlow.time,ended:new Date().toISOString()};
+  try{
+    const history=JSON.parse(localStorage.getItem("petits-gestes-five-history")||"[]");
+    const safe=Array.isArray(history)?history:[];
+    safe.push(fiveLastResult);
+    localStorage.setItem("petits-gestes-five-history",JSON.stringify(safe.slice(-30)));
+  }catch(e){}
+  fiveFlow=null;
+  go("five");
+};
+
 
 function openList(t,origin){
   listOrigin=origin||current||"catalog";
@@ -974,6 +1160,7 @@ function backFromExercise(){
   else if(detailOrigin==="daily")go("daily");
   else if(detailOrigin==="needs")go("needs");
   else if(detailOrigin==="home")go("home");
+  else if(detailOrigin==="five")go("five");
   else go("catalog");
 }
 $("detailBack").onclick=backFromExercise;
@@ -1332,9 +1519,19 @@ function recordUse(){
 function updateDoneFav(){
   updateFavButtons();
   updateRoutineDone();
+  const box=$("fiveAfterBox");
+  if(box)box.style.display=fiveFlow?"block":"none";
+  if(fiveFlow){
+    const start=fiveFlow.before!=null?fiveFlow.before:5;
+    $("fiveAfter").value=start;
+    $("fiveAfterValue").textContent=start+" / 10";
+    $("fiveDelta").textContent=fiveFlow.before!=null?"Avant : "+fiveFlow.before+" / 10. Où en es-tu maintenant ?":"Tu n’avais pas renseigné le niveau avant.";
+    $("doneAnother").textContent="Retour à mes 5 minutes";
+  }
 }
 $("doneFav").onclick=function(){toggleFav(currentExercise&&currentExercise.id)};
 $("doneAnother").onclick=function(){
+  if(fiveFlow){fiveFlow=null;go("five");return;}
   if(activeRoutine){
     activeRoutine=null;
     dailyTab="routines";
