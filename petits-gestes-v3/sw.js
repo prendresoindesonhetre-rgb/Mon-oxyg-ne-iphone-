@@ -1,4 +1,4 @@
-const CACHE="petits-gestes-v3-2026-09-20";
+const CACHE="petits-gestes-v3-2026-09-23-five";
 const CORE=[
   "./",
   "./index.html",
