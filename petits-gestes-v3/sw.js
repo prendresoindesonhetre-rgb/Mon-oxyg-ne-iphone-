@@ -1,4 +1,4 @@
-const CACHE="petits-gestes-v3-2026-09-23-mantras";
+const CACHE="petits-gestes-v3-2026-09-23-navfix";
 const CORE=[
   "./",
   "./index.html",
